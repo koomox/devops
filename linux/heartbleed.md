@@ -39,4 +39,18 @@ echo "/usr/local/openssl/lib" > /etc/ld.so.conf.d/openssl.conf
 ldconfig -v
 openssl version -a
 ```      
-查看 OpenSSL 1.0.2l openssl.conf [源文件](../storage/linux/scripts/openssl/1.0.2l/openssl.cnf)
+查看 OpenSSL 1.0.2l openssl.conf [源文件](../storage/linux/scripts/openssl/1.0.2l/openssl.cnf)             
+```sh
+\rm -rf /etc/pki/tls/misc /etc/pki/tls/openssl.cnf
+ln -s /usr/local/openssl/misc /etc/pki/tls/misc
+wget -O /etc/pki/tls/openssl.cnf https://git.oschina.net/koomox/devops/raw/master/storage/linux/scripts/openssl/1.0.2l/openssl-ca.cnf
+
+wget -O /etc/pki/tls/openssl.cnf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/openssl/1.0.2l/openssl-ca.cnf
+```
+```sh
+\rm -rf /etc/pki/tls/openssl.cnf
+
+wget -O /etc/pki/tls/openssl.cnf https://git.oschina.net/koomox/devops/raw/master/storage/linux/scripts/openssl/1.0.2l/openssl-cert.cnf
+
+wget -O /etc/pki/tls/openssl.cnf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/openssl/1.0.2l/openssl-cert.cnf
+```
