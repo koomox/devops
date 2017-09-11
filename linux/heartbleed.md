@@ -18,6 +18,8 @@ yum -y install gcc gcc-c++ make automake autoconf perl zlib-devel
 ```
 安装 OpenSSL 1.0.2l              
 ```sh
+cd /tmp
+
 \rm -rf openssl-1.0.2l.tar.gz
 wget http://7xqxqz.com1.z0.glb.clouddn.com/openssl-1.0.2l.tar.gz
 
