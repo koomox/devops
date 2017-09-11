@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - /data/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123123
+      - MYSQL_DATABASE=hengxin
+
+  php_fpm:
+    image: php:7.1-fpm
+    links:
+      - db
+    volumes:
+      - /usr/local/nginx/html/hengxinvr/backend/web:/var/www/html
+    restart: always
+
+  app:
+    image: nginx:1.12
+    ports:
+      - "80:80"
+      - "443:443"
+    links:
+      - php_fpm
+      - db
+    volumes:
+      - /etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    volumes_from:
+      - php_fpm
+    restart: always

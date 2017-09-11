@@ -1,0 +1,38 @@
+list disk
+select disk 0
+clean
+convert gpt
+
+list partition
+select partition 1
+delete partition override
+list partition
+
+create partition primary size=1024
+format quick fs=ntfs label="RE_tools"
+assign letter="R"
+set id="de94bba4-06d1-4d40-a16a-bfd50179d6ac"
+gpt attributes=0x8000000000000001
+
+create partition efi size=500
+format quick fs=fat32 label="System"
+assign letter="U"
+
+create partition msr size=128
+
+create partition primary size=102400
+format quick fs=ntfs label="Windows"
+assign letter="O"
+
+create partition primary size=204800
+format quick fs=ntfs label="Data"
+assign letter="M"
+
+create partition primary size=307200
+format quick fs=ntfs
+assign letter="N"
+
+create partition primary
+format quick fs=ntfs
+assign letter="Q"
+exit
