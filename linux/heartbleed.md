@@ -7,6 +7,10 @@ OpenSSL 下载地址: [传送门](https://www.openssl.org/source/)
 OpenSSL github.com: [传送门](https://github.com/openssl/openssl)            
 
 ### OpenSSL             
+安装依赖包           
+```sh
+yum -y install gcc gcc-c++ make automake autoconf perl zlib-devel
+```
 删除 OpenSSL 旧版本文件            
 ```sh
 \rm -rf /usr/local/openssl
