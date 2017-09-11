@@ -6,6 +6,8 @@ golangtc 下载地址: [传送门](https://www.golangtc.com/download)
 ```sh
 cd /tmp
 
+http://7xqxqz.com1.z0.glb.clouddn.com/go1.9.linux-amd64.tar.gz
+
 wget https://storage.googleapis.com/golang/go1.9.linux-amd64.tar.gz
 tar -zxf go1.9.linux-amd64.tar.gz
 mv go /usr/local/go
