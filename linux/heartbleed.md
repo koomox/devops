@@ -39,4 +39,4 @@ echo "/usr/local/openssl/lib" > /etc/ld.so.conf.d/openssl.conf
 ldconfig -v
 openssl version -a
 ```      
-查看 OpenSSL 1.0.2l openssl.conf [源文件](../storage/linux/scripts/openssl/1.0.2l/openssl.conf)
+查看 OpenSSL 1.0.2l openssl.conf [源文件](../storage/linux/scripts/openssl/1.0.2l/openssl.cnf)
