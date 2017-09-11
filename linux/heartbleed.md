@@ -1,0 +1,35 @@
+# 修复 OpenSSL 心脏出血漏洞Heartbleed                
+OpenSSL出现HeartBleed心脏出血漏洞               
+OpenSSL 1.0.1f及以下的版本受该漏洞的影响               
+OpenSSL 1.0.1g及以上的版本不受影响               
+所以我们需要升级系统的OpenSSL               
+OpenSSL 下载地址: [传送门](https://www.openssl.org/source/)           
+OpenSSL github.com: [传送门](https://github.com/openssl/openssl)            
+
+### OpenSSL             
+删除 OpenSSL 旧版本文件            
+```sh
+\rm -rf /usr/local/openssl
+\rm -rf /usr/bin/openssl /usr/include/openssl
+```
+安装 OpenSSL 1.0.2l              
+```sh
+\rm -rf openssl-1.0.2l.tar.gz
+wget http://7xqxqz.com1.z0.glb.clouddn.com/openssl-1.0.2l.tar.gz
+
+wget https://www.openssl.org/source/openssl-1.0.2l.tar.gz
+
+\rm -rf openssl-1.0.2l
+tar -zxf openssl-1.0.2l.tar.gz
+cd openssl-1.0.2l
+./config --prefix=/usr/local/openssl --openssldir=/usr/local/openssl shared zlib
+make && make install
+
+ln -s /usr/local/openssl/bin/openssl /usr/bin/openssl
+ln -s /usr/local/openssl/include/openssl /usr/include/openssl
+
+touch /etc/ld.so.conf.d/openssl.conf
+echo "/usr/local/openssl/lib" > /etc/ld.so.conf.d/openssl.conf
+ldconfig -v
+openssl version -a
+```      
