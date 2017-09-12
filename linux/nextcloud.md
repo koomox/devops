@@ -142,6 +142,10 @@ usermod -a -G nginx www-data
 ```
 ```sh
 cd /docker/nextcloud
+\rm -rf nextcloud-12.0.2.tar.bz2
+
+wget http://7xqxqz.com1.z0.glb.clouddn.com/nextcloud-12.0.2.tar.bz2
+
 wget https://download.nextcloud.com/server/releases/nextcloud-12.0.2.tar.bz2
 tar -jxf nextcloud-12.0.2.tar.bz2
 mkdir -p /docker/nextcloud/nextcloud/data
