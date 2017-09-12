@@ -109,4 +109,14 @@ MySQL: [传送门](https://dev.mysql.com/downloads/mysql/)
 Windows loader 激活命令               
 ```bat
 "windows loader.exe" /silent /norestart
-```
+```  
+### Notepad++ 7.5.1        
+Notepad++ 7.5.1 x86: [点击下载](http://7xqxqz.com1.z0.glb.clouddn.com/npp.7.5.1.Installer.exe)          
+Notepad++ 7.5.1 x64: [点击下载](http://7xqxqz.com1.z0.glb.clouddn.com/npp.7.5.1.Installer.x64.exe)          
+### FastStone         
+FastStone Capture: [传送门](http://www.faststone.org/FSCapturerDownload.htm)           
+FastStone Capture 8.6: [点击下载](http://www.faststonesoft.net/DN/FSCaptureSetup86.exe)           
+FastStone Capture 8.6 国内加速:[点击下载](http://7xqxqz.com1.z0.glb.clouddn.com/FSCaptureSetup86.exe)     
+FastStone Image Viewer: [传送门](http://www.faststone.org/FSViewerDownload.htm)         
+FastStone Image Viewer 6.3: [点击下载](http://www.faststonesoft.net/DN/FSViewerSetup63.exe)             
+FastStone Image Viewer 6.3 国内加速: [点击下载](http://7xqxqz.com1.z0.glb.clouddn.com/FSViewerSetup63.exe) 
