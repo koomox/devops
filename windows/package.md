@@ -119,4 +119,6 @@ FastStone Capture 8.6: [点击下载](http://www.faststonesoft.net/DN/FSCaptureS
 FastStone Capture 8.6 国内加速:[点击下载](http://7xqxqz.com1.z0.glb.clouddn.com/FSCaptureSetup86.exe)     
 FastStone Image Viewer: [传送门](http://www.faststone.org/FSViewerDownload.htm)         
 FastStone Image Viewer 6.3: [点击下载](http://www.faststonesoft.net/DN/FSViewerSetup63.exe)             
-FastStone Image Viewer 6.3 国内加速: [点击下载](http://7xqxqz.com1.z0.glb.clouddn.com/FSViewerSetup63.exe) 
+FastStone Image Viewer 6.3 国内加速: [点击下载](http://7xqxqz.com1.z0.glb.clouddn.com/FSViewerSetup63.exe)      
+### 迅雷下载       
+迅雷极速版: [点击下载](http://7xqxqz.com1.z0.glb.clouddn.com/ThunderSpeed1.0.35.366.exe)         
