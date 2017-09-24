@@ -3,9 +3,16 @@ mkdir -p /tmp/general_lib
 cd /tmp/general_lib
 \rm -rf *
 yum -y install gcc gcc-c++ make perl curl
-#========= install zlib =======================
+
 curl -LO http://www.zlib.net/zlib-1.2.11.tar.gz
+curl -LO https://www.openssl.org/source/openssl-1.0.2l.tar.gz
+curl -LO https://ftp.pcre.org/pub/pcre/pcre-8.41.tar.gz
+
 tar -zxf zlib-1.2.11.tar.gz
+tar -zxf openssl-1.0.2l.tar.gz
+tar -zxf pcre-8.41.tar.gz
+
+#========= install zlib =======================
 cd zlib-1.2.11
 \rm -rf /usr/local/zlib
 ./configure --prefix=/usr/local/zlib
@@ -19,8 +26,6 @@ ldconfig -v
 cd ..
 #=========== install openssl ================
 yum -y install perl zlib-devel
-curl -LO https://www.openssl.org/source/openssl-1.0.2l.tar.gz
-tar -zxf openssl-1.0.2l.tar.gz
 cd openssl-1.0.2l
 \rm -rf /usr/local/openssl /usr/bin/openssl /usr/include/openssl
 ./config --openssldir=/usr/local/openssl shared zlib
@@ -36,8 +41,6 @@ openssl version -a
 
 cd ..
 #========= install pcre ================
-curl -LO https://ftp.pcre.org/pub/pcre/pcre-8.41.tar.gz
-tar -zxf pcre-8.41.tar.gz
 cd pcre-8.41
 \rm -rf /usr/local/pcre
 ./configure --prefix=/usr/local/pcre
@@ -50,5 +53,7 @@ ldconfig -v
 
 echo 'export PATH=$PATH:/usr/local/pcre/bin' >> /etc/profile
 source /etc/profile
+
+pcregrep -V
 
 cd ..
