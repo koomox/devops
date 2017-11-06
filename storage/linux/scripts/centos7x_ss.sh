@@ -60,7 +60,7 @@ source /etc/profile
 cd ..
 #============ install shadowsocks ====================
 yum install epel-release -y
-#yum install gcc gettext autoconf libtool automake make pcre-devel asciidoc xmlto c-ares-devel libev-devel libsodium-devel -y
+#yum install gcc gettext autoconf libtool automake make pcre-devel asciidoc xmlto c-ares-devel libev-devel libsodium-devel mbedtls-devel -y
 yum install gcc gettext autoconf libtool automake make asciidoc xmlto c-ares-devel libev-devel libsodium-devel -y
 cd shadowsocks-libev-3.1.0
 \rm -rf /usr/local/shadowsocks-libev

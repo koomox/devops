@@ -48,6 +48,7 @@ Adobe Acrobat Reader DC 离线下载: [传送门](http://get.adobe.com/reader/en
 ### 压缩软件              
 WinRAR 5.31 中文版 x64: [点击下载](http://www.rarlab.com/rar/winrar-x64-531sc.exe)              
 WinRAR 5.31 中文版 x86: [点击下载](http://www.rarlab.com/rar/wrar531sc.exe)             
+WinRAR 5.31 Key: [点击查看源文件](../storage/windows/winrar/531/rarreg.key)             
 WinRAR 5.40 英文版 x64: [点击下载](http://www.rarlab.com/rar/winrar-x64-540.exe)          
 WinRAR 5.40 英文版 x86: [点击下载](http://www.rarlab.com/rar/wrar540.exe)           
 
