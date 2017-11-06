@@ -47,10 +47,13 @@ Adobe Flash Player 离线下载: [传送门](http://www.adobe.com/support/flashp
 Adobe Acrobat Reader DC 离线下载: [传送门](http://get.adobe.com/reader/enterprise/)        
 ### 压缩软件              
 WinRAR 5.31 中文版 x64: [点击下载](http://www.rarlab.com/rar/winrar-x64-531sc.exe)              
-WinRAR 5.31 中文版 x86: [点击下载](http://www.rarlab.com/rar/wrar531sc.exe)             
+WinRAR 5.31 中文版 x86: [点击下载](http://www.rarlab.com/rar/wrar531sc.exe)               
 WinRAR 5.31 Key: [点击查看源文件](../storage/windows/winrar/531/rarreg.key)             
-WinRAR 5.40 英文版 x64: [点击下载](http://www.rarlab.com/rar/winrar-x64-540.exe)          
-WinRAR 5.40 英文版 x86: [点击下载](http://www.rarlab.com/rar/wrar540.exe)           
+WinRAR 5.50 中文版 x64: [点击下载](https://www.win-rar.com/fileadmin/winrar-versions/sc20170830/wrr/winrar-x64-550sc.exe
+)              
+WinRAR 5.50 中文版 x86: [点击下载](https://www.win-rar.com/fileadmin/winrar-versions/sc20170830/wrr/wrar550sc.exe)         
+WinRAR 5.50 英文版 x64: [点击下载](https://www.rarlab.com/rar/winrar-x64-550.exe)          
+WinRAR 5.50 英文版 x86: [点击下载](https://www.rarlab.com/rar/wrar550.exe)           
 
 7-Zip 16.04 x64: [点击下载](http://www.7-zip.org/a/7z1604-x64.exe)           
 7-Zip 16.04 x86: [点击下载](http://www.7-zip.org/a/7z1604.exe)           
