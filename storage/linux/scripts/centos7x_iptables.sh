@@ -1,6 +1,4 @@
 #!/bin/bash
-SELINUX_CONF="/etc/selinux/config"
-SSH_CONF="/etc/ssh/sshd_config"
 SSH_PORT=22
 
 echo "========= setting SSH and internat ip and ipsec secrets ======"
@@ -19,29 +17,6 @@ iptables -Z
 service iptables save
 service iptables restart
 iptables -nvL
-
-#修改SSH为证书登录
-setenforce 0
-echo -e "#SELINUX=enforcing\n#SELINUXTYPE=targeted\nSELINUX=disabled\nSETLOCALDEFS=0" > ${SELINUX_CONF}
-sed -i '/Port /c Port '"$SSH_PORT"'' ${SSH_CONF}
-sed -i '/PermitEmptyPasswords no/c #PermitEmptyPasswords no' ${SSH_CONF}
-sed -i '/PermitRootLogin yes/c #PermitRootLogin yes' ${SSH_CONF}
-sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' ${SSH_CONF}
-
-echo "======== set iptables rules================"
-yum -y install iptables-services
-systemctl mask firewalld.service
-systemctl enable iptables.service
-systemctl stop firewalld
-systemctl start iptables
-
-iptables -P INPUT ACCEPT
-iptables -P OUTPUT ACCEPT
-iptables -P FORWARD ACCEPT
-iptables -F
-iptables -X
-iptables -Z
-#iptables -t nat -F
 
 # INPUT
 iptables -A INPUT -i lo -j ACCEPT
