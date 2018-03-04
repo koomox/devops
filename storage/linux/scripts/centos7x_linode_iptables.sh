@@ -101,6 +101,7 @@ iptables -A OUTPUT -p tcp --dport 587 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 995 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 465 -j ACCEPT
 
+
 iptables -P INPUT DROP
 iptables -P FORWARD DROP
 iptables -P OUTPUT DROP
