@@ -1,0 +1,8 @@
+{
+	"server": "my-server-ip",
+	"server_port": 8888,
+	"password": "mypassword",
+	"timeout": 300,
+	"method": "aes-256-cfb",
+	"fast_open": false
+}
