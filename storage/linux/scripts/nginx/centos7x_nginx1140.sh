@@ -55,5 +55,7 @@ curl -LO https://github.com/koomox/devops/raw/master/storage/linux/scripts/nginx
 
 #============= Start Nginx =======================
 systemctl enable nginx
+systemctl start nginx
+systemctl status nginx
 
 nginx -v

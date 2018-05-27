@@ -174,14 +174,16 @@ mkdir -p /etc/php/php-fpm.d
 mkdir -p /etc/php/conf.d
 mkdir -p /var/log/php
 
-curl -LO https://github.com/koomox/devops/raw/master/storage/linux/scripts/php/7.2.6/php-fpm.conf
-curl -LO https://github.com/koomox/devops/raw/master/storage/linux/scripts/php/7.2.6/php-fpm.d/www.conf
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/php/7.2.6/php-fpm.conf
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/php/7.2.6/php-fpm.d/www.conf
 \cp -f php-fpm.conf /etc/php/php-fpm.conf
 \cp -f www.conf /etc/php/php-fpm.d/www.conf
 
-curl -LO https://github.com/koomox/devops/blob/master/storage/linux/scripts/php/7.2.6/php-fpm.service
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/php/7.2.6/php-fpm.service
 \cp -f php-fpm.service /usr/lib/systemd/system/php-fpm.service
 
 systemctl enable php-fpm
 systemctl start php-fpm
 systemctl status php-fpm
+
+php-fpm -v
