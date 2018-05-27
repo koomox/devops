@@ -174,25 +174,14 @@ mkdir -p /etc/php/php-fpm.d
 mkdir -p /etc/php/conf.d
 mkdir -p /var/log/php
 
-curl -LO 
-\cp -f /usr/local/php/etc/php-fpm.conf.default /etc/php/php-fpm.conf
-\cp -f /usr/local/php/etc/php-fpm.d/www.conf.default /etc/php/php-fpm.d/www.conf
+curl -LO https://github.com/koomox/devops/raw/master/storage/linux/scripts/php/7.2.6/php-fpm.conf
+curl -LO https://github.com/koomox/devops/raw/master/storage/linux/scripts/php/7.2.6/php-fpm.d/www.conf
+\cp -f php-fpm.conf /etc/php/php-fpm.conf
+\cp -f www.conf /etc/php/php-fpm.d/www.conf
 
-touch /usr/lib/systemd/system/php-fpm.service
-cat >>/usr/lib/systemd/system/php-fpm.service<<EOF
-[Unit]
-Description=The PHP FastCGI Process Manager
-After=syslog.target network.target
-
-[Service]
-Type=simple
-PIDFile=/var/run/php/php-fpm.pid
-ExecStart=/usr/local/php/sbin/php-fpm --nodaemonize --allow-to-run-as-root --fpm-config /etc/php/php-fpm.conf
-ExecReload=/bin/kill -USR2 $MAINPID
-ExecStop=/bin/kill -SIGINT $MAINPID
-
-[Install]
-WantedBy=multi-user.target
-EOF
+curl -LO https://github.com/koomox/devops/blob/master/storage/linux/scripts/php/7.2.6/php-fpm.service
+\cp -f php-fpm.service /usr/lib/systemd/system/php-fpm.service
 
 systemctl enable php-fpm
+systemctl start php-fpm
+systemctl status php-fpm
