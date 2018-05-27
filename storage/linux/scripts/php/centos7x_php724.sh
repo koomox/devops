@@ -168,13 +168,13 @@ ldconfig -v
 echo 'export PATH=$PATH:/usr/local/php/bin:/usr/local/php/sbin' >> /etc/profile
 source /etc/profile
 
-cd ..
+cd ${WORK-PATH}
 
 mkdir -p /etc/php/php-fpm.d
 mkdir -p /etc/php/conf.d
-mkdir -p /var/run/php
 mkdir -p /var/log/php
 
+curl -LO 
 \cp -f /usr/local/php/etc/php-fpm.conf.default /etc/php/php-fpm.conf
 \cp -f /usr/local/php/etc/php-fpm.d/www.conf.default /etc/php/php-fpm.d/www.conf
 
