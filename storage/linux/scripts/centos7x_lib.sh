@@ -5,12 +5,12 @@ cd /tmp/general_lib
 yum -y install gcc gcc-c++ make perl curl
 
 curl -LO http://www.zlib.net/zlib-1.2.11.tar.gz
-curl -LO https://www.openssl.org/source/openssl-1.0.2l.tar.gz
-curl -LO https://ftp.pcre.org/pub/pcre/pcre-8.41.tar.gz
+curl -LO https://www.openssl.org/source/openssl-1.0.2o.tar.gz
+curl -LO https://ftp.pcre.org/pub/pcre/pcre-8.42.tar.gz
 
 tar -zxf zlib-1.2.11.tar.gz
-tar -zxf openssl-1.0.2l.tar.gz
-tar -zxf pcre-8.41.tar.gz
+tar -zxf openssl-1.0.2o.tar.gz
+tar -zxf pcre-8.42.tar.gz
 
 #========= install zlib =======================
 cd zlib-1.2.11
@@ -26,7 +26,7 @@ ldconfig -v
 cd ..
 #=========== install openssl ================
 yum -y install perl zlib-devel
-cd openssl-1.0.2l
+cd openssl-1.0.2o
 \rm -rf /usr/local/openssl /usr/bin/openssl /usr/include/openssl
 ./config --openssldir=/usr/local/openssl shared zlib
 make && make install
@@ -41,7 +41,7 @@ openssl version -a
 
 cd ..
 #========= install pcre ================
-cd pcre-8.41
+cd pcre-8.42
 \rm -rf /usr/local/pcre
 ./configure --prefix=/usr/local/pcre
 make && make install
