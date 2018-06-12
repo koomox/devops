@@ -1,7 +1,8 @@
 #!/bin/bash
-WORK-PATH=/tmp/make_nginx
-mkdir -p ${WORK-PATH}
-cd ${WORK-PATH}
+WORK_PATH=/tmp/make_nginx
+WEB_PATH=/var/www/html
+mkdir -p ${WORK_PATH}
+cd ${WORK_PATH}
 \rm -rf *
 yum -y install gcc gcc-c++ make perl curl
 
@@ -37,10 +38,10 @@ source /etc/profile
 
 #============== Run Nginx ================
 cd /usr/local/nginx
-curl -LO https://github.com/koomox/devops/raw/master/storage/linux/scripts/nginx/1.14.0/nginx.service
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/nginx.service
 \cp -f nginx.service /usr/lib/systemd/system/nginx.service
 
-curl -LO https://github.com/koomox/devops/raw/master/storage/linux/scripts/nginx/1.14.0/nginx-php-fpm.conf
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/nginx-php-fpm.conf
 \cp -f nginx-php-fpm.conf /etc/nginx/nginx.conf
 
 #=============== Enable Port =====================
@@ -54,6 +55,9 @@ curl -LO https://github.com/koomox/devops/raw/master/storage/linux/scripts/nginx
 #firewall-cmd --zone=public --list-all
 
 #============= Start Nginx =======================
+mkdir -p ${WEB_PATH}
+chmod -R 755 ${WEB_PATH}
+
 systemctl enable nginx
 systemctl start nginx
 systemctl status nginx

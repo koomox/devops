@@ -1,7 +1,7 @@
 #!/bin/bash
-WORK-PATH=/tmp/make_phpfpm
-mkdir -p ${WORK-PATH}
-cd ${WORK-PATH}
+WORK_PATH=/tmp/make_phpfpm
+mkdir -p ${WORK_PATH}
+cd ${WORK_PATH}
 \rm -rf *
 yum -y install gcc gcc-c++ make perl curl
 
@@ -43,7 +43,7 @@ ldconfig -v
 echo 'export PATH=$PATH:/usr/local/libiconv/bin' >> /etc/profile
 source /etc/profile
 
-cd ${WORK-PATH}
+cd ${WORK_PATH}
 #========= install libzip =======================
 cd libzip-1.1.3
 ./configure --prefix=/usr/local/libzip
@@ -62,7 +62,7 @@ ldconfig -v
 echo 'export PATH=$PATH:/usr/local/libzip/bin' >> /etc/profile
 source /etc/profile
 
-cd ${WORK-PATH}
+cd ${WORK_PATH}
 #========= install icu =======================
 cd icu/source
 ./configure --prefix=/usr/local/libicu
@@ -76,7 +76,7 @@ ldconfig -v
 echo 'export PATH=$PATH:/usr/local/libicu/sbin' >> /etc/profile
 source /etc/profile
 
-cd ${WORK-PATH}
+cd ${WORK_PATH}
 #========= install libzip =======================
 yum -y install perl zlib-devel
 cd openssl-1.0.2o
@@ -92,7 +92,7 @@ echo "/usr/local/openssl/lib" > /etc/ld.so.conf.d/openssl.conf
 ldconfig -v
 openssl version -a
 
-cd ${WORK-PATH}
+cd ${WORK_PATH}
 #========= install libzip =======================
 groupadd php-fpm
 useradd -g php-fpm php-fpm
@@ -168,7 +168,7 @@ ldconfig -v
 echo 'export PATH=$PATH:/usr/local/php/bin:/usr/local/php/sbin' >> /etc/profile
 source /etc/profile
 
-cd ${WORK-PATH}
+cd ${WORK_PATH}
 
 mkdir -p /etc/php/php-fpm.d
 mkdir -p /etc/php/conf.d
