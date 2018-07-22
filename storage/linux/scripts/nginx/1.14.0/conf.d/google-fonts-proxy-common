@@ -1,0 +1,12 @@
+# disable gzip response, otherwise subs_filter cannot parse it
+proxy_set_header Accept-Encoding "";
+
+#subs_filter_types text/html text/css text/xml text/javascript;
+subs_filter_types text/css text/xml text/javascript;
+subs_filter //fonts.googleapis.com/ //fonts.*.com/;
+# subs_filter //ajax.googleapis.com/ //ajax.*.com/;
+# subs_filter //themes.googleusercontent.com/ //google-themes.*.com/;
+# subs_filter //fonts.gstatic.com/ //fonts.*.com/;
+
+proxy_connect_timeout 3s;
+error_page 500 502 504 @redirect;

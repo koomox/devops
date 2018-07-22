@@ -4,10 +4,10 @@ cd /tmp/make_nginx
 \rm -rf *
 yum -y install gcc gcc-c++ make perl curl
 
-curl -LO https://storage.allen.com/nginx/nginx-1.12.2.tar.gz
-curl -LO https://storage.allen.com/openssl/openssl-1.0.2n.tar.gz
-curl -LO https://storage.allen.com/zlib/zlib-1.2.11.tar.gz
-curl -LO https://storage.allen.com/pcre/pcre-8.41.tar.gz
+curl -LO http://nginx.org/download/nginx-1.12.2.tar.gz
+curl -LO https://www.openssl.org/source/openssl-1.0.2n.tar.gz
+curl -LO https://zlib.net/zlib-1.2.11.tar.gz
+curl -LO https://ftp.pcre.org/pub/pcre/pcre-8.41.tar.gz
 
 tar -zxf nginx-1.12.2.tar.gz
 tar -zxf openssl-1.0.2n.tar.gz

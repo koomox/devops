@@ -1,6 +1,10 @@
 #!/bin/bash
 WORK_PATH=/tmp/make_nginx
 WEB_PATH=/var/www/html
+NGINX_LOG_PATH=/var/log/nginx
+NGINX_PID_PATH=/var/lib/nginx
+NGINX_CONF_PATH=/etc/nginx/conf.d
+NGINX_LETSENCRYPT=/var/www/letsencrypt
 mkdir -p ${WORK_PATH}
 cd ${WORK_PATH}
 \rm -rf *
@@ -41,8 +45,15 @@ cd /usr/local/nginx
 curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/nginx.service
 \cp -f nginx.service /usr/lib/systemd/system/nginx.service
 
-curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/nginx-php-fpm.conf
-\cp -f nginx-php-fpm.conf /etc/nginx/nginx.conf
+mkdir -p ${NGINX_CONF_PATH}
+cd ${NGINX_CONF_PATH}
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/fastcgi_php.conf
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/letsencrypt.conf
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/nginx-http-php.conf
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/nginx-ssl-php.conf
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/nginx-default.conf
+
+\cp -f nginx-default.conf ../nginx.conf
 
 #=============== Enable Port =====================
 #\cp -f /usr/lib/firewalld/services/http.xml /etc/firewalld/services/http.xml
@@ -55,8 +66,12 @@ curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/sc
 #firewall-cmd --zone=public --list-all
 
 #============= Start Nginx =======================
+mkdir -p ${NGINX_LOG_PATH}
+mkdir -p ${NGINX_PID_PATH}
 mkdir -p ${WEB_PATH}
+mkdir -p ${NGINX_LETSENCRYPT}
 chmod -R 755 ${WEB_PATH}
+chmod -R 755 ${NGINX_LETSENCRYPT}
 
 systemctl enable nginx
 systemctl start nginx
