@@ -197,12 +197,12 @@ ldconfig -v
 echo 'export PATH=$PATH:/usr/local/php/bin:/usr/local/php/sbin' >> /etc/profile
 source /etc/profile
 
-curl -LO https://gitee.com/koomox/devops/raw/master/storage/linux/scripts/php/7.2.7/php-fpm.conf
-curl -LO https://gitee.com/koomox/devops/raw/master/storage/linux/scripts/php/7.2.7/php-fpm.d/www.conf
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/php/7.2.7/php-fpm.conf
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/php/7.2.7/php-fpm.d/www.conf
 \cp -f php-fpm.conf /etc/php/php-fpm.conf
 \cp -f www.conf /etc/php/php-fpm.d/www.conf
 
-curl -LO https://gitee.com/koomox/devops/raw/master/storage/linux/scripts/php/7.2.7/php-fpm.service
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/php/7.2.7/php-fpm.service
 \cp -f php-fpm.service /usr/lib/systemd/system/php-fpm.service
 
 systemctl enable php-fpm
@@ -211,13 +211,13 @@ systemctl status php-fpm
 
 php-fpm -v
 ############### install phpmyadmin ################
-curl -LO https://gitee.com/koomox/devops/raw/master/storage/linux/libs/php/phpmyadmin/4.8.2/phpMyAdmin-4.8.2-all-languages.tar.xz
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/libs/php/phpmyadmin/4.8.2/phpMyAdmin-4.8.2-all-languages.tar.xz
 xz -d phpMyAdmin-4.8.2-all-languages.tar.xz
 tar -xf phpMyAdmin-4.8.2-all-languages.tar
 mv phpMyAdmin-4.8.2-all-languages /var/www/html/pma
 
-curl -LO https://gitee.com/koomox/devops/raw/master/storage/linux/scripts/php/index.php
-curl -LO https://gitee.com/koomox/devops/raw/master/storage/linux/libs/php/phpmyadmin/4.8.2/config.inc.php
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/php/index.php
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/libs/php/phpmyadmin/4.8.2/config.inc.php
 \cp -f index.php /var/www/html
 \cp -f config.inc.php /var/www/html/pma
 mkdir -p /var/www/html/pma/tmp
