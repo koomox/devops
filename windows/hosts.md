@@ -33,8 +33,27 @@ hosts 文件 Windows 下面的路径: `%SystemRoot%\system32\drivers\etc\`
 127.0.0.1 ereg.wip3.adobe.com
 127.0.0.1 wwis-dubc1-vip60.adobe.com
 ```               
-### Dropbox           
+### Adobe Flash Player           
 ```txt
-162.125.248.1 dropbox.com
-162.125.7.1 www.dropbox.com
+127.0.0.1 www.2144.cn
+127.0.0.1 flash.2144.cn
+127.0.0.1 www.flash.cn
+127.0.0.1 fpdownload.macromedia.com
+```
+### Sublime Text 3             
+```txt
+127.0.0.1 license.sublimehq.com
+127.0.0.1 45.55.255.55
+127.0.0.1 45.55.41.223
+```
+### IntelliJ IDEA          
+```txt
+0.0.0.0 account.jetbrains.com
+```
+### CorelDRAW        
+```txt
+127.0.0.1 apps.corel.com
+127.0.0.1 mc.corel.com
+127.0.0.1 origin-mc.corel.com
+127.0.0.1 iws.corel.com
 ```
