@@ -4,7 +4,7 @@
 
 ### UEFI/GPT 分区          
 使用 `DiskPart /s F:\CreatePartitions.txt` 命令自动分区。          
-![](hhttps://raw.githubusercontent.com/koomox/devops/master/static/images/wiki/IMG_20180915_212100.jpg)         
+![](https://raw.githubusercontent.com/koomox/devops/master/static/images/wiki/IMG_20180915_212100.jpg)         
 ```bat
 select disk 0
 clean
