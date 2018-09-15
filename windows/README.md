@@ -1,5 +1,6 @@
 # Windows 7 优化                    
 [DISM](dism.md)           
+[diskpart Windows磁盘分区](diskpart.md)        
 [PE](pe.md)           
 [hosts文件](hosts.md)                 
 [常用软件下载](package.md)                        

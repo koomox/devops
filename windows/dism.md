@@ -8,6 +8,10 @@ Bootsect 命令行选项: [传送门](https://msdn.microsoft.com/zh-cn/library/w
 ```bat
 bcdboot C:\Windows /s U: /f UEFI /l zh-cn
 ```
+创建 BIOS 启动文件到 System 启动分区              
+```bat
+bcdboot C:\Windows /s U: /f BIOS /l zh-cn
+```
 
 创建 BIOS 和 UEFI 启动文件到系统分区                  
 ```bat
