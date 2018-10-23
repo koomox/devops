@@ -111,3 +111,10 @@ pdbedit -a -u samba
 ```sh
 pdbedit -Lw
 ```
+创建共享文件夹，设置权限          
+```sh
+mkdir -p /data/share/samba_newuser
+cd /data/share/samba_newuser
+chmod -R 777 .
+chown samba_newuser:samba_newuser .
+```
