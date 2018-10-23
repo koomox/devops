@@ -1,4 +1,20 @@
-# Windows 7 优化                    
+# Windows 7 优化          
+[Windows 无人值守安装](unattend.md)         
+[KMS](kms.md)         
+[Windows 10 优化](win10.md)         
+[Windows Server 2008 R2 自动登录](windowsserver2008_autologin.md)          
+[Office](office.md)         
+[浏览器](browser.md)         
+[SwitchyOmega](SwitchyOmega.md)         
+[Nano Server](nanoserver.md)          
+[勒索病毒补丁](wncry.md)          
+[Adobe](adobe.md)           
+[Ubuntu on Windows 10](Microsoft-Windows-Subsystem-Linux.md)                    
+[添加 Windows PE 启动项](winpe.md)        
+[添加 Windows RE 启动项](winre.md)        
+[Windows 共享打开匿名访问权限](share.md)        
+[KMS 激活 Windows](active.md)          
+[常用命令](control.md)                   
 [DISM](dism.md)           
 [diskpart Windows磁盘分区](diskpart.md)        
 [PE](pe.md)           
@@ -8,3 +24,16 @@
 [Xshell 5](xshell.md)                    
 [微信备份恢复聊天记录](wechat.md)                 
 [TeamViewer](teamviewer.md)             
+[批处理设置IP地址](batchip.md)             
+[端口映射](portproxy.md)       
+### 常见故障                
+[VMware Workstation](vmware.md)           
+[SQL Server 2005 创建定时备份计划失败](sqlserver2005.md)              
+[Windows Server 2008 R2 64位 喇叭有红叉提示未安装任何音频输出设备](winserver2008r2x64-sound.md)          
+### 常用软件           
+[AIDA64](aida64.md)             
+[Android SDK Tools](android-sdk.md)                    
+### 黑苹果            
+[Windows 提取 DSDT](dsdt.md)        
+### VPN            
+[L2TP 错误汇总](l2tp.md)           

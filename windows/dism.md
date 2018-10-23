@@ -8,10 +8,6 @@ Bootsect 命令行选项: [传送门](https://msdn.microsoft.com/zh-cn/library/w
 ```bat
 bcdboot C:\Windows /s U: /f UEFI /l zh-cn
 ```
-创建 BIOS 启动文件到 System 启动分区              
-```bat
-bcdboot C:\Windows /s U: /f BIOS /l zh-cn
-```
 
 创建 BIOS 和 UEFI 启动文件到系统分区                  
 ```bat
@@ -19,6 +15,7 @@ bcdboot C:\Windows /s C: /f ALL /l zh-cn
 ```
 ### dism             
 DISM 命令行选项: [传送门](https://technet.microsoft.com/zh-cn/library/hh825258.aspx)            
+Dism 完整版: [点击下载](https://gitee.com/koomox/devops/raw/master/storage/windows/dism/DeploymentTools.zip)        
 
 将某个驱动器的映像捕捉到新的 .wim 文件。                        
 ```bat
@@ -43,7 +40,7 @@ Dism /Capture-Image /ImageFile:win7sp2.wim /CaptureDir:C:\ /Name:"Windows 7 Ulti
 
 显示 .wim、vhd 或 .vhdx 文件中所含映像的有关信息。                   
 ```bat
-Dism /Get-ImageInfo /ImageFile:install.wim
+Dism /Get-ImageInfo /ImageFile:.\install.wim
 ```
 
 将 Windows 映像从 .vim 或 .vhdx 文件装载到指定的目录，以便可对其进行处理。                  
@@ -65,4 +62,76 @@ Dism /Apply-Image /ImageFile:install.wim /Index:1 /ApplyDir:D:\
 将附加映像添加到 .wim 文件中。`/AppendImage` 用于对比新文件与由 `/ImageFile` 参数指定的现有 .vim 文件中的资源，并仅存储各个唯一的文件的单份拷贝，从而使得每个文件仅被捕捉一次。.wim 文件可以仅具有一个分配的压缩类型。因此，你可以仅附加具有相同压缩类型的文件。                   
 ```bat
 Dism /Append-Image /ImageFile:install.wim /CaptureDir:D:\ /Name:Drive-D
+```
+### Dism 备份和还原驱动          
+在D盘创建 `DriversBackup` 文件夹 `MD D:\DriversBackup`          
+将当前系统驱动备份到 `D:\DriversBackup` 目录下。           
+```bat
+DISM /Online /Export-Driver /Destination:D:\DriversBackup
+```
+还原驱动。           
+```bat
+DISM /Online /Add-Driver /Driver:D:\DriversBackup /Recurse
+```
+### 使用完整版 Dism          
+Windows 7 系统中的 Dism 不完整很多功能无法使用。可以从Windows ADK 中提取出完整版的 Dism。          
+`DandIRoot` 变量就是DeploymentTools的路径，如此就可以使用完整版的 Dism 了。       
+使用完整版 Dism: [点击查看源文件](../storage/windows/scripts/dism/DISM-ENV.bat)           
+```
+IF /I %PROCESSOR_ARCHITECTURE%==x86 (
+    IF NOT "%PROCESSOR_ARCHITEW6432%"=="" (
+        SET PROCESSOR_ARCHITECTURE=%PROCESSOR_ARCHITEW6432%
+    )
+) ELSE IF /I NOT %PROCESSOR_ARCHITECTURE%==amd64 (
+    @echo Not implemented for PROCESSOR_ARCHITECTURE of %PROCESSOR_ARCHITECTURE%.
+    @echo Using "%ProgramFiles%"
+    
+    SET NewPath="%ProgramFiles%"
+
+    goto SetPath
+)
+
+SET ScriptPath=%~dp0
+SET DandIRoot=%ScriptPath%\DeploymentTools
+SET DISMRoot=%DandIRoot%\%PROCESSOR_ARCHITECTURE%\DISM
+SET BCDBootRoot=%DandIRoot%\%PROCESSOR_ARCHITECTURE%\BCDBoot
+SET NewPath=%DISMRoot%;%BCDBootRoot%
+
+:SetPath
+SET PATH=%NewPath:"=%;%PATH%
+
+cd /d %~dp0
+cls
+```
+### Dism 提取WIM镜像、添加驱动等          
+显示 .wim、vhd 或 .vhdx 文件中所含映像的有关信息。                   
+```bat
+Dism /Get-ImageInfo /ImageFile:.\install.wim
+```
+从 `install.wim` 文件中提取索引4的镜像，保存为 `win7sp1-Ultimate-x64.wim`
+```bat
+Dism /Export-Image /SourceImageFile:.\install.wim /SourceIndex:4 /DestinationImageFile:win7sp1-Ultimate-x64.wim
+```
+从 `D:\DriversBackup` 添加驱动到离线镜像             
+```bat
+Dism /Image:.\mount /Add-Driver /Driver:D:\DriversBackup /Recurse
+```
+把无人值守文件 `Unattend.xml` 复制到 `\Windows\Panther` 目录下         
+```bat
+MD .\mount\Windows\Panther
+COPY Unattend-x64.xml .\mount\Windows\Panther\Unattend.xml
+```
+卸载镜像并提交所做的修改           
+```bat
+Dism /Unmount-Image /MountDir:.\mount /Commit
+```
+```bat
+Dism /Get-ImageInfo /ImageFile:.\install.wim
+Dism /Export-Image /SourceImageFile:.\install.wim /SourceIndex:4 /DestinationImageFile:win7sp1-Ultimate-x64.wim
+Dism /Image:.\mount /Add-Driver /Driver:D:\DriversBackup /Recurse
+MD .\mount\Windows\Panther
+COPY Unattend-x64.xml .\mount\Windows\Panther\Unattend.xml
+Dism /Mount-Image /ImageFile:.\win7sp1-Ultimate-x64.wim /Index:1 /MountDir:.\mount
+Dism /Unmount-Image /MountDir:.\mount /Commit
+::Dism /Unmount-Image /MountDir:.\mount /Discard
 ```
