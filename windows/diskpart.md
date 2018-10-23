@@ -113,7 +113,7 @@ list volume
 exit
 ```
 配置 4 个以上分区，使用命令 `DiskPart /s F:\PrepareMyPartitions.txt` 自动分区。          
-![](https://raw.githubusercontent.com/koomox/devops/master/static/images/wiki/IMG_20180915_212105.jpg)       
+![](../static/images/wiki/IMG_20180915_212105.jpg)       
 ```bat
 select disk 0
 clean
