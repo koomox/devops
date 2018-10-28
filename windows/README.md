@@ -26,6 +26,7 @@
 [TeamViewer](teamviewer.md)             
 [批处理设置IP地址](batchip.md)             
 [端口映射](portproxy.md)       
+[Hexo + github 搭建个人博客](hexo.md)           
 ### 常见故障                
 [VMware Workstation](vmware.md)           
 [SQL Server 2005 创建定时备份计划失败](sqlserver2005.md)              
