@@ -18,16 +18,11 @@ read MTPROXY_SECRET
 echo "========= MTProxy Secret ============="
 echo "${MTPROXY_SECRET}"
 
-cd /tmp
 apt-get install curl git
-curl -LO https://nodejs.org/dist/latest-v6.x/node-${NODE_VER}-linux-x64.tar.xz
-xz -d node-${NODE_VER}-linux-x64.tar.xz
-tar -xf node-${NODE_VER}-linux-x64.tar
-\rm -rf /usr/local/node
-mv node-${NODE_VER}-linux-x64 /usr/local/node
-echo 'export NODE_HOME=/usr/local/node' >> /etc/profile
-echo 'export PATH=$PATH:$NODE_HOME/bin' >> /etc/profile
-echo 'export NODE_PATH=$PATH:$NODE_HOME/lib/node_modules' >> /etc/profile
+curl -sL https://deb.nodesource.com/setup_6.x | bash -
+apt-get install -y nodejs
+source ~/.profile
+source ~/.bashrc
 source /etc/profile
 
 npm install -g pm2
