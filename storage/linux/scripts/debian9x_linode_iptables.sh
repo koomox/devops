@@ -85,12 +85,6 @@ iptables -A OUTPUT -p tcp --dport 587 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 995 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 465 -j ACCEPT
 
-
-iptables -P INPUT DROP
-iptables -P FORWARD DROP
-iptables -P OUTPUT DROP
-
-
 iptables-save > /etc/iptables.rules
 
 systemctl enable rc.local
@@ -99,4 +93,10 @@ echo '#!/bin/sh -e' > /etc/rc.local
 echo 'iptables-restore < /etc/iptables.rules' >> /etc/rc.local
 echo 'exit 0' >> /etc/rc.local
 chmod +x /etc/rc.local
+
+systemctl restart sshd
+
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
+iptables -P OUTPUT DROP
 iptables -nvL
