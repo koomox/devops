@@ -34,14 +34,14 @@ npm install -g pm2
 cd /opt
 git clone https://github.com/FreedomPrevails/JSMTProxy.git
 
-cat > /opt/JSMTProxy/config.json << EOF
-{
-	"port":${MTPROXY_PORT},
-	"secret":"${MTPROXY_SECRET}"
-}
-EOF
+echo -e "{\n\t\"port\":${MTPROXY_PORT}\n\t\"secret\":\"${MTPROXY_SECRET}\"\n}" > /opt/JSMTProxy/config.json
 
 iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport ${MTPROXY_PORT} -j ACCEPT
 iptables -A OUTPUT -p tcp --sport ${MTPROXY_PORT} -j ACCEPT
 
+iptables-save > /etc/iptables.rules
+
 cd /opt/JSMTProxy && pm2 start mtproxy.js -i max
+
+pm2 save
+pm2 startup
