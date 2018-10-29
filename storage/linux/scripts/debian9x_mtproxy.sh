@@ -14,7 +14,12 @@ echo "========= MTProxy Secret ============="
 echo "${MTPROXY_SECRET}"
 
 \rm -rf /opt/MTProxy
-mkdir -p /opt/MTProxy
+cd /opt
+apt-get install git curl build-essential libssl-dev zlib1g-dev -y
+git clone https://github.com/TelegramMessenger/MTProxy
+cd MTProxy
+make && cd objs/bin
+mv mtproto-proxy -t /opt/MTProxy
 cd /opt/MTProxy
 curl -s https://core.telegram.org/getProxySecret -o proxy-secret
 curl -s https://core.telegram.org/getProxyConfig -o proxy-multi.conf
@@ -33,6 +38,10 @@ Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 EOF
+
+iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport ${MTPROXY_PORT} -j ACCEPT
+iptables -A OUTPUT -p tcp --sport ${MTPROXY_PORT} -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 8888 -j ACCEPT
 
 systemctl daemon-reload
 systemctl restart MTProxy.service
