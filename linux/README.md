@@ -6,7 +6,7 @@
 [NextCloud](nextcloud.md)                      
 [CentOS 7.x 安装 NextCloud](centos7x_nextcloud.md)           
 [openwrt](openwrt.md)                     
-[Go 1.10](golang110.md)              
+[Go 1.11.1](golang1111.md)              
 [CentOS 7.x](centos7x.md)           
 [Samba](samba.md)           
 # Docker              
