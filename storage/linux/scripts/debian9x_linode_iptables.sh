@@ -15,14 +15,7 @@ echo "${SSH_KEY}"
 if [ ! -x "~/.ssh" ];then
 	mkdir -p ~/.ssh
 fi
-if [ -f "~/.ssh/authorized_keys" ];then
-	rm -rf "~/.ssh/authorized_keys"
-	echo "remove ~/.ssh/authorized_keys already exists!"
-fi
-touch ~/.ssh/authorized_keys
-cat > ~/.ssh/authorized_keys << EOF
-${SSH_KEY}
-EOF
+echo -e "${SSH_KEY}" > ~/.ssh/authorized_keys
 echo "====== read ~/.ssh/authorized_keys ========"
 cat ~/.ssh/authorized_keys
 
