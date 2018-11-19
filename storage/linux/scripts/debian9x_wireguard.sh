@@ -104,6 +104,8 @@ sed -i '/^$/d' ${WG_CONF}
 sed -i '/^#/d' ${CLIENT_CONF}
 sed -i '/^$/d' ${CLIENT_CONF}
 
+chmod -R 755 /etc/wireguard
+
 # 打开防火墙转发功能
 echo 1 > /proc/sys/net/ipv4/ip_forward
 echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
