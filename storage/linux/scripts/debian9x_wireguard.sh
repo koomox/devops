@@ -1,48 +1,59 @@
 #!/bin/bash
-PUBLIC_PORT=5123
-WG_CONF=/etc/wireguard/wg0.conf 
-CLIENT_CONF=/etc/wireguard/client.conf
+# 更新内核
+update_kernel() {
+	# 更新软件包源
+	apt update
 
-apt install curl -y
+	# 安装和 linux-image 内核版本相对于的 linux-headers 内核
+	apt install linux-headers-$(uname -r) -y
 
-# 获取网络接口名称
-interface=$(ip addr | grep '^[0-9]:' | grep -v 'lo' | cut -d ':' -f2 | awk '{ print $1 }')
-# 获取IP地址
-local_ip=$(ip addr | grep 'inet ' | grep -v '127.0.0.1' | cut -d '/' -f1 | awk '{ print $2 }')
-# 获取外网IP地址
-global_ip=$(curl whatismyip.akamai.com)
+	# Debian9 安装后内核列表
+	dpkg -l|grep linux-headers
 
-# 更新软件包源
-apt update
+	echo "完成更新内核"
+}
 
-# 安装和 linux-image 内核版本相对于的 linux-headers 内核
-apt install linux-headers-$(uname -r) -y
+# 安装 WireGuard
+install_wireguard() {
+	# 添加 unstable 软件包源，以确保安装版本是最新的
+	echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.list.d/unstable.list
+	echo -e 'Package: *\nPin: release a=unstable\nPin-Priority: 150' > /etc/apt/preferences.d/limit-unstable
 
-# Debian9 安装后内核列表
-dpkg -l|grep linux-headers
+	# 更新一下软件包源
+	apt update
 
-# 添加 unstable 软件包源，以确保安装版本是最新的
-echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.list.d/unstable.list
-echo -e 'Package: *\nPin: release a=unstable\nPin-Priority: 150' > /etc/apt/preferences.d/limit-unstable
+	# 开始安装 WireGuard
+	apt install wireguard -y
 
-# 更新一下软件包源
-apt update
+	# 验证是否安装成功
+	modprobe wireguard && lsmod | grep wireguard
 
-# 开始安装 WireGuard
-apt install wireguard -y
+	echo "完成安装 WireGuard"
+}
 
-# 验证是否安装成功
-modprobe wireguard && lsmod | grep wireguard
+# 初始化 WireGuard
+initialize_wireguard() {
+	WG_CONF=/etc/wireguard/wg0.conf 
+	CLIENT_CONF=/etc/wireguard/client.conf
 
-# 配置步骤 WireGuard服务端
+	read -p "请输入 WireGuard 服务端口号: " wireguard_port
 
-# 首先进入配置文件目录
-mkdir -p /etc/wireguard
-cd /etc/wireguard
+	apt install curl -y
 
-# 然后开始生成 密匙对(公匙+私匙)。
-wg genkey | tee sprivatekey | wg pubkey > spublickey
-wg genkey | tee cprivatekey | wg pubkey > cpublickey
+	# 获取网络接口名称
+	interface=$(ip addr | grep '^[0-9]:' | grep -v 'lo' | cut -d ':' -f2 | awk '{ print $1 }')
+	# 获取IP地址
+	local_ip=$(ip addr | grep 'inet ' | grep -v '127.0.0.1' | cut -d '/' -f1 | awk '{ print $2 }')
+	# 获取外网IP地址
+	global_ip=$(curl whatismyip.akamai.com)
+
+	# 首先进入配置文件目录
+	mkdir -p /etc/wireguard
+	cd /etc/wireguard
+
+	# 然后开始生成 密匙对(公匙+私匙)。
+	wg genkey | tee sprivatekey | wg pubkey > spublickey
+	wg genkey | tee cprivatekey | wg pubkey > cpublickey
 
 # 生成服务端配置文件
 cat > ${WG_CONF} << EOF
@@ -58,7 +69,7 @@ PostUp   = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -A FORWARD -o wg0 -j A
 # 如果你的服务器主网卡名称不是 eth0 ，那么请修改下面防火墙规则中最后的 eth0 为你的主网卡名称。
 PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -D FORWARD -o wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o ${interface} -j MASQUERADE
 # 服务端监听端口，可以自行修改
-ListenPort = ${PUBLIC_PORT}
+ListenPort = ${wireguard_port}
 # 服务端请求域名解析 DNS
 DNS = 8.8.8.8
 # 保持默认
@@ -69,7 +80,6 @@ PublicKey = $(cat cpublickey)
 # VPN内网IP范围，一般默认即可，除非和你服务器或客户端设备本地网段冲突
 AllowedIPs = 10.0.0.2/32
 EOF
-
 
 # 生成客户端配置文件
 cat > ${CLIENT_CONF} << EOF
@@ -90,7 +100,7 @@ PostDown = start  ..\route\routes-down.bat
 # 公匙，自动读取上面刚刚生成的密匙内容
 PublicKey = $(cat spublickey)
 # 服务器地址和端口，下面的 X.X.X.X 记得更换为你的服务器公网IP，端口根据服务端配置时的监听端口填写
-Endpoint = ${global_ip}:${PUBLIC_PORT}
+Endpoint = ${global_ip}:${wireguard_port}
 # 转发流量的IP范围，下面这个代表所有流量都走VPN
 AllowedIPs = 0.0.0.0/0, ::0/0
 # 保持连接，如果客户端或服务端是 NAT 网络(比如国内大多数家庭宽带没有公网IP，都是NAT)，
@@ -99,20 +109,56 @@ AllowedIPs = 0.0.0.0/0, ::0/0
 PersistentKeepalive = 25
 EOF
 
-sed -i '/^#/d' ${WG_CONF}
-sed -i '/^$/d' ${WG_CONF}
-sed -i '/^#/d' ${CLIENT_CONF}
-sed -i '/^$/d' ${CLIENT_CONF}
+	chmod -R 755 /etc/wireguard
 
-chmod -R 755 /etc/wireguard
+	# 打开防火墙转发功能
+	echo "打开NAT路由转发"
+	echo 1 > /proc/sys/net/ipv4/ip_forward
+	echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
+	sysctl -p
 
-# 打开防火墙转发功能
-echo 1 > /proc/sys/net/ipv4/ip_forward
-echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
-sysctl -p
+	echo "启动 WireGuard"
+	wg-quick up wg0
+	systemctl enable wg-quick@wg0
+	echo "=============== 服务器端配置文件 ==============="
+	cat ${WG_CONF}
+	echo "=============== 服务器端配置文件 ==============="
+	cat ${CLIENT_CONF}
+}
 
-# 显示配置文件，可以修改里面的实际IP
-echo "================= ${WG_CONF} ======================="
-cat ${WG_CONF}
-echo "================= ${CLIENT_CONF} ======================="
-cat ${CLIENT_CONF}
+# 开始菜单
+start_menu() {
+	clear
+	echo "============================="
+	echo "环境: 适用于 Debian 9.x"
+	echo "Author: allen.w"
+	echo "============================="
+	echo "1. 升级系统内核"
+	echo "2. 安装 WireGuard"
+	echo "3. 初始化 WireGuard"
+	echo "4. 退出脚本"
+	echo 
+	read -p "请输入数字: " num
+	case "$num" in
+		1)
+			update_kernel
+			;;
+		2)
+			install_wireguard
+			;;
+		3)
+			initialize_wireguard
+			;;
+		4)
+			exit 1
+			;;
+		*)
+			clear
+			echo "请输入正确的数字"
+			sleep 5s
+			start_menu
+			;;
+	esac
+}
+
+start_menu
