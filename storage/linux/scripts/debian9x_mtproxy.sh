@@ -17,21 +17,21 @@ install_mtproxy() {
 
 # 初始化 MTProxy
 initialize_mtproxy() {
-	cd /usr/local/MTProxy
-	curl -s https://core.telegram.org/getProxySecret -o proxy-secret
-	curl -s https://core.telegram.org/getProxyConfig -o proxy-multi.conf
+cd /usr/local/MTProxy
+curl -s https://core.telegram.org/getProxySecret -o proxy-secret
+curl -s https://core.telegram.org/getProxyConfig -o proxy-multi.conf
 
-	service_mtproxy
-	iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport ${MTPROXY_PORT} -j ACCEPT
-	iptables -A OUTPUT -p tcp --sport ${MTPROXY_PORT} -j ACCEPT
-	iptables -A OUTPUT -p tcp --dport 8888 -j ACCEPT
+service_mtproxy
+iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport ${MTPROXY_PORT} -j ACCEPT
+iptables -A OUTPUT -p tcp --sport ${MTPROXY_PORT} -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 8888 -j ACCEPT
 
-	iptables-save > /etc/iptables.rules
+iptables-save > /etc/iptables.rules
 
-	systemctl daemon-reload
-	systemctl restart MTProxy.service
-	systemctl enable MTProxy.service
-	systemctl status MTProxy.service
+systemctl daemon-reload
+systemctl restart MTProxy.service
+systemctl enable MTProxy.service
+systemctl status MTProxy.service
 }
 
 # 重置 MTProxy
