@@ -3,16 +3,6 @@ MTPROXY_PORT=443
 MTPROXY_SECRET="*****"
 MTPROXY_SERVICE="/etc/systemd/system/MTProxy.service"
 
-# 获取网络接口名称
-interface=$(ip addr | grep '^[0-9]:' | grep -v 'lo' | cut -d ':' -f2 | awk '{ print $1 }')
-# 获取IP地址
-local_ip=$(ip addr | grep 'inet ' | grep -v '127.0.0.1' | cut -d '/' -f1 | awk '{ print $2 }')
-# 获取外网IP地址
-global_ip=$(curl whatismyip.akamai.com)
-
-read -p "请输入 MTProxy 端口: " MTPROXY_PORT
-read -p "请输入 MTProxy 密钥: " MTPROXY_SECRET
-
 # 安装 TelegramMessenger MTProxy
 install_mtproxy() {
 	\rm -rf /opt/MTProxy /usr/local/MTProxy
@@ -62,6 +52,16 @@ reset_mtproxy() {
 
 # 创建 MTProxy 服务
 service_mtproxy() {
+# 获取网络接口名称
+interface=$(ip addr | grep '^[0-9]:' | grep -v 'lo' | cut -d ':' -f2 | awk '{ print $1 }')
+# 获取IP地址
+local_ip=$(ip addr | grep 'inet ' | grep -v '127.0.0.1' | cut -d '/' -f1 | awk '{ print $2 }')
+# 获取外网IP地址
+global_ip=$(curl whatismyip.akamai.com)
+
+read -p "请输入 MTProxy 端口: " MTPROXY_PORT
+read -p "请输入 MTProxy 密钥: " MTPROXY_SECRET
+
 if [ "${local_ip}" == ${global_ip} ]
 then
 cat > ${MTPROXY_SERVICE} << EOF
