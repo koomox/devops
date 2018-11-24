@@ -34,7 +34,7 @@ initialize_mtproxy() {
 	systemctl status MTProxy.service
 }
 
-# 重置网络并重新启动服务
+# 重置 MTProxy
 reset_mtproxy() {
 	cd /usr/local/MTProxy
 	\rm -rf proxy-secret proxy-multi.conf
@@ -105,7 +105,7 @@ start_menu() {
 	echo "============================="
 	echo "1. 安装 TelegramMessenger MTProxy"
 	echo "2. 初始化 MTProxy"
-	echo "3. 重置网络并重新启动服务"
+	echo "3. 重置 MTProxy"
 	echo "4. 退出脚本"
 	echo 
 	read -p "请输入数字: " num
