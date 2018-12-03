@@ -112,6 +112,11 @@ AllowedIPs = 0.0.0.0/0, ::0/0
 PersistentKeepalive = 25
 EOF
 
+sed -i '/^$/d' ${WG_CONF}
+sed -i '/^#/d' ${WG_CONF}
+sed -i '/^$/d' ${CLIENT_CONF}
+sed -i '/^#/d' ${CLIENT_CONF}
+
 	chmod -R 755 /etc/wireguard
 
 	# 打开防火墙转发功能
