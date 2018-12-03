@@ -210,7 +210,8 @@ start_menu() {
 	echo "2. 安装 WireGuard"
 	echo "3. 初始化 WireGuard"
 	echo "4. 添加防火墙规则"
-	echo "5. 退出脚本"
+	echo "5. 添加用户"
+	echo "6. 退出脚本"
 	echo 
 	read -p "请输入数字: " num
 	case "$num" in
@@ -227,6 +228,9 @@ start_menu() {
 			add_iptables_rules
 			;;
 		5)
+			add_client
+			;;
+		6)
 			exit 1
 			;;
 		*)
