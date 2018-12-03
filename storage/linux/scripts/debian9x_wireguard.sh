@@ -25,6 +25,9 @@ install_wireguard() {
 	# 开始安装 WireGuard
 	apt install wireguard -y
 
+	# 安装依赖包，否则会提示:"/usr/bin/wg-quick: line 31: resolvconf: command not found"
+	apt install resolvconf
+
 	# 验证是否安装成功
 	modprobe wireguard && lsmod | grep wireguard
 
