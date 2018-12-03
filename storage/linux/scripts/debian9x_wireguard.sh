@@ -126,6 +126,13 @@ EOF
 	cat ${CLIENT_CONF}
 }
 
+# 添加防火墙规则
+add_iptables_rules() {
+read -p "输入 wireguard 端口: " WIREGUARD_PORT
+iptables -A INPUT -p udp --dport ${WIREGUARD_PORT} -j ACCEPT
+iptables -A OUTPUT -p udp --sport ${WIREGUARD_PORT} -j ACCEPT
+}
+
 # 开始菜单
 start_menu() {
 	clear
@@ -150,6 +157,9 @@ start_menu() {
 			initialize_wireguard
 			;;
 		4)
+			add_iptables_rules
+			;;
+		5)
 			exit 1
 			;;
 		*)
