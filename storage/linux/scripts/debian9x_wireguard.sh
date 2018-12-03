@@ -96,8 +96,8 @@ DNS = 8.8.8.8
 # 保持默认
 MTU = 1300
 # Wireguard客户端配置文件加入PreUp,Postdown命令调用批处理文件
-PreUp = start   ..\route\routes-up.bat
-PostDown = start  ..\route\routes-down.bat
+PreUp = start "" "D:\TunSafe\route\routes-up.bat"
+PostDown = start "" "D:\TunSafe\route\routes-down.bat"
 #### 正常使用Tunsafe点击connect就会调用routes-up.bat将国内IP写进系统路由表，断开disconnect则会调用routes-down.bat删除路由表。
 [Peer]
 # 公匙，自动读取上面刚刚生成的密匙内容
@@ -132,8 +132,64 @@ sed -i '/^#/d;/^$/d' ${CLIENT_CONF}
 	systemctl enable wg-quick@wg0
 	echo "=============== 服务器端配置文件 ==============="
 	cat ${WG_CONF}
-	echo "=============== 服务器端配置文件 ==============="
+	echo "=============== 客户端端配置文件 ==============="
 	cat ${CLIENT_CONF}
+}
+
+add_client() {
+cd /etc/wireguard
+
+read -p "输入用户名: " CLIENT_USERNAME
+read -p "输入IP地址: " CLIENT_IPADDR
+read -p "请输入 WireGuard 服务端口号: " wireguard_port
+WG_CONF=/etc/wireguard/wg0.conf
+CLIENT_USERNAME_CONF=/etc/wireguard/${CLIENT_USERNAME}.conf
+
+# 获取网络接口名称
+interface=$(ip addr | grep '^[0-9]:' | grep -v 'lo' | cut -d ':' -f2 | awk '{ print $1 }')
+# 获取IP地址
+local_ip=$(ip addr | grep 'inet ' | grep -v '127.0.0.1' | cut -d '/' -f1 | awk '{ print $2 }')
+# 获取外网IP地址
+global_ip=$(curl whatismyip.akamai.com)
+
+wg genkey | tee privatekey_${CLIENT_USERNAME} | wg pubkey > publickey_${CLIENT_USERNAME}
+echo -e "[Peer]\nPublicKey = $(cat publickey_${CLIENT_USERNAME})\nAllowedIPs = ${CLIENT_IPADDR}/32" >> ${WG_CONF}
+
+wg-quick down wg0
+wg-quick up wg0
+
+# 生成客户端配置文件
+cat > ${CLIENT_USERNAME_CONF} << EOF
+[Interface]
+# 私匙，自动读取上面刚刚生成的密匙内容
+PrivateKey = $(cat privatekey_${CLIENT_USERNAME})
+# VPN内网IP范围
+Address = ${CLIENT_IPADDR}/24
+# 解析域名用的DNS
+DNS = 8.8.8.8
+# 保持默认
+MTU = 1300
+# Wireguard客户端配置文件加入PreUp,Postdown命令调用批处理文件
+PreUp = start "" "D:\TunSafe\route\routes-up.bat"
+PostDown = start "" "D:\TunSafe\route\routes-down.bat"
+#### 正常使用Tunsafe点击connect就会调用routes-up.bat将国内IP写进系统路由表，断开disconnect则会调用routes-down.bat删除路由表。
+[Peer]
+# 公匙，自动读取上面刚刚生成的密匙内容
+PublicKey = $(cat spublickey)
+# 服务器地址和端口，下面的 X.X.X.X 记得更换为你的服务器公网IP，端口根据服务端配置时的监听端口填写
+Endpoint = ${global_ip}:${wireguard_port}
+# 转发流量的IP范围，下面这个代表所有流量都走VPN
+AllowedIPs = 0.0.0.0/0, ::0/0
+# 保持连接，如果客户端或服务端是 NAT 网络(比如国内大多数家庭宽带没有公网IP，都是NAT)，
+# 那么就需要添加这个参数定时链接服务端(单位：秒)，如果你的服务器和你本地都不是 NAT 网络，
+# 那么建议不使用该参数（设置为0，或客户端配置文件中删除这行）
+PersistentKeepalive = 25
+EOF
+
+sed -i '/^#/d;/^$/d' ${CLIENT_USERNAME_CONF}
+wg
+echo "=============== 客户端端配置文件 ==============="
+cat ${CLIENT_USERNAME_CONF}
 }
 
 # 添加防火墙规则
