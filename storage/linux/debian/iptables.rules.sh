@@ -10,7 +10,7 @@ cat > /etc/iptables.rules << EOF
 :OUTPUT DROP [0:0]
 -A INPUT -i lo -j ACCEPT
 -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
--A INPUT -p tcp -m state --state NEW -m tcp --dport ${SS_PORT} -j ACCEPT
+-A INPUT -p tcp -m state --state NEW -m tcp --dport ${SSH_PORT} -j ACCEPT
 -A INPUT -p udp -m state --state NEW -m udp --sport 123 -j ACCEPT
 -A INPUT -p tcp -m tcp --sport 16630 -j ACCEPT
 -A INPUT -p tcp -m state --state NEW -m tcp --dport ${MTPROXY_PORT} -j ACCEPT
@@ -18,7 +18,7 @@ cat > /etc/iptables.rules << EOF
 -A OUTPUT -o lo -j ACCEPT
 -A OUTPUT -p icmp -m icmp --icmp-type any -j ACCEPT
 -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
--A OUTPUT -p tcp -m tcp --sport ${SS_PORT} -j ACCEPT
+-A OUTPUT -p tcp -m tcp --sport ${SSH_PORT} -j ACCEPT
 -A OUTPUT -p tcp -m tcp --dport 21 -j ACCEPT
 -A OUTPUT -p tcp -m tcp --dport 53 -j ACCEPT
 -A OUTPUT -p udp -m udp --dport 53 -j ACCEPT
