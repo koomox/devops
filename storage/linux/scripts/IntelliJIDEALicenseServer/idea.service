@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/local/idea/idea
+ExecStart=/usr/local/idea/bin/idea
 Restart=on-abort
 KillSignal=SIGQUIT
 PIDFile=/var/lib/idea/idea.pid
