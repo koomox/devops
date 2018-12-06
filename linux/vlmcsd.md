@@ -5,6 +5,14 @@ vlmcsd for github.com: [传送门](https://github.com/Wind4/vlmcsd)
 ```sh
 tail -f /var/lib/vlmcsd/vlmcsd.log
 ```
+### 启用端口         
+```sh
+firewall-cmd --permanent --zone=public --add-port=1688/tcp
+firewall-cmd --reload
+```
+```sh
+iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 1688 -j ACCEPT
+```
 ### 一键安装脚本        
 Debian 9.x 一键安装脚本         
 ```sh

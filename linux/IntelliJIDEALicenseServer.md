@@ -18,7 +18,9 @@ http://127.0.0.1:1027
 firewall-cmd --permanent --zone=public --add-port=1027/tcp
 firewall-cmd --reload
 ```
-
+```sh
+iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 1027 -j ACCEPT
+```
 ### 一键安装脚本        
 Debian 9.x 一键安装脚本         
 ```sh
