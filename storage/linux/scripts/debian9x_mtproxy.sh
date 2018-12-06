@@ -55,7 +55,7 @@ service_mtproxy() {
 # 获取网络接口名称
 interface=$(ip addr | grep '^[0-9]:' | grep -v 'lo' | grep -v 'wg' | cut -d ':' -f2 | awk '{ print $1 }')
 # 获取IP地址
-local_ip=$(ip addr | grep 'inet ' | grep -v '127.0.0.1' | grep -v '10.0.0.1' | cut -d '/' -f1 | awk '{ print $2 }')
+local_ip=$(ip addr | grep 'inet ' | grep -v '127.0.0.1' | grep -v '10.0.0.' | cut -d '/' -f1 | awk '{ print $2 }')
 # 获取外网IP地址
 global_ip=$(curl whatismyip.akamai.com)
 
