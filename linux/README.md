@@ -22,3 +22,6 @@
 [Linode](linode.md)          
 [Debian 安装 Powerline](debian_powerline.md)             
 [CentOS 安装 Powerline](centos_powerline.md)         
+# 服务        
+[IntelliJ IDEA License Server](IntelliJIDEALicenseServer.md)        
+[Vlmcsd](vlmcsd.md)          
