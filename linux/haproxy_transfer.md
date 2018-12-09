@@ -15,3 +15,9 @@ curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/sc
 chmod +x ./iptables_haproxy.sh
 vim ./iptables_haproxy.sh
 ```
+添加多端口转发           
+```sh
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/haproxy/debian9x_haproxy_v3.sh
+chmod +x ./debian9x_haproxy_v3.sh
+vim ./debian9x_haproxy_v3.sh
+```
