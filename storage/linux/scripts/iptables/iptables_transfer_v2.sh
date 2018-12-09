@@ -57,6 +57,14 @@ clear_nat_rules() {
 iptables -t nat -F
 }
 
+# 打开防火墙转发功能
+enable_nat_rules() {
+echo "打开NAT路由转发"
+echo 1 > /proc/sys/net/ipv4/ip_forward
+echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
+sysctl -p
+}
+
 # 开始菜单
 start_menu() {
 	clear
@@ -68,7 +76,8 @@ start_menu() {
 	echo "2. 清空 NAT 规则"
 	echo "3. 添加 NAT 规则"
 	echo "4. 删除 NAT 规则"
-	echo "5. 退出脚本"
+	echo "5. 打开NAT路由转发"
+	echo "6. 退出脚本"
 	echo 
 	read -p "请输入数字: " num
 	case "$num" in
@@ -85,6 +94,9 @@ start_menu() {
 			del_iptables_rules
 			;;
 		5)
+			enable_nat_rules
+			;;
+		6)
 			exit 1
 			;;
 		*)
