@@ -26,3 +26,5 @@
 [IntelliJ IDEA License Server](IntelliJIDEALicenseServer.md)        
 [Vlmcsd](vlmcsd.md)          
 [WireGuard](wireguard.md)        
+[HAProxy 中转服务器](haproxy_transfer.md)            
+[iptables 中转服务器](iptables_transfer.md)          
