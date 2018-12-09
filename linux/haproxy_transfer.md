@@ -9,3 +9,9 @@ curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/sc
 chmod +x ./debian9x_haproxy.sh
 ./debian9x_haproxy.sh
 ```
+添加 HAProxy 防火墙规则            
+```sh
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/haproxy/iptables_haproxy.sh
+chmod +x ./iptables_haproxy.sh
+vim ./iptables_haproxy.sh
+```
