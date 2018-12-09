@@ -5,7 +5,7 @@ HAProxy: [官网](http://www.haproxy.org/)
 ### 一键安装 HAProxy         
 Debian 9 一键安装 HAProxy          
 ```sh
-curl -LO https://github.com/koomox/devops/blob/master/storage/linux/scripts/haproxy/debian9x_haproxy.sh
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/haproxy/debian9x_haproxy.sh
 chmod +x ./debian9x_haproxy.sh
 ./debian9x_haproxy.sh
 ```
