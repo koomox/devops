@@ -70,6 +70,9 @@ iptables -A OUTPUT -p tcp --dport 8080 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 14000 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 16630 -j ACCEPT
 
+### Telegram
+iptables -A OUTPUT -p tcp --dport 8888 -j ACCEPT
+
 ### Outlook.com
 iptables -A OUTPUT -p tcp --dport 993 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 587 -j ACCEPT
