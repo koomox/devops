@@ -242,4 +242,7 @@ start_menu() {
 	esac
 }
 
-start_menu
+while true
+do
+	start_menu
+done

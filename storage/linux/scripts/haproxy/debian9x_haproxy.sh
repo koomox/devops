@@ -25,7 +25,7 @@ read -p "请输入用户名: " username
 read -p "请输入目标服务器域名或IP地址: " domain_name
 read -p "请输入端口号: " public_port
 
-echo -e "frontend ss-in-${username}\n\tbind *:${public_port}\n\tdefault_backend ss-out-${username}\nbackend ss-out-${username}\n\tserver server1 ${domain_name}:${public_port} maxconn 20480" >> /etc/haproxy/haproxy.cfg
+echo -e "frontend ss-in-${username}\n\tbind *:${public_port}\n\tdefault_backend ss-out-${username}\nbackend ss-out-${username}\n\tserver server1 ${domain_name}:${public_port} maxconn 32" >> /etc/haproxy/haproxy.cfg
 
 iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport ${public_port} -j ACCEPT
 iptables -A OUTPUT -p tcp --sport ${public_port} -j ACCEPT
