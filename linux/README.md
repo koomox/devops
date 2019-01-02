@@ -23,6 +23,7 @@
 [Debian 安装 Powerline](debian_powerline.md)             
 [CentOS 安装 Powerline](centos_powerline.md)         
 # 服务        
+[Aria2 下载工具](aria2.md)            
 [IntelliJ IDEA License Server](IntelliJIDEALicenseServer.md)        
 [Vlmcsd](vlmcsd.md)          
 [WireGuard](wireguard.md)        

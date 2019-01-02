@@ -24,7 +24,6 @@ curl -s https://core.telegram.org/getProxyConfig -o proxy-multi.conf
 service_mtproxy
 iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport ${MTPROXY_PORT} -j ACCEPT
 iptables -A OUTPUT -p tcp --sport ${MTPROXY_PORT} -j ACCEPT
-iptables -A OUTPUT -p tcp --dport 8888 -j ACCEPT
 
 iptables-save > /etc/iptables.rules
 
