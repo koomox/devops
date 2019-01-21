@@ -13,3 +13,10 @@ curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/sc
 chmod +x ./centos7x_nodejs.sh
 ./centos7x_nodejs.sh
 ```
+### Raspbian 搭建 Node.js 环境                  
+Raspbian 一键安装最新版 Node.js          
+```sh
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nodejs/raspbian_nodejs.sh
+chmod +x ./raspbian_nodejs.sh
+./raspbian_nodejs.sh
+```
