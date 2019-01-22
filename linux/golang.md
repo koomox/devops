@@ -2,7 +2,7 @@
 Go Home: [传送门](https://golang.org/)              
 Go下载地址: [传送门](https://golang.org/dl/)             
 Go 下载地址:[中国镜像](https://golang.google.cn/)            
-golangtc 下载地址: [传送门](https://www.golangtc.com/download)               
+github 仓库: [传送门](https://github.com/golang/go/)              
 ### Linux 一键安装最新版 Golang                
 从 `https://golang.org/dl/` 页面提取最新版本号，自动安装，设置环境变量。                
 ```sh
