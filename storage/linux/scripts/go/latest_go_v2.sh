@@ -48,7 +48,7 @@ go_environmental(){
 
 installation_dependency
 check_os_bits
-GO_VERSION=$(wget -q -O - https://golang.org/ | grep -E "goVersion" | sed -E "s/.*go([0-9]+\.[0-9]+\.[0-9]+).*/\1/gm")
+GO_VERSION=$(wget -q -O - https://golang.org/ | grep -E "goVersion" | sed -E "s/.*go([0-9]+\.[0-9]+\.*[0-9]*).*/\1/gm")
 GO_BITS=${bit}
 
 if [ -f /tmp/go${GO_VERSION}.linux-${GO_BITS}.tar.gz ]; then

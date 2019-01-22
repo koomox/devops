@@ -48,7 +48,7 @@ node_environmental(){
 
 installation_dependency
 check_os_bits
-NODE_VERSION=$(wget -q -O - https://nodejs.org/en/download/ | grep -E "Latest LTS Version" | sed -E "s/.*<strong>([0-9]+\.[0-9]+\.[0-9]+).*/\1/gm")
+NODE_VERSION=$(wget -q -O - https://nodejs.org/en/download/ | grep -E "Latest LTS Version" | sed -E "s/.*<strong>([0-9]+\.[0-9]+\.*[0-9]*).*/\1/gm")
 NODE_BITS=${bit}
 
 cd /tmp

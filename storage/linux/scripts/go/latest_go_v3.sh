@@ -48,7 +48,7 @@ go_environmental(){
 
 installation_dependency
 check_os_bits
-GO_VERSION=$(wget -q -O - https://github.com/golang/go/tags | grep -m1 -E "golang/go/releases/tag/go[0-9]+\.[0-9]+\.[0-9]+" | sed -E "s/.*go([0-9]+\.[0-9]+\.[0-9]+).*/\1/gm")
+GO_VERSION=$(wget -q -O - https://github.com/golang/go/tags | grep -v "beta" | grep -m1 -E "golang/go/releases/tag/go[0-9]+\.[0-9]+\.*[0-9]*" | sed -E "s/.*go([0-9]+\.[0-9]+\.*[0-9]*).*/\1/gm")
 GO_BITS=${bit}
 
 cd /tmp

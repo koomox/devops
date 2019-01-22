@@ -88,4 +88,7 @@ start_menu() {
 	esac
 }
 
+while true
+do
 start_menu
+done

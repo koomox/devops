@@ -48,7 +48,7 @@ node_environmental(){
 
 installation_dependency
 check_os_bits
-NODE_VERSION=$(wget -q -O - https://github.com/nodejs/node/tags | grep -m1 -E "/nodejs/node/releases/tag/v[0-9]+\.[0-9]+\.[0-9]+" | sed -E "s/.*v([0-9]+\.[0-9]+\.[0-9]+).*/\1/gm")
+NODE_VERSION=$(wget -q -O - https://github.com/nodejs/node/tags | grep -m1 -E "/nodejs/node/releases/tag/v[0-9]+\.[0-9]+\.*[0-9]*" | sed -E "s/.*v([0-9]+\.[0-9]+\.*[0-9]*).*/\1/gm")
 NODE_BITS=${bit}
 
 cd /tmp
