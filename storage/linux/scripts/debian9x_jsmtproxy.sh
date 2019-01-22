@@ -32,7 +32,7 @@ echo "${MTPROXY_SECRET}"
 
 apt install wget git -y
 cd /tmp
-if [ -d /usr/local/node ]; then
+if [ -e /usr/local/node ]; then
 	\rm -rf /usr/local/node
 fi
 mkdir -p /usr/local/node

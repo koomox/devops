@@ -41,7 +41,7 @@ NODE_VERSION=$(wget -q -O - https://nodejs.org/en/download/current/ | grep -E "L
 NODE_BITS=${bit}
 
 cd /tmp
-if [ -d /usr/local/node ]; then
+if [ -e /usr/local/node ]; then
 	\rm -rf /usr/local/node
 fi
 if [ -f node-v${NODE_VERSION}-linux-${NODE_BITS}.tar.xz ]; then
