@@ -87,7 +87,7 @@ cd /usr/local/node >> tar --strip-components 1 -xf /tmp/node.tar.gz
 
 node_environmental
 
-npm install -g pm2
+npm install -g pm2 -y
 cd /opt
 git clone https://github.com/FreedomPrevails/JSMTProxy.git --depth=1
 
