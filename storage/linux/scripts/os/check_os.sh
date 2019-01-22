@@ -15,7 +15,7 @@ check_sys(){
 	else
 		release="unknown"
 	fi
-}ss
+}
 
 check_sys
 echo "Linux 发行版: " $release
