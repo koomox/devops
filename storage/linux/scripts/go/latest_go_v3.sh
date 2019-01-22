@@ -39,10 +39,10 @@ check_os_bits() {
 
 go_environmental(){
 	if grep -Eqi "/usr/local/go/bin" /etc/profile; then
-		export PATH=$PATH
+		source /etc/profile
 	else
 		echo 'export PATH=$PATH:/usr/local/go/bin' >> /etc/profile
-		export PATH=$PATH:/usr/local/go/bin
+		source /etc/profile
 	fi
 }
 
