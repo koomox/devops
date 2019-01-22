@@ -69,3 +69,4 @@ mv node-v${NODE_VERSION}-linux-${NODE_BITS} /usr/local/node
 
 node_environmental
 echo "install Node.js ${NODE_VERSION} Success!"
+node -v
