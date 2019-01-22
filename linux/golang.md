@@ -1,6 +1,6 @@
 # 安装 Golang                    
 Go Home: [传送门](https://golang.org/)              
-Go下载地址: [传送门](https://golang.org/dl/)             
+Go 下载地址: [传送门](https://golang.org/dl/)             
 Go 下载地址:[中国镜像](https://golang.google.cn/)            
 github 仓库: [传送门](https://github.com/golang/go/)              
 ### Linux 一键安装最新版 Golang                

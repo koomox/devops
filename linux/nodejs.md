@@ -1,6 +1,7 @@
 # Node.js              
 Node.js Home: [传送门](https://nodejs.org/en/)              
-Node.js 下载地址: [传送门](https://nodejs.org/en/download/)             
+Node.js 下载页面: [传送门](https://nodejs.org/en/download/)             
+Node.js 下载仓库: [传送门](https://nodejs.org/dist/)          
 github 仓库:[传送门](https://github.com/nodejs/node)                    
 ### 一键安装 LTS Node.js            
 Linux 一键安装 Node.js，自动检测系统类型，安装最新稳定版 Node.js。          
