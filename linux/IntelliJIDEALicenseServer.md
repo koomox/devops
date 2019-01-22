@@ -22,6 +22,12 @@ firewall-cmd --reload
 iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 1027 -j ACCEPT
 ```
 ### 一键安装脚本        
+Linux 一键安装脚本         
+```sh
+curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/IntelliJIDEALicenseServer/install_idea.sh -o /tmp/install_idea.sh
+chmod +x /tmp/install_idea.sh
+/tmp/install_idea.sh
+```
 Debian 9.x 一键安装脚本         
 ```sh
 wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/IntelliJIDEALicenseServer/debian_idea.sh
