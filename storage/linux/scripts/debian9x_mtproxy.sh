@@ -78,9 +78,11 @@ reset_mtproxy() {
 # 创建 MTProxy 服务
 service_mtproxy() {
 # 获取网络接口名称
-interface=$(ip addr | grep '^[0-9]:' | grep -v 'lo' | grep -v 'wg' | cut -d ':' -f2 | awk '{ print $1 }')
+interface=$(ip addr | grep '^[0-9]+:' | grep -v 'lo' | grep -v 'wg' | cut -d ':' -f2 | awk '{ print $1 }')
 # 获取IP地址
-local_ip=$(ip addr | grep 'inet ' | grep -v '127.0.0.1' | grep -v '10.0.0.' | cut -d '/' -f1 | awk '{ print $2 }')
+obtain_ip=$(ip addr | grep -v '127.0.0.1' | grep -Eo '((2[0-4][0-9]|25[0-5]|[01]?[0-9][0-9]?)\.){3}(2[0-4][0-9]|25[0-5]|[01]?[0-9][0-9]?)/')
+local_ip=${obtain_ip%/*}
+echo ${local_ip}
 # 获取外网IP地址
 global_ip=$(curl whatismyip.akamai.com)
 
