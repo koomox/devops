@@ -9,6 +9,17 @@ check_os_bits() {
 	fi
 }
 
+node_environmental(){
+	if grep -Eqi "NODE_HOME" /etc/profile; then
+		source /etc/profile
+	else
+		echo 'export NODE_HOME=/usr/local/node' >> /etc/profile
+		echo 'export PATH=$PATH:$NODE_HOME/bin' >> /etc/profile
+		echo 'export NODE_PATH=$PATH:$NODE_HOME/lib/node_modules' >> /etc/profile
+		source /etc/profile
+	fi
+}
+
 check_os_bits
 NODE_BITS=${bit}
 
@@ -47,14 +58,7 @@ wget https://nodejs.org/dist/latest-v6.x/`wget \
 	-O /tmp/node.tar.gz
 cd /usr/local/node >> tar --strip-components 1 -xf /tmp/node.tar.gz
 
-if grep -Eqi "NODE_HOME" /etc/profile; then
-	source /etc/profile
-else
-	echo 'export NODE_HOME=/usr/local/node' >> /etc/profile
-	echo 'export PATH=$PATH:$NODE_HOME/bin' >> /etc/profile
-	echo 'export NODE_PATH=$PATH:$NODE_HOME/lib/node_modules' >> /etc/profile
-	source /etc/profile
-fi
+node_environmental
 
 npm install -g pm2
 cd /opt

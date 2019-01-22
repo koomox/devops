@@ -35,6 +35,17 @@ check_os_bits() {
 	fi
 }
 
+node_environmental(){
+	if grep -Eqi "NODE_HOME" /etc/profile; then
+		source /etc/profile
+	else
+		echo 'export NODE_HOME=/usr/local/node' >> /etc/profile
+		echo 'export PATH=$PATH:$NODE_HOME/bin' >> /etc/profile
+		echo 'export NODE_PATH=$PATH:$NODE_HOME/lib/node_modules' >> /etc/profile
+		source /etc/profile
+	fi
+}
+
 check_sys
 check_os_bits
 NODE_VERSION=$(wget -q -O - https://nodejs.org/en/download/current/ | grep -E "Latest Current Version" | sed -E "s/.*<strong>([0-9]+\.[0-9]+\.[0-9]+).*/\1/gm")
@@ -56,13 +67,5 @@ tar -xf node-v${NODE_VERSION}-linux-${NODE_BITS}.tar
 mv node-v${NODE_VERSION}-linux-${NODE_BITS} /usr/local/node
 \rm -rf node-v${NODE_VERSION}-linux-${NODE_BITS}.tar.xz node-v${NODE_VERSION}-linux-${NODE_BITS}.tar
 
-if grep -Eqi "NODE_HOME" /etc/profile; then
-	source /etc/profile
-else
-	echo 'export NODE_HOME=/usr/local/node' >> /etc/profile
-	echo 'export PATH=$PATH:$NODE_HOME/bin' >> /etc/profile
-	echo 'export NODE_PATH=$PATH:$NODE_HOME/lib/node_modules' >> /etc/profile
-	source /etc/profile
-fi
-
+node_environmental
 echo "install Node.js ${NODE_VERSION} Success!"
