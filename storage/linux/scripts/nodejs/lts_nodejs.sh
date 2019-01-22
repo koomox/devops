@@ -34,5 +34,6 @@ else
 	echo 'export NODE_HOME=/usr/local/node' >> /etc/profile
 	echo 'export PATH=$PATH:$NODE_HOME/bin' >> /etc/profile
 	echo 'export NODE_PATH=$PATH:$NODE_HOME/lib/node_modules' >> /etc/profile
+	source /etc/profile
 	echo "Add Node.js Variable Success!"
 fi
