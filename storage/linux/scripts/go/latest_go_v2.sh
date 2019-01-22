@@ -60,6 +60,7 @@ fi
 
 wget https://dl.google.com/go/go${GO_VERSION}.linux-${GO_BITS}.tar.gz -O /tmp/go${GO_VERSION}.linux-${GO_BITS}.tar.gz
 tar -C /usr/local -xzf go${GO_VERSION}.linux-${GO_BITS}.tar.gz
+\rm -rf go${GO_VERSION}.linux-${GO_BITS}.tar.gz
 
 go_environmental
 echo "The Go Programming Language ${GO_VERSION} install Success!"
