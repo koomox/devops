@@ -17,11 +17,11 @@ installation_dependency(){
 		release="unknown"
 	fi
 
-	if [ ! `command -v wget >/dev/null` ]; then
+	if [ ! `command -v git >/dev/null` ]; then
 		if [[ ${release} == "CentOS" || ${release} == "Fedora" ]]; then
-			yum install wget -y
+			yum install git -y
 		elif [[ ${release} == "Debian" || ${release} == "Ubuntu" || ${release} == "Raspbian" || ${release} == "Aliyun" ]]; then
-			apt install wget -y
+			apt install git -y
 		fi
 	fi
 }
