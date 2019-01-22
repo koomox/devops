@@ -27,3 +27,12 @@ xz -d node-v${NODE_VERSION}-linux-${NODE_BITS}.tar.xz
 tar -xf node-v${NODE_VERSION}-linux-${NODE_BITS}.tar
 mv node-v${NODE_VERSION}-linux-${NODE_BITS} /usr/local/node
 \rm -rf node-v${NODE_VERSION}-linux-${NODE_BITS}.tar.xz node-v${NODE_VERSION}-linux-${NODE_BITS}.tar
+
+if [ grep -Eqi "NODE_HOME" /etc/profile ]; then
+	echo "Node.js Variable Already Exist!"
+else
+	echo 'export NODE_HOME=/usr/local/node' >> /etc/profile
+	echo 'export PATH=$PATH:$NODE_HOME/bin' >> /etc/profile
+	echo 'export NODE_PATH=$PATH:$NODE_HOME/lib/node_modules' >> /etc/profile
+	echo "Add Node.js Variable Success!"
+fi
