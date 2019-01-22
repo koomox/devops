@@ -16,7 +16,7 @@ curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/sc
 chmod +x ./latest_go_v2.sh
 ./latest_go_v2.sh
 ```
-国内用户使用该版本从 `https://github.com/golang/go/tags` 页面提取最新版本号，自动安装，设置环境变量。                     
+中国用户使用该版本从 `https://github.com/golang/go/tags` 页面提取最新版本号，自动安装，设置环境变量。                     
 ```sh
 curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/go/latest_go_v3.sh
 chmod +x ./latest_go_v3.sh
