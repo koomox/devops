@@ -1,6 +1,6 @@
 #!/bin/bash
 
-check_sys(){
+installation_dependency(){
 	if grep -Eqi "CentOS|Red Hat|RedHat" /etc/issue || grep -Eq "CentOS|Red Hat|RedHat" /etc/*-release || grep -Eqi "CentOS|Red Hat|RedHat" /proc/version; then
 		release="CentOS"
 	elif grep -Eqi "Debian" /etc/issue || grep -Eq "Debian" /etc/*-release; then
@@ -17,7 +17,7 @@ check_sys(){
 		release="unknown"
 	fi
 
-	if [ ! -f /usr/bin/wget ]; then
+	if [ ! `command -v wget >/dev/null` ]; then
 		if [[ ${release} == "CentOS" || ${release} == "Fedora" ]]; then
 			yum install wget -y
 		elif [[ ${release} == "Debian" || ${release} == "Ubuntu" || ${release} == "Raspbian" || ${release} == "Aliyun" ]]; then
@@ -46,7 +46,7 @@ node_environmental(){
 	fi
 }
 
-check_sys
+installation_dependency
 check_os_bits
 NODE_VERSION=$(wget -q -O - https://github.com/nodejs/node/tags | grep -m1 -E "/nodejs/node/releases/tag/v[0-9]+\.[0-9]+\.[0-9]+" | sed -E "s/.*v([0-9]+\.[0-9]+\.[0-9]+).*/\1/gm")
 NODE_BITS=${bit}
