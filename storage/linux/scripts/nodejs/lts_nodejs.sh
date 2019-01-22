@@ -30,11 +30,11 @@ mv node-v${NODE_VERSION}-linux-${NODE_BITS} /usr/local/node
 
 if grep -Eqi "NODE_HOME" /etc/profile; then
 	source /etc/profile
-	echo "Node.js Variable Already Exist!"
 else
 	echo 'export NODE_HOME=/usr/local/node' >> /etc/profile
 	echo 'export PATH=$PATH:$NODE_HOME/bin' >> /etc/profile
 	echo 'export NODE_PATH=$PATH:$NODE_HOME/lib/node_modules' >> /etc/profile
 	source /etc/profile
-	echo "Add Node.js Variable Success!"
 fi
+
+echo "install Node.js ${NODE_VERSION} Success!"
