@@ -17,6 +17,12 @@ if [ -d /usr/local/node ]; then
 	\rm -rf /usr/local/node
 fi
 mkdir -p /usr/local/node
+if [ -f node-v${NODE_VERSION}-linux-${NODE_BITS}.tar.xz ]; then
+	\rm -rf node-v${NODE_VERSION}-linux-${NODE_BITS}.tar.xz
+fi
+if [ -f node-v${NODE_VERSION}-linux-${NODE_BITS}.tar ]; then
+	\rm -rf node-v${NODE_VERSION}-linux-${NODE_BITS}.tar
+fi
 wget https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${NODE_BITS}.tar.xz
 xz -d node-v${NODE_VERSION}-linux-${NODE_BITS}.tar.xz
 tar -xf node-v${NODE_VERSION}-linux-${NODE_BITS}.tar
