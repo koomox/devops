@@ -32,7 +32,7 @@ check_os_bits() {
 		bit="amd64"
 	elif [[ ${bit} == "i386" || ${bit} == "i686" ]]; then
 		bit="386"
-	elif grep -Eqi "arm" ${bit}; then
+	elif [[ ${bit} =~ "arm" ]]; then
 		bit="armv6l"
 	fi
 }
