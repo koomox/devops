@@ -16,7 +16,7 @@ iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 1688 -j ACCEPT
 ### 一键安装脚本        
 Linux 一键安装脚本         
 ```sh
-curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/vlmcsd/install_vlmcsd.sh
+curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/vlmcsd/install_vlmcsd.sh -o /tmp/install_vlmcsd.sh
 chmod +x ./install_vlmcsd.sh
 ./install_vlmcsd.sh
 ```
