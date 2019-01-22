@@ -42,7 +42,7 @@ fi
 
 unzip IntelliJIDEALicenseServer-1.6.zip
 
-check_os_bits() {
+install_idea() {
 	bit=$(uname -m)
 	if [[ ${bit} == "x86_64" ]]; then
 		\cp -f /tmp/IntelliJIDEALicenseServer/IntelliJIDEALicenseServer_linux_amd64 /usr/local/idea/bin/idea
@@ -52,6 +52,8 @@ check_os_bits() {
 		\cp -f /tmp/IntelliJIDEALicenseServer/IntelliJIDEALicenseServer_linux_arm /usr/local/idea/bin/idea
 	fi
 }
+
+install_idea
 
 if [ ! `grep -Eq "^idea" /etc/group` ]; then
 	groupadd -r idea
