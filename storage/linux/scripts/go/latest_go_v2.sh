@@ -37,12 +37,12 @@ check_os_bits() {
 	fi
 }
 
-node_environmental(){
+go_environmental(){
 	if grep -Eqi "/usr/local/go/bin" /etc/profile; then
-		source /etc/profile
+		export PATH=$PATH
 	else
 		echo 'export PATH=$PATH:/usr/local/go/bin' >> /etc/profile
-		source /etc/profile
+		export PATH=$PATH:/usr/local/go/bin
 	fi
 }
 
@@ -61,5 +61,6 @@ fi
 wget https://dl.google.com/go/go${GO_VERSION}.linux-${GO_BITS}.tar.gz -O /tmp/go${GO_VERSION}.linux-${GO_BITS}.tar.gz
 tar -C /usr/local -xzf go${GO_VERSION}.linux-${GO_BITS}.tar.gz
 
-node_environmental
+go_environmental
 echo "The Go Programming Language ${GO_VERSION} install Success!"
+go version
