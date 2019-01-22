@@ -18,18 +18,18 @@ installation_dependency(){
 	fi
 
 	if [[ ${release} == "CentOS" || ${release} == "Fedora" ]]; then
-		if [ ! `command -v git >/dev/null` ]; then
-			yum install git -y
-		fi
 		if [ ! `command -v wget >/dev/null` ]; then
 			yum install wget -y
 		fi
-	elif [[ ${release} == "Debian" || ${release} == "Ubuntu" || ${release} == "Raspbian" || ${release} == "Aliyun" ]]; then
 		if [ ! `command -v git >/dev/null` ]; then
-			apt install git -y
+			yum install git -y
 		fi
+	elif [[ ${release} == "Debian" || ${release} == "Ubuntu" || ${release} == "Raspbian" || ${release} == "Aliyun" ]]; then
 		if [ ! `command -v wget >/dev/null` ]; then
 			apt install wget -y
+		fi
+		if [ ! `command -v git >/dev/null` ]; then
+			apt install git -y
 		fi
 	fi
 }
