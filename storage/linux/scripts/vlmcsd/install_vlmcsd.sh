@@ -61,11 +61,11 @@ chmod +x /usr/local/vlmcsd/bin/vlmcsd
 ls -al /usr/local/vlmcsd/bin/vlmcsd
 
 init_vlmcsd_service() {
-	if [ ! `systemctl list-units | grep 'vlmcsd'` ]; then
+	if [ `systemctl list-units | grep 'vlmcsd'` ]; then
 		systemctl stop vlmcsd
 	fi
 
-	if [ ! `systemctl list-unit-files | grep 'vlmcsd'` ]; then
+	if `systemctl list-unit-files | grep 'vlmcsd'`; then
 		systemctl disable vlmcsd
 	fi
 

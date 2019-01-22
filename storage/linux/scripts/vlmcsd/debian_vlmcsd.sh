@@ -22,14 +22,8 @@ chmod +x /usr/local/vlmcsd/bin/vlmcsd
 ls -al /usr/local/vlmcsd/bin/vlmcsd
 
 init_vlmcsd_service() {
-	if [ ! `systemctl list-units | grep 'vlmcsd'` ]; then
-		systemctl stop vlmcsd
-	fi
-
-	if [ ! `systemctl list-unit-files | grep 'vlmcsd'` ]; then
-		systemctl disable vlmcsd
-	fi
-
+	systemctl stop vlmcsd
+	systemctl disable vlmcsd
 	if [ -e /etc/systemd/system/vlmcsd.service ]; then
 		\rm -rf /etc/systemd/system/vlmcsd.service
 	fi
