@@ -35,7 +35,7 @@ install_mtproxy() {
 	mkdir -p /usr/local/MTProxy
 	cd /opt
 	apt install git curl build-essential libssl-dev zlib1g-dev -y
-	git clone https://github.com/TelegramMessenger/MTProxy
+	git clone https://github.com/TelegramMessenger/MTProxy --depth=1
 	cd MTProxy
 	make && cd objs/bin
 	mv mtproto-proxy -t /usr/local/MTProxy
