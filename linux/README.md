@@ -7,10 +7,10 @@
 [NextCloud](nextcloud.md)                      
 [CentOS 7.x 安装 NextCloud](centos7x_nextcloud.md)           
 [openwrt](openwrt.md)                     
-[Go 1.11.1](golang1111.md)              
+[安装 Golang 语言](golang.md)              
 [CentOS 7.x](centos7x.md)           
 [Samba](samba.md)           
-[Node.js](nodejs.md)            
+[安装 Node.js](nodejs.md)            
 # Docker              
 [Docker for Ubuntu Server 17.04](docker/ubuntuserver17x.md)                  
 [Docker for CentOS 7.x](docker/centos7x.md)                  

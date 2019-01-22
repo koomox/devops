@@ -6,6 +6,13 @@ curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/sc
 chmod +x ./lts_nodejs.sh
 ./lts_nodejs.sh
 ```
+### 一键安装 LTS Node.js            
+Linux 一键安装 LTS Node.js，自动检测系统类型，安装最新版 LTS Node.js。          
+```sh
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nodejs/lts_nodejs.sh
+chmod +x ./lts_nodejs.sh
+./lts_nodejs.sh
+```
 ### Debian 9.x 搭建 Node.js 环境            
 Debian 9.x 一键安装最新版 Node.js          
 ```sh

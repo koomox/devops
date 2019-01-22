@@ -1,0 +1,67 @@
+#!/bin/bash
+
+check_sys(){
+	if grep -Eqi "CentOS|Red Hat|RedHat" /etc/issue || grep -Eq "CentOS|Red Hat|RedHat" /etc/*-release || grep -Eqi "CentOS|Red Hat|RedHat" /proc/version; then
+		release="CentOS"
+	elif grep -Eqi "Debian" /etc/issue || grep -Eq "Debian" /etc/*-release; then
+		release="Debian"
+	elif grep -Eqi "Fedora" /etc/issue || grep -Eq "Fedora" /etc/*-release || grep -Eqi "Fedora" /proc/version; then
+		release="Fedora"
+	elif grep -Eqi "Ubuntu" /etc/issue || grep -Eq "Ubuntu" /etc/*-release || grep -Eqi "Ubuntu" /proc/version; then
+		release="Ubuntu"
+	elif grep -Eqi "Raspbian" /etc/issue || grep -Eq "Raspbian" /etc/*-release; then
+		release="Raspbian"
+	elif grep -Eqi "Aliyun" /etc/issue || grep -Eq "Aliyun" /etc/*-release; then
+		release="Aliyun"
+	else
+		release="unknown"
+	fi
+
+	if [ ! -f /usr/bin/wget ]; then
+		if [[ ${release} == "CentOS" || ${release} == "Fedora" ]]; then
+			yum install wget -y
+		elif [[ ${release} == "Debian" || ${release} == "Ubuntu" || ${release} == "Raspbian" || ${release} == "Aliyun" ]]; then
+			apt install wget -y
+		fi
+	fi
+}
+
+check_os_bits() {
+	bit=$(uname -m)
+	if [[ ${bit} == "x86_64" ]]; then
+		bit="amd64"
+	elif [[ ${bit} == "i386" || ${bit} == "i686" ]]; then
+		bit="386"
+	elif grep -Eqi "arm" ${bit}; then
+		bit="armv6l"
+	fi
+}
+
+node_environmental(){
+	if grep -Eqi "/usr/local/go/bin" /etc/profile; then
+		source /etc/profile
+	else
+		echo 'export PATH=$PATH:/usr/local/go/bin' >> /etc/profile
+		source /etc/profile
+	fi
+}
+
+check_sys
+check_os_bits
+GO_VERSION=$(wget -q -O - https://golang.org/dl/ | grep -m1 -E "go[0-9]+\.[0-9]+\.[0-9]+\.linux.*\.tar\.gz" | sed -E "s/.*go([0-9]+\.[0-9]+\.[0-9]+)\.linux.*\.tar\.gz.*/\1/gm")
+GO_BITS=${bit}
+
+cd /tmp
+
+if [ -f go${GO_VERSION}.linux-${GO_BITS}.tar.gz ]; then
+	\rm -rf go${GO_VERSION}.linux-${GO_BITS}.tar.gz
+fi
+if [ -e /usr/local/go ]; then
+	\rm -rf /usr/local/go
+fi
+
+wget https://dl.google.com/go/go${GO_VERSION}.linux-${GO_BITS}.tar.gz
+tar -C /usr/local -xzf go${GO_VERSION}.linux-${GO_BITS}.tar.gz
+
+node_environmental
+echo "The Go Programming Language ${GO_VERSION} install Success!"
