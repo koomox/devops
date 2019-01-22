@@ -46,6 +46,7 @@ fi
 git clone https://github.com/Wind4/vlmcsd.git --depth=1 /tmp/vlmcsd
 cd /tmp/vlmcsd && make
 \cp -f /tmp/vlmcsd/bin/vlmcsd /usr/local/vlmcsd/bin/vlmcsd
+\rm -rf /tmp/vlmcsd
 
 if [ ! `grep -Eq "^vlmcsd" /etc/group` ]; then
 	groupadd -r vlmcsd
