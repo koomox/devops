@@ -76,7 +76,6 @@ read MTPROXY_SECRET
 echo "========= MTProxy Secret ============="
 echo "${MTPROXY_SECRET}"
 
-apt install wget git -y
 cd /tmp
 if [ -e /usr/local/node ]; then
 	\rm -rf /usr/local/node
