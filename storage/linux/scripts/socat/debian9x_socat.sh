@@ -39,7 +39,7 @@ initialize_socat(){
 	fi
 	mkdir -p /etc/socat
 
-	wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/socat/run.sh -o /etc/socat/run.sh
+	wget -O /etc/socat/run.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/socat/run.sh
 	chmod +x /etc/socat/run.sh
 }
 

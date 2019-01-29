@@ -12,3 +12,4 @@ iptables -A OUTPUT -p tcp --dport ${public_port} -j ACCEPT
 nohup socat TCP4-LISTEN:${public_port},reuseaddr,fork TCP4:${ip}:${public_port} >> /var/log/socat.log 2>&1 &
 nohup socat UDP4-LISTEN:${public_port},reuseaddr,fork UDP4:${ip}:${public_port} >> /var/log/socat.log 2>&1 &
 }
+
