@@ -111,3 +111,10 @@ sed 命令替换网址字符串
 ```sh
 sed -i 's/https:\/\/gitee.com\/koomox\/devops\/raw\/master/https:\/\/raw.githubusercontent.com\/koomox\/devops\/master/g' file
 ```
+### 基于 git 的代码自动化部署          
+一键创建基于 git 的web 自动化部署             
+```sh
+curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/git/git_webdeploy.sh -o /tmp/git_webdeploy.sh
+chmod +x /tmp/git_webdeploy.sh
+/tmp/git_webdeploy.sh
+```
