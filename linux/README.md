@@ -11,6 +11,7 @@
 [CentOS 7.x](centos7x.md)           
 [Samba](samba.md)           
 [安装 Node.js](nodejs.md)            
+[Nginx](nginx.md)           
 # Docker              
 [Docker for Ubuntu Server 17.04](docker/ubuntuserver17x.md)                  
 [Docker for CentOS 7.x](docker/centos7x.md)                  

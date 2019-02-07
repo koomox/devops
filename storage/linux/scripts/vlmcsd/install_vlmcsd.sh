@@ -28,6 +28,8 @@ installation_dependency(){
 	fi
 }
 
+installation_dependency
+
 if [ -e /usr/local/vlmcsd ]; then
 	\rm -rf /usr/local/vlmcsd
 fi

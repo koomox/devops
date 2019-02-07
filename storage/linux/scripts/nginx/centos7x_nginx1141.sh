@@ -8,7 +8,8 @@ NGINX_LETSENCRYPT=/var/www/letsencrypt
 mkdir -p ${WORK_PATH}
 cd ${WORK_PATH}
 \rm -rf *
-yum -y install gcc gcc-c++ make perl curl
+yum install curl -y
+yum groupinstall "Development Tools" -y
 
 curl -LO https://nginx.org/download/nginx-1.14.1.tar.gz
 curl -LO https://www.openssl.org/source/openssl-1.0.2p.tar.gz
