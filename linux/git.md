@@ -114,7 +114,7 @@ sed -i 's/https:\/\/gitee.com\/koomox\/devops\/raw\/master/https:\/\/raw.githubu
 ### 创建 git 仓库         
 一键创建 git 仓库              
 ```sh
-curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/git/git_webdeploy.sh -o /tmp/git_storage.sh
+curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/git/git_storage.sh -o /tmp/git_storage.sh
 chmod +x /tmp/git_storage.sh
 /tmp/git_storage.sh
 ```
