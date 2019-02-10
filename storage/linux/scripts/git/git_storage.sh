@@ -25,12 +25,14 @@ function set_ssh_secret() {
 }
 
 
-if [ -e ${GIT_WORK} ]; then
-	\rm -rf ${GIT_WORK}
+if [ !  -e ${GIT_WORK} ]; then
+	mkdir -p ${GIT_WORK}
 fi
-mkdir -p ${GIT_WORK}
 
 cd ${GIT_WORK}
+if [ ! -e ${GIT_NAME}.git ]; then
+	\rm -rf ${GIT_NAME}.git
+fi
 git init --bare ${GIT_NAME}.git
 
 
