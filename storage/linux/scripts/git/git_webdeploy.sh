@@ -20,14 +20,14 @@ function git_user() {
 }
 
 function git_private() {
-	if [ ! -e /homt/git/.ssh/authorized_keys ] || [ ! -s /homt/git/.ssh/authorized_keys ]; then
+	if [ ! -e /home/git/.ssh/authorized_keys ] || [ ! -s /home/git/.ssh/authorized_keys ]; then
 		set_ssh_secret
 	fi
 }
 
 function set_ssh_secret() {
 	read -p "please input SSH Secret: " SSH_SECRET
-	echo "${SSH_SECRET}" > /homt/git/.ssh/authorized_keys
+	echo "${SSH_SECRET}" > /home/git/.ssh/authorized_keys
 
 	chmod 755 /home/git
 	chmod 700 /home/git/.ssh
