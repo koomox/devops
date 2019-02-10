@@ -30,15 +30,17 @@ tar -xf icu4c-58_2-src.tgz
 tar -zxf php-7.2.6.tar.gz
 #========= User Manager ==============================
 function create_system_user() {
-	SYSTEM_USERNAME=$1
-	grep -E "^${SYSTEM_USERNAME}" /etc/group >& /dev/null
-	if [ $? -ne 0 ]; then
-		groupadd -r ${SYSTEM_USERNAME}
+	USERNAME=$1
+	if ! `grep -Eq "^${USERNAME}" /etc/group` ; then
+		groupadd -r ${USERNAME}
+	else
+		echo "${USERNAME} Group Already Exist!"
 	fi
 
-	grep -E "^${SYSTEM_USERNAME}" /etc/passwd >& /dev/null
-	if [ $? -ne 0 ]; then
-		useradd -r -g ${SYSTEM_USERNAME} -s /bin/false ${SYSTEM_USERNAME}
+	if ! `grep -Eq "^${USERNAME}" /etc/passwd` ; then
+		useradd -r -g ${USERNAME} -s /bin/false ${USERNAME}
+	else
+		echo "User ${USERNAME} Already Exist!"
 	fi
 }
 
