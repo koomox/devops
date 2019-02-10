@@ -2,17 +2,27 @@
 read -p "please input GIT Work Path:(/git/work_path) " GIT_WORK
 read -p "please input GIT Storage Name:(ProjectName) " GIT_NAME
 
-if [ ! `grep -Eq "^git" /etc/group` ]; then
-	groupadd -r git
-fi
+function git_user() {
+	grep -E "^git" /etc/group >& /dev/null
+	if [ $? -ne 0 ]; then
+		groupadd -r git
+	fi
 
-if [ ! `grep -Eq "^git" /etc/passwd` ]; then
-	useradd -r -g git -d /home/git -m git
-fi
+	grep -E "^git" /etc/passwd >& /dev/null
+	if [ $? -ne 0 ]; then
+		useradd -r -g git -d /home/git -m git
+	fi
 
-if [ ! -e /home/git/.ssh ]; then
-	mkdir /home/git/.ssh	
-fi
+	if [ ! -e /home/git/.ssh ]; then
+		mkdir /home/git/.ssh	
+	fi
+}
+
+function git_private() {
+	if [ ! -e /homt/git/.ssh/authorized_keys ] || [ ! -s /homt/git/.ssh/authorized_keys ]; then
+		set_ssh_secret
+	fi
+}
 
 function set_ssh_secret() {
 	read -p "please input SSH Secret: " SSH_SECRET
@@ -24,6 +34,8 @@ function set_ssh_secret() {
 	chown -R git:git /home/git
 }
 
+git_user
+git_private
 
 if [ !  -e ${GIT_WORK} ]; then
 	mkdir -p ${GIT_WORK}
@@ -39,5 +51,5 @@ git init --bare ${GIT_NAME}.git
 chown -R git:git ${GIT_WORK}
 chmod 755 ${GIT_WORK}
 
-echo "git auto web deploy success!"
+echo "git storage create success!"
 echo "git remote add develop ssh://git@ipaddr:22${GIT_WORK}/${GIT_NAME}.git"
