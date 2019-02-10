@@ -35,14 +35,22 @@ tar -xf php-7.2.7.tar
 tar -zxf cmake-3.11.4.tar.gz
 
 #========= User Manager ==============================
-groupadd php-fpm
-useradd -r -g php-fpm -s /bin/false php-fpm
+function create_system_user() {
+	SYSTEM_USERNAME=$1
+	grep -E "^${SYSTEM_USERNAME}" /etc/group >& /dev/null
+	if [ $? -ne 0 ]; then
+		groupadd -r ${SYSTEM_USERNAME}
+	fi
 
-groupadd nginx
-useradd -r -g nginx -s /bin/false nginx
+	grep -E "^${SYSTEM_USERNAME}" /etc/passwd >& /dev/null
+	if [ $? -ne 0 ]; then
+		useradd -r -g ${SYSTEM_USERNAME} -s /bin/false ${SYSTEM_USERNAME}
+	fi
+}
 
-groupadd www-data
-useradd -r -g www-data -s /bin/false www-data
+create_system_user php-fpm
+create_system_user nginx
+create_system_user www-data
 
 usermod -a -G www-data php-fpm
 usermod -a -G www-data nginx

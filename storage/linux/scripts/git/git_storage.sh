@@ -2,19 +2,22 @@
 read -p "please input GIT Work Path:(/git/work_path) " GIT_WORK
 read -p "please input GIT Storage Name:(ProjectName) " GIT_NAME
 
-function git_user() {
-	grep -E "^git" /etc/group >& /dev/null
-	if [ $? -ne 0 ]; then
-		groupadd -r git
+function create_system_user() {
+	USERNAME=$1
+	if ! `grep -Eq "^${USERNAME}" /etc/group` ; then
+		groupadd -r ${USERNAME}
+	else
+		echo "${USERNAME} Group Already Exist!"
 	fi
 
-	grep -E "^git" /etc/passwd >& /dev/null
-	if [ $? -ne 0 ]; then
-		useradd -r -g git -d /home/git -m git
+	if ! `grep -Eq "^${USERNAME}" /etc/passwd` ; then
+		useradd -r -g ${USERNAME} -d /home/${USERNAME} -m ${USERNAME}
+	else
+		echo "User ${USERNAME} Already Exist!"
 	fi
 
-	if [ ! -e /home/git/.ssh ]; then
-		mkdir /home/git/.ssh	
+	if [ ! -e /home/${USERNAME}/.ssh ]; then
+		mkdir -p /home/${USERNAME}/.ssh
 	fi
 }
 
@@ -34,7 +37,7 @@ function set_ssh_secret() {
 	chown -R git:git /home/git
 }
 
-git_user
+create_system_user git
 git_private
 
 if [ !  -e ${GIT_WORK} ]; then

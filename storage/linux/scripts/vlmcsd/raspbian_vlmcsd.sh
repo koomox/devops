@@ -6,8 +6,22 @@ wget https://github.com/Wind4/vlmcsd/releases/download/svn1112/binaries.tar.gz
 tar -zxf binaries.tar.gz
 mkdir -p /usr/local/vlmcsd/bin /var/lib/vlmcsd
 \cp -f ./binaries/Linux/arm/little-endian/glibc/vlmcsd-armv6hf-Raspberry-glibc /usr/local/vlmcsd/bin/vlmcsd
-groupadd -r vlmcsd
-useradd -r -g vlmcsd -d /var/lib/vlmcsd -s /bin/false -c vlmcsd vlmcsd
+
+function create_system_user() {
+	SYSTEM_USERNAME=$1
+	grep -E "^${SYSTEM_USERNAME}" /etc/group >& /dev/null
+	if [ $? -ne 0 ]; then
+		groupadd -r ${SYSTEM_USERNAME}
+	fi
+
+	grep -E "^${SYSTEM_USERNAME}" /etc/passwd >& /dev/null
+	if [ $? -ne 0 ]; then
+		useradd -r -g ${SYSTEM_USERNAME} -d /var/lib/${SYSTEM_USERNAME} -s /bin/false -c ${SYSTEM_USERNAME} ${SYSTEM_USERNAME}
+	fi
+}
+
+create_system_user vlmcsd
+
 chown -R vlmcsd:vlmcsd /var/lib/vlmcsd
 chown -R vlmcsd:vlmcsd /usr/local/vlmcsd
 chmod +x /usr/local/vlmcsd/bin/vlmcsd

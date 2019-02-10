@@ -50,13 +50,20 @@ cd /tmp/vlmcsd && make
 \cp -f /tmp/vlmcsd/bin/vlmcsd /usr/local/vlmcsd/bin/vlmcsd
 \rm -rf /tmp/vlmcsd
 
-if [ ! `grep -Eq "^vlmcsd" /etc/group` ]; then
-	groupadd -r vlmcsd
-fi
+function create_system_user() {
+	SYSTEM_USERNAME=$1
+	grep -E "^${SYSTEM_USERNAME}" /etc/group >& /dev/null
+	if [ $? -ne 0 ]; then
+		groupadd -r ${SYSTEM_USERNAME}
+	fi
 
-if [ ! `grep -Eq "^vlmcsd" /etc/passwd` ]; then
-	useradd -r -g vlmcsd -d /var/lib/vlmcsd -s /bin/false -c vlmcsd vlmcsd
-fi
+	grep -E "^${SYSTEM_USERNAME}" /etc/passwd >& /dev/null
+	if [ $? -ne 0 ]; then
+		useradd -r -g ${SYSTEM_USERNAME} -d /var/lib/${SYSTEM_USERNAME} -s /bin/false -c ${SYSTEM_USERNAME} ${SYSTEM_USERNAME}
+	fi
+}
+
+create_system_user vlmcsd
 
 chown -R vlmcsd:vlmcsd /var/lib/vlmcsd
 chown -R vlmcsd:vlmcsd /usr/local/vlmcsd

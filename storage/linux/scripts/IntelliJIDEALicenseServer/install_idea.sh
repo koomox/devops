@@ -53,15 +53,21 @@ install_idea() {
 	fi
 }
 
+function create_system_user() {
+	SYSTEM_USERNAME=$1
+	grep -E "^${SYSTEM_USERNAME}" /etc/group >& /dev/null
+	if [ $? -ne 0 ]; then
+		groupadd -r ${SYSTEM_USERNAME}
+	fi
+
+	grep -E "^${SYSTEM_USERNAME}" /etc/passwd >& /dev/null
+	if [ $? -ne 0 ]; then
+		useradd -r -g ${SYSTEM_USERNAME} -d /var/lib/${SYSTEM_USERNAME} -s /bin/false -c ${SYSTEM_USERNAME} ${SYSTEM_USERNAME}
+	fi
+}
+
 install_idea
-
-if [ ! `grep -Eq "^idea" /etc/group` ]; then
-	groupadd -r idea
-fi
-
-if [ ! `grep -Eq "^idea" /etc/passwd` ]; then
-	useradd -r -g idea -d /var/lib/idea -s /bin/false -c idea idea
-fi
+create_system_user idea
 
 chown -R idea:idea /var/lib/idea
 chown -R idea:idea /usr/local/idea
