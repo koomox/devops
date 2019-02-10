@@ -14,7 +14,7 @@ if [ ! -e /home/git/.ssh ]; then
 	mkdir /home/git/.ssh	
 fi
 
-func set_ssh_secret() {
+function set_ssh_secret() {
 	read -p "please input SSH Secret: " SSH_SECRET
 	echo "${SSH_SECRET}" > /homt/git/.ssh/authorized_keys
 
