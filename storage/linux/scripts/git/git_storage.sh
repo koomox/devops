@@ -42,7 +42,7 @@ if [ !  -e ${GIT_WORK} ]; then
 fi
 
 cd ${GIT_WORK}
-if [ ! -e ${GIT_NAME}.git ]; then
+if [ -e ${GIT_NAME}.git ]; then
 	\rm -rf ${GIT_NAME}.git
 fi
 git init --bare ${GIT_NAME}.git

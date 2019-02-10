@@ -1,42 +1,62 @@
 #!/bin/bash
 read -p "please input GIT Work Path:(/git/work_path) " GIT_WORK
+read -p "please input GIT Storage Name:(ProjectName) " GIT_NAME
 read -p "please input WEB Work Path:(/web/work_path) " WEB_WORK
 
-if [ ! `grep -Eq "^git" /etc/group` ]; then
-	groupadd -r git
+function git_user() {
+	grep -E "^git" /etc/group >& /dev/null
+	if [ $? -ne 0 ]; then
+		groupadd -r git
+	fi
+
+	grep -E "^git" /etc/passwd >& /dev/null
+	if [ $? -ne 0 ]; then
+		useradd -r -g git -d /home/git -m git
+	fi
+
+	if [ ! -e /home/git/.ssh ]; then
+		mkdir /home/git/.ssh	
+	fi
+}
+
+function git_private() {
+	if [ ! -e /homt/git/.ssh/authorized_keys ] || [ ! -s /homt/git/.ssh/authorized_keys ]; then
+		set_ssh_secret
+	fi
+}
+
+function set_ssh_secret() {
+	read -p "please input SSH Secret: " SSH_SECRET
+	echo "${SSH_SECRET}" > /homt/git/.ssh/authorized_keys
+
+	chmod 755 /home/git
+	chmod 700 /home/git/.ssh
+	chmod 600 /home/git/.ssh/authorized_keys
+	chown -R git:git /home/git
+}
+
+git_user
+git_private
+
+
+if [ !  -e ${GIT_WORK} ]; then
+	mkdir -p ${GIT_WORK}
 fi
 
-if [ ! `grep -Eq "^git" /etc/passwd` ]; then
-	useradd -r -g git -d /home/git -m git
+cd ${GIT_WORK}
+if [ -e ${GIT_NAME}.git ]; then
+	\rm -rf ${GIT_NAME}.git
 fi
+git init --bare ${GIT_NAME}.git
 
-if [ ! -e /home/git/.ssh ]; then
-	mkdir /home/git/.ssh	
-fi
-
-read -p "please input SSH Secret: " SSH_SECRET
-echo "${SSH_SECRET}" > /homt/git/.ssh/authorized_keys
-
-chmod 755 /home/git
-chmod 700 /home/git/.ssh
-chmod 600 /home/git/.ssh/authorized_keys
-chown -R git:git /home/git
-
-
-if [ -e ${GIT_WORK} ]; then
-	\rm -rf ${GIT_WORK}
-fi
 if [ -e ${WEB_WORK} ]; then
 	\rm -rf ${WEB_WORK}
 fi
-mkdir -p ${WEB_WORK} ${GIT_WORK}
+mkdir -p ${WEB_WORK}
 
-cd ${GIT_WORK}
-git init --bare repo.git
-
-touch ${GIT_WORK}/repo.git/hooks/post-receive
-chmod +x ${GIT_WORK}/repo.git/hooks/post-receive
-cat > ${GIT_WORK}/repo.git/hooks/post-receive << EOF
+touch ${GIT_WORK}/${GIT_NAME}.git/hooks/post-receive
+chmod +x ${GIT_WORK}/${GIT_NAME}.git/hooks/post-receive
+cat > ${GIT_WORK}/${GIT_NAME}.git/hooks/post-receive << EOF
 #!/bin/bash
 echo "Running Post Receive Hook"
 
@@ -50,4 +70,4 @@ chown -R git:git ${GIT_WORK} ${WEB_WORK}
 chmod 755 ${GIT_WORK} ${WEB_WORK}
 
 echo "git auto web deploy success!"
-echo "git remote add develop ssh://git@ipaddr:22${GIT_WORK}/repo.git"
+echo "git remote add develop ssh://git@ipaddr:22${GIT_WORK}/${GIT_NAME}.git"
