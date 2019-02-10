@@ -42,19 +42,17 @@ echo 'export PATH=$PATH:/usr/local/nginx/sbin' >> /etc/profile
 source /etc/profile
 
 #============== Run Nginx ================
-cd /usr/local/nginx
-curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/nginx.service
-\cp -f nginx.service /usr/lib/systemd/system/nginx.service
+if [ -e /etc/nginx/conf.d ]; then
+	\rm -rf /etc/nginx/conf.d
+fi
 
-mkdir -p ${NGINX_CONF_PATH}
-cd ${NGINX_CONF_PATH}
-curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/fastcgi_php.conf
-curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/letsencrypt.conf
-curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/nginx-http-php.conf
-curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/nginx-ssl-php.conf
-curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/nginx-default.conf
+mkdir -p /etc/nginx/conf.d
 
-\cp -f nginx-default.conf ../nginx.conf
+wget -O /etc/nginx/conf.d/fastcgi_php.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/fastcgi_php.conf
+wget -O /etc/nginx/conf.d/letsencrypt.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/letsencrypt.conf
+wget -O /etc/nginx/conf.d/nginx-http-php.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/nginx-http-php.conf
+wget -O /etc/nginx/conf.d/nginx-ssl-php.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/nginx-ssl-php.conf
+wget -O /etc/nginx/nginx.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/nginx-default.conf
 
 #=============== Enable Port =====================
 #\cp -f /usr/lib/firewalld/services/http.xml /etc/firewalld/services/http.xml
@@ -74,8 +72,40 @@ mkdir -p ${NGINX_LETSENCRYPT}
 chmod -R 755 ${WEB_PATH}
 chmod -R 755 ${NGINX_LETSENCRYPT}
 
-systemctl enable nginx
-systemctl start nginx
-systemctl status nginx
+function create_system_user() {
+	USERNAME=$1
+	if ! `grep -Eq "^${USERNAME}" /etc/group` ; then
+		groupadd -r ${USERNAME}
+	else
+		echo "${USERNAME} Group Already Exist!"
+	fi
+
+	if ! `grep -Eq "^${USERNAME}" /etc/passwd` ; then
+		useradd -r -g ${USERNAME} -s /bin/false ${USERNAME}
+	else
+		echo "User ${USERNAME} Already Exist!"
+	fi
+}
+
+init_nginx_service() {
+	systemctl stop nginx
+	systemctl disable nginx
+
+	if [ -e /etc/systemd/system/nginx.service ]; then
+		\rm -rf /etc/systemd/system/nginx.service
+	fi
+
+	if [ -e /lib/systemd/system/nginx.service ]; then
+		\rm -rf /lib/systemd/system/nginx.service
+	fi
+
+	wget -O /etc/systemd/system/nginx.service https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/nginx.service
+	systemctl enable vlmcsd
+	systemctl start vlmcsd
+	systemctl status vlmcsd
+}
+
+create_system_user nginx
+init_nginx_service
 
 nginx -v

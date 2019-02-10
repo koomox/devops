@@ -100,13 +100,20 @@ mkdir -p ${NGINX_LETSENCRYPT}
 chmod -R 755 ${WEB_PATH}
 chmod -R 755 ${NGINX_LETSENCRYPT}
 
-if [ ! `grep -Eq "^nginx" /etc/group` ]; then
-	groupadd -r nginx
-fi
+function create_system_user() {
+	USERNAME=$1
+	if ! `grep -Eq "^${USERNAME}" /etc/group` ; then
+		groupadd -r ${USERNAME}
+	else
+		echo "${USERNAME} Group Already Exist!"
+	fi
 
-if [ ! `grep -Eq "^nginx" /etc/passwd` ]; then
-	useradd -r -g nginx -s /bin/false nginx
-fi
+	if ! `grep -Eq "^${USERNAME}" /etc/passwd` ; then
+		useradd -r -g ${USERNAME} -s /bin/false ${USERNAME}
+	else
+		echo "User ${USERNAME} Already Exist!"
+	fi
+}
 
 init_nginx_service() {
 	systemctl stop nginx
@@ -126,6 +133,7 @@ init_nginx_service() {
 	systemctl status vlmcsd
 }
 
+create_system_user nginx
 init_nginx_service
 
 nginx -v
