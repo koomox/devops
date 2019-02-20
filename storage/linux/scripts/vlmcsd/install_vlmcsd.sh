@@ -17,11 +17,11 @@ installation_dependency(){
 		release="unknown"
 	fi
 
-	if [ ! `command -v git >/dev/null` ]; then
-		if [[ ${release} == "CentOS" || ${release} == "Fedora" ]]; then
+	if ! `command -v git >/dev/null` ; then
+		if ${release} == "CentOS" || ${release} == "Fedora"; then
 			yum install wget git -y
 			yum groupinstall "Development Tools" -y
-		elif [[ ${release} == "Debian" || ${release} == "Ubuntu" || ${release} == "Raspbian" || ${release} == "Aliyun" ]]; then
+		elif ${release} == "Debian" || ${release} == "Ubuntu" || ${release} == "Raspbian" || ${release} == "Aliyun"; then
 			apt install wget git -y
 			apt install build-essential -y
 		fi

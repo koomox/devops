@@ -17,17 +17,17 @@ installation_dependency(){
 		release="unknown"
 	fi
 
-	if [ ! `command -v wget >/dev/null` ]; then
-		if [[ ${release} == "CentOS" || ${release} == "Fedora" ]]; then
+	if ! `command -v wget >/dev/null`; then
+		if ${release} == "CentOS" || ${release} == "Fedora"; then
 			yum install wget -y
-		elif [[ ${release} == "Debian" || ${release} == "Ubuntu" || ${release} == "Raspbian" || ${release} == "Aliyun" ]]; then
+		elif ${release} == "Debian" || ${release} == "Ubuntu" || ${release} == "Raspbian" || ${release} == "Aliyun"; then
 			apt install wget -y
 		fi
 	fi
-	if [ ! `command -v socat >/dev/null` ]; then
-		if [[ ${release} == "CentOS" || ${release} == "Fedora" ]]; then
+	if ! `command -v socat >/dev/null`; then
+		if ${release} == "CentOS" || ${release} == "Fedora"; then
 			yum install socat -y
-		elif [[ ${release} == "Debian" || ${release} == "Ubuntu" || ${release} == "Raspbian" || ${release} == "Aliyun" ]]; then
+		elif ${release} == "Debian" || ${release} == "Ubuntu" || ${release} == "Raspbian" || ${release} == "Aliyun"; then
 			apt install socat -y
 		fi
 	fi
