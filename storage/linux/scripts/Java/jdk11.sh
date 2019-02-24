@@ -19,6 +19,10 @@ mkdir -p /usr/local/java
 
 sudo tar -zxf jdk-11.0.2_linux-x64_bin.tar.gz -C /usr/local/java --strip-components 1
 
+echo "/usr/local/java/lib" > /etc/ld.so.conf.d/java.conf
+
+ldconfig -v
+
 jdk_environmental
 echo "The Java SE Development Kit 11.0.2 install Success!"
 java -version
