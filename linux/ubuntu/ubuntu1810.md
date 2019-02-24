@@ -135,6 +135,22 @@ curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scr
 chmod +x /tmp/latest_telegram_desktop_v3.sh
 /tmp/latest_telegram_desktop_v3.sh
 ```
+Telegram-desktop 创建的启动文件，在 `~/.local/share/applications` 路径下。      
+```sh
+cp ~/.local/share/applications/telegramdesktop.desktop ~/Desktop
+sudo cp ~/.local/share/applications/telegramdesktop.desktop /usr/share/applications
+
+chmod +x ~/Desktop/telegramdesktop.desktop
+sudo chmod +x /usr/share/applications/telegramdesktop.desktop
+
+rm ~/.local/share/applications/telegramdesktop.desktop
+```
+### Teamviewer          
+```sh
+wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
+sudo dpkg -i teamviewer_amd64.deb
+sudo apt install -f
+```
 ### Skype            
 ```sh
 wget https://go.skype.com/skypeforlinux-64.deb
