@@ -156,3 +156,9 @@ sudo apt install spotify-client
 wget http://repo.steampowered.com/steam/archive/precise/steam_latest.deb
 sudo dpkg -i steam_latest.deb
 ```
+### Java        
+```sh
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/Java/jdk11.sh
+chmod +x ./jdk11.sh.sh
+./jdk11.sh.sh
+```
