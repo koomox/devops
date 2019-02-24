@@ -1,6 +1,7 @@
 # MAC            
 [制作 macOS Mojave 10.14 系统镜像cdr、ISO文件，可用虚拟机安装](../mac/mojave.md)         
 # Linux          
+[Ubuntu 18.10](ubuntu/ubuntu1810.md)            
 [检查Linux 环境](linux.md)             
 [git 命令](git.md)           
 [压缩、解压命令](compress.md)              
