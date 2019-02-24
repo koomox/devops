@@ -103,16 +103,9 @@ sudo mv Telegram Updater -t /usr/local/telegram-desktop/bin
 echo 'export PATH=$PATH:/usr/local/telegram-desktop/bin' >> /etc/profile
 source /etc/profile
 ```
+一键安装 Telegram-desktop 最新版         
 ```sh
-TG_VERSION=$(wget -q -O - https://github.com/telegramdesktop/tdesktop/tags | grep -v "beta" | grep -v "rc" | grep -m1 -E "telegramdesktop/tdesktop/releases/tag/v[0-9]+\.[0-9]+\.*[0-9]*" | sed -E "s/.*v([0-9]+\.[0-9]+\.*[0-9]*).*/\1/gm")
-
-cd /tmp
-
-if [ -f tsetup.{TG_VERSION}.tar.xz ]; then
-	\rm -rf tsetup.{TG_VERSION}.tar.xz
-fi
-
-wget https://github.com/telegramdesktop/tdesktop/releases/download/v${TG_VERSION}/tsetup.{TG_VERSION}.tar.xz
-xz -d tsetup.{TG_VERSION}.tar.xz
-tar -xf tsetup.{TG_VERSION}.tar
+curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/telegram/latest_telegram_desktop_v3.sh -o /tmp/latest_telegram_desktop_v3.sh
+chmod +x /tmp/latest_telegram_desktop_v3.sh
+/tmp/latest_telegram_desktop_v3.sh
 ```
