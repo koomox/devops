@@ -61,6 +61,9 @@ mv Telegram Updater -t /usr/local/telegram-desktop/bin
 cd /tmp
 \rm -rf /tmp/Telegram tsetup.${TG_VERSION}.tar.xz tsetup.${TG_VERSION}.tar
 
+if [ -e ~/.local/share/TelegramDesktop ]; then
+	\rm -rf ~/.local/share/TelegramDesktop
+fi
+
 tg_environmental
 echo "The Telegram-Desktop ${TG_VERSION} install Success!"
-Telegram

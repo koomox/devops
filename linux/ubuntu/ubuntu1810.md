@@ -62,7 +62,9 @@ sudo apt install ubuntu-restricted-extras
 ### 安装 Sublime Text       
 ```sh
 sudo apt update
-sudo apt install apt-transport-https ca-certificates software-properties-common
+sudo apt install wget apt-transport-https ca-certificates software-properties-common
+
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
 
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 
@@ -92,6 +94,30 @@ sudo apt install fcitx fcitx-googlepinyin
 配置文件        
 ```sh
 echo -e "export GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\nexport XMODIFIERS=\"@im=fcitx\"" >> ~/.xprofile
+```
+### Chrome 浏览器           
+在线安装 Chrome 最新稳定版          
+```sh
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+
+sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+
+sudo apt update
+sudo apt install google-chrome-stable
+```
+二进制包安装 Chrome 最新稳定版         
+```sh
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+
+sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+
+sudo apt update
+```
+在线安装 Chromium Browser         
+```sh
+sudo apt install chromium-browser
 ```
 ### Telegram           
 使用二进制安装包安装最新版 Telegram-desktop，安装后在终端中执行 `telegram-desktop` 会自动创建应用程序图标。             
