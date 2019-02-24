@@ -129,7 +129,7 @@ sudo mv Telegram Updater -t /usr/local/telegram-desktop/bin
 echo 'export PATH=$PATH:/usr/local/telegram-desktop/bin' >> /etc/profile
 source /etc/profile
 ```
-一键安装 Telegram-desktop 最新版，安装后执行 `source /etc/source && Telegram`。         
+一键安装 Telegram-desktop 最新版，安装后执行 `source /etc/source && Telegram`。 如果遇到无法启动的情况，应该是之前安装过 Telegram-desktop 生成的配置文件导致的，`rm -rf ~/.local/share/TelegramDesktop` 删除配置文件即可。       
 ```sh
 curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/telegram/latest_telegram_desktop_v3.sh -o /tmp/latest_telegram_desktop_v3.sh
 chmod +x /tmp/latest_telegram_desktop_v3.sh
