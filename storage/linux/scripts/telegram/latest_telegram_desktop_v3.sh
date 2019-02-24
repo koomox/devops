@@ -13,8 +13,8 @@ TG_VERSION=$(wget -q -O - https://github.com/telegramdesktop/tdesktop/tags | gre
 
 cd /tmp
 
-if [ -f tsetup.{TG_VERSION}.tar.xz ]; then
-	\rm -rf tsetup.{TG_VERSION}.tar.xz
+if [ -f tsetup.${TG_VERSION}.tar.xz ]; then
+	\rm -rf tsetup.${TG_VERSION}.tar.xz
 fi
 
 if [ -e /usr/local/telegram-desktop ]; then
@@ -24,5 +24,5 @@ fi
 mkdir -p /usr/local/telegram-desktop/bin
 
 wget https://github.com/telegramdesktop/tdesktop/releases/download/v${TG_VERSION}/tsetup.${TG_VERSION}.tar.xz
-xz -d tsetup.{TG_VERSION}.tar.xz
-tar -xf tsetup.{TG_VERSION}.tar
+xz -d tsetup.${TG_VERSION}.tar.xz
+tar -xf tsetup.${TG_VERSION}.tar
