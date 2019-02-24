@@ -111,7 +111,7 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 
-sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
 
 sudo apt update
 ```
@@ -134,4 +134,25 @@ source /etc/profile
 curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/telegram/latest_telegram_desktop_v3.sh -o /tmp/latest_telegram_desktop_v3.sh
 chmod +x /tmp/latest_telegram_desktop_v3.sh
 /tmp/latest_telegram_desktop_v3.sh
+```
+### Skype            
+```sh
+wget https://go.skype.com/skypeforlinux-64.deb
+
+sudo dpkg -i skypeforlinux-64.deb
+```
+### Spotify            
+```sh
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
+
+echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
+
+sudo apt update
+
+sudo apt install spotify-client
+```
+### Steam            
+```sh
+wget http://repo.steampowered.com/steam/archive/precise/steam_latest.deb
+sudo dpkg -i steam_latest.deb
 ```
