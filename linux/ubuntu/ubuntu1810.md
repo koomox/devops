@@ -162,3 +162,34 @@ curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/sc
 chmod +x ./jdk11.sh.sh
 ./jdk11.sh.sh
 ```
+### IntelliJ IDEA          
+运行 `idea.sh` 脚本的时候，不要使用 `sudo` 命令，否则会提示无法找到JAVA运行环境。           
+```sh
+wget https://download.jetbrains.8686c.com/idea/ideaIU-2018.3.4-no-jdk.tar.gz
+tar -zxf ideaIU-2018.3.4-no-jdk.tar.gz
+sudo mv ideaIU-2018.3.4 /usr/local
+/usr/local/ideaIU-2018.3.4/bin/idea.sh
+```
+IntelliJ IDEA 创建的启动文件，在 `~/.local/share/applications` 路径下。      
+```sh
+cp ~/.local/share/applications/jetbrains-idea.desktop ~/Desktop
+sudo cp ~/.local/share/applications/jetbrains-idea.desktop /usr/share/applications
+
+chmod +x ~/Desktop/jetbrains-idea.desktop
+sudo chmod +x /usr/share/applications/jetbrains-idea.desktop
+
+rm ~/.local/share/applications/jetbrains-idea.desktop
+```
+### GoLand           
+允许 `goland.sh` 脚本，安装 GoLand。            
+```sh
+wget https://download.jetbrains.8686c.com/go/goland-2018.3.4.tar.gz
+tar -zxf goland-2018.3.4.tar.gz
+sudo mv goland-2018.3.4 /usr/local
+/usr/local/goland-2018.3.4/bin/goland.sh
+```
+GoLand 默认不创建启动文件，第一次打开 GoLand 程序后，点击菜单栏上面的 Tool 创建桌面快捷方式。          
+```sh
+cp /usr/share/applications/jetbrains-goland.desktop ~/Desktop
+chmod +x ~/Desktop/jetbrains-goland.desktop
+```
