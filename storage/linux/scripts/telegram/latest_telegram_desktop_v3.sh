@@ -23,6 +23,6 @@ fi
 
 mkdir -p /usr/local/telegram-desktop/bin
 
-wget https://github.com/telegramdesktop/tdesktop/releases/download/v${TG_VERSION}/tsetup.{TG_VERSION}.tar.xz
+wget https://github.com/telegramdesktop/tdesktop/releases/download/v${TG_VERSION}/tsetup.${TG_VERSION}.tar.xz
 xz -d tsetup.{TG_VERSION}.tar.xz
 tar -xf tsetup.{TG_VERSION}.tar
