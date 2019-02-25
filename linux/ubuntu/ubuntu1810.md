@@ -28,6 +28,11 @@ sudo update-initramfs -u
 ```sh
 lsmod | grep nouveau
 ```
+### 语言格式         
+Ubuntu 安装完成后，因为时区选择的上海，结果时间显示为中文，不伦不类的，需要修改 locale 文件。         
+```sh
+sudo sed -i 's/zh_CN/en_US/g' /etc/default/locale
+```
 ### 更换更新源            
 ```sh
 sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
@@ -95,6 +100,8 @@ sudo apt install fcitx fcitx-googlepinyin
 ```sh
 echo -e "export GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\nexport XMODIFIERS=\"@im=fcitx\"" >> ~/.xprofile
 ```
+还需要在语言中设置为 fcitx              
+![fcitx](https://raw.githubusercontent.com/koomox/devops/master/static/images/wiki/IMG_20190225_122500.png)
 ### Chrome 浏览器           
 在线安装 Chrome 最新稳定版          
 ```sh
