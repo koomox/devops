@@ -123,11 +123,8 @@ sudo apt install chromium-browser
 使用二进制安装包安装最新版 Telegram-desktop，安装后在终端中执行 `telegram-desktop` 会自动创建应用程序图标。             
 ```sh
 wget -O- https://telegram.org/dl/desktop/linux | sudo tar xJ -C /opt/
-cd /opt/Telegram
-sudo mkdir -p /usr/local/telegram-desktop/bin
-sudo mv Telegram Updater -t /usr/local/telegram-desktop/bin
-echo 'export PATH=$PATH:/usr/local/telegram-desktop/bin' >> /etc/profile
-source /etc/profile
+
+/opt/Telegram/Telegram
 ```
 一键安装 Telegram-desktop 最新版，安装后执行 `source /etc/source && Telegram`。 如果遇到无法启动的情况，应该是之前安装过 Telegram-desktop 生成的配置文件导致的，`rm -rf ~/.local/share/TelegramDesktop` 删除配置文件即可。       
 ```sh
