@@ -64,12 +64,17 @@ WinRAR 5.60 英文版 x64: [点击下载](https://www.rarlab.com/rar/winrar-x64-
 WinRAR 5.60 英文版 x86: [点击下载](https://www.rarlab.com/rar/wrar560.exe)           
 WinRAR 5.60 Key: [点击查看源文件](../storage/windows/winrar/560/rarreg.key)             
 
+WinRAR 5.70 英文版 x64: [点击下载](https://www.rarlab.com/rar/winrar-x64-570.exe)          
+WinRAR 5.70 英文版 x86: [点击下载](https://www.rarlab.com/rar/wrar570.exe)          
+
 WinRAR 7-Zip Yandex网盘下载地址: [传送门](https://yadi.sk/d/jU4cCAdX3RVryV)               
 
 7-Zip 16.04 x64: [点击下载](http://www.7-zip.org/a/7z1604-x64.exe)           
 7-Zip 16.04 x86: [点击下载](http://www.7-zip.org/a/7z1604.exe)           
 7-Zip 18.05 x64: [点击下载](https://www.7-zip.org/a/7z1805-x64.exe)           
 7-Zip 18.05 x86: [点击下载](https://www.7-zip.org/a/7z1805.exe)           
+7-Zip 19.00 x64: [点击下载](https://www.7-zip.org/a/7z1900-x64.exe)           
+7-Zip 19.00 x86: [点击下载](https://www.7-zip.org/a/7z1900.exe)           
 ### Skype
 Skype 国际版离线安装包: [点击下载](http://www.skype.com/go/getskype-full?source=lightinstaller)          
 ### Intel USB 3.0              
