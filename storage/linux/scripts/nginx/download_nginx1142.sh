@@ -60,7 +60,7 @@ DeployDirFunc() {
 downloadFunc() {
 	fileName=$1
 	downLink=$2
-	if [ -f ${fileName} ]; then
+	if [ ! -f ${fileName} ]; then
 		echo "Found file ${fileName} Already Exist!"
 	else
 		wget ${downLink}
