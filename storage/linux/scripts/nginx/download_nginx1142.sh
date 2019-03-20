@@ -47,7 +47,7 @@ installation_dependency(){
 }
 
 DeployDirFunc() {
-	makeDir=$0
+	makeDir=$1
 	if [ -e ${makeDir} ]; then
 		\rm -rf ${makeDir}
 	fi
@@ -58,8 +58,8 @@ DeployDirFunc() {
 }
 
 downloadFunc() {
-	fileName=$0
-	downLink=$1
+	fileName=$1
+	downLink=$2
 	if [ -f ${fileName} ]; then
 		echo "Found file ${fileName} Already Exist!"
 	else
@@ -68,8 +68,8 @@ downloadFunc() {
 }
 
 compressFunc() {
-	compressPath=$0
-	compressName=$1
+	compressPath=$1
+	compressName=$2
 	cd ${compressPath}
 	if [ -e ${compressName}.tar.gz ]; then
 		\rm -rf ${compressName}.tar.gz
