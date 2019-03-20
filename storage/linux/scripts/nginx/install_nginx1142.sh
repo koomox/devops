@@ -5,10 +5,26 @@ NGINX_LOG_PATH=/var/log/nginx
 NGINX_PID_PATH=/var/lib/nginx
 NGINX_CONF_PATH=/etc/nginx/conf.d
 NGINX_LETSENCRYPT=/var/www/letsencrypt
+
 NGINX_VERSION=1.14.2
-OPENSSL_VERSION=1.0.2q
+OPENSSL_VERSION=1.0.2r
 ZLIB_VERSION=1.2.11
 PCRE_VERSION=8.42
+
+NGINX_FILE_NAME=nginx-${NGINX_VERSION}
+OPENSSL_FILE_NAME=openssl-${OPENSSL_VERSION}.
+ZLIB_FILE_NAME=zlib-${ZLIB_VERSION}
+PCRE_FILE_NAME=pcre-${PCRE_VERSION}
+
+NGINX_FULL_NAME=${NGINX_FILE_NAME}.tar.gz
+OPENSSL_FULL_NAME=${OPENSSL_FILE_NAME}.tar.gz
+ZLIB_FULL_NAME=${ZLIB_FILE_NAME}.tar.gz
+PCRE_FULL_NAME=${PCRE_FILE_NAME}.tar.gz
+
+NGINX_DOWNLOAD_LINK=https://nginx.org/download/${NGINX_FULL_NAME}
+OPENSSL_DOWNLOAD_LINK=https://www.openssl.org/source/${OPENSSL_FULL_NAME}
+ZLIB_DOWNLOAD_LINK=http://www.zlib.net/${ZLIB_FULL_NAME}
+PCRE_DOWNLOAD_LINK=https://ftp.pcre.org/pub/pcre/${PCRE_FULL_NAME}
 
 installation_dependency(){
 	if grep -Eqi "CentOS|Red Hat|RedHat" /etc/issue || grep -Eq "CentOS|Red Hat|RedHat" /etc/*-release || grep -Eqi "CentOS|Red Hat|RedHat" /proc/version; then
@@ -27,7 +43,7 @@ installation_dependency(){
 		release="unknown"
 	fi
 
-	if [ ! `command -v wget >/dev/null` ]; then
+	if [ `command -v wget >/dev/null` ]; then
 		if [[ ${release} == "CentOS" || ${release} == "Fedora" ]]; then
 			yum install wget -y
 			yum groupinstall "Development Tools" -y
@@ -38,23 +54,45 @@ installation_dependency(){
 	fi
 }
 
+DeployDirFunc() {
+	makeDir=$1
+	if [ -e ${makeDir} ]; then
+		\rm -rf ${makeDir}
+	fi
+	if [ ! -d ${makeDir} ]; then
+		mkdir -p ${makeDir}
+	fi
+	cd ${makeDir}
+}
+
+downloadFunc() {
+	fileName=$1
+	downLink=$2
+	if [ -f ${fileName} ]; then
+		echo "Found file ${fileName} Already Exist!"
+	else
+		wget ${downLink}
+	fi
+}
+
+deCompressFunc() {
+	fileName=$1
+	if [ ! -f ${fileName} ]; then
+		\rm -rf ${fileName}
+	fi
+	tar -zxf ${fileName}
+}
+
 installation_dependency
-
-if [ -e /tmp/make_nginx ]; then
-	\rm -rf /tmp/make_nginx
-fi
-mkdir -p /tmp/make_nginx
-cd /tmp/make_nginx
-
-wget https://ftp.pcre.org/pub/pcre/pcre-${PCRE_VERSION}.tar.gz
-wget http://www.zlib.net/zlib-${ZLIB_VERSION}.tar.gz
-wget https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz
-wget https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
-
-tar -zxf pcre-${PCRE_VERSION}.tar.gz
-tar -zxf zlib-${ZLIB_VERSION}.tar.gz
-tar -zxf openssl-${OPENSSL_VERSION}.tar.gz
-tar -zxf nginx-${NGINX_VERSION}.tar.gz
+DeployDirFunc /tmp/make_nginx
+downloadFunc ${NGINX_FULL_NAME} ${NGINX_DOWNLOAD_LINK}
+downloadFunc ${OPENSSL_FULL_NAME} ${OPENSSL_DOWNLOAD_LINK}
+downloadFunc ${ZLIB_FULL_NAME} ${ZLIB_DOWNLOAD_LINK}
+downloadFunc ${PCRE_FULL_NAME} ${PCRE_DOWNLOAD_LINK}
+deCompressFunc ${NGINX_FULL_NAME}
+deCompressFunc ${OPENSSL_FULL_NAME}
+deCompressFunc ${ZLIB_FULL_NAME}
+deCompressFunc ${PCRE_FULL_NAME}
 
 cd nginx-${NGINX_VERSION}
 ./configure --prefix=/usr/local/nginx \
@@ -69,9 +107,9 @@ cd nginx-${NGINX_VERSION}
 --with-http_stub_status_module \
 --with-stream \
 --with-stream_ssl_module \
---with-pcre=../pcre-${PCRE_VERSION} \
---with-zlib=../zlib-${ZLIB_VERSION} \
---with-openssl=../openssl-${OPENSSL_VERSION}
+--with-pcre=../${PCRE_FILE_NAME} \
+--with-zlib=../${ZLIB_FILE_NAME} \
+--with-openssl=../${OPENSSL_FILE_NAME}
 make
 make install
 
