@@ -43,7 +43,7 @@ installation_dependency(){
 		release="unknown"
 	fi
 
-	if [ `command -v wget >/dev/null` ]; then
+	if ! `command -v wget >/dev/null`; then
 		if [[ ${release} == "CentOS" || ${release} == "Fedora" ]]; then
 			yum install wget -y
 			yum groupinstall "Development Tools" -y
@@ -140,13 +140,13 @@ chmod -R 755 ${NGINX_LETSENCRYPT}
 
 function create_system_user() {
 	USERNAME=$1
-	if [ `grep -Eq "^${USERNAME}" /etc/group` ]; then
+	if ! `grep -Eq "^${USERNAME}" /etc/group`; then
 		groupadd -r ${USERNAME}
 	else
 		echo "${USERNAME} Group Already Exist!"
 	fi
 
-	if [ `grep -Eq "^${USERNAME}" /etc/passwd` ]; then
+	if ! `grep -Eq "^${USERNAME}" /etc/passwd`; then
 		useradd -r -g ${USERNAME} -s /bin/false ${USERNAME}
 	else
 		echo "User ${USERNAME} Already Exist!"

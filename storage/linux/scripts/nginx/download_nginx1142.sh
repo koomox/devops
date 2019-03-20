@@ -32,7 +32,7 @@ installation_dependency(){
 		release="unknown"
 	fi
 
-	if [ `command -v wget >/dev/null` ]; then
+	if ! `command -v wget >/dev/null`; then
 		if [[ ${release} == "CentOS" || ${release} == "Fedora" ]]; then
 			yum install wget -y
 		elif [[ ${release} == "Debian" || ${release} == "Ubuntu" || ${release} == "Raspbian" || ${release} == "Aliyun" ]]; then
@@ -40,7 +40,7 @@ installation_dependency(){
 		fi
 	fi
 	
-	if [ `command -v ffsend >/dev/null` ]; then
+	if ! `command -v ffsend >/dev/null`; then
 		wget https://github.com/timvisee/ffsend/releases/download/v0.2.38/ffsend-v0.2.38-linux-x64-static -O /usr/local/bin/ffsend
 		chmod +x /usr/local/bin/ffsend
 	fi
