@@ -71,7 +71,7 @@ compressFunc() {
 	compressPath=$1
 	compressName=$2
 	cd ${compressPath}
-	if [ -e ${compressName}.tar.gz ]; then
+	if [ ! -e ${compressName}.tar.gz ]; then
 		\rm -rf ${compressName}.tar.gz
 	fi
 	tar -zcvf ${compressName}.tar.gz ${compressName}
