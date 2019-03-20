@@ -4,15 +4,15 @@ OPENSSL_VERSION=1.0.2r
 ZLIB_VERSION=1.2.11
 PCRE_VERSION=8.42
 
-NGINX_FULL_NAME=nginx-${NGINX_VERSION}.tar.gz
-OPENSSL_FULL_NAME=openssl-${OPENSSL_VERSION}.tar.gz
-ZLIB_FULL_NAME=zlib-${ZLIB_VERSION}.tar.gz
-PCRE_FULL_NAME=pcre-${PCRE_VERSION}.tar.gz
+NGINX_FULL_NAME=nginx-$(NGINX_VERSION).tar.gz
+OPENSSL_FULL_NAME=openssl-$(OPENSSL_VERSION).tar.gz
+ZLIB_FULL_NAME=zlib-$(ZLIB_VERSION).tar.gz
+PCRE_FULL_NAME=pcre-$(PCRE_VERSION).tar.gz
 
-NGINX_DOWNLOAD_LINK=https://nginx.org/download/${NGINX_FULL_NAME}
-OPENSSL_DOWNLOAD_LINK=https://www.openssl.org/source/${OPENSSL_FULL_NAME}
-ZLIB_DOWNLOAD_LINK=http://www.zlib.net/${ZLIB_FULL_NAME}
-PCRE_DOWNLOAD_LINK=https://ftp.pcre.org/pub/pcre/${PCRE_FULL_NAME}
+NGINX_DOWNLOAD_LINK=https://nginx.org/download/$(NGINX_FULL_NAME)
+OPENSSL_DOWNLOAD_LINK=https://www.openssl.org/source/$(OPENSSL_FULL_NAME)
+ZLIB_DOWNLOAD_LINK=http://www.zlib.net/$(ZLIB_FULL_NAME)
+PCRE_DOWNLOAD_LINK=https://ftp.pcre.org/pub/pcre/$(PCRE_FULL_NAME)
 
 
 installation_dependency(){
