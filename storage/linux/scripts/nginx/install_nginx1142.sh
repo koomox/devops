@@ -77,7 +77,7 @@ downloadFunc() {
 
 deCompressFunc() {
 	fileName=$1
-	if [ ! -f ${fileName} ]; then
+	if [ -e ${fileName} ]; then
 		\rm -rf ${fileName}
 	fi
 	tar -zxf ${fileName}
