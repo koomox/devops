@@ -1,6 +1,6 @@
 #!/bin/bash
 
-installation_dependency(){
+function installation_dependency(){
 	if grep -Eqi "CentOS|Red Hat|RedHat" /etc/issue || grep -Eq "CentOS|Red Hat|RedHat" /etc/*-release || grep -Eqi "CentOS|Red Hat|RedHat" /proc/version; then
 		release="CentOS"
 	elif grep -Eqi "Debian" /etc/issue || grep -Eq "Debian" /etc/*-release; then
@@ -42,7 +42,7 @@ fi
 
 unzip IntelliJIDEALicenseServer-1.6.zip
 
-install_idea() {
+function install_idea() {
 	bit=$(uname -m)
 	if [[ ${bit} == "x86_64" ]]; then
 		\cp -f /tmp/IntelliJIDEALicenseServer/IntelliJIDEALicenseServer_linux_amd64 /usr/local/idea/bin/idea
@@ -74,7 +74,7 @@ chown -R idea:idea /usr/local/idea
 chmod +x /usr/local/idea/bin/idea
 ls -al /usr/local/idea/bin/idea
 
-init_idea_service() {
+function init_idea_service() {
 	systemctl stop idea
 	systemctl disable idea
 

@@ -26,7 +26,7 @@ OPENSSL_DOWNLOAD_LINK=https://www.openssl.org/source/${OPENSSL_FULL_NAME}
 ZLIB_DOWNLOAD_LINK=http://www.zlib.net/${ZLIB_FULL_NAME}
 PCRE_DOWNLOAD_LINK=https://ftp.pcre.org/pub/pcre/${PCRE_FULL_NAME}
 
-installation_dependency(){
+function installation_dependency(){
 	if grep -Eqi "CentOS|Red Hat|RedHat" /etc/issue || grep -Eq "CentOS|Red Hat|RedHat" /etc/*-release || grep -Eqi "CentOS|Red Hat|RedHat" /proc/version; then
 		release="CentOS"
 	elif grep -Eqi "Debian" /etc/issue || grep -Eq "Debian" /etc/*-release; then
@@ -54,7 +54,7 @@ installation_dependency(){
 	fi
 }
 
-DeployDirFunc() {
+function DeployDirFunc() {
 	makeDir=$1
 	if [ -f ${makeDir} ]; then
 		\rm -rf ${makeDir}
@@ -65,7 +65,7 @@ DeployDirFunc() {
 	cd ${makeDir}
 }
 
-downloadFunc() {
+function downloadFunc() {
 	fileName=$1
 	downLink=$2
 	if [ -f ${fileName} ]; then
@@ -75,7 +75,7 @@ downloadFunc() {
 	fi
 }
 
-deCompressFunc() {
+function deCompressFunc() {
 	fileName=$1
 	if [ -e ${fileName} ]; then
 		\rm -rf ${fileName}

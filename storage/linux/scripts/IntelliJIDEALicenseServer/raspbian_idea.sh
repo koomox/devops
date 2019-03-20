@@ -25,7 +25,7 @@ chown -R idea:idea /usr/local/idea
 chmod +x /usr/local/idea/bin/idea
 ls -al /usr/local/idea/bin/idea
 
-init_idea_service() {
+function init_idea_service() {
 	systemctl stop idea
 	systemctl disable idea
 

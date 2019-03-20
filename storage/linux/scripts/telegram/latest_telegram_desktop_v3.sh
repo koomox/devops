@@ -1,6 +1,6 @@
 #!/bin/bash
 
-installation_dependency(){
+function installation_dependency(){
 	if grep -Eqi "CentOS|Red Hat|RedHat" /etc/issue || grep -Eq "CentOS|Red Hat|RedHat" /etc/*-release || grep -Eqi "CentOS|Red Hat|RedHat" /proc/version; then
 		release="CentOS"
 	elif grep -Eqi "Debian" /etc/issue || grep -Eq "Debian" /etc/*-release; then
@@ -17,7 +17,7 @@ installation_dependency(){
 		release="unknown"
 	fi
 
-	if [ ! `command -v wget >/dev/null` ]; then
+	if ! `command -v wget >/dev/null`; then
 		if [[ ${release} == "CentOS" || ${release} == "Fedora" ]]; then
 			yum install wget -y
 		elif [[ ${release} == "Debian" || ${release} == "Ubuntu" || ${release} == "Raspbian" || ${release} == "Aliyun" ]]; then
@@ -27,18 +27,36 @@ installation_dependency(){
 }
 
 TG_VERSION=$(wget -q -O - https://github.com/telegramdesktop/tdesktop/tags | grep -v "beta" | grep -v "rc" | grep -m1 -E "telegramdesktop/tdesktop/releases/tag/v[0-9]+\.[0-9]+\.*[0-9]*" | sed -E "s/.*v([0-9]+\.[0-9]+\.*[0-9]*).*/\1/gm")
+TG_FILE_NAME=tsetup.${TG_VERSION}
+TG_FULL_NAME=tsetup.${TG_VERSION}.tar.xz
+TG_DOWNLOAD_LINK=https://github.com/telegramdesktop/tdesktop/releases/download/v${TG_VERSION}/tsetup.${TG_VERSION}.tar.xz
 
-cd /tmp
+function downloadFunc() {
+	fileName=$1
+	downLink=$2
+	if [ -f ${fileName} ]; then
+		echo "Found file ${fileName} Already Exist!"
+	else
+		wget ${downLink}
+	fi
+}
 
-if [ -f tsetup.${TG_VERSION}.tar.xz ]; then
-	\rm -rf tsetup.${TG_VERSION}.tar.xz
-fi
+function deCompressFunc() {
+	fileName=$1
+	if [ -e ${fileName} ]; then
+		\rm -rf ${fileName}
+	fi
+	tar -zxf ${fileName}
+}
+
+downloadFunc ${TG_FILE_NAME} ${TG_DOWNLOAD_LINK}
+
 
 if [ -e /opt/Telegram ]; then
 	\rm -rf /opt/Telegram
 fi
 
-wget https://github.com/telegramdesktop/tdesktop/releases/download/v${TG_VERSION}/tsetup.${TG_VERSION}.tar.xz
+wget 
 xz -d tsetup.${TG_VERSION}.tar.xz
 tar -xf tsetup.${TG_VERSION}.tar -C /opt
 \rm -rf tsetup.${TG_VERSION}.tar.xz tsetup.${TG_VERSION}.tar

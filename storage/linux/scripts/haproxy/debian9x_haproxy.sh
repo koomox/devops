@@ -1,52 +1,44 @@
 #!/bin/bash
 
 # 安装 HaProxy
-install_haproxy() {
+function install_haproxy() {
 	apt install haproxy -y
 }
 
-initialize_haproxy() {
-\cp -f /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
-cat > /etc/haproxy/haproxy.cfg << EOF
-global
-	ulimit-n 51200
-defaults
-	log     global
-	mode    tcp
-	option  dontlognull
-	timeout connect 5000
-	timeout client  50000
-	timeout server  50000
-EOF
+function initialize_haproxy() {
+	if [ ! -f /etc/haproxy/haproxy.cfg.bak ]; then
+		\cp -f /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
+	fi
+	echo -e "global\n\tulimit-n 51200\ndefaults\n\tlog global\n\tmode tcp\n\toption dontlognull\n\ttimeout connect 5000\n\ttimeout client 50000\n\ttimeout server 50000" > /etc/haproxy/haproxy.cfg
 }
 
-add_haproxy_user() {
-read -p "请输入用户名: " username
-read -p "请输入目标服务器域名或IP地址: " domain_name
-read -p "请输入端口号: " public_port
+function add_haproxy_user() {
+	read -p "请输入用户名: " username
+	read -p "请输入目标服务器域名或IP地址: " domain_name
+	read -p "请输入端口号: " public_port
 
-echo -e "frontend ss-in-${username}\n\tbind *:${public_port}\n\tdefault_backend ss-out-${username}\nbackend ss-out-${username}\n\tserver server1 ${domain_name}:${public_port} maxconn 32" >> /etc/haproxy/haproxy.cfg
+	echo -e "frontend ss-in-${username}\n\tbind *:${public_port}\n\tdefault_backend ss-out-${username}\nbackend ss-out-${username}\n\tserver server1 ${domain_name}:${public_port} maxconn 32" >> /etc/haproxy/haproxy.cfg
 
-iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport ${public_port} -j ACCEPT
-iptables -A OUTPUT -p tcp --sport ${public_port} -j ACCEPT
-iptables -A OUTPUT -p tcp --dport ${public_port} -j ACCEPT
+	iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport ${public_port} -j ACCEPT
+	iptables -A OUTPUT -p tcp --sport ${public_port} -j ACCEPT
+	iptables -A OUTPUT -p tcp --dport ${public_port} -j ACCEPT
 }
 
-del_haproxy_rules() {
-read -p "请输入端口号: " public_port
+function del_haproxy_rules() {
+	read -p "请输入端口号: " public_port
 
-iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport ${public_port} -j ACCEPT
-iptables -D OUTPUT -p tcp --sport ${public_port} -j ACCEPT
-iptables -D OUTPUT -p tcp --dport ${public_port} -j ACCEPT
+	iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport ${public_port} -j ACCEPT
+	iptables -D OUTPUT -p tcp --sport ${public_port} -j ACCEPT
+	iptables -D OUTPUT -p tcp --dport ${public_port} -j ACCEPT
 }
 
-reset_haproxy() {
+function reset_haproxy() {
 	systemctl stop haproxy
 	systemctl start haproxy
 }
 
 # 开始菜单
-start_menu() {
+function start_menu() {
 	clear
 	echo "============================="
 	echo "环境: 适用于 Debian 9.x"

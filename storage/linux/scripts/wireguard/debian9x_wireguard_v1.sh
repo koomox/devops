@@ -1,6 +1,6 @@
 #!/bin/bash
 # 更新内核
-update_kernel() {
+function update_kernel() {
 	# 更新软件包源
 	apt update
 
@@ -14,7 +14,7 @@ update_kernel() {
 }
 
 # 安装 WireGuard
-install_wireguard() {
+function install_wireguard() {
 	# 添加 unstable 软件包源，以确保安装版本是最新的
 	echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.list.d/unstable.list
 	echo -e 'Package: *\nPin: release a=unstable\nPin-Priority: 150' > /etc/apt/preferences.d/limit-unstable
@@ -35,7 +35,7 @@ install_wireguard() {
 }
 
 # 初始化 WireGuard
-initialize_wireguard() {
+function initialize_wireguard() {
 	WG_CONF=/etc/wireguard/wg0.conf 
 	CLIENT_CONF=/etc/wireguard/client.conf
 
@@ -116,8 +116,8 @@ EOF
 # sed -i '/^#/d' ${WG_CONF}
 # sed -i '/^$/d' ${CLIENT_CONF}
 # sed -i '/^#/d' ${CLIENT_CONF}
-sed -i '/^#/d;/^$/d' ${WG_CONF}
-sed -i '/^#/d;/^$/d' ${CLIENT_CONF}
+	sed -i '/^#/d;/^$/d' ${WG_CONF}
+	sed -i '/^#/d;/^$/d' ${CLIENT_CONF}
 
 	chmod -R 755 /etc/wireguard
 
@@ -136,27 +136,27 @@ sed -i '/^#/d;/^$/d' ${CLIENT_CONF}
 	cat ${CLIENT_CONF}
 }
 
-add_client() {
-cd /etc/wireguard
+function add_client() {
+	cd /etc/wireguard
 
-read -p "输入用户名: " CLIENT_USERNAME
-read -p "输入IP地址: " CLIENT_IPADDR
-read -p "请输入 WireGuard 服务端口号: " wireguard_port
-WG_CONF=/etc/wireguard/wg0.conf
-CLIENT_USERNAME_CONF=/etc/wireguard/${CLIENT_USERNAME}.conf
+	read -p "输入用户名: " CLIENT_USERNAME
+	read -p "输入IP地址: " CLIENT_IPADDR
+	read -p "请输入 WireGuard 服务端口号: " wireguard_port
+	WG_CONF=/etc/wireguard/wg0.conf
+	CLIENT_USERNAME_CONF=/etc/wireguard/${CLIENT_USERNAME}.conf
 
-# 获取网络接口名称
-interface=$(ip addr | grep '^[0-9]:' | grep -v 'lo' | grep -v 'wg' | cut -d ':' -f2 | awk '{ print $1 }')
-# 获取IP地址
-local_ip=$(ip addr | grep 'inet ' | grep -v '127.0.0.1' | grep -v '10.0.0.' | cut -d '/' -f1 | awk '{ print $2 }')
-# 获取外网IP地址
-global_ip=$(curl whatismyip.akamai.com)
+	# 获取网络接口名称
+	interface=$(ip addr | grep '^[0-9]:' | grep -v 'lo' | grep -v 'wg' | cut -d ':' -f2 | awk '{ print $1 }')
+	# 获取IP地址
+	local_ip=$(ip addr | grep 'inet ' | grep -v '127.0.0.1' | grep -v '10.0.0.' | cut -d '/' -f1 | awk '{ print $2 }')
+	# 获取外网IP地址
+	global_ip=$(curl whatismyip.akamai.com)
 
-wg genkey | tee privatekey_${CLIENT_USERNAME} | wg pubkey > publickey_${CLIENT_USERNAME}
-echo -e "[Peer]\nPublicKey = $(cat publickey_${CLIENT_USERNAME})\nAllowedIPs = ${CLIENT_IPADDR}/32" >> ${WG_CONF}
+	wg genkey | tee privatekey_${CLIENT_USERNAME} | wg pubkey > publickey_${CLIENT_USERNAME}
+	echo -e "[Peer]\nPublicKey = $(cat publickey_${CLIENT_USERNAME})\nAllowedIPs = ${CLIENT_IPADDR}/32" >> ${WG_CONF}
 
-wg-quick down wg0
-wg-quick up wg0
+	wg-quick down wg0
+	wg-quick up wg0
 
 # 生成客户端配置文件
 cat > ${CLIENT_USERNAME_CONF} << EOF
@@ -186,21 +186,21 @@ AllowedIPs = 0.0.0.0/0, ::0/0
 PersistentKeepalive = 25
 EOF
 
-sed -i '/^#/d;/^$/d' ${CLIENT_USERNAME_CONF}
-wg
-echo "=============== 客户端端配置文件 ==============="
-cat ${CLIENT_USERNAME_CONF}
+	sed -i '/^#/d;/^$/d' ${CLIENT_USERNAME_CONF}
+	wg
+	echo "=============== 客户端端配置文件 ==============="
+	cat ${CLIENT_USERNAME_CONF}
 }
 
 # 添加防火墙规则
-add_iptables_rules() {
-read -p "输入 wireguard 端口: " WIREGUARD_PORT
-iptables -A INPUT -p udp --dport ${WIREGUARD_PORT} -j ACCEPT
-iptables -A OUTPUT -p udp --sport ${WIREGUARD_PORT} -j ACCEPT
+function add_iptables_rules() {
+	read -p "输入 wireguard 端口: " WIREGUARD_PORT
+	iptables -A INPUT -p udp --dport ${WIREGUARD_PORT} -j ACCEPT
+	iptables -A OUTPUT -p udp --sport ${WIREGUARD_PORT} -j ACCEPT
 }
 
 # 开始菜单
-start_menu() {
+function start_menu() {
 	clear
 	echo "============================="
 	echo "环境: 适用于 Debian 9.x"

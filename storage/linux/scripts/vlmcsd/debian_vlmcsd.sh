@@ -28,7 +28,7 @@ chown -R vlmcsd:vlmcsd /usr/local/vlmcsd
 chmod +x /usr/local/vlmcsd/bin/vlmcsd
 ls -al /usr/local/vlmcsd/bin/vlmcsd
 
-init_vlmcsd_service() {
+function init_vlmcsd_service() {
 	systemctl stop vlmcsd
 	systemctl disable vlmcsd
 	if [ -e /etc/systemd/system/vlmcsd.service ]; then

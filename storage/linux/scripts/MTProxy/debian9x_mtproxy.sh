@@ -3,7 +3,7 @@ MTPROXY_PORT=443
 MTPROXY_SECRET="*****"
 MTPROXY_SERVICE="/etc/systemd/system/MTProxy.service"
 
-installation_dependency(){
+function installation_dependency(){
 	if grep -Eqi "CentOS|Red Hat|RedHat" /etc/issue || grep -Eq "CentOS|Red Hat|RedHat" /etc/*-release || grep -Eqi "CentOS|Red Hat|RedHat" /proc/version; then
 		release="CentOS"
 	elif grep -Eqi "Debian" /etc/issue || grep -Eq "Debian" /etc/*-release; then
@@ -20,7 +20,7 @@ installation_dependency(){
 		release="unknown"
 	fi
 
-	if [ ! `command -v wget >/dev/null` ]; then
+	if ! `command -v wget >/dev/null`; then
 		if [[ ${release} == "CentOS" || ${release} == "Fedora" ]]; then
 			yum install wget -y
 		elif [[ ${release} == "Debian" || ${release} == "Ubuntu" || ${release} == "Raspbian" || ${release} == "Aliyun" ]]; then
@@ -30,38 +30,38 @@ installation_dependency(){
 }
 
 # 安装 TelegramMessenger MTProxy
-install_mtproxy() {
-	\rm -rf /opt/MTProxy /usr/local/MTProxy
-	mkdir -p /usr/local/MTProxy
+function install_mtproxy() {
+	\rm -rf /opt/MTProxy /opt/MTProxy
+	mkdir -p /opt/MTProxy
 	cd /opt
 	apt install git curl build-essential libssl-dev zlib1g-dev -y
 	git clone https://github.com/TelegramMessenger/MTProxy --depth=1
 	cd MTProxy
 	make && cd objs/bin
-	mv mtproto-proxy -t /usr/local/MTProxy
+	mv mtproto-proxy -t /opt/MTProxy
 }
 
 # 初始化 MTProxy
-initialize_mtproxy() {
-cd /usr/local/MTProxy
-curl -s https://core.telegram.org/getProxySecret -o proxy-secret
-curl -s https://core.telegram.org/getProxyConfig -o proxy-multi.conf
+function initialize_mtproxy() {
+	cd /opt/MTProxy
+	curl -s https://core.telegram.org/getProxySecret -o proxy-secret
+	curl -s https://core.telegram.org/getProxyConfig -o proxy-multi.conf
 
-service_mtproxy
-iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport ${MTPROXY_PORT} -j ACCEPT
-iptables -A OUTPUT -p tcp --sport ${MTPROXY_PORT} -j ACCEPT
+	service_mtproxy
+	iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport ${MTPROXY_PORT} -j ACCEPT
+	iptables -A OUTPUT -p tcp --sport ${MTPROXY_PORT} -j ACCEPT
 
-iptables-save > /etc/iptables.rules
+	iptables-save > /etc/iptables.rules
 
-systemctl daemon-reload
-systemctl restart MTProxy.service
-systemctl enable MTProxy.service
-systemctl status MTProxy.service
+	systemctl daemon-reload
+	systemctl restart MTProxy.service
+	systemctl enable MTProxy.service
+	systemctl status MTProxy.service
 }
 
 # 重置 MTProxy
-reset_mtproxy() {
-	cd /usr/local/MTProxy
+function reset_mtproxy() {
+	cd /opt/MTProxy
 	\rm -rf proxy-secret proxy-multi.conf
 	curl -s https://core.telegram.org/getProxySecret -o proxy-secret
 	curl -s https://core.telegram.org/getProxyConfig -o proxy-multi.conf
@@ -76,7 +76,7 @@ reset_mtproxy() {
 }
 
 # 创建 MTProxy 服务
-service_mtproxy() {
+function service_mtproxy() {
 # 获取网络接口名称
 interface=$(ip addr | grep '^[0-9]+:' | grep -v 'lo' | grep -v 'wg' | cut -d ':' -f2 | awk '{ print $1 }')
 # 获取IP地址
@@ -98,8 +98,8 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/usr/local/MTProxy
-ExecStart=/usr/local/MTProxy/mtproto-proxy -u nobody -p 8888 -H ${MTPROXY_PORT} -S "${MTPROXY_SECRET}" --aes-pwd proxy-secret proxy-multi.conf -M 1
+WorkingDirectory=/opt/MTProxy
+ExecStart=/opt/MTProxy/mtproto-proxy -u nobody -p 8888 -H ${MTPROXY_PORT} -S "${MTPROXY_SECRET}" --aes-pwd proxy-secret proxy-multi.conf -M 1
 Restart=on-failure
 
 [Install]
@@ -113,8 +113,8 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/usr/local/MTProxy
-ExecStart=/usr/local/MTProxy/mtproto-proxy -u nobody -p 8888 -H ${MTPROXY_PORT} -S "${MTPROXY_SECRET}" --nat-info ${local_ip}:${global_ip} --aes-pwd proxy-secret proxy-multi.conf -M 1
+WorkingDirectory=/opt/MTProxy
+ExecStart=/opt/MTProxy/mtproto-proxy -u nobody -p 8888 -H ${MTPROXY_PORT} -S "${MTPROXY_SECRET}" --nat-info ${local_ip}:${global_ip} --aes-pwd proxy-secret proxy-multi.conf -M 1
 Restart=on-failure
 
 [Install]
@@ -124,7 +124,7 @@ fi
 }
 
 # 开始菜单
-start_menu() {
+function start_menu() {
 	clear
 	echo "============================="
 	echo "环境: 适用于 Debian 9.x"

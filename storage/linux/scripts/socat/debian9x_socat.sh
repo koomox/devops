@@ -1,6 +1,6 @@
 #!/bin/bash
 
-installation_dependency(){
+function installation_dependency(){
 	if grep -Eqi "CentOS|Red Hat|RedHat" /etc/issue || grep -Eq "CentOS|Red Hat|RedHat" /etc/*-release || grep -Eqi "CentOS|Red Hat|RedHat" /proc/version; then
 		release="CentOS"
 	elif grep -Eqi "Debian" /etc/issue || grep -Eq "Debian" /etc/*-release; then
@@ -33,7 +33,7 @@ installation_dependency(){
 	fi
 }
 
-initialize_socat(){
+function initialize_socat(){
 	if [ -e /etc/socat ]; then
 	\rm -rf /etc/socat
 	fi
@@ -43,7 +43,7 @@ initialize_socat(){
 	chmod +x /etc/socat/run.sh
 }
 
-socat_add_user() {
+function socat_add_user() {
 	read -p "输入用户名: " USERNAME
 	read -p "输入转发IP地址: " IPADDR
 	read -p "请输入 socat 转发端口号: " PUBLIC_PORT
@@ -59,7 +59,7 @@ socat_add_user() {
 }
 
 # 开始菜单
-start_menu() {
+function start_menu() {
 	clear
 	echo "============================="
 	echo "环境: 适用于 Debian 9.x"
