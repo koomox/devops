@@ -87,7 +87,4 @@ downloadFunc ${ZLIB_FULL_NAME} ${ZLIB_DOWNLOAD_LINK}
 downloadFunc ${PCRE_FULL_NAME} ${PCRE_DOWNLOAD_LINK}
 
 compressFunc /tmp make_nginx
-
-cd ..
-tar -zcvf /tmp/make_nginx.tar.gz make_nginx
 ffsend upload /tmp/make_nginx.tar.gz
