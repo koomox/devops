@@ -1,6 +1,6 @@
 #!/bin/bash
 
-installation_dependency(){
+function installation_dependency(){
 	if grep -Eqi "CentOS|Red Hat|RedHat" /etc/issue || grep -Eq "CentOS|Red Hat|RedHat" /etc/*-release || grep -Eqi "CentOS|Red Hat|RedHat" /proc/version; then
 		release="CentOS"
 	elif grep -Eqi "Debian" /etc/issue || grep -Eq "Debian" /etc/*-release; then
@@ -17,7 +17,7 @@ installation_dependency(){
 		release="unknown"
 	fi
 
-	if [ ! `command -v wget >/dev/null` ]; then
+	if ! `command -v wget >/dev/null`; then
 		if [[ ${release} == "CentOS" || ${release} == "Fedora" ]]; then
 			yum install wget -y
 		elif [[ ${release} == "Debian" || ${release} == "Ubuntu" || ${release} == "Raspbian" || ${release} == "Aliyun" ]]; then
@@ -26,7 +26,7 @@ installation_dependency(){
 	fi
 }
 
-check_os_bits() {
+function check_os_bits() {
 	bit=$(uname -m)
 	if [[ ${bit} == "x86_64" ]]; then
 		bit="amd64"

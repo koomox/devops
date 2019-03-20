@@ -2,6 +2,10 @@
 MTPROXY_PORT=443
 MTPROXY_SECRET="*****"
 MTPROXY_SERVICE="/etc/systemd/system/MTProxy.service"
+MTPROXY_SECRET_FILE_NAME=proxy-secret
+MTPROXY_MULTI_FILE_NAME=proxy-multi.conf
+MTPROXY_SECRET_DOWNLOAD_LINK=https://core.telegram.org/getProxySecret
+MTPROXY_MULTI_DOWNLOAD_LINK=https://core.telegram.org/getProxyConfig
 
 function installation_dependency(){
 	if grep -Eqi "CentOS|Red Hat|RedHat" /etc/issue || grep -Eq "CentOS|Red Hat|RedHat" /etc/*-release || grep -Eqi "CentOS|Red Hat|RedHat" /proc/version; then
@@ -29,9 +33,24 @@ function installation_dependency(){
 	fi
 }
 
+function downloadFunc() {
+	fileName=$1
+	downLink=$2
+	if [ -f ${fileName} ]; then
+		\rm -rf ${fileName}
+	fi
+	curl -s ${downLink} -o ${fileName}
+}
+
+function reset_config_file() {
+	cd /opt/MTProxy
+	downloadFunc ${MTPROXY_SECRET_FILE_NAME} ${MTPROXY_SECRET_DOWNLOAD_LINK}
+	downloadFunc ${MTPROXY_MULTI_FILE_NAME} ${MTPROXY_MULTI_DOWNLOAD_LINK}
+}
+
 # 安装 TelegramMessenger MTProxy
 function install_mtproxy() {
-	\rm -rf /opt/MTProxy /opt/MTProxy
+	\rm -rf /opt/MTProxy /usr/local/MTProxy
 	mkdir -p /opt/MTProxy
 	cd /opt
 	apt install git curl build-essential libssl-dev zlib1g-dev -y
@@ -41,38 +60,33 @@ function install_mtproxy() {
 	mv mtproto-proxy -t /opt/MTProxy
 }
 
-# 初始化 MTProxy
-function initialize_mtproxy() {
-	cd /opt/MTProxy
-	curl -s https://core.telegram.org/getProxySecret -o proxy-secret
-	curl -s https://core.telegram.org/getProxyConfig -o proxy-multi.conf
-
-	service_mtproxy
-	iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport ${MTPROXY_PORT} -j ACCEPT
-	iptables -A OUTPUT -p tcp --sport ${MTPROXY_PORT} -j ACCEPT
-
-	iptables-save > /etc/iptables.rules
-
+function start_mtproxy() {
 	systemctl daemon-reload
 	systemctl restart MTProxy.service
 	systemctl enable MTProxy.service
 	systemctl status MTProxy.service
 }
 
+# 初始化 MTProxy
+function initialize_mtproxy() {
+	reset_config_file
+
+	service_mtproxy
+	iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport ${MTPROXY_PORT} -j ACCEPT
+	iptables -A OUTPUT -p tcp --sport ${MTPROXY_PORT} -j ACCEPT
+
+	iptables-save > /etc/iptables.rules
+	start_mtproxy
+}
+
 # 重置 MTProxy
 function reset_mtproxy() {
-	cd /opt/MTProxy
-	\rm -rf proxy-secret proxy-multi.conf
-	curl -s https://core.telegram.org/getProxySecret -o proxy-secret
-	curl -s https://core.telegram.org/getProxyConfig -o proxy-multi.conf
+	reset_config_file
 
 	systemctl stop MTProxy.service
 	systemctl disable MTProxy.service
 	service_mtproxy
-	systemctl daemon-reload
-	systemctl enable MTProxy.service
-	systemctl start MTProxy.service
-	systemctl status MTProxy.service
+	start_mtproxy
 }
 
 # 创建 MTProxy 服务
