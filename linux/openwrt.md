@@ -1,13 +1,16 @@
-# openwrt                               
-openwrt 15.05 x86 IMG镜像: [点击下载](https://downloads.openwrt.org/chaos_calmer/15.05/x86/generic/openwrt-15.05-x86-generic-combined-squashfs.img)                               
-参考文档: [传送门](http://blog.csdn.net/xingyuzhe/article/details/51280337)                          
-
-安装 qemu-img                       
+# OpenWRT              
+下载镜像，下载其中一个即可。                   
 ```sh
-sudo apt-get install qemu-img
+wget https://downloads.openwrt.org/releases/18.06.2/targets/x86/generic/openwrt-18.06.2-x86-generic-combined-squashfs.img.gz
+wget https://downloads.openwrt.org/releases/18.06.2/targets/x86/generic/openwrt-18.06.2-x86-generic-combined-ext4.img.gz
 ```
-
-将img镜像文件转换为vmdk文件                           
+Vmware 需要将img转换为vmdk格式，使用`qemu-img`工具。       
 ```sh
-qemu-img convert -f raw openwrt-15.05-x86-generic-combined-squashfs.img -O vmdk openwrt-15.05-x86-generic-combined.vmdk
+apt install qemu-utils
 ```
+解压镜像并转换格式         
+```sh
+gzip -d openwrt-18.06.2-x86-generic-combined-ext4.img.gz
+qemu-img convert -f raw openwrt-18.06.2-x86-generic-combined-ext4.img -O vmdk openwrt-18.06.2-x86-generic-combined-ext4.vmdk
+```
+设置IP地址，修改`/etc/config/network`配置文件。         

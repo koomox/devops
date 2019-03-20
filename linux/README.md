@@ -9,7 +9,7 @@
 [常用库](package.md)             
 [NextCloud](nextcloud.md)                      
 [CentOS 7.x 安装 NextCloud](centos7x_nextcloud.md)           
-[openwrt](openwrt.md)                     
+[OpenWRT](openwrt.md)                     
 [安装 Golang 语言](golang.md)              
 [CentOS 7.x](centos7x.md)           
 [Samba](samba.md)           
