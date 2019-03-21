@@ -14,9 +14,9 @@ wget https://stable.release.core-os.net/amd64-usr/current/coreos_production_iso_
 wget https://stable.release.core-os.net/amd64-usr/current/coreos_production_image.bin.bz2
 wget https://stable.release.core-os.net/amd64-usr/current/coreos_production_image.bin.bz2.sig
 ```
-生成密码              
+创建密码              
 ```sh
-sudo openssl passwd -1 > cloud-config-file
+sudo openssl passwd -1
 ```
 创建配置文件
 ```sh
