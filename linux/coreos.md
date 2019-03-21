@@ -22,8 +22,10 @@ sudo openssl passwd -1
 ```sh
 vi cloud-config
 ```
-内容
+内容，配置文件必须以`#cloud-config`开始                
 ```ini
+#cloud-config
+
 hostname: "coreos1"
 
 users:
