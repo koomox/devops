@@ -88,7 +88,7 @@ function ffsend_upload() {
 
 function DeployDirFunc() {
 	makeDir=$1
-	if [ -e ${makeDir} ]; then
+	if [ -f ${makeDir} ]; then
 		\rm -rf ${makeDir}
 	fi
 	if [ ! -d ${makeDir} ]; then
