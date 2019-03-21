@@ -28,7 +28,7 @@ LIBICONV_FULL_NAME=${LIBICONV_FILE_NAME}.tar.gz
 LIBZIP_FULL_NAME=${LIBZIP_FILE_NAME}.tar.xz
 ICU4C_FULL_NAME=${ICU4C_FILE_NAME}.tgz
 
-PHP_DOWNLOAD_LINK=http://php.net/distributions/
+PHP_DOWNLOAD_LINK=https://secure.php.net/distributions/${PHP_FULL_NAME}
 CMAKE_DOWNLOAD_LINK=https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/${CMAKE_FULL_NAME}
 OPENSSL_DOWNLOAD_LINK=https://www.openssl.org/source/${OPENSSL_FULL_NAME}
 ZLIB_DOWNLOAD_LINK=http://www.zlib.net/${ZLIB_FULL_NAME}
