@@ -27,6 +27,12 @@ chmod +x ./centos7x_mariadb1037.sh
 /usr/bin/mysql_secure_installation
 ```
 ### PHP              
+下载 PHP 相关文件打包并上传至 firefox send               
+```
+curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/php/download_php733.sh
+chmod +x ./download_php733.sh
+./download_php733.sh
+```
 ```
 curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/php/centos7x_phpfpm727.sh
 chmod +x ./centos7x_phpfpm727.sh
