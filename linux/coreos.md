@@ -62,6 +62,16 @@ sudo mkfs.ext4 /dev/sda5
 df -h
 sudo mount /dev/sda5 /data
 ```
+### Vmware 虚拟机配置文件               
+配置好cloud-config，执行下面命令将cloud-config文件编码               
+```sh
+gzip -c cloud-config | base64 && echo
+```
+然后在vmx文件中追加如下两行：                 
+```ini
+guestinfo.coreos.config.data = "这里是编码后的cloud-config文件内容"
+guestinfo.coreos.config.data.encoding = "gzip+base64"
+```
 ### 调整 Docker 默认存储地址              
 参考文档: [传送门](https://docs.docker.com/config/daemon/systemd/)            
 ```sh
