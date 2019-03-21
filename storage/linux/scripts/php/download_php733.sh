@@ -54,7 +54,7 @@ function installation_dependency(){
 		release="unknown"
 	fi
 
-	if [ `command -v wget >/dev/null` ]; then
+	if ! `command -v wget >/dev/null`; then
 		if [[ ${release} == "CentOS" || ${release} == "Fedora" ]]; then
 			yum install wget -y
 			yum groupinstall "Development Tools" -y
