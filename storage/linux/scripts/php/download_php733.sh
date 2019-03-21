@@ -107,6 +107,16 @@ function downloadFunc() {
 	fi
 }
 
+function compressFunc() {
+	compressPath=$1
+	compressName=$2
+	cd ${compressPath}
+	if [ -f ${compressName}.tar.gz ]; then
+		\rm -rf ${compressName}.tar.gz
+	fi
+	tar -zcvf ${compressName}.tar.gz ${compressName}
+}
+
 function deCompressFunc() {
 	fileName=$1
 	fullName=$2
