@@ -23,14 +23,14 @@ sudo openssl passwd -1
 vi cloud-config
 ```
 内容，配置文件必须以`#cloud-config`开始                
-```ini
+```yaml
 #cloud-config
 
 hostname: "coreos1"
 
 users:
   - name: "core"
-    passwd: "$6$5s2u6/jR$un0AvWnqilcgaNB3Mkxd5yYv6mTlWfOoCYHZmfi3LDKVltj.E8XNKEcwWm..."
+    passwd: "$1$DEbRtvQI$EOYzi.KQJ9Af5aLbDu.ZJ/"
     groups:
       - "sudo"
       - "docker"
@@ -47,7 +47,7 @@ sudo coreos-install -d /dev/sda -C stable -c ./cloud-config-file
 ```sh
 sudo coreos-install -d /dev/sda -C stable -c ./cloud-config-file -b http://192.168.0.8:8080/coreos
 ```
-如下命令，用户名`core`，密码`core`，密钥文件 [点击查看源文件](https://raw.githubusercontent.com/koomox/devops/master/storage/linux/coreos/ssh/id_rsa)              
+如下命令，用户名`core`，密码`core`，密钥文件 [点击查看源文件](../storage/linux/coreos/ssh/id_rsa)              
 ```sh
 sudo coreos-install -d /dev/sda -C stable -c https://raw.githubusercontent.com/koomox/devops/master/storage/linux/coreos/cloud-config/cloud-cnfig.yaml
 ```
