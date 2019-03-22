@@ -81,8 +81,8 @@ guestinfo.coreos.config.data.encoding = "gzip+base64"
 参考文档: [传送门](https://docs.docker.com/config/daemon/systemd/)            
 ```sh
 sudo mkdir -p /etc/docker/
-sudo touch /etc/docker/daemon.json
-sudo vim /etc/docker/daemon.json
+wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/docker/daemon/daemon.json
+sudo cp daemon.json /etc/docker/daemon.json
 ```
 内容
 ```json
