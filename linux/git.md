@@ -60,6 +60,8 @@ git remote add origin git://github.com/xx/xx.git
 ```
 git remote add origin ssh://username@domain.com:port/srv/git/code.git  # 支持自定义SSH端口
 git remote add origin username@domain.com:/srv/git/code.git  # 不支持自定义SSH端口
+
+git remote add develop git://
 ```
 删除远程分支         
 ```
@@ -93,6 +95,12 @@ git merge tmp
 ```
 ```
 git pull origin master
+```
+### git 强制覆盖本地代码                
+```sh
+git fetch --all
+git reset --hard origin/master
+git pull
 ```
 ### 在线仓库                
 gitee.com 在线仓库的raw文件地址              
