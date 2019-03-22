@@ -49,7 +49,8 @@ sudo coreos-install -d /dev/sda -C stable -c ./cloud-config-file -b http://192.1
 ```
 如下命令，用户名`core`，密码`core`，密钥文件 [点击查看源文件](../storage/linux/coreos/ssh/id_rsa)              
 ```sh
-sudo coreos-install -d /dev/sda -C stable -c https://raw.githubusercontent.com/koomox/devops/master/storage/linux/coreos/cloud-config/cloud-cnfig.yaml
+wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/coreos/cloud-config/cloud-cnfig.yaml
+sudo coreos-install -d /dev/sda -C stable -c ./cloud-cnfig.yaml
 ```
 如果忘记密码，CoreOS启动GRUB按E编译，加上参数`coreos.autologin`即可自动登录系统，使用`sudo passwd root`修改密码。              
 
