@@ -17,7 +17,7 @@ mkdir -p ./src/github.com/aead/chacha20
 git clone https://github.com/aead/chacha20.git ./src/github.com/aead/chacha20 --depth=1
 mkdir -p ./src/golang.org/x/crypto
 git clone https://github.com/golang/crypto.git ./src/golang.org/x/crypto --depth=1
-\rm -rf ./.git ./src/golang.org/x/crypto/.git ./src/github.com/aead/chacha20.git
+find . -name .git | xargs rm -fr
 cd ..
 tar -zcvf go-shadowsocks2.tar.gz go-shadowsocks2
 ffsend upload go-shadowsocks2.tar.gz
