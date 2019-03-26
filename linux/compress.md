@@ -18,6 +18,7 @@
 压缩文件                       
 ```sh
 tar -zcvf /path/to/file.tar.gz file
+tar -zcvf file.tar.gz file
 ```
 解压文件       
 ```sh
@@ -34,4 +35,12 @@ openssl des3 -d -k "password" -salt -in /path/to/file.tar.gz | tar zxf -
 解密解压到指定目录            
 ```sh
 openssl des3 -d -k "password" -salt -in /path/to/file.tar.gz | tar zx -C /path/to
+```
+压缩并分割文件           
+```sh
+tar czf - rust | split -b 500M - rust.tar.gz
+```
+合并解压文件            
+```sh
+cat rust.tar.gz* | tar -zxv
 ```
