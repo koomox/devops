@@ -49,6 +49,7 @@ hosts 文件 Windows 下面的路径: `%SystemRoot%\system32\drivers\etc\`
 ### IntelliJ IDEA          
 ```txt
 0.0.0.0 account.jetbrains.com
+0.0.0.0 www.jetbrains.com
 ```
 ### CorelDRAW        
 ```txt
