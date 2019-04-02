@@ -166,9 +166,9 @@ init_nginx_service() {
 	fi
 
 	wget -O /etc/systemd/system/nginx.service https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.14.0/nginx.service
-	systemctl enable vlmcsd
-	systemctl start vlmcsd
-	systemctl status vlmcsd
+	systemctl enable nginx
+	systemctl start nginx
+	systemctl status nginx
 }
 
 create_system_user nginx

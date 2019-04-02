@@ -90,7 +90,15 @@ git clone https://github.com/sergeche/emmet-sublime.git --depth=1
 ### 添加代理          
 国内下载软件的时候非常慢，可以使用代理加速下载，下面的方法重启电脑后即失效。（对apt、wget、等命令有效）                      
 ```sh
-export http_proxy="http://127.0.0.1:8080"
+export http_proxy="http://127.0.0.1:1080"
+export https_proxy="socks5://127.0.0.1:1080"
+
+export ALL_PROXY=socks5://127.0.0.1:1080
+```
+编辑 `~/.bashrc` 通过设置alias简写来简化操作，每次要用的时候输入setproxy，不用了就unsetproxy。          
+```sh
+alias setproxy="export ALL_PROXY=socks5://127.0.0.1:1080"
+alias unsetproxy="unset ALL_PROXY"
 ```
 ### 安装输入法            
 ```sh
