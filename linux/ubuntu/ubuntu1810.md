@@ -221,3 +221,35 @@ chmod +x ~/Desktop/jetbrains-goland.desktop
 ```
 ![goland_img](https://raw.githubusercontent.com/koomox/devops/master/static/images/wiki/IMG_20190224_192100.png)          
 ![goland_img](https://raw.githubusercontent.com/koomox/devops/master/static/images/wiki/IMG_20190224_192101.png)
+### 开启转发            
+下面的命令都可以查询是否开启转发，0禁用，1启用               
+```sh
+sysctl net.ipv4.ip_forward
+
+cat /proc/sys/net/ipv4/ip_forward
+```
+#### 临时生效的配置方式          
+临时生效的配置方式，在系统重启，或对系统的网络服务进行重启后都会失效。这种方式可用于临时测试、或做实验时使用。                
+`sysctl` 命令的 `-w` 参数可以实时修改Linux的内核参数，并生效。所以使用如下命令可以开发Linux的路由转发功能。                 
+```sh
+sysctl -w net.ipv4.ip_forward=1
+```
+内核参数在Linux文件系统中的映射出的文件：`/proc/sys/net/ipv4/ip_forward` 中记录了Linux系统当前对路由转发功能的支持情况。文件中的值为0,说明禁止进行IP转发；如果是`1`,则说明IP转发功能已经打开。可使用vi编辑器修改文件的内容，也可以使用如下指令修改文件内容：          
+```sh
+echo 1 > /proc/sys/net/ipv4/ip_forward
+```
+#### 永久生效的配置方式           
+永久生效的配置方式，在系统重启、或对系统的网络服务进行重启后还会一直保持生效状态。这种方式可用于生产环境的部署搭建。              
+在 `sysctl.conf` 配置文件中有一项名为 `net.ipv4.ip_forward` 的配置项，用于配置Linux内核中的 `net.ipv4.ip_forward`参数。其值为`0`,说明禁止进行IP转发；如果是`1`,则说明IP转发功能已经打开。        
+需要注意的是，修改 `sysctl.conf` 文件后需要执行指令 `sysctl -p` 后新的配置才会生效。         
+```sh
+cat /etc/sysctl.conf | grep ip_forward
+echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+sysctl -p
+```
+取消sysctl.conf文件中net.ipv4.ip_forward的注释              
+```sh
+sed -i '/net.ipv4.ip_forward/cnet.ipv4.ip_forward=1' /etc/sysctl.conf
+sysctl -p /etc/sysctl.conf
+cat /etc/sysctl.conf | grep ip_forward
+```
