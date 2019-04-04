@@ -8,7 +8,8 @@ fi
 
 mkdir shadowsocks-go
 cd shadowsocks-go
-go get -u -d github.com/shadowsocks/shadowsocks-go
+go get -u -d github.com/shadowsocks/shadowsocks-go/cmd/shadowsocks-server
+go get -u -d github.com/shadowsocks/shadowsocks-go/cmd/shadowsocks-local
 cd ..
 tar -zcvf shadowsocks-go.tar.gz shadowsocks-go
 ffsend upload shadowsocks-go.tar.gz
