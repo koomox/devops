@@ -17,9 +17,7 @@ git clone https://github.com/golang/sys.git ./src/golang.org/x/sys --depth=1
 mkdir -p ./src/golang.org/x/crypto
 git clone https://github.com/golang/crypto.git ./src/golang.org/x/crypto --depth=1
 
-#export GOPATH=$(pwd)
-#go build -o ss-server github.com/shadowsocks/shadowsocks-go/cmd/shadowsocks-server
-#go build -o ss-local github.com/shadowsocks/shadowsocks-go/cmd/shadowsocks-local
+echo -e "export GOPATH=$(pwd)\ngo build -o ss-server github.com/shadowsocks/shadowsocks-go/cmd/shadowsocks-server\ngo build -o ss-local github.com/shadowsocks/shadowsocks-go/cmd/shadowsocks-local" > ./run.sh
 
 find . -name .git | xargs rm -fr
 cd ..
