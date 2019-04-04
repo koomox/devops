@@ -17,6 +17,9 @@ git clone https://github.com/golang/sys.git ./src/golang.org/x/sys --depth=1
 mkdir -p ./src/golang.org/x/crypto
 git clone https://github.com/golang/crypto.git ./src/golang.org/x/crypto --depth=1
 
+#export GOPATH=$(pwd)
+#go build -o ss-server github.com/shadowsocks/go-shadowsocks2
+
 find . -name .git | xargs rm -fr
 cd ..
 tar -zcvf go-shadowsocks2.tar.gz go-shadowsocks2
