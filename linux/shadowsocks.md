@@ -25,13 +25,13 @@ chmod +x ./debian9x_ss_local.sh
 ```
 一键配置ss-redir        
 ```sh
-wget -O debian9x_ss_local.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/shadowsocks/shadowsocks-libev/debian9x_ss_redir.sh
+wget -O debian9x_ss_redir.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/shadowsocks/shadowsocks-libev/debian9x_ss_redir.sh
 chmod +x ./debian9x_ss_redir.sh
 ./debian9x_ss_redir.sh
 ```
 一键配置ss-tunnel        
 ```sh
-wget -O debian9x_ss_local.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/shadowsocks/shadowsocks-libev/debian9x_ss_tunnel.sh
+wget -O debian9x_ss_tunnel.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/shadowsocks/shadowsocks-libev/debian9x_ss_tunnel.sh
 chmod +x ./debian9x_ss_tunnel.sh
 ./debian9x_ss_tunnel.sh
 ```

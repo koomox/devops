@@ -13,7 +13,7 @@ read -p "请输入服务器地址: " server_address
 read -p "请输入服务器端口: " server_port
 read -p "请输入服务器密钥: " server_secret
 read -p "请输入加密协议:(aes-256-cfb) " server_method
-read -p "请输入本地端口: " local_port
+read -p "请输入本地端口: (53)" local_port
 
 mkdir -p /etc/shadowsocks-libev
 cat > ${SS_CONF} << EOF
