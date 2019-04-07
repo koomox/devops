@@ -1,16 +1,23 @@
-# OpenWRT              
-下载镜像，下载其中一个即可。                   
+# openwrt                               
+openwrt 15.05 x86 IMG镜像: [点击下载](https://downloads.openwrt.org/chaos_calmer/15.05/x86/generic/openwrt-15.05-x86-generic-combined-squashfs.img)                  
+openwrt 18.06.2 x86 IMG镜像: [点击下载](https://downloads.openwrt.org/releases/18.06.2/targets/x86/generic/openwrt-18.06.2-x86-generic-combined-squashfs.img.gz)       
+openwrt 下载地址: [Link](https://downloads.openwrt.org/)                                    
+参考文档: [传送门](http://blog.csdn.net/xingyuzhe/article/details/51280337)                          
+### Linux Kernel        
+openwrt 18.06 Linux Kernel 升级到 4.14           
+
+### 转换镜像文件         
+安装 qemu-utils ，使用 qemu-img 工具转换镜像文件。                      
 ```sh
+sudo apt install qemu-utils
+```
+将img镜像文件转换为vmdk文件                           
+```sh
+qemu-img convert -f raw openwrt-15.05-x86-generic-combined-squashfs.img -O vmdk openwrt-15.05-x86-generic-combined.vmdk
+
+#wget https://downloads.openwrt.org/releases/18.06.2/targets/x86/generic/openwrt-18.06.2-x86-generic-combined-ext4.img.gz
 wget https://downloads.openwrt.org/releases/18.06.2/targets/x86/generic/openwrt-18.06.2-x86-generic-combined-squashfs.img.gz
-wget https://downloads.openwrt.org/releases/18.06.2/targets/x86/generic/openwrt-18.06.2-x86-generic-combined-ext4.img.gz
-```
-Vmware 需要将img转换为vmdk格式，使用`qemu-img`工具。       
-```sh
-apt install qemu-utils
-```
-解压镜像并转换格式         
-```sh
-gzip -d openwrt-18.06.2-x86-generic-combined-ext4.img.gz
-qemu-img convert -f raw openwrt-18.06.2-x86-generic-combined-ext4.img -O vmdk openwrt-18.06.2-x86-generic-combined-ext4.vmdk
+gzip -d openwrt-18.06.2-x86-generic-combined-squashfs.img.gz
+qemu-img convert -f raw openwrt-18.06.2-x86-generic-combined-squashfs.img -O vmdk openwrt-18.06.2-x86-generic-combined-squashfs.vmdk
 ```
 设置IP地址，修改`/etc/config/network`配置文件。         
