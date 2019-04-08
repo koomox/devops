@@ -51,6 +51,9 @@ iface eth0 inet static
 打开IP转发            
 ```sh
 echo "1" > /proc/sys/net/ipv4/ip_forward
+
+sed -i "1inet.ipv4.ip_forward = 1" /etc/sysctl.d/00-alpine.conf
+cat /etc/sysctl.d/00-alpine.conf
 ```
 ### iptables         
 安装 iptables
