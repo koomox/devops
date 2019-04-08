@@ -95,3 +95,20 @@ echo "nohup /usr/bin/ss-local -s server_address -p server_port -l local_port -k 
 chmod +x /etc/local.d/ss.start
 rc-update add local
 ```
+### 代理           
+安装 privoxy       
+```sh
+apk add --no-cache privoxy
+```
+配置文件 `/etc/privoxy/config`，`listen-address` 参数为监听地址端口，`forward-socks5` 为转发地址端口。        
+```sh
+cp /etc/privoxy/config /etc/privoxy/config.bak
+sed -i '/^#/d;/^$/d' /etc/privoxy/config
+sed -i '/listen-address/clisten-address 0.0.0.0:1090' /etc/privoxy/config
+sed -i '/forwarded-/aforward-socks5 \/ 127.0.0.1:1080 .' /etc/privoxy/config
+cat /etc/privoxy/config
+```
+设置开机自启动          
+```sh
+rc-update add privoxy
+```
