@@ -100,6 +100,20 @@ export ALL_PROXY=socks5://127.0.0.1:1080
 alias setproxy="export ALL_PROXY=socks5://127.0.0.1:1080"
 alias unsetproxy="unset ALL_PROXY"
 ```
+有些应用程序只支持HTTP代理，可以通过 `privoxy` 实现。         
+```sh
+sudo apt install privoxy
+```
+设置配置文件          
+```sh
+sudo cp /etc/privoxy/config /etc/privoxy/config.bak
+sed -i '/^#/d;/^$/d' /etc/privoxy/config
+```
+添加下面两行实现了SOCKS转HTTP代理，监听1090端口转发到本机1080端口。 `forward-socks5` 最后的小点不要漏了。         
+```ini
+forward-socks5 / 127.0.0.1:1080 .
+listen-address 0.0.0.1:1090
+```
 ### 安装输入法            
 ```sh
 sudo apt install fcitx fcitx-googlepinyin

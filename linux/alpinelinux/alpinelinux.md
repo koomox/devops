@@ -1,0 +1,97 @@
+# Alpine Linux 3.9.2             
+Linux Kernel 4.19               
+下载地址: [Link](https://alpinelinux.org/downloads/)             
+### 安装        
+不管是刻录U盘还是在虚拟机里启动，进入终端之后，输入 `root` 默认无密登陆，然后执行 `setup-alpine` 命令，在终端上启动他的安装程序。              
+键盘布局选择 `us` , 后面的配置项默认回车。          
+时区选择 Asia，Shanghai。             
+软件源，如果联网了，输入 `f` 回车，让程序自动匹配当前最快的软件源。可能会花一点时间。尽量不要跳过，因为后面格式化硬盘的时候需要联网安装相关的命令。               
+有时候网络不通，输入 `e` 回车，添加源到文件。              
+```
+https://mirrors.tuna.tsinghua.edu.cn/alpine/v3.9/main
+https://mirrors.tuna.tsinghua.edu.cn/alpine/v3.9/community
+```
+之后的每一步要仔细看了，就询问你"Availabe disks are"和"Which disks would you like to use?"来选择安装的硬盘，可以输入"?"来列举可用硬盘，然后手动输入，这里这里我安装到 `sda` ，你有需要可以选择其他位置。         
+在询问你"How would you like to use it?",这里输入 `sys` 硬盘安装，其余的"data"、"lvm"可以了解一下，这里不再赘述。            
+格式化硬盘然后复制文件需要些时间，完成之后会提示"Installation is complete",这时候拔掉U盘或者设置硬盘第一启动，就可以重启了。          
+### 修改更新源           
+更换更新源文件 `/etc/apk/repositories`          
+```sh
+sed -i 's/http:\/\/.*\//https:\/\/mirrors.tuna.tsinghua.edu.cn\//g' /etc/apk/repositories
+```
+```sh
+cp /etc/apk/repositories /etc/apk/repositories.bak
+echo -e "https://mirrors.tuna.tsinghua.edu.cn/alpine/v3.9/main\nhttps://mirrors.tuna.tsinghua.edu.cn/alpine/v3.9/community" &gt; /etc/apk/repositories
+cat /etc/apk/repositories
+```
+更新系统          
+```sh
+apk update
+```
+安装软件，Alpine Linux 默认是没有 `bash` 的，需要手动安装。         
+```sh
+apk add --no-cache bash vim wget curl git htop         
+```
+### 网络设置       
+配置文件 `/etc/network/interfaces`         
+```sh
+vim /etc/network/interfaces
+```
+```ini
+auto eth0
+iface eth0 inet static
+        address 192.168.1.150
+        netmask 255.255.255.0
+        gateway 192.168.1.1
+```
+重启网络服务       
+```sh
+/etc/init.d/networking restart
+```
+打开IP转发            
+```sh
+echo "1" > /proc/sys/net/ipv4/ip_forward
+```
+### iptables         
+安装 iptables
+```sh
+apk add iptables
+```
+开机自启动           
+```sh
+rc-update add iptables
+```
+保存 iptables 规则         
+```sh
+/etc/init.d/iptables save
+```
+保存配置         
+```sh
+lbu ci
+```
+### 安装 Shadowsocks-libev         
+安装依赖包，`mbedtls-dev` 在 `community` 更新源中。        
+```sh
+apk add --no-cache autoconf automake build-base c-ares-dev libev-dev libtool libsodium-dev linux-headers mbedtls-dev pcre-dev
+```
+一键打包下载 shadowsocks-libev 并上传至 firefox send         
+```sh
+wget -O download_shadowsocks_libev.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/shadowsocks/download_shadowsocks_libev.sh
+chmod +x ./download_shadowsocks_libev.sh
+./download_shadowsocks_libev.sh
+```
+安装Shadowsocks-libev          
+```sh
+tar -zxvf shadowsocks-libev.tar.gz
+cd shadowsocks-libev
+./autogen.sh
+./configure --prefix=/usr --disable-documentation
+make install
+```
+创建自启动文件 `/etc/local.d/ss.start` 。Alpine Linux 的 开机自启目录在 `/etc/local.d` 下，这个目录用于放置我们需要在本地服务启动或停止后执行的脚本。                   
+```sh
+touch /etc/local.d/ss.start
+echo "nohup /usr/bin/ss-local -s server_address -p server_port -l local_port -k server_password -m aes-256-cfb -b 0.0.0.0 &" > /etc/local.d/ss.start
+chmod +x /etc/local.d/ss.start
+rc-update add local
+```
