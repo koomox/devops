@@ -21,7 +21,7 @@ sed -i 's/http:\/\/.*\//https:\/\/mirrors.tuna.tsinghua.edu.cn\//g' /etc/apk/rep
 ```
 ```sh
 cp /etc/apk/repositories /etc/apk/repositories.bak
-echo -e "https://mirrors.tuna.tsinghua.edu.cn/alpine/v3.9/main\nhttps://mirrors.tuna.tsinghua.edu.cn/alpine/v3.9/community" &gt; /etc/apk/repositories
+echo -e "https://mirrors.tuna.tsinghua.edu.cn/alpine/v3.9/main\nhttps://mirrors.tuna.tsinghua.edu.cn/alpine/v3.9/community" > /etc/apk/repositories
 cat /etc/apk/repositories
 ```
 更新系统          
