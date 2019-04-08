@@ -114,6 +114,11 @@ sed -i '/^#/d;/^$/d' /etc/privoxy/config
 forward-socks5 / 127.0.0.1:1080 .
 listen-address 0.0.0.1:1090
 ```
+```sh
+sed -i '/listen-address/clisten-address 0.0.0.0:1090' /etc/privoxy/config
+sed -i '/forwarded-/aforward-socks5 \/ 127.0.0.1:1080 .' /etc/privoxy/config
+cat /etc/privoxy/config
+```
 ### 安装输入法            
 ```sh
 sudo apt install fcitx fcitx-googlepinyin
