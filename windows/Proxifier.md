@@ -2,7 +2,7 @@
 使用 Shadowsocks 代理，配置 SwitchyOmega 插件，只能实现 Chrome 浏览器科学上网，但是对于 WhatsApp、Line、Wire、Messenger、Facebook 等客户端，可以使用 Proxifier 实现应用程序的代理。         
 Proxifier Portable Edition (Windows): [点击下载](https://www.proxifier.com/download/ProxifierPE.zip)            
 Proxifier Portable Edition (macOS): [点击下载](https://www.proxifier.com/download/ProxifierMac.dmg)           
-Windows 下通用配置文件: [Link](../storage/windows/Proxifier/Profiles/Default.ppx)           
+通用配置文件 (Windows): [Link](../storage/windows/Proxifier/Profiles/Default.ppx)           
 一、首先我们设置 Shadowscks 本地代理类型 `socks5`，端口: `10258`。          
 二、打开 Proxifier，添加代理服务器。          
 ![IMG_20190101_113900.png](../static/images/wiki/IMG_20190101_113900.png)                    
