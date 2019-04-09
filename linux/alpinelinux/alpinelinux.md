@@ -37,7 +37,7 @@ apk add --no-cache bash vim wget curl git htop
 ```sh
 vim /etc/network/interfaces
 ```
-```ini
+```
 auto eth0
 iface eth0 inet static
         address 192.168.1.150
