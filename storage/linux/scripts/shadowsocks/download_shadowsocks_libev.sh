@@ -18,5 +18,5 @@ git submodule update --init --recursive
 cd ..
 wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.16.tar.gz
 wget https://tls.mbed.org/download/mbedtls-2.6.0-gpl.tgz
-tar -zcvf shadowsocks-libev.tar.gz shadowsocks-libev
+tar -zcvf shadowsocks-libev.tar.gz shadowsocks-libev libsodium-1.0.16.tar.gz mbedtls-2.6.0-gpl.tgz
 ffsend upload shadowsocks-libev.tar.gz
