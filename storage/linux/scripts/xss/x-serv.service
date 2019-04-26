@@ -1,0 +1,14 @@
+[Unit]
+Description=X Serv Service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/x-serv
+Restart=on-abort
+KillSignal=SIGQUIT
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
