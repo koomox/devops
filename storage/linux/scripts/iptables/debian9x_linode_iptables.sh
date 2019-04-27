@@ -67,6 +67,7 @@ iptables -A OUTPUT -p tcp --dport 5228 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 5229 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 5230 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 8080 -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 8181 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 14000 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 16630 -j ACCEPT
 
