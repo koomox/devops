@@ -55,6 +55,7 @@ iptables -A OUTPUT -m icmp -p icmp --icmp-type any -j ACCEPT
 iptables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 iptables -A OUTPUT -p tcp --sport ${SSH_PORT} -j ACCEPT
+iptables -A OUTPUT -p tcp --dport ${SSH_PORT} -j ACCEPT
 
 iptables -A OUTPUT -p tcp --dport 21 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 53 -j ACCEPT
@@ -64,6 +65,7 @@ iptables -A OUTPUT -p tcp --dport 80 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 443 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 1080 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 5222 -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 5223 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 5228 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 5229 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 5230 -j ACCEPT
