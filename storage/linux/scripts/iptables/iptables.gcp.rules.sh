@@ -9,6 +9,8 @@ cat > /etc/iptables.rules << EOF
 -A INPUT -i lo -j ACCEPT
 -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 -A INPUT -p tcp -m state --state NEW -m tcp --dport ${SSH_PORT} -j ACCEPT
+-A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT
+-A INPUT -p tcp -m state --state NEW -m tcp --dport 443 -j ACCEPT
 -A INPUT -p udp -m udp --sport 53 -j ACCEPT
 -A INPUT -p udp -m udp --sport 123 -j ACCEPT
 -A INPUT -p tcp -m tcp --sport 16630 -j ACCEPT
@@ -21,7 +23,9 @@ cat > /etc/iptables.rules << EOF
 -A OUTPUT -p tcp -m tcp --dport 53 -j ACCEPT
 -A OUTPUT -p udp -m udp --dport 53 -j ACCEPT
 -A OUTPUT -p udp -m udp --dport 123 -j ACCEPT
+-A OUTPUT -p tcp -m tcp --sport 80 -j ACCEPT
 -A OUTPUT -p tcp -m tcp --dport 80 -j ACCEPT
+-A OUTPUT -p tcp -m tcp --sport 443 -j ACCEPT
 -A OUTPUT -p tcp -m tcp --dport 443 -j ACCEPT
 -A OUTPUT -p tcp -m tcp --dport 1080 -j ACCEPT
 -A OUTPUT -p tcp -m tcp --dport 5222 -j ACCEPT
