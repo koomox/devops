@@ -4,11 +4,12 @@ After=network.target
 
 [Service]
 Type=simple
+User=root
 ExecStart=/usr/bin/x-serv
+LimitNOFILE=50000
+LimitNPROC=50000
 Restart=on-abort
 KillSignal=SIGQUIT
-User=root
-Group=root
 
 [Install]
 WantedBy=multi-user.target
