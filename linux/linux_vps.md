@@ -1,7 +1,7 @@
 # Linux VPS - DD 重装系统与系统优化            
 参考文档: [Link](https://moeclub.org/2017/11/19/483/)           
 ### [ Linux VPS ] Debian/Ubuntu/CentOS 网络安装/重装系统/纯净安装 一键脚本                 
-全自动安装默认root密码:Vicer,安装完成后请立即更改密码.          
+全自动安装默认 `root` 密码:`Vicer`,安装完成后请立即更改密码.          
 能够全自动重装Debian/Ubuntu/CentOS等系统.          
 特别注意:OpenVZ构架不适用.           
 #### 依赖包:         
@@ -85,6 +85,7 @@ bash InstallNET.sh -c 6.9 -v 64 -a --mirror 'http://mirror.centos.org/centos'
 #--mirror 'http://mirror.xtom.com.hk/debian/'
 ```
 #### 重新安装 Debian stretch           
+全自动重新安装 Debian stretch 系统，`root` 默认密码 `Vicer` [查看源文件](/storage/linux/debian/DebianNET/InstallNET.sh)            
 ```sh
 apt install -y gawk sed grep
 apt update
@@ -99,14 +100,14 @@ bash InstallNET.sh -d 9 -v 64 -a --mirror 'http://mirror.xtom.com.hk/debian/'
 ```sh
 apt install curl wget git vim sudo htop net-tools neofetch lsb-release build-essential
 ```
-安装 ffsend         
+安装 ffsend [查看源文件](/storage/linux/scripts/ffsend/ffsend.sh)        
 ```sh
 wget -O autoinstall_ffsend.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/ffsend/ffsend.sh
 chmod +x ./autoinstall_ffsend.sh
 ./autoinstall_ffsend.sh
 ```
 ### 优化系统         
-优化内核参数         
+优化内核参数 [查看源文件](/storage/linux/debian/sysctl/aliyun.lightsail.sysctl.conf)        
 ```sh
 cp -f /etc/sysctl.conf /etc/sysctl.conf.bak
 wget -O /etc/sysctl.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/sysctl/aliyun.lightsail.sysctl.conf
@@ -114,7 +115,7 @@ modprobe ip_conntrack
 lsmod |grep conntrack
 sysctl -p
 ```
-增加文件描述符数量，默认值太小            
+增加文件描述符数量，默认值太小 [查看源文件](/storage/linux/debian/sysctl/aliyun.limits.conf)            
 ```sh
 cp -f /etc/security/limits.conf /etc/security/limits.conf.bak
 wget -O /etc/security/limits.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/sysctl/aliyun.limits.conf
@@ -124,4 +125,20 @@ cat /etc/security/limits.conf
 ```sh
 echo "ulimit -SHn 60000" >> /etc/profile
 ulimit -SHn 60000
+```
+### 设置时区         
+设置北京时间             
+```sh
+# 设置时区
+timedatectl set-timezone Asia/Shanghai
+
+# 查看当前时区
+timedatectl
+```
+### 设置SSH          
+自定义SSH端口，设置证书登录 [查看源文件](/storage/linux/scripts/iptables/debian9x_linode_iptables.sh)         
+```sh
+wget -O custom_ssh_iptables.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/iptables/debian9x_linode_iptables.sh
+chmod +x ./custom_ssh_iptables.sh
+./custom_ssh_iptables.sh
 ```
