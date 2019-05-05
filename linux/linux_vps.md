@@ -34,7 +34,7 @@ apt update
 #RedHat/CentOS:
 yum update
 ```
-下载及说明:          
+下载及说明: [查看源文件](https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/DebianNET/InstallNET.sh)         
 ```sh
 wget --no-check-certificate -qO InstallNET.sh 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh' && chmod a+x InstallNET.sh
 ```
