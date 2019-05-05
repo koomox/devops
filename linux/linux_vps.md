@@ -142,3 +142,7 @@ wget -O custom_ssh_iptables.sh https://raw.githubusercontent.com/koomox/devops/m
 chmod +x ./custom_ssh_iptables.sh
 ./custom_ssh_iptables.sh
 ```
+### 获取公网IP地址          
+```sh
+curl https://checkip.amazonaws.com/
+```
