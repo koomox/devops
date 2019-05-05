@@ -1,5 +1,20 @@
 # Linux VPS - DD 重装系统与系统优化            
 参考文档: [Link](https://moeclub.org/2017/11/19/483/)           
+### KVM 重装系统         
+下载 linux、initrd           
+```sh
+mkdir /boot/ub && cd /boot/ub
+
+wget http://ftp.debian.org/debian/dists/stretch/main/installer-amd64/current/images/netboot/debian-installer/amd64/initrd.gz
+wget http://ftp.debian.org/debian/dists/stretch/main/installer-amd64/current/images/netboot/debian-installer/amd64/linux
+```
+grub 界面，按 `C` ，进入GRUB命令           
+```sh
+root=(hd0,1)
+linux /boot/ub/linux
+initrd /boot/ub/initrd.gz
+boot
+```
 ### [ Linux VPS ] Debian/Ubuntu/CentOS 网络安装/重装系统/纯净安装 一键脚本                 
 全自动安装默认 `root` 密码:`Vicer`,安装完成后请立即更改密码.          
 能够全自动重装Debian/Ubuntu/CentOS等系统.          
