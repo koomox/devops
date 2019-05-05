@@ -29,6 +29,7 @@ cat > /etc/iptables.rules << EOF
 -A OUTPUT -p tcp -m tcp --dport 5228 -j ACCEPT
 -A OUTPUT -p tcp -m tcp --dport 5229 -j ACCEPT
 -A OUTPUT -p tcp -m tcp --dport 5230 -j ACCEPT
+-A OUTPUT -p tcp -m tcp --dport 8000 -j ACCEPT
 -A OUTPUT -p tcp -m tcp --dport 8080 -j ACCEPT
 -A OUTPUT -p tcp -m tcp --dport 8181 -j ACCEPT
 -A OUTPUT -p tcp -m tcp --dport 14000 -j ACCEPT
