@@ -6,6 +6,7 @@
 [Windows Server 2008 R2 自动登录](windowsserver2008_autologin.md)          
 [Office](office.md)         
 [浏览器](browser.md)         
+[Firefox](firefox.md)           
 [SwitchyOmega](SwitchyOmega.md)         
 [Nano Server](nanoserver.md)          
 [勒索病毒补丁](wncry.md)          
