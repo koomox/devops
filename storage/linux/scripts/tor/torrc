@@ -1,0 +1,19 @@
+Log debug file /var/log/tor/debug.log
+
+DataDirectory /var/lib/tor
+PidFile /var/run/tor/tor.pid
+RunAsDaemon 1
+User debian-tor
+
+ControlSocket /var/run/tor/control GroupWritable RelaxDirModeCheck
+ControlSocketsGroupWritable 1
+SocksPort unix:/var/run/tor/socks WorldWritable
+SocksPort 0.0.0.0:9050
+
+CookieAuthentication 1
+CookieAuthFileGroupReadable 1
+CookieAuthFile /var/run/tor/control.authcookie
+
+ExcludeNodes {cn},{hk},{mo},{kp},{ir},{sy},{pk},{cu},{vn}
+strictnodes 1
+Socks5Proxy 127.0.0.1:10258
