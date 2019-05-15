@@ -20,3 +20,6 @@ Proxy SwitchyOmega: [在线安装](https://addons.mozilla.org/en-US/firefox/addo
 如果要屏蔽语言包的签名要求，你需要将偏好`extensions.langpacks.signatures.required`设置为`false`。 还有其它一些山寨版的 Firefox 也允许此项屏蔽。更多内容，参阅 MozillaWiki 文章 附加组件/扩展签名。             
 
 查看当前更新 `about:studies`             
+### 多用户配置文件管理          
+打开 Firefox 在地址栏输入 `about:profiles`，点击 `Create a New Profile`打开新建配置文件向导，创建完成后选择`Set as default profile`，重启浏览器 `Restart normally...`。       
+Windows系统下，通过再快捷方式目标地址后面添加参数打开配置文件管理器。 可以使用 `-p`、`-p` 和 `-ProfileManager`，完整地址为 `"C:\Program Files\Mozilla Firefox\firefox.exe" -P`            
