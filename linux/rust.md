@@ -34,3 +34,12 @@ cd rust-1.34.2-x86_64-unknown-linux-gnu
 
 rustc --version
 ```
+### Linux 安装 ffsend         
+ffsend Home: [Link](https://github.com/timvisee/ffsend)         
+```sh
+wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/ffsend/ffsend.sh
+chmod +x ./ffsend.sh
+./ffsend.sh
+
+ffsend --version
+```
