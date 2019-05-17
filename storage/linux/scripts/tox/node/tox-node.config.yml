@@ -6,9 +6,9 @@ tcp-addresses:
 tcp-connections-limit: 512
 motd: "{{start_date}} {{uptime}} Tcp: incoming {{tcp_packets_in}}, outgoing {{tcp_packets_out}}, Udp: incoming {{udp_packets_in}}, outgoing {{udp_packets_out}}"
 bootstrap-nodes:
-  - pk: 1D5A5F2F5D6233058BF0259B09622FB40B482E4FA0931EB8FD3AB8E7BF7DAF6F
-    addr: 198.98.51.198:33445
-  - pk: DA4E4ED4B697F2E9B000EEFE3A34B554ACD3F45F5C96EAEA2516DD7FF9AF7B43
-    addr: 185.25.116.107:33445
+  - pk: BEF0CFB37AF874BD17B9A8F9FE64C75521DB95A37D33C5BDB00E9CF58659C04F
+    addr: 198.199.98.108:33445
+  - pk: A04F5FE1D006871588C8EC163676458C1EC75B20B4A147433D271E1E85DAF839
+    addr: 52.53.185.100:33445
 threads: auto # or any u16 > 0
 lan-discovery: True
