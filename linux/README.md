@@ -19,6 +19,7 @@
 [安装 Node.js](nodejs.md)            
 [Nginx](nginx.md)           
 [Shadowsocks](shadowsocks.md)          
+[Rust](rust.md)          
 # Docker              
 [Docker for Ubuntu Server 17.04](docker/ubuntuserver17x.md)                  
 [Docker for CentOS 7.x](docker/centos7x.md)                  
