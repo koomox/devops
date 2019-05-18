@@ -3,7 +3,7 @@ Description=Tox DHT Bootstrap Daemon
 After=network.target
 
 [Service]
-Type=forking
+Type=simple
 RuntimeDirectory=tox-bootstrapd
 RuntimeDirectoryMode=750
 PIDFile=/var/lib/tox-bootstrapd/tox-bootstrapd.pid
