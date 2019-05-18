@@ -1,10 +1,14 @@
-log-type: Stderr
-keys-file: ./keys
+log-type: Syslog
+keys-file: /var/lib/tox-node/keys
 udp-address: 0.0.0.0:33445
 tcp-addresses:
   - 0.0.0.0:33445
-tcp-connections-limit: 512
-motd: "{{start_date}} {{uptime}} Tcp: incoming {{tcp_packets_in}}, outgoing {{tcp_packets_out}}, Udp: incoming {{udp_packets_in}}, outgoing {{udp_packets_out}}"
+tcp-connections-limit: 8192
+lan-discovery: True
+threads: 1
+motd: "Hi from tox-rs! I'm up {{uptime}}. TCP: incoming {{tcp_packets_in}}, outgoing {{tcp_packets_out}}, UDP: incoming {{udp_packets_in}}, outgoing {{udp_packets_out}}"
+
+
 bootstrap-nodes:
   - pk: 8E7D0B859922EF569298B4D261A8CCB5FEA14FB91ED412A7603A585A25698832
     addr: 85.172.30.117:33445
@@ -60,5 +64,3 @@ bootstrap-nodes:
     addr: 79.140.30.52:33445
   - pk: EDBEF0BE30CE1978F6EE9E13C1D4133409908929CC8AD7F56C4AE865B15B3177
     addr: 52.27.228.84:33445
-threads: auto # or any u16 > 0
-lan-discovery: True
