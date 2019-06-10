@@ -40,3 +40,4 @@ systemctl status nginx
 ```
 ```sh
 echo "hello world" > /var/www/letsencrypt/index
+```
