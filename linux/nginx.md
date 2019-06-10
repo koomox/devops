@@ -38,3 +38,5 @@ systemctl stop nginx
 systemctl start nginx
 systemctl status nginx
 ```
+```sh
+echo "hello world" > /var/www/letsencrypt/index
