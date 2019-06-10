@@ -22,9 +22,19 @@ chmod +x ./install_nginx1160.sh
 ```sh
 sed -i 's/localhost/*.com www.*.com/g' /etc/nginx/conf.d/*.com.conf
 sed -i 's/$domain/*.com/g' /etc/nginx/conf.d/*.com.conf
+sed -i 's/\/var\/www\/html/\/${public_path}/g' /etc/nginx/conf.d/*.com.conf
 ```
 ```sh
 mkdir -p /etc/letsencrypt/live/$domain
 touch /etc/letsencrypt/live/$domain/fullchain.pem
 touch /etc/letsencrypt/live/$domain/privkey.pem
+```
+```sh
+sed -i 's/phpmyadmin/pma/g' /etc/nginx/conf.d/phpmyadmin.conf
+cat /etc/nginx/conf.d/phpmyadmin.conf
+```
+```sh
+systemctl stop nginx
+systemctl start nginx
+systemctl status nginx
 ```
