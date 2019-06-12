@@ -9,6 +9,10 @@ cat /etc/v2ray/config.json
 echo "user_uuid = ${user_uuid}"
 echo "path_uuid = ${path_uuid}"
 
+systemctl stop v2ray
+systemctl start v2ray
+systemctl status v2ray
+
 wget -O /etc/v2ray/config.json https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/v2ray/websocket_tls/client.json
 sed -i 's/$socks_port/10258/g' /etc/v2ray/config.json
 sed -i 's/$http_port/10259/g' /etc/v2ray/config.json
