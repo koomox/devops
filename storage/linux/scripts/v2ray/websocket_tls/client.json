@@ -1,43 +1,88 @@
 {
-  "inbounds": [
+  "log":{},
+  "dns":{},
+  "stats":{},
+  "inbounds":[
     {
-      "port": 10258,
-      "listen": "127.0.0.1",
-      "protocol": "socks",
-      "sniffing": {
-        "enabled": true,
-        "destOverride": ["http", "tls"]
+      "settings":{
+        "auth":"noauth",
+        "udp":true
       },
-      "settings": {
-        "auth": "noauth",
-        "udp": false
-      }
+      "protocol":"socks",
+      "port":"$socks_port",
+      "tag":"in-0"
+    },
+    {
+      "settings":{},
+      "protocol":"http",
+      "port":"$http_port",
+      "tag":"in-1"
     }
   ],
-  "outbounds": [
+  "outbounds":[
     {
-      "protocol": "vmess",
-      "settings": {
-        "vnext": [
+      "settings":{
+        "vnext":[
           {
-            "address": "$domain",
-            "port": 443,
-            "users": [
+            "address":"$domain",
+            "port":443,
+            "users":[
               {
-                "id": "$user_uuid",
-                "alterId": 64
+                "alterId":32,
+                "id":"$user_uuid"
               }
             ]
           }
         ]
       },
-      "streamSettings": {
-        "network": "ws",
-        "security": "tls",
-        "wsSettings": {
-          "path": "/$path_uuid"
-        }
-      }
+      "protocol":"vmess",
+      "streamSettings":{
+        "security":"tls",
+        "tlsSettings":{
+          "serverName":"$domain"
+        },
+        "wsSettings":{
+          "path":"/$path_uuid"
+        },
+        "network":"ws"
+      },
+      "tag":"out-0"
+    },
+    {
+      "tag":"direct",
+      "protocol":"freedom",
+      "settings":{}
+    },
+    {
+      "tag":"blocked",
+      "protocol":"blackhole",
+      "settings":{}
     }
-  ]
+  ],
+  "routing":{
+    "domainStrategy":"IPOnDemand",
+    "rules":[
+      {
+        "outboundTag":"direct",
+        "ip":[
+          "geoip:private"
+        ],
+        "type":"field"
+      },
+      {
+        "outboundTag":"direct",
+        "inboundTag":[
+          "in-0",
+          "in-1"
+        ],
+        "ip":[
+          "geoip:cn"
+        ],
+        "type":"field"
+      }
+    ]
+  },
+  "policy":{},
+  "reverse":{},
+  "transport":{}
 }
