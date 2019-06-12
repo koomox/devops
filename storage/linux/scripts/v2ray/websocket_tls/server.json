@@ -10,6 +10,7 @@
       "listen": "127.0.0.1",
       "protocol": "vmess",
       "settings": {
+        "udp": false,
         "clients": [
           {
             "id": "$user_uuid",
@@ -21,7 +22,8 @@
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
-          "path": "/$path_uuid"
+          "connectionReuse": true,
+          "path": "$path_uuid"
         }
       }
     }
