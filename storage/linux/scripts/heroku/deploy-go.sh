@@ -18,6 +18,11 @@ function deploy_heroku() {
 	pwd
 	ls vendor
 	cd ../${GOPATH}
+	if [ -e ${PROJECTNAME}.tar.gz ]; then
+		\rm -rf ${PROJECTNAME}.tar.gz
+	fi
+	tar -czvf ${PROJECTNAME}.tar.gz ${PROJECTNAME}
+	ls -lah ${PROJECTNAME}.tar.gz
 }
 
 function installation_dependency(){
