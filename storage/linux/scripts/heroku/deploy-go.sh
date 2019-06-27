@@ -2,8 +2,7 @@
 
 function deploy_heroku() {
 	PROJECTNAME=""
-	echo "please input GO Project Name: "
-	read -p PROJECTNAME
+	read -p "please input GO Project Name: " PROJECTNAME
 	if [ -e ${PROJECTNAME} ]; then
 		\rm -rf ${PROJECTNAME}
 	fi
