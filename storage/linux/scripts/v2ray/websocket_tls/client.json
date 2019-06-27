@@ -28,7 +28,7 @@
             "users": [
               {
                 "id": "$user_uuid",
-                "alterId": 32,
+                "alterId": 64,
                 "security": "auto"
               }
             ]

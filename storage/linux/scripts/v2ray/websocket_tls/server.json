@@ -15,7 +15,7 @@
           {
             "id": "$user_uuid",
             "level": 1,
-            "alterId": 32
+            "alterId": 64
           }
         ]
       },
