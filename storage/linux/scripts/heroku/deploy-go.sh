@@ -13,7 +13,7 @@ function deploy_heroku() {
 	go get -u -d github.com/PuerkitoBio/goquery
 	go get -u -d github.com/brianvoe/gofakeit
 	cd src/${PROJECTNAME}
-	wget -O main.go
+	wget -O main.go https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/heroku/heroku.go
 	govendor init
 	govendor add +external
 	ls vendor
