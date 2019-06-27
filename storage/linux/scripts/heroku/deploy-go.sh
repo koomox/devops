@@ -96,7 +96,7 @@ function install_go() {
 	go version
 }
 
-func auto_install_deploy_heroku_go() {
+function auto_install_deploy_heroku_go() {
 	install_go
 	install_govendor
 	deploy_heroku
