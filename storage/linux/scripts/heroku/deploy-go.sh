@@ -103,10 +103,42 @@ function install_go() {
 	go version
 }
 
-function auto_install_deploy_heroku_go() {
-	install_go
-	install_govendor
-	deploy_heroku
+# 开始菜单
+function start_menu() {
+	clear
+	echo "============================="
+	echo "环境: 适用于 Debian 9.x"
+	echo "Author: allen.w"
+	echo "============================="
+	echo "1. 安装升级 Golang 语言"
+	echo "2. 安装 govendor"
+	echo "3. 创建 heroku with go 项目"
+	echo "4. 退出脚本"
+	echo 
+	read -p "请输入数字: " num
+	case "$num" in
+		1)
+			install_go
+			;;
+		2)
+			install_govendor
+			;;
+		3)
+			deploy_heroku
+			;;
+		4)
+			exit 1
+			;;
+		*)
+			clear
+			echo "请输入正确的数字"
+			sleep 5s
+			start_menu
+			;;
+	esac
 }
 
-auto_install_deploy_heroku_go
+while true
+do
+	start_menu
+done
