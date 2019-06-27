@@ -15,7 +15,9 @@ function deploy_heroku() {
 	wget -O main.go https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/heroku/heroku.go
 	govendor init
 	govendor add +external
+	pwd
 	ls vendor
+	cd ../${GOPATH}
 }
 
 function installation_dependency(){
@@ -74,6 +76,7 @@ function install_govendor() {
 	go install github.com/kardianos/govendor
 	\cp -f $GOPATH/bin/govendor /usr/local/go/bin/govendor
 	govendor -version
+	cd ..
 }
 
 function install_go() {
