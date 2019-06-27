@@ -1,6 +1,8 @@
 #!/bin/bash
 
 function deploy_heroku() {
+	echo "============== heroku with go ================"
+	NOW_PATH=$(pwd)
 	PROJECTNAME=""
 	read -p "please input GO Project Name: " PROJECTNAME
 	if [ -e ${PROJECTNAME} ]; then
@@ -17,7 +19,7 @@ function deploy_heroku() {
 	govendor add +external
 	pwd
 	ls vendor
-	cd ../${GOPATH}
+	cd ${NOW_PATH}
 	if [ -e ${PROJECTNAME}.tar.gz ]; then
 		\rm -rf ${PROJECTNAME}.tar.gz
 	fi
