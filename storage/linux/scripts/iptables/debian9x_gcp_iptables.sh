@@ -30,7 +30,8 @@ iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 # iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
 iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport ${SSH_PORT} -j ACCEPT
-iptables -A INPUT -m state --state NEW -m udp -p udp --sport 123 -j ACCEPT
+iptables -A INPUT -p udp -m udp --sport 53 -j ACCEPT
+iptables -A INPUT -p udp -m udp --sport 123 -j ACCEPT
 iptables -A INPUT -p tcp --sport 16630 -j ACCEPT
 
 # OUTPUT
@@ -51,7 +52,9 @@ iptables -A OUTPUT -p tcp --dport 5222 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 5228 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 5229 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 5230 -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 8000 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 8080 -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 8181 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 14000 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 16630 -j ACCEPT
 

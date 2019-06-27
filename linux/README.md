@@ -1,6 +1,7 @@
 # MAC            
 [制作 macOS Mojave 10.14 系统镜像cdr、ISO文件，可用虚拟机安装](../mac/mojave.md)         
 # Linux          
+[Debian 9.x](debian9x.md)        
 [Linux VPS - DD 重装系统与系统优化](linux_vps.md)         
 [Ubuntu 18.10](ubuntu/ubuntu1810.md)            
 [CentOS 7.x](centos7x.md)           

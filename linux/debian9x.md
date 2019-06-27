@@ -1,0 +1,13 @@
+# Debian 9.x              
+一键设置优化 Amazon Lightsail          
+```sh
+wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/Lightsail/debian9x.sh
+chmod +x ./debian9x.sh
+./debian9x.sh
+```
+一键设置优化 Aliyun ECS         
+```sh
+wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/Aliyun/debian9x.sh
+chmod +x ./debian9x.sh
+./debian9x.sh
+```
