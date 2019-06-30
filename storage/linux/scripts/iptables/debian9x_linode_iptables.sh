@@ -30,11 +30,11 @@ iptables -nvL
 
 #修改SSH为证书登录
 setenforce 0
-sed -i '/Port /c Port '"$SSH_PORT"'' ${SSH_CONF}
-sed -i '/PermitEmptyPasswords no/c #PermitEmptyPasswords no' ${SSH_CONF}
-sed -i '/PermitRootLogin yes/c PermitRootLogin yes' ${SSH_CONF}
-sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' ${SSH_CONF}
-sed -i '/PubkeyAuthentication yes/c PubkeyAuthentication yes' ${SSH_CONF}
+sed -E -i '/^#*Port /cPort '"$SSH_PORT"'' /etc/ssh/sshd_config
+sed -E -i '/^#*PermitEmptyPasswords/cPermitEmptyPasswords no' /etc/ssh/sshd_config
+sed -E -i '/^#*PermitRootLogin/cPermitRootLogin yes' /etc/ssh/sshd_config
+sed -E -i '/^#*PasswordAuthentication/cPasswordAuthentication no' /etc/ssh/sshd_config
+sed -E -i '/^#*PubkeyAuthentication/cPubkeyAuthentication yes' /etc/ssh/sshd_config
 
 echo "======== set iptables rules================"
 

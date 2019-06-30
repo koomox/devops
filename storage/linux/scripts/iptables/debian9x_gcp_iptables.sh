@@ -19,7 +19,7 @@ iptables -nvL
 
 #修改SSH为证书登录
 setenforce 0
-sed -i '/Port /c Port '"$SSH_PORT"'' ${SSH_CONF}
+sed -E -i '/^#*Port /cPort '"$SSH_PORT"'' ${SSH_CONF}
 
 echo "======== set iptables rules================"
 
