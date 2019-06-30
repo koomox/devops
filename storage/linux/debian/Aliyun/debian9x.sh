@@ -88,11 +88,11 @@ function custom_ssh_iptables() {
 
 	#修改SSH为证书登录
 	setenforce 0
-	sed -i '/Port /c Port '"$SSH_PORT"'' ${SSH_CONF}
-	sed -i '/PermitEmptyPasswords no/c #PermitEmptyPasswords no' ${SSH_CONF}
-	sed -i '/PermitRootLogin yes/c PermitRootLogin yes' ${SSH_CONF}
-	sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' ${SSH_CONF}
-	sed -i '/PubkeyAuthentication yes/c PubkeyAuthentication yes' ${SSH_CONF}
+	sed -E -i '/^#*Port /cPort '"$SSH_PORT"'' ${SSH_CONF}
+	sed -E -i '/^#*PermitEmptyPasswords/cPermitEmptyPasswords no' ${SSH_CONF}
+	sed -E -i '/^#*PermitRootLogin/cPermitRootLogin yes' ${SSH_CONF}
+	sed -E -i '/^#*PasswordAuthentication/cPasswordAuthentication no' ${SSH_CONF}
+	sed -E -i '/^#*PubkeyAuthentication/cPubkeyAuthentication yes' ${SSH_CONF}
 
 	echo "======== set iptables rules================"
 
