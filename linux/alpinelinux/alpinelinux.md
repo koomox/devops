@@ -72,6 +72,11 @@ iface eth1 inet static
 ```sh
 /etc/init.d/networking restart
 ```
+修改 SSH 配置文件 `/etc/ssh/sshd_config`       
+```sh
+sed -E -i '/^#*PermitEmptyPasswords/cPermitEmptyPasswords no' /etc/ssh/sshd_config
+sed -E -i '/^#*PermitRootLogin/cPermitRootLogin yes' /etc/ssh/sshd_config
+```
 打开IP转发            
 ```sh
 echo "1" > /proc/sys/net/ipv4/ip_forward
