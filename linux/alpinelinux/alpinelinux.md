@@ -19,9 +19,16 @@ https://mirrors.tuna.tsinghua.edu.cn/alpine/v3.9/community
 ```sh
 sed -i 's/http:\/\/.*\//https:\/\/mirrors.tuna.tsinghua.edu.cn\//g' /etc/apk/repositories
 ```
+Tuna 源     
 ```sh
 cp /etc/apk/repositories /etc/apk/repositories.bak
-echo -e "https://mirrors.tuna.tsinghua.edu.cn/alpine/v3.9/main\nhttps://mirrors.tuna.tsinghua.edu.cn/alpine/v3.9/community" > /etc/apk/repositories
+echo -e "https://mirrors.tuna.tsinghua.edu.cn/alpine/v3.10/main\nhttps://mirrors.tuna.tsinghua.edu.cn/alpine/v3.10/community" > /etc/apk/repositories
+cat /etc/apk/repositories
+```
+阿里云源        
+```sh
+cp /etc/apk/repositories /etc/apk/repositories.bak
+echo -e "https://mirrors.aliyun.com/alpine/v3.10/main\nhttps://mirrors.aliyun.com/alpine/v3.10/community" > /etc/apk/repositories
 cat /etc/apk/repositories
 ```
 更新系统          
@@ -37,12 +44,29 @@ apk add --no-cache bash vim wget curl git htop
 ```sh
 vim /etc/network/interfaces
 ```
+VMware NAT 模式设置一个就可以了。           
 ```
+auto lo
+iface lo inet loopback
+
 auto eth0
 iface eth0 inet static
         address 192.168.1.150
         netmask 255.255.255.0
         gateway 192.168.1.1
+```
+VirtualBox 需要设置 NAT + Host only 两个网卡, NAT 用于上网， host only 用于 主机访问虚拟机。          
+```
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet dhcp
+
+auto eth1
+iface eth1 inet static
+	address 192.168.56.5
+	netmask 255.255.255.0
 ```
 重启网络服务       
 ```sh
