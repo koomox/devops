@@ -23,3 +23,20 @@ curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/sc
 chmod +x ./latest_nodejs_v2.sh
 ./latest_nodejs_v2.sh
 ```
+### NodeSource           
+github: [Link](https://github.com/nodesource/distributions)         
+```sh
+wget -qO- https://deb.nodesource.com/setup_10.x | bash -
+```
+```sh
+curl -sL https://deb.nodesource.com/setup_11.x | bash -
+```
+```sh
+wget -qO- https://deb.nodesource.com/setup_12.x | bash -
+```
+更新系统并安装 `nodejs` `yarn`         
+```sh
+apt update -y
+apt install nodejs -y
+apt install yarn -y
+```
