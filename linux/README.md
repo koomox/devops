@@ -20,6 +20,7 @@
 [安装 Node.js](nodejs.md)            
 [Nginx](nginx.md)           
 [Shadowsocks](shadowsocks.md)          
+[V2ray](v2ray.md)        
 [Rust](rust.md)          
 # Docker              
 [Docker for Ubuntu Server 17.04](docker/ubuntuserver17x.md)                  
