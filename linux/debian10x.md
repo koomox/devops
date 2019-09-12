@@ -1,4 +1,4 @@
-# Debian 9.x              
+# Debian 10.x              
 一键设置优化 Amazon Lightsail [查看源文件](/storage/linux/debian/Lightsail/debian10x.sh)         
 ```sh
 wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/Lightsail/debian10x.sh
