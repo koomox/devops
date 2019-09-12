@@ -5,8 +5,8 @@
 ```sh
 mkdir /boot/ub && cd /boot/ub
 
-wget http://ftp.debian.org/debian/dists/stretch/main/installer-amd64/current/images/netboot/debian-installer/amd64/initrd.gz
-wget http://ftp.debian.org/debian/dists/stretch/main/installer-amd64/current/images/netboot/debian-installer/amd64/linux
+wget http://ftp.debian.org/debian/dists/buster/main/installer-amd64/current/images/netboot/debian-installer/amd64/initrd.gz
+wget http://ftp.debian.org/debian/dists/buster/main/installer-amd64/current/images/netboot/debian-installer/amd64/linux
 ```
 grub 界面，按 `C` ，进入GRUB命令           
 ```sh
