@@ -20,10 +20,9 @@ useradd  -r -g docker -s /bin/false docker
 mkdir /docker
 cd /docker
 
-wget http://7xqxqz.com1.z0.glb.clouddn.com/docker-17.06.1-ce.tgz
-wget https://download.docker.com/linux/static/stable/x86_64/docker-17.06.2-ce.tgz
+wget https://download.docker.com/linux/static/stable/x86_64/docker-18.06.3-ce.tgz
 
-tar -zxf docker-17.06.2-ce.tgz
+tar -zxf docker-18.06.3-ce.tgz
 sudo \cp -f docker/* /usr/local/bin/
 
 \rm -rf /lib/systemd/system/docker.service /lib/systemd/system/docker.socket
@@ -41,12 +40,8 @@ systemctl start docker
 ```
 二进制包安装 Docker-compose                
 ```sh
-cd /docker
-
-wget http://7xqxqz.com1.z0.glb.clouddn.com/docker-compose-Linux-x86_64
-wget https://github.com/docker/compose/releases/download/1.16.1/docker-compose-Linux-x86_64
-
-\cp -f docker-compose-Linux-x86_64 /usr/local/bin/docker-compose
+curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
+
 docker-compose --version
 ```
