@@ -20,18 +20,18 @@ rustc --version
 ### 二进制包安装 Rust          
 树莓派安装 Rust        
 ```sh
-wget https://static.rust-lang.org/dist/rust-1.35.0-armv7-unknown-linux-gnueabihf.tar.gz
-tar -zxf rust-1.35.0-armv7-unknown-linux-gnueabihf.tar.gz
-cd rust-1.35.0-armv7-unknown-linux-gnueabihf
+wget https://static.rust-lang.org/dist/rust-1.37.0-armv7-unknown-linux-gnueabihf.tar.gz
+tar -zxf rust-1.37.0-armv7-unknown-linux-gnueabihf.tar.gz
+cd rust-1.37.0-armv7-unknown-linux-gnueabihf
 ./install.sh
 
 rustc --version
 ```
 Debian 安装 Rust       
 ```sh
-wget https://static.rust-lang.org/dist/rust-1.35.0-x86_64-unknown-linux-gnu.tar.gz
-tar -zxf rust-1.35.0-x86_64-unknown-linux-gnu.tar.gz
-cd rust-1.35.0-x86_64-unknown-linux-gnu
+wget https://static.rust-lang.org/dist/rust-1.37.0-x86_64-unknown-linux-gnu.tar.gz
+tar -zxf rust-1.37.0-x86_64-unknown-linux-gnu.tar.gz
+cd rust-1.37.0-x86_64-unknown-linux-gnu
 ./install.sh
 
 rustc --version
