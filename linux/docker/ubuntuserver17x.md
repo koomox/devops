@@ -26,9 +26,6 @@ tar -zxf docker-18.06.3-ce.tgz
 sudo \cp -f docker/* /usr/local/bin/
 
 \rm -rf /lib/systemd/system/docker.service /lib/systemd/system/docker.socket
-wget -O /lib/systemd/system/docker.service https://git.oschina.net/koomox/devops/raw/master/storage/linux/scripts/docker/ubuntuserver1704/docker-fast.service
-wget -O /lib/systemd/system/docker.socket https://git.oschina.net/koomox/devops/raw/master/storage/linux/scripts/docker/ubuntuserver1704/docker.socket
-
 wget -O /lib/systemd/system/docker.service https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/docker/ubuntuserver1704/docker-fast.service
 wget -O /lib/systemd/system/docker.socket https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/docker/ubuntuserver1704/docker.socket
 
