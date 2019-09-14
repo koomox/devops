@@ -22,5 +22,5 @@ sudo apt install mint-meta-codecs
 ```
 安装输入法         
 ```sh
-sudo apt install fcitx fcitx-config-gtk fcitx-ui-classic fcitx-googlepinyin
+sudo apt install fcitx fcitx-config-gtk fcitx-frontend-gtk2 fcitx-frontend-gtk3 fcitx-ui-classic fcitx-googlepinyin
 ```
