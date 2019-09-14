@@ -24,3 +24,40 @@ sudo apt install mint-meta-codecs
 ```sh
 sudo apt install fcitx fcitx-config-gtk fcitx-frontend-gtk2 fcitx-frontend-gtk3 fcitx-ui-classic fcitx-googlepinyin
 ```
+### Teamviewer          
+```sh
+wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
+sudo dpkg -i teamviewer_amd64.deb
+sudo apt install -f
+
+cp /usr/share/applications/com.teamviewer.TeamViewer.desktop ~/Desktop
+chmod +x ~/Desktop/com.teamviewer.TeamViewer.desktop
+```
+### 安装 Sublime Text      
+```sh
+sudo apt update
+sudo apt install wget apt-transport-https ca-certificates software-properties-common
+
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+
+sudo apt update
+sudo apt install sublime-text
+
+cp /usr/share/applications/sublime_text.desktop ~/Desktop
+chmod +x ~/Desktop/sublime_text.desktop
+```
+安装常用插件        
+```sh
+git clone https://github.com/titoBouzout/SideBarEnhancements.git --depth=1
+git clone https://github.com/sergeche/emmet-sublime.git --depth=1
+```
+### Skype          
+```sh
+wget https://go.skype.com/skypeforlinux-64.deb
+sudo dpkg -i skypeforlinux-64.deb
+
+cp /usr/share/applications/skypeforlinux.desktop ~/Desktop
+chmod +x ~/Desktop/skypeforlinux.desktop
+```
