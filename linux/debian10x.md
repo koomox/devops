@@ -2,14 +2,14 @@
 一键设置优化 Amazon Lightsail [查看源文件](/storage/linux/debian/Lightsail/debian10x.sh)         
 ```sh
 wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/Lightsail/debian10x.sh
-chmod +x ./debian9x.sh
-./debian9x.sh
+chmod +x ./debian10x.sh
+./debian10x.sh
 ```
 一键设置优化 Aliyun ECS [查看源文件](/storage/linux/debian/Aliyun/debian10x.sh)        
 ```sh
 wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/Aliyun/debian10x.sh
-chmod +x ./debian9x.sh
-./debian9x.sh
+chmod +x ./debian10x.sh
+./debian10x.sh
 ```
 ### Linux 安装 ffsend         
 ffsend Home: [Link](https://github.com/timvisee/ffsend)         
