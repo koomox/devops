@@ -11,3 +11,12 @@ wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian
 chmod +x ./debian9x.sh
 ./debian9x.sh
 ```
+### Linux 安装 ffsend         
+ffsend Home: [Link](https://github.com/timvisee/ffsend)         
+```sh
+wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/ffsend/ffsend.sh
+chmod +x ./ffsend.sh
+./ffsend.sh
+
+ffsend --version
+```
