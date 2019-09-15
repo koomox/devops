@@ -16,6 +16,24 @@ sudo sed -E -i 's/(http|https):\/\/.*.(ubuntu.com|edu.cn)\/ubuntu/https:\/\/mirr
 sudo apt update
 sudo apt upgrade
 ```
+安装 ssh server         
+```sh
+sudo apt install openssh-server
+```
+启动 ssh           
+```sh
+systemctl status sshd
+systemctl start sshd
+```
+修改 SSH 配置文件 `/etc/ssh/sshd_config`           
+```sh
+sed -E -i '/^#*PermitEmptyPasswords/cPermitEmptyPasswords no' /etc/ssh/sshd_config
+sed -E -i '/^#*PermitRootLogin/cPermitRootLogin yes' /etc/ssh/sshd_config
+```
+安装常用依赖          
+```sh
+sudo apt install curl wget git vim sudo htop net-tools neofetch lsb-release build-essential
+```
 安装多媒体解码套件          
 ```sh
 sudo apt install mint-meta-codecs
