@@ -46,3 +46,4 @@
 [HAProxy 中转服务器](haproxy_transfer.md)            
 [iptables 中转服务器](iptables_transfer.md)          
 [socat 中转服务器](socat_transfer.md)          
+[proxychains-ng](proxychains_ng.md)          
