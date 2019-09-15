@@ -112,7 +112,7 @@ function custom_ssh_iptables() {
 
 	iptables -P INPUT DROP
 	iptables -P FORWARD DROP
-	iptables -P ACCEPT DROP
+	iptables -P OUTPUT ACCEPT
 
 	iptables-save > /etc/iptables.rules
 
