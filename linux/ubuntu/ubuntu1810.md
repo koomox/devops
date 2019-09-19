@@ -1,4 +1,13 @@
 # Ubuntu 18.10          
+### Oracle Cloud Ubuntu 18.x         
+一键设置 Ubuntu 18.x, 更新系统, 设置防火墙, 自定义 SSH 端口和证书          
+[source](/storage/linux/ubuntu/oraclecloud/ubuntu18x.sh)         
+```sh
+wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/ubuntu/oraclecloud/ubuntu18x.sh
+chmod +x ./ubuntu18x.sh
+./ubuntu18x.sh
+```
+
 ### 禁用 Nvidia 独显       
 Ubuntu 默认使用 nouveau 开源驱动程序驱动 Nvidia 显卡，但是该驱动经常导致 Nvidia 显卡无法正常工作，甚至无法引导，如果需要无法引导的情况需要将其禁用。       
 Ubuntu 引导GRUB界面，按 `E` 键，在 `splash` 后面添加 `nouveau.modeset=0`，保存后按 `F10` 引导。        
