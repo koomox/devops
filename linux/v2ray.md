@@ -19,4 +19,10 @@ bash <(curl -L -s https://raw.githubusercontent.com/v2ray/v2ray-core/master/rele
  * /usr/bin/v2ray/v2ctl：V2Ray 工具；
  * /etc/v2ray/config.json：配置文件；
  * /usr/bin/v2ray/geoip.dat：IP 数据文件
- * /usr/bin/v2ray/geosite.dat：域名数据文件
+ * /usr/bin/v2ray/geosite.dat：域名数据文件        
+
+### Nginx            
+```sh
+mkdir -p /etc/nginx/conf.d
+wget -O /etc/nginx/conf.d/default.conf 
+```
