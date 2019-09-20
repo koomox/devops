@@ -30,7 +30,14 @@ wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/
 wget -O /etc/nginx/conf.d/v2ray.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.0/conf.d/v2ray.conf
 
 domain=test.com
-sed -i 's/$path_uuid/'"$path_uuid"'/g' /etc/nginx/conf.d/v2ray.conf
+sed -i 's/$domain/'"$domain"'/g' /etc/nginx/conf.d/default.conf
+
+mkdir -p /etc/letsencrypt/live/$domain
+vim /etc/letsencrypt/live/$domain/fullchain.pem
+vim /etc/letsencrypt/live/$domain/privkey.pem
+
+cd /var/www/html
+wget --content-disposition https://html5up.net/paradigm-shift/download
 ```
 ```sh
 systemctl enable nginx
