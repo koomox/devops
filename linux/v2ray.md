@@ -22,7 +22,38 @@ bash <(curl -L -s https://raw.githubusercontent.com/v2ray/v2ray-core/master/rele
  * /usr/bin/v2ray/geosite.dat：域名数据文件        
 
 ### Nginx            
+`/etc/nginx/conf.d/default.conf` [source](/storage/linux/scripts/nginx/1.16.0/conf.d/default_v2ray.conf)        
+`/etc/nginx/conf.d/v2ray.conf` [source](/storage/linux/scripts/nginx/1.16.0/conf.d/v2ray.conf)           
 ```sh
 mkdir -p /etc/nginx/conf.d
-wget -O /etc/nginx/conf.d/default.conf 
+wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.0/conf.d/default_v2ray.conf
+wget -O /etc/nginx/conf.d/v2ray.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.0/conf.d/v2ray.conf
+
+domain=test.com
+sed -i 's/$path_uuid/'"$path_uuid"'/g' /etc/nginx/conf.d/v2ray.conf
+```
+```sh
+systemctl enable nginx
+systemctl stop nginx
+systemctl start nginx
+systemctl status nginx
+```
+### v2ray 配置文件       
+`/etc/v2ray/config.json` [source](/storage/linux/scripts/v2ray/websocket_tls/server.json)         
+```sh
+user_uuid=$(cat /proc/sys/kernel/random/uuid)
+path_uuid=$(cat /proc/sys/kernel/random/uuid)
+wget -O /etc/v2ray/config.json https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/v2ray/websocket_tls/server.json
+sed -i 's/$user_uuid/'"$user_uuid"'/g' /etc/v2ray/config.json
+sed -i 's/$path_uuid/'"$path_uuid"'/g' /etc/v2ray/config.json
+sed -i 's/$path_uuid/'"$path_uuid"'/g' /etc/nginx/conf.d/v2ray.conf
+cat /etc/v2ray/config.json
+echo "user_uuid = ${user_uuid}"
+echo "path_uuid = ${path_uuid}"
+```
+```sh
+systemctl enable v2ray
+systemctl stop v2ray
+systemctl start v2ray
+systemctl status v2ray
 ```
