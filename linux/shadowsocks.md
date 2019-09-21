@@ -33,8 +33,7 @@ cd shadowsocks-libev
 git submodule update --init --recursive
 cd ..
 ./autogen.sh
-./configure --prefix=/usr --disable-documentation
-make
+./configure --prefix=/usr --disable-documentation && make
 sudo make install
 ```
 systemd 启动文件 `/etc/systemd/system/shadowsocks-libev-server@.service`         

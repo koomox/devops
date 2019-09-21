@@ -6,7 +6,7 @@
   },
   "inbounds": [
     {
-      "port": 10000,
+      "port": $port,
       "listen": "127.0.0.1",
       "protocol": "vmess",
       "settings": {
