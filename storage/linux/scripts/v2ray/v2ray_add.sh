@@ -21,7 +21,7 @@ sed -i 's/$path_uuid/'"$path_uuid"'/g' /etc/v2ray/$USERNAME.conf
 sed -i 's/$port/'"$port"'/g' /etc/nginx/conf.d/v2ray-$USERNAME.conf
 sed -i 's/$port/'"$port"'/g' /etc/v2ray/$USERNAME.conf
 
-sed -i '$c '"include conf.d\/$USERNAME.conf\n}" /etc/nginx/conf.d/default.conf
+sed -i '$c '"include conf.d\/v2ray-$USERNAME.conf;\n}" /etc/nginx/conf.d/default.conf
 
 nohup /usr/bin/v2ray/v2ray -config /etc/v2ray/v2ray-$USERNAME.conf
 
