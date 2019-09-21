@@ -12,13 +12,14 @@ port=$(rand 20000 30000)
 
 user_uuid=$(cat /proc/sys/kernel/random/uuid)
 path_uuid=$(cat /proc/sys/kernel/random/uuid)
-wget -O /etc/v2ray/$USERNAME.json https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/v2ray/websocket_tls/server.json
+wget -O /etc/v2ray/$USERNAME.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/v2ray/websocket_tls/server.json
 wget -O /etc/nginx/conf.d/v2ray-$USERNAME.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.0/conf.d/v2ray.conf
-sed -i 's/$user_uuid/'"$user_uuid"'/g' /etc/v2ray/$USERNAME.json
-sed -i 's/$path_uuid/'"$path_uuid"'/g' /etc/v2ray/$USERNAME.json
-sed -i 's/$path_uuid/'"$path_uuid"'/g' /etc/nginx/conf.d/$USERNAME.conf
-sed -i 's/$port/'"$port"'/g' /etc/nginx/conf.d/$USERNAME.conf
-sed -i 's/$port/'"$port"'/g' /etc/v2ray/v2ray-$USERNAME.conf
+
+sed -i 's/$path_uuid/'"$path_uuid"'/g' /etc/nginx/conf.d/v2ray-$USERNAME.conf
+sed -i 's/$path_uuid/'"$path_uuid"'/g' /etc/v2ray/$USERNAME.conf
+
+sed -i 's/$port/'"$port"'/g' /etc/nginx/conf.d/v2ray-$USERNAME.conf
+sed -i 's/$port/'"$port"'/g' /etc/v2ray/$USERNAME.conf
 
 sed -i '$c '"include conf.d\/$USERNAME.conf\n}" /etc/nginx/conf.d/default.conf
 
@@ -29,10 +30,10 @@ systemctl start nginx
 
 
 
-echo "========= /etc/v2ray/$USERNAME.json ============"
-cat /etc/v2ray/$USERNAME.json
-echo "========= /etc/v2ray/v2ray-$USERNAME.conf ============"
-cat /etc/v2ray/v2ray-$USERNAME.conf
+echo "========= /etc/nginx/conf.d/v2ray-$USERNAME.conf ============"
+cat /etc/nginx/conf.d/v2ray-$USERNAME.conf
+echo "========= /etc/v2ray/$USERNAME.conf ============"
+cat /etc/v2ray/$USERNAME.conf
 echo "=============== UUID ===================="
 echo "port = ${port}"
 echo "user_uuid = ${user_uuid}"
