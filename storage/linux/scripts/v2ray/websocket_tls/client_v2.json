@@ -1,0 +1,48 @@
+{
+  "inbounds": [
+    {
+      "port": $port,
+      "listen": "0.0.0.0",
+      "protocol": "socks",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      },
+      "settings": {
+        "auth": "noauth",
+        "udp": false
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "vmess",
+      "settings": {
+        "vnext": [
+          {
+            "address": "$domain",
+            "port": 443,
+            "users": [
+              {
+                "id": "$user_uuid",
+                "alterId": 64,
+                "security": "auto"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "wsSettings": {
+          "connectionReuse": true,
+          "path": "$path_uuid"
+        }
+      }
+    }
+  ]
+}

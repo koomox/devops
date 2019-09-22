@@ -64,3 +64,25 @@ systemctl stop v2ray
 systemctl start v2ray
 systemctl status v2ray
 ```
+客户端配置文件           
+```sh
+wget -O /etc/v2ray/config.json https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/v2ray/websocket_tls/client.json
+
+local_addr="0.0.0.0"
+local_port=
+remote_addr=""
+remote_port=443
+user_uuid=
+path_uuid=
+alterId=64
+
+sed -i 's/$local_addr/'"$local_addr"'/g' /etc/v2ray/config.json
+sed -i 's/$local_port/'"$local_port"'/g' /etc/v2ray/config.json
+sed -i 's/$remote_addr/'"$remote_addr"'/g' /etc/v2ray/config.json
+sed -i 's/$remote_port/'"$remote_port"'/g' /etc/v2ray/config.json
+sed -i 's/$user_uuid/'"$user_uuid"'/g' /etc/v2ray/config.json
+sed -i 's/$path_uuid/'"$path_uuid"'/g' /etc/v2ray/config.json
+sed -i 's/$alterId/'"$alterId"'/g' /etc/v2ray/config.json
+
+cat /etc/v2ray/config.json
+```
