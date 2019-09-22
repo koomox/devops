@@ -21,6 +21,22 @@ bash <(curl -L -s https://raw.githubusercontent.com/v2ray/v2ray-core/master/rele
  * /usr/bin/v2ray/geoip.dat：IP 数据文件
  * /usr/bin/v2ray/geosite.dat：域名数据文件        
 
+### Alpine Linux 安装 V2ray            
+```sh
+mkdir -p /tmp/v2ray && cd /tmp/v2ray
+wget https://github.com/v2ray/v2ray-core/releases/download/v4.20.0/v2ray-linux-64.zip
+unzip v2ray-linux-64.zip
+cp v2ray v2ctl geoip.dat geosite.dat -t /usr/bin
+chmod +x /usr/bin/v2ray
+chmod +x /usr/bin/v2ctl
+```
+Alpine Linux 添加 v2ray 自启动文件          
+```sh
+touch /etc/local.d/v2ray.start
+echo "nohup /usr/bin/v2ray -config /etc/v2ray/config.json &" > /etc/local.d/v2ray.start
+chmod +x /etc/local.d/v2ray.start
+rc-update add local
+```
 ### Nginx            
 `/etc/nginx/conf.d/default.conf` [source](/storage/linux/scripts/nginx/1.16.0/conf.d/default_v2ray.conf)        
 `/etc/nginx/conf.d/v2ray.conf` [source](/storage/linux/scripts/nginx/1.16.0/conf.d/v2ray.conf)           
