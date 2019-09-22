@@ -62,7 +62,8 @@ systemctl start nginx
 systemctl status nginx
 ```
 ### v2ray 配置文件       
-`/etc/v2ray/config.json` [source](/storage/linux/scripts/v2ray/websocket_tls/server.json)         
+服务端配置文件
+[source](/storage/linux/scripts/v2ray/websocket_tls/server.json)         
 ```sh
 user_uuid=$(cat /proc/sys/kernel/random/uuid)
 path_uuid=$(cat /proc/sys/kernel/random/uuid)
