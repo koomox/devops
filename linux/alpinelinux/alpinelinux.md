@@ -127,6 +127,22 @@ echo "nohup /usr/bin/ss-local -s server_address -p server_port -l local_port -k 
 chmod +x /etc/local.d/ss.start
 rc-update add local
 ```
+### 安装V2ray            
+```sh
+mkdir -p /tmp/v2ray && cd /tmp/v2ray
+wget https://github.com/v2ray/v2ray-core/releases/download/v4.20.0/v2ray-linux-64.zip
+unzip v2ray-linux-64.zip
+cp v2ray v2ctl geoip.dat geosite.dat -t /usr/bin
+chmod +x /usr/bin/v2ray
+chmod +x /usr/bin/v2ctl
+```
+Alpine Linux 添加 v2ray 自启动文件          
+```sh
+touch /etc/local.d/v2ray.start
+echo "nohup /usr/bin/v2ray -config /etc/v2ray/config.json &" > /etc/local.d/v2ray.start
+chmod +x /etc/local.d/v2ray.start
+rc-update add local
+```
 ### 代理           
 安装 privoxy       
 ```sh
@@ -143,4 +159,9 @@ cat /etc/privoxy/config
 设置开机自启动          
 ```sh
 rc-update add privoxy
+```
+### 历史记录 history       
+Alpine Linux 使用 busybox, 历史文件 `~/.ash_history`, 清除历史记录使用下面的命令。                  
+```sh
+echo "" > ~/.ash_history && reboot
 ```
