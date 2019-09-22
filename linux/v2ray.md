@@ -65,6 +65,7 @@ systemctl start v2ray
 systemctl status v2ray
 ```
 客户端配置文件           
+[source](/storage/linux/scripts/v2ray/websocket_tls/client.json)         
 ```sh
 wget -O /etc/v2ray/config.json https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/v2ray/websocket_tls/client.json
 
