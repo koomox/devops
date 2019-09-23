@@ -1,0 +1,13 @@
+[Unit]
+Description=trojan
+Documentation=https://trojan-gfw.github.io/trojan/config https://trojan-gfw.github.io/trojan/
+After=network.target network-online.target nss-lookup.target mysql.service mariadb.service mysqld.service
+
+[Service]
+Type=simple
+StandardError=journal
+ExecStart="/usr/local/bin/trojan" -c "/etc/trojan/config.json"
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target
