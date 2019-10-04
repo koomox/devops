@@ -43,6 +43,8 @@ cp -f trojan /usr/local/bin/trojan
 chmod +x /usr/local/bin/trojan
 ```
 配置trojan         
+服务端配置文件 `server.json` [source](/storage/linux/scripts/trojan/server-config.json)         
+启动文件 `trojan.service` [source](/storage/linux/scripts/trojan/trojan.service)         
 ```sh
 wget -O /etc/systemd/system/trojan.service https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/trojan/trojan.service
 
