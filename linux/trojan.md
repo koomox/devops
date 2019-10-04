@@ -23,9 +23,11 @@ systemctl status nginx
 ```
 设置 iptables        
 ```sh
-wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/iptables/iptables.v2.rules.sh
-chmod +x ./iptables.v2.rules.sh
-./iptables.v2.rules.sh
+wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/iptables/iptables.http.rules.sh
+chmod +x ./iptables.http.rules.sh
+./iptables.http.rules.sh
+
+iptables-restore < /etc/iptables.rules
 ```
 安装 Let's Encrypt 证书, 证书路径 `~/.acme.sh/`        
 ```sh
