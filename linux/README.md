@@ -22,6 +22,7 @@
 [Nginx](nginx.md)           
 [Shadowsocks](shadowsocks.md)          
 [V2ray](v2ray.md)        
+[trojan](trojan.md)           
 [Rust](rust.md)          
 [MariaDB](mariadb.md)        
 # Docker              
