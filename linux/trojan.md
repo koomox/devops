@@ -63,7 +63,7 @@ wget -O /etc/trojan/config.json https://raw.githubusercontent.com/koomox/devops/
 ```sh
 domain=example.com
 sed -i "s/password1/${password}/g" /etc/trojan/config.json
-sed -i "s/certificate.crt/\/root\/.acme.sh/${domain}\/fullchain.cer/g" /etc/trojan/config.json
+sed -i "s/certificate.crt/\/root\/.acme.sh\/${domain}\/fullchain.cer/g" /etc/trojan/config.json
 sed -i "s/private.key/\/root\/.acme.sh\/${domain}\/${domain}.key/g" /etc/trojan/config.json
 ```
 ```sh
