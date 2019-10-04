@@ -23,6 +23,22 @@ git config --local --list   #查看仓库级配置
 git config --global --list   #查看全局级配置
 git config --system --list   #查看系统级配置
 ```
+用户设置单个仓库           
+```
+git init
+
+git config user.name "Your Name"  # 设置和修改用户信息
+git config user.email "email@example.com"
+git config http.postBuffer 524288000   # git 文件上传大小默认为1M，如果超过1M就无法上传，500M
+
+git config http.proxy socks5://127.0.0.1:1080  # 设置代理
+
+git remote add origin git@gihtub.com:username/repo.git
+
+git add -A
+git commit -m "first commit"
+git push -u origin master
+```
 ### 设置全局代理             
 在某些网络环境下，你可能需要为 Git 配置代理，这很简单，只需要一行命令就可以了。        
 ```
