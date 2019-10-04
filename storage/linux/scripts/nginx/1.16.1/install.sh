@@ -1,6 +1,6 @@
 #!/bin/bash
 mkdir -p /usr/local/nginx/sbin
-wget -O /usr/local/nginx/sbin/nginx https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.0/binary/nginx-1.16.1
+wget -O /usr/local/nginx/sbin/nginx https://github.com/koomox/devops/releases/download/v1.0/nginx-1.16.1
 chmod +x /usr/local/nginx/sbin/nginx
 
 echo 'export PATH=$PATH:/usr/local/nginx/sbin' >> /etc/profile
