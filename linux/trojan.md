@@ -1,6 +1,6 @@
 # trojan          
 Home: [Link](https://github.com/trojan-gfw/trojan)         
-
+VC runtime: [DownloadLink](https://aka.ms/vs/16/release/VC_redist.x64.exe)          
 ### 安装 Nginx        
 一键安装 Nginx 1.16.1 [查看源文件](/storage/linux/scripts/nginx/install_nginx1161.sh)       
 ```sh
@@ -14,12 +14,6 @@ cd /var/www/html
 wget --content-disposition https://html5up.net/paradigm-shift/download
 apt install unzip -y
 unzip html5up-paradigm-shift.zip
-
-
-systemctl enable nginx
-systemctl stop nginx
-systemctl start nginx
-systemctl status nginx
 ```
 设置 iptables        
 ```sh
@@ -35,6 +29,7 @@ wget -O -  https://get.acme.sh | sh
 
 source ~/.bashrc
 
+systemctl stop nginx
 acme.sh --issue --standalone -d example.com -d www.example.com -d cp.example.com
 ```
 
@@ -70,4 +65,9 @@ sed -i "s/private.key/\/root\/.acme.sh\/${domain}\/${domain}.key/g" /etc/trojan/
 systemctl enable trojan
 systemctl start trojan
 systemctl status trojan
+```
+```sh
+systemctl enable nginx
+systemctl start nginx
+systemctl status nginx
 ```
