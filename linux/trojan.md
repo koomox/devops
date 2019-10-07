@@ -2,11 +2,11 @@
 Home: [Link](https://github.com/trojan-gfw/trojan)         
 VC runtime: [DownloadLink](https://aka.ms/vs/16/release/VC_redist.x64.exe)          
 ### 安装 Nginx        
-一键安装 Nginx 1.16.1 [查看源文件](/storage/linux/scripts/nginx/install_nginx1161.sh)       
+一键安装二进制版 Nginx 1.16.1 [查看源文件](/storage/linux/scripts/nginx/1.16.1/install.sh)       
 ```sh
-wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/install_nginx1161.sh
-chmod +x ./install_nginx1161.sh
-./install_nginx1161.sh
+wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.1/install.sh
+chmod +x ./install.sh
+./install.sh
 
 wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.0/conf.d/default_trojan.conf
 mkdir -p /var/www/html
