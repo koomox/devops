@@ -51,6 +51,11 @@ yum update
 ```
 下载及说明: [查看源文件](/storage/linux/debian/DebianNET/InstallNET.sh)         
 ```sh
+wget --no-check-certificate -qO InstallNET.sh 'https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/DebianNET/InstallNET.sh' && chmod a+x InstallNET.sh
+
+./InstallNET.sh -d buster -v amd64 -a --mirror 'http://ftp.hk.debian.org/debian/'
+```
+```sh
 wget --no-check-certificate -qO InstallNET.sh 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh' && chmod a+x InstallNET.sh
 ```
 ```
@@ -72,7 +77,7 @@ Usage:
 使用示例:       
 ```sh
 #使用默认镜像全自动安装
-bash InstallNET.sh -d 9 -v 64 -a --mirror 'http://mirror.xtom.com.hk/debian/'
+bash InstallNET.sh -d 10 -v 64 -a --mirror 'http://mirror.xtom.com.hk/debian/'
 
 #使用自定义镜像全自动安装
 bash InstallNET.sh -c 6.9 -v 64 -a --mirror 'http://mirror.centos.org/centos'
@@ -99,15 +104,15 @@ bash InstallNET.sh -c 6.9 -v 64 -a --mirror 'http://mirror.centos.org/centos'
 #--mirror 'http://mirrors.ustc.edu.cn/debian/'
 #--mirror 'http://mirror.xtom.com.hk/debian/'
 ```
-#### 重新安装 Debian stretch           
-全自动重新安装 Debian stretch 系统，`root` 默认密码 `Vicer` [查看源文件](/storage/linux/debian/DebianNET/InstallNET.sh)            
+#### 重新安装 Debian Buster           
+全自动重新安装 Debian buster 系统，`root` 默认密码 `Vicer` [查看源文件](/storage/linux/debian/DebianNET/InstallNET.sh)            
 ```sh
 apt install -y gawk sed grep
 apt update
 
 wget --no-check-certificate -qO InstallNET.sh 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh' && chmod a+x InstallNET.sh
 
-bash InstallNET.sh -d 9 -v 64 -a --mirror 'http://mirror.xtom.com.hk/debian/'
+bash InstallNET.sh -d 10 -v 64 -a --mirror 'http://mirror.xtom.com.hk/debian/'
 #bash InstallNET.sh -d 9 -v 64 -a --mirror 'http://mirrors.ustc.edu.cn/debian/'
 ```
 ### 安装常用软件          
