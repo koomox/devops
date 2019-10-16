@@ -65,12 +65,15 @@ systemctl status nginx
 服务端配置文件
 [source](/storage/linux/scripts/v2ray/websocket_tls/server.json)         
 ```sh
+port=10000
 user_uuid=$(cat /proc/sys/kernel/random/uuid)
 path_uuid=$(cat /proc/sys/kernel/random/uuid)
 wget -O /etc/v2ray/config.json https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/v2ray/websocket_tls/server.json
 sed -i 's/$user_uuid/'"$user_uuid"'/g' /etc/v2ray/config.json
 sed -i 's/$path_uuid/'"$path_uuid"'/g' /etc/v2ray/config.json
 sed -i 's/$path_uuid/'"$path_uuid"'/g' /etc/nginx/conf.d/v2ray.conf
+sed -i 's/$port/'"$port"'/g' /etc/v2ray/config.json
+sed -i 's/$port/'"$port"'/g' /etc/nginx/conf.d/v2ray.conf
 cat /etc/v2ray/config.json
 echo "user_uuid = ${user_uuid}"
 echo "path_uuid = ${path_uuid}"
