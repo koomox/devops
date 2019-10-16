@@ -53,7 +53,7 @@ yum update
 ```sh
 wget --no-check-certificate -qO InstallNET.sh 'https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/DebianNET/InstallNET.sh' && chmod a+x InstallNET.sh
 
-./InstallNET.sh -d buster -v amd64 -a --mirror 'http://ftp.hk.debian.org/debian/'
+bash InstallNET.sh -d buster -v amd64 -a --mirror 'http://ftp.hk.debian.org/debian/'
 ```
 ```sh
 wget --no-check-certificate -qO InstallNET.sh 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh' && chmod a+x InstallNET.sh
@@ -113,6 +113,7 @@ apt update
 wget --no-check-certificate -qO InstallNET.sh 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh' && chmod a+x InstallNET.sh
 
 bash InstallNET.sh -d 10 -v 64 -a --mirror 'http://mirror.xtom.com.hk/debian/'
+bash InstallNET.sh -d 10 -v 64 -a --mirror 'http://ftp.hk.debian.org/debian/'
 #bash InstallNET.sh -d 9 -v 64 -a --mirror 'http://mirrors.ustc.edu.cn/debian/'
 ```
 ### 安装常用软件          
