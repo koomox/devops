@@ -50,10 +50,11 @@ mkdir -p /etc/shadowsocks-libev && cd /etc/shadowsocks-libev
 wget -O /etc/shadowsocks-libev/server.json https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/shadowsocks/server-config.json
 ```
 ```
+server_ip=0.0.0.0
 server_port=10000
 password=
 method=aes-256-gcm
-sed -i "s/my-server-ip/0.0.0.0/g" /etc/shadowsocks-libev/server.json
+sed -i "s/my-server-ip/${server_ip}/g" /etc/shadowsocks-libev/server.json
 sed -i "s/8888/${server_port}/g" /etc/shadowsocks-libev/server.json
 sed -i "s/mypassword/${password}/g" /etc/shadowsocks-libev/server.json
 sed -i "s/aes-256-cfb/${method}/g" /etc/shadowsocks-libev/server.json
