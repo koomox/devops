@@ -57,6 +57,8 @@ sed -i "s/my-server-ip/0.0.0.0/g" /etc/shadowsocks-libev/server.json
 sed -i "s/8888/${server_port}/g" /etc/shadowsocks-libev/server.json
 sed -i "s/mypassword/${password}/g" /etc/shadowsocks-libev/server.json
 sed -i "s/aes-256-cfb/${method}/g" /etc/shadowsocks-libev/server.json
+
+cat /etc/shadowsocks-libev/server.json
 ```
 一键打包下载 shadowsocks-go 并上传至 firefox send [source file](/storage/linux/scripts/shadowsocks/download_shadowsocks_go.sh)            
 ```sh
