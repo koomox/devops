@@ -48,8 +48,7 @@ systemctl status shadowsocks-libev-server@server
 ```sh
 mkdir -p /etc/shadowsocks-libev && cd /etc/shadowsocks-libev
 wget -O /etc/shadowsocks-libev/server.json https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/shadowsocks/server-config.json
-```
-```
+
 server_ip=0.0.0.0
 server_port=10000
 password=
