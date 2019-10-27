@@ -1,4 +1,5 @@
 # Shadowsocks             
+github: [Link](https://github.com/shadowsocks/shadowsocks-libev)        
 ### Debian 10.x 安装 shadowsocks        
 安装依赖包          
 ```sh
@@ -6,10 +7,10 @@ sudo apt-get install --no-install-recommends gettext build-essential autoconf li
 ```
 安装 `Libsodium`            
 ```sh
-export LIBSODIUM_VER=1.0.18
-wget https://github.com/jedisct1/libsodium/releases/download/${LIBSODIUM_VER}-RELEASE/libsodium-${LIBSODIUM_VER}.tar.gz
-tar -zxf libsodium-${LIBSODIUM_VER}.tar.gz
-cd libsodium-${LIBSODIUM_VER}
+export LIBSODIUM_VER=1.0.16
+wget https://download.libsodium.org/libsodium/releases/libsodium-$LIBSODIUM_VER.tar.gz
+tar xvf libsodium-$LIBSODIUM_VER.tar.gz
+cd libsodium-$LIBSODIUM_VER
 ./configure --prefix=/usr && make
 sudo make install
 cd ..
@@ -17,11 +18,11 @@ sudo ldconfig
 ```
 安装 `MbedTLS`        
 ```sh
-export MBEDTLS_VER=2.16.3
-wget --content-disposition https://codeload.github.com/ARMmbed/mbedtls/tar.gz/mbedtls-${MBEDTLS_VER}
-tar -zxf mbedtls-mbedtls-${MBEDTLS_VER}.tar.gz
-cd mbedtls-mbedtls-${MBEDTLS_VER}
-make SHARED=1 CFLAGS=-fPIC
+export MBEDTLS_VER=2.6.0
+wget https://tls.mbed.org/download/mbedtls-$MBEDTLS_VER-gpl.tgz
+tar xvf mbedtls-$MBEDTLS_VER-gpl.tgz
+cd mbedtls-$MBEDTLS_VER
+make SHARED=1 CFLAGS="-O2 -fPIC"
 sudo make DESTDIR=/usr install
 cd ..
 sudo ldconfig
@@ -36,10 +37,11 @@ cd ..
 ./configure --prefix=/usr --disable-documentation && make
 sudo make install
 ```
-systemd 启动文件 `/etc/systemd/system/shadowsocks-libev-server@.service`         
+systemd 启动文件 [Link](/storage/linux/scripts/shadowsocks/shadowsocks-libev/debian/shadowsocks-libev-server@.service)         
 ```sh
 vim /etc/systemd/system/shadowsocks-libev-server@.service
 
+wget -O /etc/systemd/system/shadowsocks-libev-server@.service https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/shadowsocks/shadowsocks-libev/debian/shadowsocks-libev-server@.service
 systemctl enable shadowsocks-libev-server@server
 systemctl start shadowsocks-libev-server@server
 systemctl status shadowsocks-libev-server@server
@@ -85,37 +87,37 @@ echo "" > /etc/shadowsocks-libev/server.json && vim /etc/shadowsocks-libev/serve
 }
 ```
 
-一键打包下载 shadowsocks-go 并上传至 firefox send             
+一键打包下载 shadowsocks-go 并上传至 firefox send [source file](/storage/linux/scripts/shadowsocks/download_shadowsocks_go.sh)            
 ```sh
 wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/shadowsocks/download_shadowsocks_go.sh
 chmod +x ./download_shadowsocks_go.sh
 ./download_shadowsocks_go.sh
 ```
-一键打包下载 go-shadowsocks2 并上传至 firefox send         
+一键打包下载 go-shadowsocks2 并上传至 firefox send [source file](/storage/linux/scripts/shadowsocks/download_go_shadowsocks2.sh)         
 ```sh
 wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/shadowsocks/download_go_shadowsocks2.sh
 chmod +x ./download_go_shadowsocks2.sh
 ./download_go_shadowsocks2.sh
 ```
-一键打包下载 shadowsocks-libev 并上传至 firefox send         
+一键打包下载 shadowsocks-libev 并上传至 firefox send [source file](/storage/linux/scripts/shadowsocks/download_shadowsocks_libev.sh)         
 ```sh
 wget -O download_shadowsocks_libev.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/shadowsocks/download_shadowsocks_libev.sh
 chmod +x ./download_shadowsocks_libev.sh
 ./download_shadowsocks_libev.sh
 ```
-一键配置ss-local             
+一键配置ss-local [source file](/storage/linux/scripts/shadowsocks/debian9x_ss_local.sh)            
 ```sh
 wget -O debian9x_ss_local.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/shadowsocks/shadowsocks-libev/debian9x_ss_local.sh
 chmod +x ./debian9x_ss_local.sh
 ./debian9x_ss_local.sh
 ```
-一键配置ss-redir        
+一键配置ss-redir [source file](/storage/linux/scripts/shadowsocks/debian9x_ss_redir.sh)        
 ```sh
 wget -O debian9x_ss_redir.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/shadowsocks/shadowsocks-libev/debian9x_ss_redir.sh
 chmod +x ./debian9x_ss_redir.sh
 ./debian9x_ss_redir.sh
 ```
-一键配置ss-tunnel        
+一键配置ss-tunnel [source file](/storage/linux/scripts/shadowsocks/debian9x_ss_tunnel.sh)       
 ```sh
 wget -O debian9x_ss_tunnel.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/shadowsocks/shadowsocks-libev/debian9x_ss_tunnel.sh
 chmod +x ./debian9x_ss_tunnel.sh
