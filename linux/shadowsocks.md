@@ -79,19 +79,19 @@ wget -O download_shadowsocks_libev.sh https://raw.githubusercontent.com/koomox/d
 chmod +x ./download_shadowsocks_libev.sh
 ./download_shadowsocks_libev.sh
 ```
-一键配置ss-local [source file](/storage/linux/scripts/shadowsocks/debian9x_ss_local.sh)            
+一键配置ss-local [source file](/storage/linux/scripts/shadowsocks/shadowsocks-libev/debian9x_ss_local.sh)            
 ```sh
 wget -O debian9x_ss_local.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/shadowsocks/shadowsocks-libev/debian9x_ss_local.sh
 chmod +x ./debian9x_ss_local.sh
 ./debian9x_ss_local.sh
 ```
-一键配置ss-redir [source file](/storage/linux/scripts/shadowsocks/debian9x_ss_redir.sh)        
+一键配置ss-redir [source file](/storage/linux/scripts/shadowsocks/shadowsocks-libev/debian9x_ss_redir.sh)        
 ```sh
 wget -O debian9x_ss_redir.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/shadowsocks/shadowsocks-libev/debian9x_ss_redir.sh
 chmod +x ./debian9x_ss_redir.sh
 ./debian9x_ss_redir.sh
 ```
-一键配置ss-tunnel [source file](/storage/linux/scripts/shadowsocks/debian9x_ss_tunnel.sh)       
+一键配置ss-tunnel [source file](/storage/linux/scripts/shadowsocks/shadowsocks-libev/debian9x_ss_tunnel.sh)       
 ```sh
 wget -O debian9x_ss_tunnel.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/shadowsocks/shadowsocks-libev/debian9x_ss_tunnel.sh
 chmod +x ./debian9x_ss_tunnel.sh
