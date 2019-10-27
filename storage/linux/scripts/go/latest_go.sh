@@ -51,18 +51,16 @@ check_os_bits
 GO_VERSION=$(wget -q -O - https://golang.org/dl/ | grep -m1 -E "go[0-9]+\.[0-9]+\.*[0-9]*\.linux.*\.tar\.gz" | sed -E "s/.*go([0-9]+\.[0-9]+\.*[0-9]*)\.linux.*\.tar\.gz.*/\1/gm")
 GO_BITS=${bit}
 
-cd /tmp
-
-if [ -f go${GO_VERSION}.linux-${GO_BITS}.tar.gz ]; then
-	\rm -rf go${GO_VERSION}.linux-${GO_BITS}.tar.gz
+if [ -f /tmp/go${GO_VERSION}.linux-${GO_BITS}.tar.gz ]; then
+	\rm -rf /tmp/go${GO_VERSION}.linux-${GO_BITS}.tar.gz
 fi
 if [ -e /usr/local/go ]; then
 	\rm -rf /usr/local/go
 fi
 
-wget https://dl.google.com/go/go${GO_VERSION}.linux-${GO_BITS}.tar.gz
-tar -C /usr/local -xzf go${GO_VERSION}.linux-${GO_BITS}.tar.gz
-\rm -rf go${GO_VERSION}.linux-${GO_BITS}.tar.gz
+wget -O /tmp/go${GO_VERSION}.linux-${GO_BITS}.tar.gz https://dl.google.com/go/go${GO_VERSION}.linux-${GO_BITS}.tar.gz
+tar -C /usr/local -xzf /tmp/go${GO_VERSION}.linux-${GO_BITS}.tar.gz
+\rm -rf /tmp/go${GO_VERSION}.linux-${GO_BITS}.tar.gz
 
 go_environmental
 echo "The Go Programming Language ${GO_VERSION} install Success!"

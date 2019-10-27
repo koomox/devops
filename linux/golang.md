@@ -7,7 +7,7 @@ github 仓库: [传送门](https://github.com/golang/go/)
 从 `https://golang.org/dl/` 页面提取最新版本号，自动安装，设置环境变量。                
 ```sh
 curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/go/latest_go.sh
-chmod +x ./latest_go_v2.sh
+chmod +x ./latest_go.sh
 ./latest_go.sh
 ```
 从 `https://golang.org/` 页面提取最新版本号，自动安装，设置环境变量。                     
