@@ -39,54 +39,25 @@ sudo make install
 ```
 systemd 启动文件 [Link](/storage/linux/scripts/shadowsocks/shadowsocks-libev/debian/shadowsocks-libev-server@.service)         
 ```sh
-vim /etc/systemd/system/shadowsocks-libev-server@.service
-
 wget -O /etc/systemd/system/shadowsocks-libev-server@.service https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/shadowsocks/shadowsocks-libev/debian/shadowsocks-libev-server@.service
 systemctl enable shadowsocks-libev-server@server
 systemctl start shadowsocks-libev-server@server
 systemctl status shadowsocks-libev-server@server
 ```
-```ini
-#  This file is part of shadowsocks-libev.
-#
-#  Shadowsocks-libev is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 3 of the License, or
-#  (at your option) any later version.
-#
-#  This is a template unit file. Users may copy and rename the file into
-#  config directories to make new service instances. See systemd.unit(5)
-#  for details.
-
-[Unit]
-Description=Shadowsocks-Libev Custom Server Service for %I
-Documentation=man:ss-server(1)
-After=network.target
-
-[Service]
-Type=simple
-CapabilityBoundingSet=CAP_NET_BIND_SERVICE
-ExecStart=/usr/bin/ss-server -c /etc/shadowsocks-libev/%i.json
-
-[Install]
-WantedBy=multi-user.target
-```
-配置文件 `/etc/shadowsocks-libev/server.json`        
+配置文件 `/etc/shadowsocks-libev/server.json` [source file](/storage/linux/scripts/shadowsocks/server-config.json)       
 ```sh
 mkdir -p /etc/shadowsocks-libev && cd /etc/shadowsocks-libev
-echo "" > /etc/shadowsocks-libev/server.json && vim /etc/shadowsocks-libev/server.json
+wget -O /etc/shadowsocks-libev/server.json https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/shadowsocks/server-config.json
 ```
 ```
-{
-    "server":"0.0.0.0",
-    "server_port":${server_port},
-    "password":"${server_secret}",
-    "timeout":300,
-    "method":"aes-256-gcm",
-    "mode": "tcp_and_udp",
-}
+server_port=10000
+password=
+method=aes-256-gcm
+sed -i "s/my-server-ip/0.0.0.0/g" /etc/shadowsocks-libev/server.json
+sed -i "s/8888/${server_port}/g" /etc/shadowsocks-libev/server.json
+sed -i "s/mypassword/${password}/g" /etc/shadowsocks-libev/server.json
+sed -i "s/aes-256-cfb/${method}/g" /etc/shadowsocks-libev/server.json
 ```
-
 一键打包下载 shadowsocks-go 并上传至 firefox send [source file](/storage/linux/scripts/shadowsocks/download_shadowsocks_go.sh)            
 ```sh
 wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/shadowsocks/download_shadowsocks_go.sh
