@@ -70,7 +70,7 @@ acme.sh --issue --standalone -d example.com -d www.example.com -d cp.example.com
 wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.1/conf.d/default.conf
 
 domain=test.com
-sed -i 's/$domain/'"$domain"'/g' /etc/nginx/conf.d/default.conf
+sed -i "s/example.com/${domain}/g" /etc/nginx/conf.d/default.conf
 
 mkdir -p /etc/letsencrypt/live/$domain
 vim /etc/letsencrypt/live/$domain/fullchain.pem
