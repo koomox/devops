@@ -68,12 +68,15 @@ nginx v2ray 配置文件 `/etc/nginx/conf.d/v2ray.conf` [source file](/storage/l
 port=10000
 user_uuid=$(cat /proc/sys/kernel/random/uuid)
 path_uuid=$(cat /proc/sys/kernel/random/uuid)
+alterId=64
+
 wget -O /etc/v2ray/config.json https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/v2ray/websocket_tls/server.json
 sed -i "s/20e4d377-725a-4f30-81a9-4dc42272c093/${user_uuid}/g" /etc/v2ray/config.json
 sed -i "s/2b494de7-64a1-46f8-be61-9d600d8f34d9/${path_uuid}/g" /etc/v2ray/config.json
 sed -i "s/2b494de7-64a1-46f8-be61-9d600d8f34d9/${path_uuid}/g" /etc/nginx/conf.d/v2ray.conf
 sed -i "s/1080/${port}/g" /etc/v2ray/config.json
 sed -i "s/127.0.0.1:1080/127.0.0.1:${port}/g" /etc/nginx/conf.d/v2ray.conf
+sed -i "s/128/${alterId}/g" /etc/v2ray/config.json
 cat /etc/v2ray/config.json
 echo "user_uuid = ${user_uuid}"
 echo "path_uuid = ${path_uuid}"
@@ -84,9 +87,9 @@ systemctl stop v2ray
 systemctl start v2ray
 systemctl status v2ray
 ```
-客户端配置文件 `/etc/v2ray/config.json` [source](/storage/linux/scripts/v2ray/websocket_tls/client.json)         
+客户端配置文件 `/etc/v2ray/client.json` [source](/storage/linux/scripts/v2ray/websocket_tls/client.json)         
 ```sh
-wget -O /etc/v2ray/config.json https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/v2ray/websocket_tls/client.json
+wget -O /etc/v2ray/client.json https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/v2ray/websocket_tls/client.json
 
 local_addr="0.0.0.0"
 local_port=
@@ -96,13 +99,13 @@ user_uuid=
 path_uuid=
 alterId=64
 
-sed -i "s/127.0.0.1/${local_addr}/g" /etc/v2ray/config.json
-sed -i "s/1080/${local_port}/g" /etc/v2ray/config.json
-sed -i "s/example.com/${remote_addr}/g" /etc/v2ray/config.json
-sed -i "s/443/${remote_port}/g" /etc/v2ray/config.json
-sed -i "s/20e4d377-725a-4f30-81a9-4dc42272c093/${user_uuid}/g" /etc/v2ray/config.json
-sed -i "s/2b494de7-64a1-46f8-be61-9d600d8f34d9/${path_uuid}/g" /etc/v2ray/config.json
-sed -i "s/128/${alterId}/g" /etc/v2ray/config.json
+sed -i "s/127.0.0.1/${local_addr}/g" /etc/v2ray/client.json
+sed -i "s/1080/${local_port}/g" /etc/v2ray/client.json
+sed -i "s/example.com/${remote_addr}/g" /etc/v2ray/client.json
+sed -i "s/443/${remote_port}/g" /etc/v2ray/client.json
+sed -i "s/20e4d377-725a-4f30-81a9-4dc42272c093/${user_uuid}/g" /etc/v2ray/client.json
+sed -i "s/2b494de7-64a1-46f8-be61-9d600d8f34d9/${path_uuid}/g" /etc/v2ray/client.json
+sed -i "s/128/${alterId}/g" /etc/v2ray/client.json
 
-cat /etc/v2ray/config.json
+cat /etc/v2ray/client.json
 ```
