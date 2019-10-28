@@ -43,6 +43,19 @@ systemctl status nginx
 echo "hello world" > /var/www/letsencrypt/index
 ```
 ### SSL        
+一键安装二进制版 Nginx 1.16.1 [source file](/storage/linux/scripts/nginx/1.16.1/install.sh)             
+```sh
+wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.1/install.sh
+chmod +x ./install.sh
+./install.sh
+
+wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.1/conf.d/default.conf
+mkdir -p /var/www/html
+cd /var/www/html
+wget --content-disposition https://html5up.net/paradigm-shift/download
+apt install unzip -y
+unzip html5up-paradigm-shift.zip
+```
 安装 Let's Encrypt 证书, 证书路径 `~/.acme.sh/`            
 ```sh
 wget -O -  https://get.acme.sh | sh
