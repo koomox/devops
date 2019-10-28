@@ -32,7 +32,7 @@
       "settings": {
         "vnext": [
           {
-            "address": "google.com",
+            "address": "example.com",
             "port": 443,
             "users": [
               {

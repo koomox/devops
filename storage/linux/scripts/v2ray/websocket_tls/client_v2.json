@@ -1,7 +1,7 @@
 {
   "inbounds": [
     {
-      "port": $port,
+      "port": 1080,
       "listen": "0.0.0.0",
       "protocol": "socks",
       "sniffing": {
@@ -23,12 +23,12 @@
       "settings": {
         "vnext": [
           {
-            "address": "$domain",
+            "address": "example.com",
             "port": 443,
             "users": [
               {
-                "id": "$user_uuid",
-                "alterId": 64,
+                "id": "20e4d377-725a-4f30-81a9-4dc42272c093",
+                "alterId": 128,
                 "security": "auto"
               }
             ]
@@ -40,7 +40,7 @@
         "security": "tls",
         "wsSettings": {
           "connectionReuse": true,
-          "path": "$path_uuid"
+          "path": "2b494de7-64a1-46f8-be61-9d600d8f34d9"
         }
       }
     }
