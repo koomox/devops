@@ -34,10 +34,32 @@ sed -i 's/phpmyadmin/pma/g' /etc/nginx/conf.d/phpmyadmin.conf
 cat /etc/nginx/conf.d/phpmyadmin.conf
 ```
 ```sh
+systemctl enable nginx
 systemctl stop nginx
 systemctl start nginx
 systemctl status nginx
 ```
 ```sh
 echo "hello world" > /var/www/letsencrypt/index
+```
+### SSL        
+安装 Let's Encrypt 证书, 证书路径 `~/.acme.sh/`            
+```sh
+wget -O -  https://get.acme.sh | sh
+
+source ~/.bashrc
+
+systemctl stop nginx
+acme.sh --issue --standalone -d example.com -d www.example.com -d cp.example.com
+```
+强制 SSL 网页跳转 [source file](/storage/linux/scripts/nginx/1.16.1/conf.d/default.conf)           
+```sh
+wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.1/conf.d/default.conf
+
+domain=test.com
+sed -i 's/$domain/'"$domain"'/g' /etc/nginx/conf.d/default.conf
+
+mkdir -p /etc/letsencrypt/live/$domain
+vim /etc/letsencrypt/live/$domain/fullchain.pem
+vim /etc/letsencrypt/live/$domain/privkey.pem
 ```
