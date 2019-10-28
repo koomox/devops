@@ -38,15 +38,15 @@ chmod +x /etc/local.d/v2ray.start
 rc-update add local
 ```
 ### Nginx            
-`/etc/nginx/conf.d/default.conf` [source](/storage/linux/scripts/nginx/1.16.0/conf.d/default_v2ray.conf)        
-`/etc/nginx/conf.d/v2ray.conf` [source](/storage/linux/scripts/nginx/1.16.0/conf.d/v2ray.conf)           
+nginx 配置文件 `/etc/nginx/conf.d/default.conf` [source file](/storage/linux/scripts/nginx/1.16.0/conf.d/default_v2ray.conf)        
+nginx v2ray 配置文件 `/etc/nginx/conf.d/v2ray.conf` [source file](/storage/linux/scripts/nginx/1.16.0/conf.d/v2ray.conf)           
 ```sh
 mkdir -p /etc/nginx/conf.d
 wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.0/conf.d/default_v2ray.conf
 wget -O /etc/nginx/conf.d/v2ray.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.0/conf.d/v2ray.conf
 
 domain=test.com
-sed -i 's/$domain/'"$domain"'/g' /etc/nginx/conf.d/default.conf
+sed -i "s/example.com/${domain}/g" /etc/nginx/conf.d/default.conf
 
 mkdir -p /etc/letsencrypt/live/$domain
 vim /etc/letsencrypt/live/$domain/fullchain.pem
@@ -62,8 +62,8 @@ systemctl start nginx
 systemctl status nginx
 ```
 ### v2ray 配置文件       
-服务端配置文件
-[source](/storage/linux/scripts/v2ray/websocket_tls/server.json)         
+服务端配置文件 `/etc/v2ray/config.json` [source file](/storage/linux/scripts/v2ray/websocket_tls/server.json)          
+nginx v2ray 配置文件 `/etc/nginx/conf.d/v2ray.conf` [source file](/storage/linux/scripts/nginx/1.16.0/conf.d/v2ray.conf)       
 ```sh
 port=10000
 user_uuid=$(cat /proc/sys/kernel/random/uuid)
