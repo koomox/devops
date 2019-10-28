@@ -18,13 +18,9 @@ wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/script
 chmod +x ./install_nginx1160.sh
 ./install_nginx1160.sh
 ```
+```sh
+domain=example.com
 
-```sh
-sed -i 's/localhost/*.com www.*.com/g' /etc/nginx/conf.d/*.com.conf
-sed -i 's/$domain/*.com/g' /etc/nginx/conf.d/*.com.conf
-sed -i 's/\/var\/www\/html/\/${public_path}/g' /etc/nginx/conf.d/*.com.conf
-```
-```sh
 mkdir -p /etc/letsencrypt/live/$domain
 touch /etc/letsencrypt/live/$domain/fullchain.pem
 touch /etc/letsencrypt/live/$domain/privkey.pem

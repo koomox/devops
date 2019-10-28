@@ -98,7 +98,7 @@ alterId=64
 
 sed -i "s/127.0.0.1/${local_addr}/g" /etc/v2ray/config.json
 sed -i "s/1080/${local_port}/g" /etc/v2ray/config.json
-sed -i "s/google.com/${remote_addr}/g" /etc/v2ray/config.json
+sed -i "s/example.com/${remote_addr}/g" /etc/v2ray/config.json
 sed -i "s/443/${remote_port}/g" /etc/v2ray/config.json
 sed -i "s/20e4d377-725a-4f30-81a9-4dc42272c093/${user_uuid}/g" /etc/v2ray/config.json
 sed -i "s/2b494de7-64a1-46f8-be61-9d600d8f34d9/${path_uuid}/g" /etc/v2ray/config.json
