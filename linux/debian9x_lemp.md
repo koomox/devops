@@ -86,12 +86,17 @@ tuna 源
 echo -e "deb [arch=amd64] http://mirrors.tuna.tsinghua.edu.cn/mariadb/repo/10.4/debian $(lsb_release -sc) main\ndeb-src http://mirrors.tuna.tsinghua.edu.cn/mariadb/repo/10.4/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
 cat /etc/apt/sources.list.d/MariaDB.list
 ```
+ubuntu 源       
+```sh
+echo -e "deb [arch=amd64,arm64,ppc64el] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.4/ubuntu $(lsb_release -sc) main\ndeb-src http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.4/ubuntu $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
+cat /etc/apt/sources.list.d/MariaDB.list
+```
 ```sh
 sudo apt-get update -y
 sudo apt-get install mariadb-server -y
 ```
 使 root 用户可以远程登录        
-```sh
+```sql
 SELECT User, Host, Password FROM mysql.user;
 
 DROP USER 'root'@'%';
@@ -99,5 +104,11 @@ DROP USER 'root'@'%';
 GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY 'password';
 FLUSH PRIVILEGES;
 
-SELECT User, Host, Password FROM mysql.user;
+SELECT User, Host, Password, plugin FROM mysql.user;
+```
+修改密码后, 仍然可以使用空密码登录如何解决?           
+```sql
+UPDATE mysql.user SET plugin='';
+FLUSH PRIVILEGES;
+SELECT User, Host, Password, plugin FROM mysql.user;
 ```
