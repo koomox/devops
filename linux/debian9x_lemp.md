@@ -50,6 +50,10 @@ apt update
 ```
 ubuntu 源          
 ```sh
+sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x4F4EA0AAE5267A6C
+sudo apt update -y
+sudo apt upgrade -y
+
 echo -e "deb http://ppa.launchpad.net/ondrej/php/ubuntu $(lsb_release -sc) main\ndeb-src http://ppa.launchpad.net/ondrej/php/ubuntu $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
 cat /etc/apt/sources.list.d/php.list
 ```
