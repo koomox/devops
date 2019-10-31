@@ -106,7 +106,7 @@ sudo apt-get install mariadb-server -y
 ```
 使 root 用户可以远程登录        
 ```sql
-SELECT User, Host, Password FROM mysql.user;
+SELECT User, Host, Password, plugin FROM mysql.user;
 
 DROP USER 'root'@'%';
 
@@ -118,6 +118,11 @@ SELECT User, Host, Password, plugin FROM mysql.user;
 修改密码后, 仍然可以使用空密码登录如何解决?           
 ```sql
 UPDATE mysql.user SET plugin='';
+FLUSH PRIVILEGES;
+SELECT User, Host, Password, plugin FROM mysql.user;
+```
+```sql
+UPDATE mysql.user SET plugin='mysql_native_password';
 FLUSH PRIVILEGES;
 SELECT User, Host, Password, plugin FROM mysql.user;
 ```
