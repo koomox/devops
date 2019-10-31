@@ -48,6 +48,11 @@ wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 sh -c 'echo "deb https://mirror.xtom.com.hk/sury/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
 apt update
 ```
+ubuntu 源          
+```sh
+echo -e "deb http://ppa.launchpad.net/ondrej/php/ubuntu $(lsb_release -sc) main\ndeb-src http://ppa.launchpad.net/ondrej/php/ubuntu $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
+cat /etc/apt/sources.list.d/php.list
+```
 安装 php7.3-fpm           
 ```sh
 apt install -y php7.3 php7.3-common php7.3-cli php7.3-fpm php7.3-mysql php7.3-xml php7.3-curl php7.3-mbstring php7.3-zip php7.3-bz2 php7.3-bcmath php7.3-gd php7.3-intl
