@@ -67,13 +67,13 @@ wget -O /etc/nginx/conf.d/nextcloud.conf https://raw.githubusercontent.com/koomo
 cp -f /etc/nginx/conf.d/nextcloud.conf /etc/nginx/conf.d/nextcloud.conf.bak
 
 domain="example.com"
-cert="/etc/ssl/nginx/cloud.example.com.crt"
-key="/etc/ssl/nginx/cloud.example.com.key"
-sed -ri "s/^(.*)(server 127.0.0.1)(.*)/\1#\2\3/g" /etc/nginx/conf.d/nextcloud.conf
-sed -ri "s/^(.*)(server unix:|#server unix:)(.*)/\1server unix:\/run\/php\/php7.3-fpm.sock/g" /etc/nginx/conf.d/nextcloud.conf
-sed -ri "s/^(.*)(server_name )(.*)/\1\2${domain}/g" /etc/nginx/conf.d/nextcloud.conf
-sed -ri "s/^(.*)(ssl_certificate )(.*)/\1\2${cert}/g" /etc/nginx/conf.d/nextcloud.conf
-sed -ri "s/^(.*)(ssl_certificate_key )(.*)/\1\2${key}/g" /etc/nginx/conf.d/nextcloud.conf
+cert="\/etc\/ssl\/nginx\/cloud.example.com.crt"
+key="\/etc\/ssl\/nginx\/cloud.example.com.key"
+sed -ri "s/^(.*)(server 127.0.0.1)(.*)/    #\2\3/g" /etc/nginx/conf.d/nextcloud.conf
+sed -ri "s/^(.*)(server unix:)(.*)/    server unix:\/run\/php\/php7.3-fpm.sock;/g" /etc/nginx/conf.d/nextcloud.conf
+sed -ri "s/^(.*)(server_name )(.*)/\1\2${domain};/g" /etc/nginx/conf.d/nextcloud.conf
+sed -ri "s/^(.*)(ssl_certificate )(.*)/\1\2${cert};/g" /etc/nginx/conf.d/nextcloud.conf
+sed -ri "s/^(.*)(ssl_certificate_key )(.*)/\1\2${key};/g" /etc/nginx/conf.d/nextcloud.conf
 
 grep -E "^.*(server|server_name|ssl_certificate|ssl_certificate_key)( )(.*)" /etc/nginx/conf.d/nextcloud.conf
 ```
