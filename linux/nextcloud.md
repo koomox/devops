@@ -95,3 +95,41 @@ systemctl stop nginx
 systemctl start nginx
 systemctl status nginx
 ```
+### 配置 MariaDB         
+配置 MariaDB 数据库，以支持 emoji, 打开 `/etc/mysql/mariadb.conf.d/50-server.cnf` 文件, mysqld 下面添加内容                  
+```sh
+vim /etc/mysql/mariadb.conf.d/50-server.cnf
+```
+```ini
+[mysqld]
+innodb_large_prefix=true
+innodb_file_format=barracuda
+innodb_file_per_table=1
+```
+设置 mariadb 文件格式为 `Barracuda`          
+```sql
+show variables like 'innodb_file_format';
+SET GLOBAL innodb_file_format=Barracuda;
+```
+设置 nextcloud 数据库格式      
+```sql
+ALTER DATABASE nextcloud CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+```
+进入 nextcloud 目录转换文件格式          
+```sh
+cd /var/www/nextcloud
+
+sudo -u www-data php occ config:system:set mysql.utf8mb4 --type boolean --value="true"
+sudo -u www-data php occ maintenance:repair
+```
+进入数据库, 更改文件格式          
+```sql
+SELECT NAME, SPACE, FILE_FORMAT FROM INFORMATION_SCHEMA.INNODB_SYS_TABLES WHERE NAME like "nextcloud%";
+
+USE INFORMATION_SCHEMA;
+SELECT CONCAT("ALTER TABLE `", TABLE_SCHEMA,"`.`", TABLE_NAME, "` ROW_FORMAT=DYNAMIC;") AS MySQLCMD FROM TABLES WHERE TABLE_SCHEMA = "nextcloud";
+```
+重启数据库         
+```sh
+systemctl restart mariadb
+```
