@@ -36,7 +36,7 @@ echo `openssl rand -base64 50  | tr -dc A-Z-a-z-0-9 | head -c${1:-32}`
 ```sh
 sed -ri "s/^.*(cfg)(.*')(pmadb|bookmarktable|relation|table_info|table_coords|pdf_pages|column_info|history|table_uiprefs|tracking|userconfig|recent|favorite|users|usergroups|navigationhiding|savedsearches|central_columns|designer_settings|export_templates)('.*)$/\$\1\2\3\4/g" config.inc.php
 
-grep -E "^.*($cfg\[.*\]\[')(pmadb|bookmarktable|relation|table_info|table_coords|pdf_pages|column_info|history|table_uiprefs|tracking|userconfig|recent|favorite|users|usergroups|navigationhiding|savedsearches|central_columns|designer_settings|export_templates)('].*)$" config.inc.php
+grep -E "cfg\['Servers'\]" config.inc.php
 ```
 导入数据库         
 ```sh
