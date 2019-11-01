@@ -8,8 +8,9 @@ App Store for NextCloud: [Link](https://apps.nextcloud.com/)
 ```sh
 wget https://download.nextcloud.com/server/releases/nextcloud-17.0.0.tar.bz2
 
-\rm -rf /web/nextcloud
-tar -jxf nextcloud-17.0.0.tar.bz2 -C /web
+mkdir -p /var/www
+\rm -rf /var/www/nextcloud
+tar -jxf nextcloud-17.0.0.tar.bz2 -C /var/www
 ```
 新建数据库用户               
 ```sql
@@ -37,10 +38,10 @@ SHOW DATABASES;
 ```
 权限        
 ```sh
-mkdir -p /web/nextcloud/{data,custom_apps}
-chmod -R 775 /web/nextcloud
-chown -R www-data:www-data /web/nextcloud
-chmod +x /web/nextcloud/occ
+mkdir -p /var/www/nextcloud/{data,custom_apps}
+chmod -R 775 /var/www/nextcloud
+chown -R www-data:www-data /var/www/nextcloud
+chmod +x /var/www/nextcloud/occ
 ```
 配置 php-fpm           
 ```sh
@@ -57,6 +58,14 @@ cat /etc/php/7.3/fpm/pool.d/www.conf
 systemctl stop php7.3-fpm
 systemctl start php7.3-fpm
 systemctl status php7.3-fpm
+```
+配置 nginx        
+Nextcloud in the webroot of nginx [source](/storage/linux/scripts/nextcloud/17.x/nginx-nextcloud.conf)        
+Nextcloud in a subdir of nginx [source](/storage/linux/scripts/nextcloud/17.x/nginx-subdir-nextcloud.conf)           
+```sh
+wget -O /etc/nginx/conf.d/nextcloud.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nextcloud/17.x/nginx-nextcloud.conf
+
+sed -i "s/cloud.example.com/example.com/g" /etc/nginx/conf.d/nextcloud.conf
 ```
 重新启动 nginx        
 ```sh
