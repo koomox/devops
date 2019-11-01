@@ -13,14 +13,15 @@ tar -jxf nextcloud-17.0.0.tar.bz2 -C /web
 ```
 新建数据库用户               
 ```sql
-CREATE USER 'nextcloud'@'%' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON *.* TO 'nextcloud'@'%';
+CREATE USER 'nextcloud'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextcloud'@'localhost';
+UPDATE mysql.user SET plugin='mysql_native_password';
 FLUSH PRIVILEGES;
 SELECT User, Host, Password, plugin FROM mysql.user;
 ```
 删除数据库用户          
 ```sql
-DROP USER 'nextcloud'@'%';
+DROP USER 'nextcloud'@'localhost';
 FLUSH PRIVILEGES;
 SELECT User, Host, Password, plugin FROM mysql.user;
 ```
@@ -37,7 +38,7 @@ SHOW DATABASES;
 权限        
 ```sh
 mkdir -p /web/nextcloud/{data,custom_apps}
-chmod -R 750 /web/nextcloud
+chmod -R 775 /web/nextcloud
 chown -R www-data:www-data /web/nextcloud
 chmod +x /web/nextcloud/occ
 ```
