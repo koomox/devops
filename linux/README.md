@@ -33,6 +33,8 @@
 [Debian 9.x for LEMP](debian9x_lemp.md)            
 [CentOS 7.x for LNMP](centos7x_lnmp.md)              
 [CentOS 7.x for OpenLDAP](centos7x_openldap.md)            
+# PHP        
+[WordPress](wordpress.md)          
 # PXE           
 [PXE](pxe.md)         
 # 其他          
