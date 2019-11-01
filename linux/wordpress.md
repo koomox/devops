@@ -14,6 +14,7 @@ cp /web/wordpress/wp-config-sample.php /web/wordpress/wp-config.php
 新建数据库用户               
 ```sql
 CREATE USER 'wordpress'@'%' IDENTIFIED BY 'password';
+UPDATE mysql.user SET plugin='mysql_native_password';
 GRANT ALL PRIVILEGES ON *.* TO 'wordpress'@'%';
 FLUSH PRIVILEGES;
 SELECT User, Host, Password, plugin FROM mysql.user;
