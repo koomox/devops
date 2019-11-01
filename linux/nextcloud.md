@@ -58,3 +58,9 @@ systemctl stop php7.3-fpm
 systemctl start php7.3-fpm
 systemctl status php7.3-fpm
 ```
+重新启动 nginx        
+```sh
+systemctl stop nginx
+systemctl start nginx
+systemctl status nginx
+```
