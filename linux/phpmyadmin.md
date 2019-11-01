@@ -9,9 +9,9 @@ mkdir -p /web/phpMyAdmin
 xz -d phpMyAdmin-4.9.1-all-languages.tar.xz
 tar --strip-components 1 -C /web/phpMyAdmin -xf phpMyAdmin-4.9.1-all-languages.tar
 
-cp /web/phpMyAdmin/config.sample.inc.php /web/phpMyAdmin/config.inc.php
-
 cd /web/phpMyAdmin
+\cp -f config.sample.inc.php config.inc.php
+
 secret=`openssl rand -base64 50  | tr -dc A-Z-a-z-0-9 | head -c${1:-32}`
 sed -ri "s/cfg\['blowfish_secret'\] = '.*'/cfg['blowfish_secret'] = '${secret}'/" config.inc.php
 grep -E "^*cfg\['blowfish_secret'\]" config.inc.php
