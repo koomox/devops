@@ -5,10 +5,15 @@ Home: [Link](https://www.phpmyadmin.net/downloads/)
 wget https://files.phpmyadmin.net/phpMyAdmin/4.9.1/phpMyAdmin-4.9.1-all-languages.tar.xz
 
 \rm -rf /web/phpMyAdmin
+mkdir -p /web/phpMyAdmin
 xz -d phpMyAdmin-4.9.1-all-languages.tar.xz
-tar -xf phpMyAdmin-4.9.1-all-languages.tar -C /web/phpMyAdmin
+tar --strip-components 1 -C /web/phpMyAdmin -xf phpMyAdmin-4.9.1-all-languages.tar
 
 cp /web/phpMyAdmin/config.sample.inc.php /web/phpMyAdmin/config.inc.php
+
+secret=`openssl rand -base64 50  | tr -dc A-Z-a-z-0-9 | head -c${1:-32}`
+sed -ri "s/cfg\['blowfish_secret'\] = '.*'/cfg['blowfish_secret'] = '${secret}'/" /web/phpMyAdmin/config.inc.php
+grep -E "^*blowfish_secret" /web/phpMyAdmin/config.inc.php
 ```
 打开 `config.inc.php` 文件并编译。找到 `config.inc.php` 文件中的如下两行，`blowfish_secret` 为绝密的短语密码。              
 ```php
