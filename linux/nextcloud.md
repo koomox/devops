@@ -14,7 +14,6 @@ tar -jxf nextcloud-17.0.0.tar.bz2 -C /web
 新建数据库用户               
 ```sql
 CREATE USER 'nextcloud'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextcloud'@'localhost';
 UPDATE mysql.user SET plugin='mysql_native_password';
 FLUSH PRIVILEGES;
 SELECT User, Host, Password, plugin FROM mysql.user;
@@ -28,6 +27,7 @@ SELECT User, Host, Password, plugin FROM mysql.user;
 创建数据库        
 ```sql
 CREATE DATABASE IF NOT EXISTS `nextcloud` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextcloud'@'localhost';
 SHOW DATABASES;
 ```
 删除删除库        
