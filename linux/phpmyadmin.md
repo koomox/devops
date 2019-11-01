@@ -11,9 +11,10 @@ tar --strip-components 1 -C /web/phpMyAdmin -xf phpMyAdmin-4.9.1-all-languages.t
 
 cp /web/phpMyAdmin/config.sample.inc.php /web/phpMyAdmin/config.inc.php
 
+cd /web/phpMyAdmin
 secret=`openssl rand -base64 50  | tr -dc A-Z-a-z-0-9 | head -c${1:-32}`
-sed -ri "s/cfg\['blowfish_secret'\] = '.*'/cfg['blowfish_secret'] = '${secret}'/" /web/phpMyAdmin/config.inc.php
-grep -E "^*blowfish_secret" /web/phpMyAdmin/config.inc.php
+sed -ri "s/cfg\['blowfish_secret'\] = '.*'/cfg['blowfish_secret'] = '${secret}'/" config.inc.php
+grep -E "^*cfg\['blowfish_secret'\]" config.inc.php
 ```
 打开 `config.inc.php` 文件并编译。找到 `config.inc.php` 文件中的如下两行，`blowfish_secret` 为绝密的短语密码。              
 ```php
