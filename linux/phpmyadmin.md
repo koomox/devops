@@ -47,6 +47,14 @@ mysql -uroot -p < /web/phpMyAdmin/sql/create_tables.sql
 chmod -R 750 /web/phpMyAdmin
 chown -R www-data:www-data /web/phpMyAdmin
 ```
+配置 nginx, 设置随机字符串路径, 防止爆破         
+```sh
+wget -O /etc/nginx/conf.d/phpmyadmin.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.0/conf.d/phpmyadmin.conf
+
+phpmyadmin=`openssl rand -base64 50  | tr -dc A-Z-a-z-0-9 | head -c${1:-16}`
+sed -ri "s/^(.*)(location)(.*)phpmyadmin(.*)/\1\2\3${phpmyadmin}\4/g" /etc/nginx/conf.d/phpmyadmin.conf
+grep -E "^(.*)(location)(.*)\/(.*)" /etc/nginx/conf.d/phpmyadmin.conf
+```
 重新启动 nginx            
 ```sh
 systemctl stop nginx
