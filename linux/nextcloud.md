@@ -18,6 +18,12 @@ GRANT ALL PRIVILEGES ON *.* TO 'nextcloud'@'%';
 FLUSH PRIVILEGES;
 SELECT User, Host, Password, plugin FROM mysql.user;
 ```
+删除数据库用户          
+```sql
+DROP USER 'nextcloud'@'%';
+FLUSH PRIVILEGES;
+SELECT User, Host, Password, plugin FROM mysql.user;
+```
 创建数据库        
 ```sql
 CREATE DATABASE IF NOT EXISTS `nextcloud` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
