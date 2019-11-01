@@ -65,6 +65,15 @@ sed -ri "s/^memory_limit()( = ).*/memory_limit = 512M/g" /etc/php/7.3/fpm/php.in
 
 grep -E "^(post_max_size|upload_max_filesize|memory_limit)( = ).*" /etc/php/7.3/fpm/php.ini
 ```
+```sh
+sed -ri "s/^(.*)opcache.enable=(.*)/opcache.enable=1/g" /etc/php/7.3/fpm/php.ini
+sed -ri "s/^(.*)opcache.interned_strings_buffer=(.*)/opcache.interned_strings_buffer=8/g" /etc/php/7.3/fpm/php.ini
+sed -ri "s/^(.*)opcache.max_accelerated_files=(.*)/opcache.max_accelerated_files=10000/g" /etc/php/7.3/fpm/php.ini
+sed -ri "s/^(.*)opcache.memory_consumption=(.*)/opcache.memory_consumption=128/g" /etc/php/7.3/fpm/php.ini
+sed -ri "s/^(.*)opcache.save_comments=(.*)/opcache.save_comments=1/g" /etc/php/7.3/fpm/php.ini
+
+grep -E "^opcache\.(.*)" /etc/php/7.3/fpm/php.ini
+```
 重新启动 php-fpm        
 ```sh
 systemctl stop php7.3-fpm
