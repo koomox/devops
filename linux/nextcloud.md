@@ -45,11 +45,8 @@ chmod +x /var/www/nextcloud/occ
 ```
 配置 php-fpm           
 ```sh
-sed -i '/pm =/cpm = dynamic' /etc/php/7.3/fpm/pool.d/www.conf
-sed -i '/pm.max_children =/cpm.max_children = 120' /etc/php/7.3/fpm/pool.d/www.conf
-sed -i '/pm.start_servers =/cpm.start_servers = 12' /etc/php/7.3/fpm/pool.d/www.conf
-sed -i '/pm.min_spare_servers =/cpm.min_spare_servers = 6' /etc/php/7.3/fpm/pool.d/www.conf
-sed -i '/pm.max_spare_servers =/cpm.max_spare_servers = 18' /etc/php/7.3/fpm/pool.d/www.conf
+sed -i '/^pm.*/d' /etc/php/7.3/fpm/pool.d/www.conf
+echo -e "pm = dynamic\npm.max_children = 120\npm.start_servers = 12\npm.min_spare_servers = 6\npm.max_spare_servers = 18" >> /etc/php/7.3/fpm/pool.d/www.conf
 
 cat /etc/php/7.3/fpm/pool.d/www.conf
 ```
