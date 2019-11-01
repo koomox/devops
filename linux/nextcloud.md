@@ -9,7 +9,6 @@ App Store for NextCloud: [Link](https://apps.nextcloud.com/)
 wget https://download.nextcloud.com/server/releases/nextcloud-17.0.0.tar.bz2
 
 \rm -rf /web/nextcloud
-mkdir -p /web/nextcloud
 tar -jxf nextcloud-17.0.0.tar.bz2 -C /web
 ```
 新建数据库用户               
@@ -31,6 +30,8 @@ SHOW DATABASES;
 ```
 权限        
 ```sh
-chmod -R 750 /web/wordpress
-chown -R www-data:www-data /web/wordpress
+mkdir -p /web/nextcloud/{data,custom_apps}
+chmod -R 750 /web/nextcloud
+chown -R www-data:www-data /web/nextcloud
+chmod +x /web/nextcloud/occ
 ```
