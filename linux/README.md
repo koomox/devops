@@ -14,7 +14,6 @@
 [压缩、解压命令](compress.md)              
 [修复 OpenSSL 心脏出血漏洞Heartbleed](heartbleed.md)               
 [常用库](package.md)             
-[NextCloud](nextcloud.md)                      
 [CentOS 7.x 安装 NextCloud](centos7x_nextcloud.md)           
 [安装 Golang 语言](golang.md)              
 [Samba](samba.md)           
@@ -29,6 +28,7 @@
 [Docker for Ubuntu Server 17.04](docker/ubuntuserver17x.md)                  
 [Docker for CentOS 7.x](docker/centos7x.md)                  
 [certbot on docker for CentOS 7.x](docker/docker_certbot.md)
+[docker for NextCloud](docker_nextcloud.md)                      
 # LNMP        
 [Debian 9.x for LEMP](debian9x_lemp.md)            
 [CentOS 7.x for LNMP](centos7x_lnmp.md)              
@@ -36,6 +36,7 @@
 # PHP        
 [WordPress](wordpress.md)          
 [phpMyAdmin](phpmyadmin.md)        
+[NextCloud](nextcloud.md)         
 # PXE           
 [PXE](pxe.md)         
 # 其他          
