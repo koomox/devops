@@ -6,7 +6,7 @@ Themes: [Link](https://wordpress.com/themes)
 wget https://wordpress.org/latest.tar.gz
 
 mkdir -p /web
-\rm -rf /web/wordpress /web/latest.tar.gz
+\rm -rf /web/wordpress
 tar -zxf latest.tar.gz -C /web
 
 cp /web/wordpress/wp-config-sample.php /web/wordpress/wp-config.php 

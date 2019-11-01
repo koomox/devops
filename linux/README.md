@@ -35,6 +35,7 @@
 [CentOS 7.x for OpenLDAP](centos7x_openldap.md)            
 # PHP        
 [WordPress](wordpress.md)          
+[phpMyAdmin](phpmyadmin.md)        
 # PXE           
 [PXE](pxe.md)         
 # 其他          
