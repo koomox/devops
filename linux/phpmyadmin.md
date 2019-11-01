@@ -47,7 +47,7 @@ mysql -uroot -p < /web/phpMyAdmin/sql/create_tables.sql
 chmod -R 750 /web/phpMyAdmin
 chown -R www-data:www-data /web/phpMyAdmin
 ```
-配置 nginx, 设置随机字符串路径, 防止爆破         
+配置 nginx, 设置随机字符串路径, 防止爆破 [source](/storage/linux/scripts/nginx/1.16.0/conf.d/phpmyadmin.conf)        
 ```sh
 wget -O /etc/nginx/conf.d/phpmyadmin.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.0/conf.d/phpmyadmin.conf
 
