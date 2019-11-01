@@ -46,7 +46,9 @@ chmod +x /var/www/nextcloud/occ
 配置 php-fpm           
 ```sh
 sed -i '/^pm.*/d' /etc/php/7.3/fpm/pool.d/www.conf
+sed -i '/^env.*/d' /etc/php/7.3/fpm/pool.d/www.conf
 echo -e "pm = dynamic\npm.max_children = 120\npm.start_servers = 12\npm.min_spare_servers = 6\npm.max_spare_servers = 18" >> /etc/php/7.3/fpm/pool.d/www.conf
+echo -e "env[HOSTNAME] = \$HOSTNAME\nenv[PATH] = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\nenv[TMP] = /tmp\nenv[TMPDIR] = /tmp\nenv[TEMP] = /tmp" >> /etc/php/7.3/fpm/pool.d/www.conf
 
 cat /etc/php/7.3/fpm/pool.d/www.conf
 ```
