@@ -64,15 +64,18 @@ Nextcloud in the webroot of nginx [source](/storage/linux/scripts/nextcloud/17.x
 Nextcloud in a subdir of nginx [source](/storage/linux/scripts/nextcloud/17.x/nginx-subdir-nextcloud.conf)           
 ```sh
 wget -O /etc/nginx/conf.d/nextcloud.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nextcloud/17.x/nginx-nextcloud.conf
+cp -f /etc/nginx/conf.d/nextcloud.conf /etc/nginx/conf.d/nextcloud.conf.bak
 
 domain="example.com"
 cert="/etc/ssl/nginx/cloud.example.com.crt"
 key="/etc/ssl/nginx/cloud.example.com.key"
-sed -i "s/^(.*)(server_name )(.*)/c\1\2${domain}" /etc/nginx/conf.d/nextcloud.conf
-sed -i "/^(.*)(ssl_certificate )(.*)/c\1\2${cert}" /etc/nginx/conf.d/nextcloud.conf
-sed -i "/^(.*)(ssl_certificate_key )().*/c\1\2${key}" /etc/nginx/conf.d/nextcloud.conf
+sed -ri "s/^(.*)(server 127.0.0.1)(.*)/\1#\2\3/g" /etc/nginx/conf.d/nextcloud.conf
+sed -ri "s/^(.*)(server unix:|#server unix:)(.*)/\1server unix:\/run\/php\/php7.3-fpm.sock/g" /etc/nginx/conf.d/nextcloud.conf
+sed -ri "s/^(.*)(server_name )(.*)/\1\2${domain}/g" /etc/nginx/conf.d/nextcloud.conf
+sed -ri "s/^(.*)(ssl_certificate )(.*)/\1\2${cert}/g" /etc/nginx/conf.d/nextcloud.conf
+sed -ri "s/^(.*)(ssl_certificate_key )().*/\1\2${key}/g" /etc/nginx/conf.d/nextcloud.conf
 
-grep -E "^.*(server_name|ssl_certificate|ssl_certificate_key)( )(.*)" /etc/nginx/conf.d/nextcloud.conf
+grep -E "^.*(server|server_name|ssl_certificate|ssl_certificate_key)( )(.*)" /etc/nginx/conf.d/nextcloud.conf
 ```
 重新启动 nginx        
 ```sh
