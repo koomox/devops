@@ -27,7 +27,7 @@ SELECT User, Host, Password, plugin FROM mysql.user;
 创建数据库        
 ```sql
 CREATE DATABASE IF NOT EXISTS `nextcloud` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextcloud'@'localhost';
+GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextcloud'@'localhost' WITH GRANT OPTION;
 SHOW DATABASES;
 ```
 删除删除库        
