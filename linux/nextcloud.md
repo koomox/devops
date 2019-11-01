@@ -65,7 +65,14 @@ Nextcloud in a subdir of nginx [source](/storage/linux/scripts/nextcloud/17.x/ng
 ```sh
 wget -O /etc/nginx/conf.d/nextcloud.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nextcloud/17.x/nginx-nextcloud.conf
 
-sed -i "s/cloud.example.com/example.com/g" /etc/nginx/conf.d/nextcloud.conf
+domain="example.com"
+cert="/etc/ssl/nginx/cloud.example.com.crt"
+key="/etc/ssl/nginx/cloud.example.com.key"
+sed -i "s/^(.*)(server_name )(.*)/c\1\2${domain}" /etc/nginx/conf.d/nextcloud.conf
+sed -i "/^(.*)(ssl_certificate )(.*)/c\1\2${cert}" /etc/nginx/conf.d/nextcloud.conf
+sed -i "/^(.*)(ssl_certificate_key )().*/c\1\2${key}" /etc/nginx/conf.d/nextcloud.conf
+
+grep -E "^.*(server_name|ssl_certificate|ssl_certificate_key)( )(.*)" /etc/nginx/conf.d/nextcloud.conf
 ```
 重新启动 nginx        
 ```sh
