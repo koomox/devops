@@ -52,6 +52,19 @@ echo -e "env[HOSTNAME] = \$HOSTNAME\nenv[PATH] = /usr/local/sbin:/usr/local/bin:
 
 cat /etc/php/7.3/fpm/pool.d/www.conf
 ```
+配置 php.ini         
+```ini
+memory_limit = 128M
+post_max_size = 16M
+upload_max_filesize = 2M
+```
+```sh
+sed -ri "s/^post_max_size()( = ).*/post_max_size = 10000M/g" /etc/php/7.3/fpm/php.ini
+sed -ri "s/^upload_max_filesize()( = ).*/upload_max_filesize = 10000M/g" /etc/php/7.3/fpm/php.ini
+sed -ri "s/^memory_limit()( = ).*/memory_limit = 512M/g" /etc/php/7.3/fpm/php.ini
+
+grep -E "^(post_max_size|upload_max_filesize|memory_limit)( = ).*" /etc/php/7.3/fpm/php.ini
+```
 重新启动 php-fpm        
 ```sh
 systemctl stop php7.3-fpm
