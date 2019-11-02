@@ -1,6 +1,7 @@
 # WordPress          
 Home: [Link](https://wordpress.org/download/)         
 Themes: [Link](https://wordpress.com/themes)          
+WooCommerce [Link](https://wordpress.org/plugins/woocommerce/)        
 ### 部署 wordpress        
 ```sh
 wget https://wordpress.org/latest.tar.gz
