@@ -1,4 +1,8 @@
 # Nginx            
+Home [Link](https://nginx.org/en/download.html)          
+OpenSSL [Link](https://www.openssl.org/source/)         
+Zlib [Link](https://zlib.net/)       
+pcre [Link](https://ftp.pcre.org/pub/pcre/)         
 ### 一键安装脚本        
 Linux 一键安装脚本 [查看源文件](../storage/linux/scripts/nginx/install_nginx1142.sh)         
 ```sh
