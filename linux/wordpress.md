@@ -1,6 +1,7 @@
 # WordPress          
 Home: [Link](https://wordpress.org/download/)         
 Themes: [Link](https://wordpress.com/themes)          
+Astra Starter Sites [Link](https://wordpress.org/plugins/astra-sites/)        
 WooCommerce [Link](https://wordpress.org/plugins/woocommerce/)        
 ### 部署 wordpress        
 ```sh
@@ -14,15 +15,26 @@ cp /web/wordpress/wp-config-sample.php /web/wordpress/wp-config.php
 ```
 新建数据库用户               
 ```sql
-CREATE USER 'wordpress'@'%' IDENTIFIED BY 'password';
+CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'password';
 UPDATE mysql.user SET plugin='mysql_native_password';
-GRANT ALL PRIVILEGES ON *.* TO 'wordpress'@'%';
+FLUSH PRIVILEGES;
+SELECT User, Host, Password, plugin FROM mysql.user;
+```
+删除数据库用户          
+```sql
+DROP USER 'wordpress'@'localhost';
 FLUSH PRIVILEGES;
 SELECT User, Host, Password, plugin FROM mysql.user;
 ```
 创建数据库        
 ```sql
 CREATE DATABASE IF NOT EXISTS `wordpress` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'localhost';
+SHOW DATABASES;
+```
+删除删除库        
+```sql
+DROP DATABASE wordpress;
 SHOW DATABASES;
 ```
 权限        

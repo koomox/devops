@@ -15,7 +15,7 @@ tar -jxf nextcloud-17.0.0.tar.bz2 -C /var/www
 新建数据库用户               
 ```sql
 CREATE USER 'nextcloud'@'localhost' IDENTIFIED BY 'password';
-UPDATE mysql.user SET plugin='mysql_native_password';
+UPDATE mysql.user SET plugin = 'mysql_native_password';
 FLUSH PRIVILEGES;
 SELECT User, Host, Password, plugin FROM mysql.user;
 ```
