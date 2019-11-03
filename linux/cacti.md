@@ -10,7 +10,7 @@ apt install snmpd snmp snmp-mibs-downloader
 cp -f /etc/default/snmpd /etc/default/snmpd.bak
 
 sed -E -i '/^#*export (.*)MIBS/cexport MIBS=ALL' /etc/default/snmpd
-grep -E "^#*export( *)MIBS=" /etc/default/snmpd
+grep -E "^#*export ( *)MIBS=" /etc/default/snmpd
 ```
 ```sh
 cp -f /etc/snmp/snmpd.conf /etc/snmp/snmpd.conf.bak
