@@ -37,6 +37,7 @@
 [WordPress](wordpress.md)          
 [phpMyAdmin](phpmyadmin.md)        
 [NextCloud](nextcloud.md)         
+[Cacti](cacti.md)         
 # PXE           
 [PXE](pxe.md)         
 # 其他          
