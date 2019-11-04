@@ -19,6 +19,9 @@ boot
 全自动安装默认 `root` 密码:`Vicer`,安装完成后请立即更改密码.          
 能够全自动重装Debian/Ubuntu/CentOS等系统.          
 特别注意:OpenVZ构架不适用.           
+```sh
+openssl passwd -1 "$password"  # 加密明文密码, 不指定 --salt 参数，随机生成salt以使每一次生成的加密字符串不一样
+```
 #### 依赖包:         
 ```
 #二进制文件    Debian/Ubuntu    RedHat/CentOS
