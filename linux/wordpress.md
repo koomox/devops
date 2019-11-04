@@ -3,6 +3,7 @@ Home: [Link](https://wordpress.org/download/)
 Themes: [Link](https://wordpress.com/themes)          
 Astra Starter Sites [Link](https://wordpress.org/plugins/astra-sites/)        
 WooCommerce [Link](https://wordpress.org/plugins/woocommerce/)        
+ThemeForest [Link](https://themeforest.net/)          
 ### 部署 wordpress        
 ```sh
 wget https://wordpress.org/latest.tar.gz
