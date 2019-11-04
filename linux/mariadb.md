@@ -53,3 +53,21 @@ UPDATE mysql.user SET plugin='mysql_native_password';
 FLUSH PRIVILEGES;
 SELECT User, Host, Password, plugin FROM mysql.user;
 ```
+### 远程管理          
+使用 HeidiSQL 远程管理 MariaDB 出现错误, 检查发现默认监听地址为 `127.0.0.1`                  
+```sh
+netstat -anpt | grep 3306
+```
+修改 mariadb 配置文件 `/etc/mysql/mariadb.conf.d/50-server.cnf`          
+```sh
+cp -f /etc/mysql/mariadb.conf.d/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf.bak
+
+sed -ri "s/^#*(bind-address)(.*)(=)( )(.*)/\1\2\3\40.0.0.0/g" /etc/mysql/mariadb.conf.d/50-server.cnf
+grep -E "^#*(bind-address)(.*)(=)( )(.*)" /etc/mysql/mariadb.conf.d/50-server.cnf
+```
+重新启动 mariadb       
+```sh
+systemctl stop mysql
+systemctl start mysql
+systemctl status mysql
+```
