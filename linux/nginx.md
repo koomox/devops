@@ -76,3 +76,14 @@ mkdir -p /etc/letsencrypt/live/$domain
 vim /etc/letsencrypt/live/$domain/fullchain.pem
 vim /etc/letsencrypt/live/$domain/privkey.pem
 ```
+PHP-FPM [source](/storage/linux/scripts/nginx/1.16.0/nginx-ssl-fpm.conf)                
+```sh
+wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.0/nginx-ssl-fpm.conf
+
+domain=test.com
+sed -i "s/example.com/${domain}/g" /etc/nginx/conf.d/default.conf
+
+mkdir -p /etc/letsencrypt/live/$domain
+vim /etc/letsencrypt/live/$domain/fullchain.pem
+vim /etc/letsencrypt/live/$domain/privkey.pem
+```
