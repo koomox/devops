@@ -95,7 +95,7 @@ wget -O /etc/nginx/conf.d/cdnjs.conf https://raw.githubusercontent.com/koomox/de
 
 domain=test.com
 sed -ri "s/example.com/${domain}/g" /etc/nginx/conf.d/cdnjs.conf
-grep -E ".*(server_name).*" /etc/nginx/conf.d/cdnjs.conf
+grep -E "${domain}" /etc/nginx/conf.d/cdnjs.conf
 ```
 一键构建 cdnjs [source](/storage/linux/scripts/cdnjs/deploy.sh)          
 ```sh
