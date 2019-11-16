@@ -33,6 +33,7 @@ touch /etc/letsencrypt/live/$domain/privkey.pem
 sed -i 's/phpmyadmin/pma/g' /etc/nginx/conf.d/phpmyadmin.conf
 cat /etc/nginx/conf.d/phpmyadmin.conf
 ```
+重新启动 nginx       
 ```sh
 systemctl enable nginx
 systemctl stop nginx
@@ -89,4 +90,16 @@ vim /etc/letsencrypt/live/$domain/privkey.pem
 ```
 ### cdnjs         
 nginx 配置文件 [source](/storage/linux/scripts/nginx/1.16.1/conf.d/cdnjs.conf)           
+```sh
+wget -O /etc/nginx/conf.d/cdnjs.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.1/conf.d/cdnjs.conf
+
+domain=test.com
+sed -ri "s/example.com/${domain}/g" /etc/nginx/conf.d/cdnjs.conf
+grep -E ".*(server_name).*" /etc/nginx/conf.d/cdnjs.conf
+```
 一键构建 cdnjs [source](/storage/linux/scripts/cdnjs/deploy.sh)          
+```sh
+wget -O deploy_cdnjs.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/cdnjs/deploy.sh
+chmod +x ./deploy_cdnjs.sh
+./deploy_cdnjs.sh
+```
