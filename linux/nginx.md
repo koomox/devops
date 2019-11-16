@@ -87,3 +87,6 @@ mkdir -p /etc/letsencrypt/live/$domain
 vim /etc/letsencrypt/live/$domain/fullchain.pem
 vim /etc/letsencrypt/live/$domain/privkey.pem
 ```
+### cdnjs         
+nginx 配置文件 [source](/storage/linux/scripts/nginx/1.16.1/conf.d/cdnjs.conf)           
+一键构建 cdnjs [source](/storage/linux/scripts/cdnjs/deploy.sh)          
