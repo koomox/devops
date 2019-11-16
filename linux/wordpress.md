@@ -3,6 +3,10 @@ Home: [Link](https://wordpress.org/download/)
 Themes: [Link](https://wordpress.com/themes)          
 Astra Starter Sites [Link](https://wordpress.org/plugins/astra-sites/)        
 WooCommerce [Link](https://wordpress.org/plugins/woocommerce/)        
+WooCommerce Admin [Link](https://wordpress.org/plugins/woocommerce-admin/)        
+WooCommerce Services [Link](https://wordpress.org/plugins/woocommerce-services/)        
+WooCommerce Docs [Link](https://docs.woocommerce.com/)          
+Storefront Theme [Link](https://wordpress.org/themes/storefront/)        
 ThemeForest [Link](https://themeforest.net/)          
 Theme Developer [Link](https://developer.wordpress.org/themes/)           
 ### 部署 wordpress        
@@ -50,3 +54,6 @@ systemctl stop nginx
 systemctl start nginx
 systemctl status nginx
 ```
+### WooCommerce          
+手动安装 WooCommerce，需要下载 WooCommerce、 WooCommerce Admin、 WooCommerce Services, 安装得 Theme 需要支持 WooCommerce，所以安装 Storefront Theme。           
+如果要创建基于 WooCommerce Theme，那么需要创建基于 Storefront Theme 得 Child Theme。         

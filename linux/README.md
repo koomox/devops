@@ -41,6 +41,7 @@
 # PXE           
 [PXE](pxe.md)         
 # 其他          
+[Thunderbird](thunderbird.md)         
 [Linode](linode.md)          
 [Debian 安装 Powerline](debian_powerline.md)             
 [CentOS 安装 Powerline](centos_powerline.md)         
