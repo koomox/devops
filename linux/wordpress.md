@@ -54,6 +54,13 @@ systemctl stop nginx
 systemctl start nginx
 systemctl status nginx
 ```
+### permalinks          
+wordpress 设置 permalinks 为 post name, 需要配置 nginx, 添加如下内容           
+```ini
+location / {
+    try_files $uri $uri/ /index.php?$args;
+}
+```
 ### WooCommerce          
 手动安装 WooCommerce，需要下载 WooCommerce、 WooCommerce Admin、 WooCommerce Services, 安装得 Theme 需要支持 WooCommerce，所以安装 Storefront Theme。           
 如果要创建基于 WooCommerce Theme，那么需要创建基于 Storefront Theme 得 Child Theme。         

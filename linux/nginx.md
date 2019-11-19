@@ -4,7 +4,7 @@ OpenSSL [Link](https://www.openssl.org/source/)
 Zlib [Link](https://zlib.net/)       
 pcre [Link](https://ftp.pcre.org/pub/pcre/)         
 ### 一键安装脚本        
-Linux 一键安装脚本 [查看源文件](../storage/linux/scripts/nginx/install_nginx1142.sh)         
+Linux 一键安装脚本 [查看源文件](/storage/linux/scripts/nginx/install_nginx1142.sh)         
 ```sh
 curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/install_nginx1142.sh -o /tmp/install_nginx1142.sh
 chmod +x /tmp/install_nginx1142.sh
@@ -16,7 +16,7 @@ curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scr
 chmod +x /tmp/download_nginx1142.sh
 /tmp/download_nginx1142.sh
 ```
-一键安装 Nginx 1.16.0 [查看源文件](../storage/linux/scripts/nginx/install_nginx1160.sh)         
+一键安装 Nginx 1.16.0 [查看源文件](/storage/linux/scripts/nginx/install_nginx1160.sh)         
 ```sh
 wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/install_nginx1160.sh
 chmod +x ./install_nginx1160.sh
