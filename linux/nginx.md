@@ -66,6 +66,11 @@ source ~/.bashrc
 systemctl stop nginx
 acme.sh --issue --standalone -d example.com -d www.example.com -d cp.example.com
 ```
+非 80、443 端口，安卓 Let's Encrypt 证书，可以使用 DNS 验证的方式, cloudflare 界面添加 txt 记录。           
+```sh
+apt install certbot
+certbot certonly --manual --preferred-challenges dns -d example.com --register-unsafely-without-email
+```
 强制 SSL 网页跳转 [source file](/storage/linux/scripts/nginx/1.16.1/conf.d/default.conf)           
 ```sh
 wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.1/conf.d/default.conf
