@@ -3,7 +3,7 @@ cdnjs=/var/www/cdnjs/ajax/libs
 jquery_version_3x=3.4.1
 jquery_version_2x=2.2.4
 jquery_version_1x=1.12.4
-bootstrap_version=4.3.1
+bootstrap_version=4.4.1
 fontawesome_version=4.7.0
 
 mkdir -p $cdnjs/jquery/{$jquery_version_3x,$jquery_version_2x,$jquery_version_1x} $cdnjs/{bootstrap,font-awesome}
