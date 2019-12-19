@@ -38,7 +38,7 @@ wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/script
 chmod +x ./install.sh
 ./install.sh
 
-wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.1/conf.d/default.conf
+wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.0/nginx-ssl-fpm.conf
 
 wget https://wordpress.org/latest.tar.gz
 
