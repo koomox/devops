@@ -61,6 +61,13 @@ location / {
     try_files $uri $uri/ /index.php?$args;
 }
 ```
+下载 nginx 配置文件           
+```sh
+wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.1/conf.d/ssl_php_fpm_cdnjs_wordpress.conf
+
+domain=example.com
+sed -i "s/example.com/${domain}/g" /etc/nginx/conf.d/default.conf
+```
 ### WooCommerce          
 手动安装 WooCommerce，需要下载 WooCommerce、 WooCommerce Admin、 WooCommerce Services, 安装得 Theme 需要支持 WooCommerce，所以安装 Storefront Theme。           
 如果要创建基于 WooCommerce Theme，那么需要创建基于 Storefront Theme 得 Child Theme。         
