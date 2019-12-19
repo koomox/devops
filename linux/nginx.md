@@ -97,10 +97,6 @@ vim /etc/letsencrypt/live/$domain/privkey.pem
 nginx 配置文件 [source](/storage/linux/scripts/nginx/1.16.1/conf.d/cdnjs.conf)           
 ```sh
 wget -O /etc/nginx/conf.d/cdnjs.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.1/conf.d/cdnjs.conf
-
-domain=test.com
-sed -ri "s/example.com/${domain}/g" /etc/nginx/conf.d/cdnjs.conf
-grep -E "${domain}" /etc/nginx/conf.d/cdnjs.conf
 ```
 一键构建 cdnjs [source](/storage/linux/scripts/cdnjs/deploy.sh)          
 ```sh
