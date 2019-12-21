@@ -1,6 +1,6 @@
 [Unit]
 Description=X Serv Service
-After=network.target
+After=network.target rc-local.service
 
 [Service]
 Type=simple

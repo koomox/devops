@@ -1,4 +1,9 @@
 # git 命令            
+### SSH 证书         
+生成 ssh 公钥和私钥           
+```sh
+ssh-keygen -t rsa -b 4096 -C "email@example.com" -f example.com.key
+```
 ### 设置用户信息        
 因为Git是分布式系统，所以在使用Git之前，必须先设置用户信息（包括用户名和邮件地址）          
 ```
