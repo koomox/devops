@@ -154,3 +154,8 @@ curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scr
 chmod +x /tmp/git_webdeploy.sh
 /tmp/git_webdeploy.sh
 ```
+### 常用命令             
+删除当前目录及子目录下的 `.git` 文件夹           
+```sh
+find . -name ".git" | xargs rm -Rf
+```
