@@ -1,5 +1,6 @@
 # Windows 7 优化          
-[输入法](ime.md)        
+[Windows 10 无人值守安装](windows.md)        
+[输入法](ime.md)          
 [Windows 无人值守安装](unattend.md)         
 [KMS](kms.md)         
 [Windows 10 优化](win10.md)         
