@@ -32,6 +32,7 @@ Dism /Apply-Image /ImageFile:.\install.wim /Index:1 /ApplyDir:W:\
 
 MD W:\Windows\Panther
 COPY Unattend.xml W:\Windows\Panther\Unattend.xml
+COPY hosts W:\Windows\System32\drivers\etc\hosts
 ```
 ### Bcdboot 命令添加启动项           
 ```bat
