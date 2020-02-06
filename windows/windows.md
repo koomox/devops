@@ -6,7 +6,7 @@ select disk 0
 clean
 
 rem == 1. System partition ======================
-create partition primary size=350
+create partition primary size=512
 format quick fs=ntfs label="System"
 assign letter="S"
 active
