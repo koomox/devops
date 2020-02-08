@@ -1,6 +1,7 @@
 # openwrt                               
 openwrt 15.05 x86 IMG镜像: [点击下载](https://downloads.openwrt.org/chaos_calmer/15.05/x86/generic/openwrt-15.05-x86-generic-combined-squashfs.img)                  
 openwrt 18.06.2 x86 IMG镜像: [点击下载](https://downloads.openwrt.org/releases/18.06.2/targets/x86/generic/openwrt-18.06.2-x86-generic-combined-squashfs.img.gz)       
+openwrt 19.07.1 x86 IMG镜像: [点击下载](https://downloads.openwrt.org/releases/19.07.1/targets/x86/generic/openwrt-19.07.1-x86-generic-combined-squashfs.img.gz)
 openwrt 下载地址: [Link](https://downloads.openwrt.org/)                                    
 参考文档: [传送门](http://blog.csdn.net/xingyuzhe/article/details/51280337)                          
 ### Linux Kernel        
@@ -15,9 +16,9 @@ sudo apt install qemu-utils
 ```sh
 qemu-img convert -f raw openwrt-15.05-x86-generic-combined-squashfs.img -O vmdk openwrt-15.05-x86-generic-combined.vmdk
 
-#wget https://downloads.openwrt.org/releases/18.06.2/targets/x86/generic/openwrt-18.06.2-x86-generic-combined-ext4.img.gz
-wget https://downloads.openwrt.org/releases/18.06.2/targets/x86/generic/openwrt-18.06.2-x86-generic-combined-squashfs.img.gz
-gzip -d openwrt-18.06.2-x86-generic-combined-squashfs.img.gz
-qemu-img convert -f raw openwrt-18.06.2-x86-generic-combined-squashfs.img -O vmdk openwrt-18.06.2-x86-generic-combined-squashfs.vmdk
+#wget https://downloads.openwrt.org/releases/19.07.1/targets/x86/generic/openwrt-19.07.1-x86-generic-combined-ext4.img.gz
+wget https://downloads.openwrt.org/releases/19.07.1/targets/x86/generic/openwrt-19.07.1-x86-generic-combined-squashfs.img.gz
+gzip -d openwrt-19.07.1-x86-generic-combined-squashfs.img.gz
+qemu-img convert -f raw openwrt-19.07.1-x86-generic-combined-squashfs.img -O vmdk openwrt-19.07.1-x86-generic-combined-squashfs.vmdk
 ```
 设置IP地址，修改`/etc/config/network`配置文件。         
