@@ -1,4 +1,25 @@
 # Proxmox VE          
+### Debian 安装 proxmox            
+```sh
+sudo hostnamectl set-hostname pve --static
+192.168.0.253   pve.proxmox.com pve
+```
+```sh
+echo "deb http://download.proxmox.com/debian/pve buster pve-no-subscription" > /etc/apt/sources.list.d/pve-install-repo.list
+
+echo "deb http://download.proxmox.com/debian/pve buster pve-no-subscription" | sudo tee /etc/apt/sources.list.d/pve-install-repo.list
+```
+```sh
+wget http://download.proxmox.com/debian/proxmox-ve-release-6.x.gpg -O /etc/apt/trusted.gpg.d/proxmox-ve-release-6.x.gpg
+chmod +r /etc/apt/trusted.gpg.d/proxmox-ve-release-6.x.gpg
+```
+```sh
+apt update && apt full-upgrade
+```
+```sh
+apt install proxmox-ve postfix open-iscsi
+```
+
 ### 打开CPU虚拟化功能          
 如果操作硬件直通，提示  `No IOMMU detected, please activate it.See Documentation for further information.` 执行如下操作             
 ```sh
