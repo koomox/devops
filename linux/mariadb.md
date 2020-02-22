@@ -31,7 +31,7 @@ SELECT User, Host, Password, plugin FROM mysql.user;
 
 DROP USER 'root'@'%';
 
-GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY 'password';
+GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 
 SELECT User, Host, Password, plugin FROM mysql.user;
@@ -39,7 +39,7 @@ SELECT User, Host, Password, plugin FROM mysql.user;
 创建新用户          
 ```sql
 CREATE USER 'newuser'@'%' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON *.* TO 'newuser'@'%';
+GRANT ALL PRIVILEGES ON *.* TO 'newuser'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 ```
 修改密码后, 仍然可以使用空密码登录如何解决?           

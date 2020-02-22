@@ -6,11 +6,11 @@ NextCloud 12 Server for Nginx Configuration: [Link](https://docs.nextcloud.com/s
 App Store for NextCloud: [Link](https://apps.nextcloud.com/)           
 ### 部署 NextCloud          
 ```sh
-wget https://download.nextcloud.com/server/releases/nextcloud-17.0.0.tar.bz2
+wget https://download.nextcloud.com/server/releases/nextcloud-18.0.1.tar.bz2
 
 mkdir -p /var/www
 \rm -rf /var/www/nextcloud
-tar -jxf nextcloud-17.0.0.tar.bz2 -C /var/www
+tar -jxf nextcloud-18.0.1.tar.bz2 -C /var/www
 ```
 新建数据库用户               
 ```sql
@@ -28,7 +28,7 @@ SELECT User, Host, Password, plugin FROM mysql.user;
 创建数据库        
 ```sql
 CREATE DATABASE IF NOT EXISTS `nextcloud` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextcloud'@'localhost' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextcloud'@'localhost' IDENTIFIED BY 'nextcloud' WITH GRANT OPTION;
 SHOW DATABASES;
 ```
 删除删除库        
@@ -141,4 +141,13 @@ SELECT CONCAT("ALTER TABLE `", TABLE_SCHEMA,"`.`", TABLE_NAME, "` ROW_FORMAT=DYN
 重启数据库         
 ```sh
 systemctl restart mariadb
+```
+### 访问 Nextcloud 经常出现 504 错误            
+Nginx 配置文件添加下面的内容              
+```sh
+proxy_connect_timeout 600s;
+proxy_send_timeout 600s;
+proxy_read_timeout 600s;
+fastcgi_send_timeout 600s;
+fastcgi_read_timeout 600s;
 ```
