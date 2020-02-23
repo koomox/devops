@@ -84,6 +84,12 @@ bash InstallNET.sh -d 10 -v 64 -a --mirror 'http://mirror.xtom.com.hk/debian/'
 
 bash InstallNET.sh -d 10 -v 64 -a --mirror 'http://ftp2.cn.debian.org/debian/'
 
+bash InstallNET.sh -d 10 -v 64 -a --mirror 'http://ftp.hk.debian.org/debian/'
+
+bash InstallNET.sh -d 10 -v 64 -a --mirror 'http://ftp.tw.debian.org/debian/'
+
+bash InstallNET.sh -d 10 -v 64 -a --mirror 'http://mirror.0x.sg/debian/'
+
 bash InstallNET.sh -d 9 -v 64 -a --mirror 'http://ftp.us.debian.org/debian/'
 
 #使用自定义镜像全自动安装
