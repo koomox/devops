@@ -31,6 +31,7 @@
 [端口映射](portproxy.md)       
 [Hexo + github 搭建个人博客](hexo.md)           
 ### 常见故障                
+[Windows 常见网络故障](win-network.md)            
 [VMware Workstation](vmware.md)           
 [SQL Server 2005 创建定时备份计划失败](sqlserver2005.md)              
 [Windows Server 2008 R2 64位 喇叭有红叉提示未安装任何音频输出设备](winserver2008r2x64-sound.md)          
