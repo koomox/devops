@@ -12,24 +12,42 @@ iptables -P INPUT ACCEPT
 iptables -P OUTPUT ACCEPT
 iptables -P FORWARD ACCEPT
 ```
+### 备份/恢复 iptables 规则             
+备份         
+```sh
+iptables-save -t nat > /etc/iptables.rules
+```
+恢复        
+```sh
+iptables-restore < /etc/iptables.rules
+```
 ### 透明网关                
 ```sh
-iptables -t nat -N SHADOWSOCKS
-iptables -t nat -A SHADOWSOCKS -p tcp --dport ${server_port} -j RETURN
+iptables -t nat -N TSOCKS
 
-iptables -t nat -A SHADOWSOCKS -d ${server_ip} -j RETURN
-iptables -t nat -A SHADOWSOCKS -d 0.0.0.0 -j RETURN
-iptables -t nat -A SHADOWSOCKS -d 127.0.0.1 -j RETURN
+iptables -t nat -A TSOCKS -d ${server_ip}/24 -j RETURN
 
-iptables -t nat -A SHADOWSOCKS -d 0.0.0.0/8 -j RETURN
-iptables -t nat -A SHADOWSOCKS -d 10.0.0.0/8 -j RETURN
-iptables -t nat -A SHADOWSOCKS -d 127.0.0.0/8 -j RETURN
-iptables -t nat -A SHADOWSOCKS -d 169.254.0.0/16 -j RETURN
-iptables -t nat -A SHADOWSOCKS -d 172.16.0.0/12 -j RETURN
-iptables -t nat -A SHADOWSOCKS -d 192.168.0.0/16 -j RETURN
-iptables -t nat -A SHADOWSOCKS -d 224.0.0.0/4 -j RETURN
-iptables -t nat -A SHADOWSOCKS -d 240.0.0.0/4 -j RETURN
+iptables -t nat -A TSOCKS -d 119.29.29.29/24 -j RETURN
+iptables -t nat -A TSOCKS -d 223.5.5.5/24 -j RETURN
+iptables -t nat -A TSOCKS -d 114.114.114.114/24 -j RETURN
+iptables -t nat -A TSOCKS -d 8.8.8.8/24 -j RETURN
+iptables -t nat -A TSOCKS -d 8.8.4.4/24 -j RETURN
+iptables -t nat -A TSOCKS -d 1.1.1.1/24 -j RETURN
 
-iptables -t nat -A SHADOWSOCKS -p tcp -j REDIRECT --to-ports ${local_port}
-iptables -t nat -I PREROUTING -p tcp -j SHADOWSOCKS
+iptables -t nat -A TSOCKS -d 0.0.0.0/8 -j RETURN
+iptables -t nat -A TSOCKS -d 10.0.0.0/8 -j RETURN
+iptables -t nat -A TSOCKS -d 100.64.0.0/10 -j RETURN
+iptables -t nat -A TSOCKS -d 127.0.0.0/8 -j RETURN
+iptables -t nat -A TSOCKS -d 169.254.0.0/16 -j RETURN
+iptables -t nat -A TSOCKS -d 172.16.0.0/12 -j RETURN
+iptables -t nat -A TSOCKS -d 192.168.0.0/16 -j RETURN
+iptables -t nat -A TSOCKS -d 198.18.0.0/15 -j RETURN
+iptables -t nat -A TSOCKS -d 224.0.0.0/4 -j RETURN
+iptables -t nat -A TSOCKS -d 240.0.0.0/4 -j RETURN
+
+iptables -t nat -A TSOCKS -p tcp -j REDIRECT --to-ports ${local_port}
+iptables -t nat -A TSOCKS -p udp --dport=53 -j RETURN
+
+iptables -t nat -I PREROUTING --in-interface ${eth0} -p tcp -j TSOCKS
+iptables -t nat -I PREROUTING --in-interface ${eth0} -p udp -j TSOCKS
 ```
