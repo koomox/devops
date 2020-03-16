@@ -35,7 +35,8 @@
 [VMware Workstation](vmware.md)           
 [SQL Server 2005 创建定时备份计划失败](sqlserver2005.md)              
 [Windows Server 2008 R2 64位 喇叭有红叉提示未安装任何音频输出设备](winserver2008r2x64-sound.md)          
-### 常用软件           
+### 常用软件        
+[MIUI](miui.md)         
 [AIDA64](aida64.md)             
 [Android SDK Tools](android-sdk.md)                    
 [Proxifier 代理软件](Proxifier.md)
