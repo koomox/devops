@@ -28,7 +28,7 @@ Firefox Developer Edition 64 位: [点击下载](https://download-installer.cdn.
 Firefox Developer Edition 32 位: [点击下载](https://download-installer.cdn.mozilla.net/pub/devedition/releases/63.0b5/win32/zh-CN/Firefox%20Setup%2063.0b5.exe)          
 ### 下载          
 ```sh
-wget -O browser.sh 
+wget -O browser.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/browser.sh
 chmod +x ./browser.sh
 ./browser.sh
 ```
