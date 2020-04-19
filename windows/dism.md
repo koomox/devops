@@ -143,6 +143,8 @@ Dism /Export-Image /SourceImageFile:.\install.wim /SourceIndex:1 /DestinationIma
 
 Dism /Mount-Image /ImageFile:.\en_win10_ltsc_2019_x64.wim /Index:1 /MountDir:.\mount
 
+rmdir mount
+mkdir mount
 Dism /Image:.\mount /Add-Driver /Driver:D:\DriversBackup /Recurse
 
 MD .\mount\Windows\Panther
