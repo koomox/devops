@@ -1,10 +1,10 @@
 # 浏览器              
 ### Google Chrome 浏览器        
-Google Chrome 中文版 64 位: [点击下载](https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B2CB0D8FA-81F0-3F11-82FF-72F765975D6C%7D%26lang%3Dzh-CN%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/chrome/install/ChromeStandaloneSetup64.exe)          
-Google Chrome 中文版 32 位: [点击下载](https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B2CB0D8FA-81F0-3F11-82FF-72F765975D6C%7D%26lang%3Dzh-CN%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/chrome/install/ChromeStandaloneSetup.exe)          
+Google Chrome 中文版 64 位: [点击下载](https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B754CC110-B9C8-798B-4231-9054058921FC%7D%26lang%3Dzh-CN%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/chrome/install/ChromeStandaloneSetup64.exe)          
+Google Chrome 中文版 32 位: [点击下载](https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B754CC110-B9C8-798B-4231-9054058921FC%7D%26lang%3Dzh-CN%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx86-stable-statsdef_1%26installdataindex%3Dempty/chrome/install/ChromeStandaloneSetup.exe)          
 
-Google Chrome 英文版 64 位: [点击下载](https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7BB6F1A534-C49F-4E8E-BF2C-B0F39E3311E7%7D%26lang%3Den%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/chrome/install/ChromeStandaloneSetup64.exe)           
-Google Chrome 英文版 32 位: [点击下载](https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7BB6F1A534-C49F-4E8E-BF2C-B0F39E3311E7%7D%26lang%3Den%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/chrome/install/ChromeStandaloneSetup.exe)           
+Google Chrome 英文版 64 位: [点击下载](https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B754CC110-B9C8-798B-4231-9054058921FC%7D%26lang%3Den%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/chrome/install/ChromeStandaloneSetup64.exe)           
+Google Chrome 英文版 32 位: [点击下载](https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B754CC110-B9C8-798B-4231-9054058921FC%7D%26lang%3Den%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx86-stable-statsdef_1%26installdataindex%3Dempty/chrome/install/ChromeStandaloneSetup.exe)           
 
 Google Chrome MAC OS X: [点击下载](https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg)             
 ### Google Chrome 49.0.2623.112 XP 系统最终版            
@@ -18,14 +18,14 @@ Yandex 离线完整包: [点击下载](https://browser.yandex.com/download/?full
 Yandex Win下载地址: [点击下载](http://download.cdn.yandex.net/browser/int/en/Yandex.exe)         
 Yandex MAC下载地址: [点击下载](http://download.cdn.yandex.net/browser/int/en/Yandex.dmg)         
 ### Firefox 浏览器         
-Firefox 64 位: [点击下载](https://download-installer.cdn.mozilla.net/pub/firefox/releases/62.0/win64/zh-CN/Firefox%20Setup%2062.0.exe)       
-Firefox 32 位: [点击下载](https://download-installer.cdn.mozilla.net/pub/firefox/releases/62.0/win32/zh-CN/Firefox%20Setup%2062.0.exe)       
+Firefox 64 位: [点击下载](https://download-installer.cdn.mozilla.net/pub/firefox/releases/75.0/win64/zh-CN/Firefox%20Setup%2075.0.exe)       
+Firefox 32 位: [点击下载](https://download-installer.cdn.mozilla.net/pub/firefox/releases/75.0/win32/zh-CN/Firefox%20Setup%2075.0.exe)       
 ### Firefox 52.0.2 XP 系统最终版          
 Firefox 52.0.2 XP 系统最终版 64 位： [点击下载](https://ftp.mozilla.org/pub/firefox/releases/52.0.2/win64/zh-CN/Firefox%20Setup%2052.0.2.exe)         
 Firefox 52.0.2 XP 系统最终版 32 位： [点击下载](https://ftp.mozilla.org/pub/firefox/releases/52.0.2/win32/zh-CN/Firefox%20Setup%2052.0.2.exe)         
 ### Firefox Developer Edition           
-Firefox Developer Edition 64 位: [点击下载](https://download-installer.cdn.mozilla.net/pub/devedition/releases/63.0b5/win64/zh-CN/Firefox%20Setup%2063.0b5.exe)          
-Firefox Developer Edition 32 位: [点击下载](https://download-installer.cdn.mozilla.net/pub/devedition/releases/63.0b5/win32/zh-CN/Firefox%20Setup%2063.0b5.exe)          
+Firefox Developer Edition 64 位: [点击下载](https://download-installer.cdn.mozilla.net/pub/devedition/releases/76.0b5/win64/zh-CN/Firefox%20Setup%2076.0b5.exe)          
+Firefox Developer Edition 32 位: [点击下载](https://download-installer.cdn.mozilla.net/pub/devedition/releases/76.0b5/win32/zh-CN/Firefox%20Setup%2076.0b5.exe)          
 ### 下载          
 ```sh
 wget -O browser.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/browser.sh
