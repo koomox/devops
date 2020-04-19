@@ -13,28 +13,35 @@ gpt attributes=0x8000000000000001
 exit
 ```
 ### 复制文件到隐藏分区            
-可用的wim文件有两个，`*.iso\sources\boot.wim`或`*.iso\sources\install.wim\Windows\System32\Recovery\winre.wim`文件，以及`*.iso\boot\boot.sdi`文件。复制到`M:\Recovery\WindowsRE\`文件夹。          
+可用的wim文件有两个，`*.iso\sources\boot.wim`或`*.iso\sources\install.wim\Windows\System32\Recovery\winre.wim`文件，以及`*.iso\boot\boot.sdi`文件。复制到`T:\Recovery\WindowsRE\`文件夹。          
+```bat
+mkdir mount
+
+Dism /Mount-Wim /WimFile:.\install.wim /Index:1 /MountDir:.\mount
+
+xcopy /h .\mount\Windows\System32\Recovery\Winre.wim .\
+
+Dism /Unmount-Image /MountDir:.\mount /Discard
+```
 首先查看WIM镜像文件详细信息          
 ```
-SET DISM_PATH=F:\RecoveryImage\PE_Tools\Windows_10_version_1607_Kits\Deployment_Tools\amd64\DISM
-SET WIM_FILE=F:\RecoveryImage\10\x64\install.wim
+Dism /Get-ImageInfo /ImageFile:.\Winre.wim
+```
+复制到 RE 分区       
+```bat
+mkdir T:\Recovery\WindowsRE
 
-cd /d %DISM_PATH%
-
-Dism /Get-ImageInfo /ImageFile:"%WIM_FILE%"
+xcopy /h .\Winre.wim T:\Recovery\WindowsRE
 ```
 挂载WIM镜像文件            
 ```
-SET WIM_FILE=F:\RecoveryImage\10\x64\install.wim
-SET WIM_INDEX=2
-SET WIM_MOUNTPATH=D:\mount\win10
-
-Dism /Mount-Wim /WimFile:%WIM_FILE% /Index:%WIM_INDEX% /MountDir:%WIM_MOUNTPATH%
+mkdir mount
+Dism /Mount-Wim /WimFile:.\Winre.wim /Index:2 /MountDir:.\mount
 ```
 复制文件到隐藏分区           
-```
-SET RE_DRIVE=M:
-SET WIM_MOUNTPATH=D:\mount\win10
+```bat
+SET RE_DRIVE=T:
+SET WIM_MOUNTPATH=D:\mount
 
 rmdir /S /Q "%RE_DRIVE%\Recovery"
 mkdir "%RE_DRIVE%\Recovery"
@@ -51,40 +58,27 @@ SET WIM_MOUNTPATH=D:\mount\win10
 Dism /Unmount-Wim /MountDir:%WIM_MOUNTPATH% /Discard
 ```
 ### 把 Windows RE 系统添加到系统启动项              
-用管理员身份运行命令提示符，输入下面的命令获取启动项          
-```
-bcdedit /enum > "%USERPROFILE%\Desktop\os_bootlist.txt"
-```
-创建一个内存虚拟硬盘，系统自动生成一个GUID          
-```
-bcdedit /create /d "RE Ramdisk Options" /device >> "%USERPROFILE%\Desktop\os_bootlist.txt"
-```
-通过GUID设置SDI文件的分区号和路径。           
-```
-SET SDI_PART=M:
-SET SDI_FILE=\Recovery\WindowsRE\boot.sdi
-SET SDI_GUID={72dfcc76-9840-11e5-824e-94de80aa20ba}
+```bat
+SET RE_SDI_GUID={}
+SET RE_WIM_GUID={}
+SET RE_SDI_PART=T:
+SET RE_SDI_FILE=\Recovery\WindowsRE\boot.sdi
+SET RE_WIM_FILE=[T:]\Recovery\WindowsRE\Winre.wim
+SET RE_WIM_BOOT_NAME="Windows RE"
 
-bcdedit /set %SDI_GUID% ramdisksdidevice partition=%SDI_PART%
-bcdedit /set %SDI_GUID% ramdisksdipath %SDI_FILE%
-```
-创建一个启动项，系统自动生成一个GUID            
-```
-bcdedit /create /d "Windows 10 RE" /application osloader >> "%USERPROFILE%\Desktop\os_bootlist.txt"
-```
-通过GUID设置启动项的相关参数。          
-```
-SET SDI_GUID={72dfcc76-9840-11e5-824e-94de80aa20ba}
-SET WIM_GUID={72dfcc77-9840-11e5-824e-94de80aa20ba}
-SET WIM_FILE=[M:]\Recovery\WindowsRE\winre.wim
+FOR /F "tokens=2 delims={,}" %I IN ('bcdedit /create /d %RE_WIM_BOOT_NAME% /device') DO @SET RE_SDI_GUID={%I}
+bcdedit /set %RE_SDI_GUID% ramdisksdidevice partition=%RE_SDI_PART%
+bcdedit /set %RE_SDI_GUID% ramdisksdipath %RE_SDI_FILE%
 
-bcdedit /set %WIM_GUID% device ramdisk=%WIM_FILE%,%SDI_GUID%
-bcdedit /set %WIM_GUID% path \Windows\System32\winload.efi
-bcdedit /set %WIM_GUID% osdevice ramdisk=%WIM_FILE%,%SDI_GUID%
-bcdedit /set %WIM_GUID% systemroot \Windows
-bcdedit /set %WIM_GUID% detecthal yes
-bcdedit /set %WIM_GUID% winpe yes
-bcdedit /displayorder %WIM_GUID% /addlast
+FOR /F "tokens=2 delims={,}" %I IN ('bcdedit /create /d %RE_WIM_BOOT_NAME% /application osloader') DO @SET RE_WIM_GUID={%I}
+bcdedit /set %RE_WIM_GUID% device ramdisk=%RE_WIM_FILE%,%RE_SDI_GUID%
+bcdedit /set %RE_WIM_GUID% path \Windows\System32\boot\winload.efi
+bcdedit /set %RE_WIM_GUID% osdevice ramdisk=%RE_WIM_FILE%,%RE_SDI_GUID%
+bcdedit /set %RE_WIM_GUID% systemroot \Windows
+bcdedit /set %RE_WIM_GUID% detecthal yes
+bcdedit /set %RE_WIM_GUID% winpe yes
+bcdedit /displayorder %RE_WIM_GUID% /addlast
+bcdedit /enum %RE_WIM_GUID%
 ```
 ### 隐藏 Windows RE 分区        
 ```

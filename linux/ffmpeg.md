@@ -53,7 +53,7 @@ make
 make install
 ```
 ### 用法          
-使用 OBS Studio 录制得视频为 MKV 格式，无法导入 Premiere Pro, 使用 ffmpeg 转换为 MP4 格式, `-ss` 开始时间, `-t` 结束时间, `-i` 源文件                     
+使用 OBS Studio 录制得视频为 MKV 格式，无法导入 Premiere Pro, 使用 ffmpeg 转换为 MP4 格式, `-ss` 开始时间, `-t` 要切割得时间, `-i` 源文件                     
 ```sh
 ffmpeg -ss 00:00:00 -t 00:10:00 -i input.mkv -vcodec copy -acodec copy output.mp4
 ```

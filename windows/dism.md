@@ -135,3 +135,61 @@ Dism /Mount-Image /ImageFile:.\win7sp1-Ultimate-x64.wim /Index:1 /MountDir:.\mou
 Dism /Unmount-Image /MountDir:.\mount /Commit
 ::Dism /Unmount-Image /MountDir:.\mount /Discard
 ```
+### WIMBOOT              
+导出镜像并添加驱动、无人值守、hosts 文件            
+```bat
+Dism /Get-ImageInfo /ImageFile:.\install.wim
+Dism /Export-Image /SourceImageFile:.\install.wim /SourceIndex:1 /DestinationImageFile:en_win10_ltsc_2019_x64.wim
+
+Dism /Mount-Image /ImageFile:.\en_win10_ltsc_2019_x64.wim /Index:1 /MountDir:.\mount
+
+Dism /Image:.\mount /Add-Driver /Driver:D:\DriversBackup /Recurse
+
+MD .\mount\Windows\Panther
+COPY Unattend-x64.xml .\mount\Windows\Panther\Unattend.xml
+
+COPY .\mount\Windows\System32\drivers\etc\hosts hosts
+COPY hosts .\mount\Windows\System32\drivers\etc\hosts
+
+attrib -h -s .\mount\Windows\System32\Recovery\Winre.wim
+move .\mount\Windows\System32\Recovery\Winre.wim Winre.wim
+
+Dism /Unmount-Image /MountDir:.\mount /Commit
+```
+构造并部署 wimboot, wimboot 文件存放在SSD硬盘隐藏分区        
+```bat
+Dism /Export-Image /SourceImageFile:.\install.wim /SourceIndex:1 /DestinationImageFile:.\en_win10_ltsc_2019_x64_boot.wim /WIMBoot
+Dism /Apply-Image /ImageFile:.\en_win10_ltsc_2019_x64_boot.wim /ApplyDir:C:\ /Index:1 /WIMBoot
+```
+### bcdedit         
+添加 VHD 启动项         
+```bat
+bcdedit /copy {current} /d "Windows 10 VHD" > E:\uuid.txt
+bcdedit /set {uuid} device vhd="[R:]\VHD\win10.vhd"
+bcdedit /set {uuid} osdevice vhd="[R:]\VHD\win10.vhd"
+bcdedit /set {uuid} detecthal Yes
+bcdedit /displayorder {uuid} /addlast
+```
+添加 pe.wim 启动项         
+```bat
+SET PE_SDI_GUID={}
+SET PE_WIM_GUID={}
+SET PE_SDI_PART=T:
+SET PE_SDI_FILE=\BOOT\BOOT.sdi
+SET PE_WIM_FILE=[T:]\BOOT\10PEx64.wim
+SET PE_WIM_BOOT_NAME="Windows PE"
+
+FOR /F "tokens=2 delims={,}" %I IN ('bcdedit /create /d %PE_WIM_BOOT_NAME% /device') DO @SET PE_SDI_GUID={%I}
+bcdedit /set %PE_SDI_GUID% ramdisksdidevice partition=%PE_SDI_PART%
+bcdedit /set %PE_SDI_GUID% ramdisksdipath %PE_SDI_FILE%
+
+FOR /F "tokens=2 delims={,}" %I IN ('bcdedit /create /d %PE_WIM_BOOT_NAME% /application osloader') DO @SET PE_WIM_GUID={%I}
+bcdedit /set %PE_WIM_GUID% device ramdisk=%PE_WIM_FILE%,%PE_SDI_GUID%
+bcdedit /set %PE_WIM_GUID% path \Windows\System32\boot\winload.efi
+bcdedit /set %PE_WIM_GUID% osdevice ramdisk=%PE_WIM_FILE%,%PE_SDI_GUID%
+bcdedit /set %PE_WIM_GUID% systemroot \Windows
+bcdedit /set %PE_WIM_GUID% detecthal yes
+bcdedit /set %PE_WIM_GUID% winpe yes
+bcdedit /displayorder %PE_WIM_GUID% /addlast
+bcdedit /enum %PE_WIM_GUID%
+```
