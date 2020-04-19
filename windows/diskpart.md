@@ -4,7 +4,7 @@
 
 ### UEFI/GPT 分区          
 使用 `DiskPart /s F:\CreatePartitions.txt` 命令自动分区。          
-![](../static/images/wiki/IMG_20180915_212100.jpg)         
+![](/static/images/wiki/IMG_20180915_212100.jpg)         
 ```bat
 select disk 0
 clean
@@ -22,7 +22,7 @@ create partition primary
 format quick fs=ntfs label="Windows"
 assign letter="W"
 ```
-![](../static/images/wiki/IMG_20180915_212101.jpg)       
+![](/static/images/wiki/IMG_20180915_212101.jpg)       
 ```bat
 rem == CreatePartitions-UEFI.txt ==
 rem == These commands are used with DiskPart to
@@ -67,7 +67,7 @@ list volume
 exit
 ```
 ### BIOS/MBR 分区         
-![](../static/images/wiki/IMG_20180915_212102.jpg)         
+![](/static/images/wiki/IMG_20180915_212102.jpg)         
 ```bat
 select disk 0
 clean
@@ -79,7 +79,7 @@ format quick fs=ntfs label="Windows"
 assign letter="W"
 exit
 ```
-![](../static/images/wiki/IMG_20180915_212103.jpg)       
+![](/static/images/wiki/IMG_20180915_212103.jpg)       
 ```bat
 rem == CreatePartitions-BIOS.txt ==
 rem == These commands are used with DiskPart to
@@ -113,7 +113,7 @@ list volume
 exit
 ```
 配置 4 个以上分区，使用命令 `DiskPart /s F:\PrepareMyPartitions.txt` 自动分区。          
-![](../static/images/wiki/IMG_20180915_212105.jpg)       
+![](/static/images/wiki/IMG_20180915_212105.jpg)       
 ```bat
 select disk 0
 clean

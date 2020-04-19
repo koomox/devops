@@ -49,8 +49,8 @@
       <Action type="Direct" />
     </Rule>
     <Rule enabled="true">
-      <Name>Whatsapp</Name>
-      <Applications>Whatsapp.exe; WhatsAppSetup.exe</Applications>
+      <Name>WhatsApp</Name>
+      <Applications>Whatsapp.exe; Update.exe; WhatsAppSetup.exe; squirrel.exe</Applications>
       <Targets>www.whatsapp.com; web.whatsapp.com; *.whatsapp.com; *.whatsapp.net</Targets>
       <Action type="Proxy">100</Action>
     </Rule>
@@ -61,8 +61,8 @@
       <Action type="Proxy">100</Action>
     </Rule>
     <Rule enabled="true">
-      <Name>wire</Name>
-      <Applications>wire.exe;squirrel.exe</Applications>
+      <Name>Wire</Name>
+      <Applications>wire.exe; squirrel.exe</Applications>
       <Targets>wire.com; www.wire.com; prod-nginz-ssl.wire.com; app.wire.com; *.wire.com</Targets>
       <Action type="Proxy">100</Action>
     </Rule>
