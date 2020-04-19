@@ -152,7 +152,8 @@ COPY .\mount\Windows\System32\drivers\etc\hosts hosts
 COPY hosts .\mount\Windows\System32\drivers\etc\hosts
 
 attrib -h -s .\mount\Windows\System32\Recovery\Winre.wim
-move .\mount\Windows\System32\Recovery\Winre.wim Winre.wim
+del .\mount\Windows\System32\Recovery\Winre.wim /Q
+dir /a .\mount\Windows\System32\Recovery
 
 Dism /Unmount-Image /MountDir:.\mount /Commit
 ```
