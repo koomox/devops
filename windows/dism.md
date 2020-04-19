@@ -162,15 +162,18 @@ Dism /Export-Image /SourceImageFile:.\install.wim /SourceIndex:1 /DestinationIma
 Dism /Apply-Image /ImageFile:.\en_win10_ltsc_2019_x64_boot.wim /ApplyDir:C:\ /Index:1 /WIMBoot
 ```
 ### bcdedit         
-添加 VHD 启动项         
+添加 VHD 启动项 [source](/storage/windows/deploy/add_vhd.bat)         
 ```bat
-bcdedit /copy {current} /d "Windows 10 VHD" > E:\uuid.txt
-bcdedit /set {uuid} device vhd="[R:]\VHD\win10.vhd"
-bcdedit /set {uuid} osdevice vhd="[R:]\VHD\win10.vhd"
-bcdedit /set {uuid} detecthal Yes
-bcdedit /displayorder {uuid} /addlast
+SET VHD_GUID={}
+SET VHD_BOOT_NAME="Windows 10 VHD"
+
+FOR /F "tokens=2 delims={,}" %I IN ('bcdedit /copy {current} /d %VHD_BOOT_NAME%') DO @SET VHD_GUID={%I}
+bcdedit /set %VHD_GUID% device vhd="[R:]\VHD\win10.vhd"
+bcdedit /set %VHD_GUID% osdevice vhd="[R:]\VHD\win10.vhd"
+bcdedit /set %VHD_GUID% detecthal Yes
+bcdedit /displayorder %VHD_GUID% /addlast
 ```
-添加 pe.wim 启动项         
+添加 pe.wim 启动项 [source](/storage/windows/deploy/add_pe.bat)        
 ```bat
 SET PE_SDI_GUID={}
 SET PE_WIM_GUID={}

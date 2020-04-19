@@ -21,7 +21,7 @@ SET WIM_MOUNTPATH=D:\mount\win10pe
 
 Dism /Mount-Wim /WimFile:%WIM_FILE% /Index:%WIM_INDEX% /MountDir:%WIM_MOUNTPATH%
 ```
-将 PE 添加到启动项           
+将 PE 添加到启动项 [source](/storage/windows/deploy/add_pe.bat)           
 ```
 SET PE_SDI_GUID={}
 SET PE_WIM_GUID={}

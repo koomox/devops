@@ -57,7 +57,7 @@ dir /a
 SET WIM_MOUNTPATH=D:\mount\win10
 Dism /Unmount-Wim /MountDir:%WIM_MOUNTPATH% /Discard
 ```
-### 把 Windows RE 系统添加到系统启动项              
+### 把 Windows RE 系统添加到系统启动项 [source](/storage/windows/deploy/add_re.bat)             
 ```bat
 SET RE_SDI_GUID={}
 SET RE_WIM_GUID={}
