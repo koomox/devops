@@ -97,6 +97,17 @@ echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sou
 sudo apt update
 sudo apt install sublime-text
 ```
+二进制包安装 Sublime Text         
+```sh
+wget https://download.sublimetext.com/sublime_text_3_build_3211_x64.tar.bz2
+
+tar -xjvf sublime_text_3_build_3211_x64.tar.bz2
+
+sudo mv sublime_text_3 /opt/sublime_text
+
+cp /opt/sublime_text/sublime_text.desktop ~/Desktop
+chmod +x ~/Desktop/sublime_text.desktop
+```
 安装好仍然无法打开，因为缺少libgtk包        
 ```sh
 sudo apt install libgtk2.0-0
@@ -107,6 +118,14 @@ git clone https://github.com/titoBouzout/SideBarEnhancements.git --depth=1
 ```
 ```sh
 git clone https://github.com/sergeche/emmet-sublime.git --depth=1
+```
+### 安装 VSCode          
+二进制包安装 VSCode         
+```sh
+sudo dpkg -i code_1.43.2-1585036376_amd64.deb
+
+cp /usr/share/applications/code.desktop ~/Desktop
+chmod +x ~/Desktop/code.desktop
 ```
 ### 添加代理          
 国内下载软件的时候非常慢，可以使用代理加速下载，下面的方法重启电脑后即失效。（对apt、wget、等命令有效）                      
@@ -217,8 +236,8 @@ wget https://go.skype.com/skypeforlinux-64.deb
 
 sudo dpkg -i skypeforlinux-64.deb
 
-cp /usr/share/applications/skype.desktop ~/Desktop
-chmod +x ~/Desktop/skype.desktop
+cp /usr/share/applications/skypeforlinux.desktop ~/Desktop
+chmod +x ~/Desktop/skypeforlinux.desktop
 ```
 ```
 ### Spotify            
@@ -230,6 +249,16 @@ echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sourc
 sudo apt update
 
 sudo apt install spotify-client
+```
+### Telegram        
+```sh
+wget --content-disposition https://telegram.org/dl/desktop/linux
+
+xz -d tsetup.2.0.1.tar.xz
+tar -xf tsetup.2.0.1.tar
+sudo mv Telegram /opt
+
+
 ```
 ### Steam            
 ```sh

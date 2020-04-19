@@ -52,3 +52,25 @@ cd nginx-1.16.1
 make
 make install
 ```
+### 用法          
+使用 OBS Studio 录制得视频为 MKV 格式，无法导入 Premiere Pro, 使用 ffmpeg 转换为 MP4 格式, `-ss` 开始时间, `-t` 结束时间, `-i` 源文件                     
+```sh
+ffmpeg -ss 00:00:00 -t 00:10:00 -i input.mkv -vcodec copy -acodec copy output.mp4
+```
+提取视频           
+```sh
+ffmpeg -i input.mkv -vcodec copy -an output.mp4
+```
+提取音频        
+```sh
+ffmpeg -i input.mkv -acodec aac -vn ouput.aac
+```
+码率控制, 可以压缩文件得大小          
+```sh
+ffmpeg -i input.mp4 -b:v 2000k -bufsize 2000k output.mp4
+ffmpeg -i input.mp4 -b:v 4000k -bufsize 4000k output.mp4
+```
+为视频添加 LOGO 图片       
+```sh
+ffmpeg -i input.mp4 -i logo.png -filter_complex overlay output.mp4
+```
