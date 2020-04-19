@@ -26,7 +26,8 @@ Firefox 52.0.2 XP 系统最终版 32 位： [点击下载](https://ftp.mozilla.o
 ### Firefox Developer Edition           
 Firefox Developer Edition 64 位: [点击下载](https://download-installer.cdn.mozilla.net/pub/devedition/releases/76.0b5/win64/zh-CN/Firefox%20Setup%2076.0b5.exe)          
 Firefox Developer Edition 32 位: [点击下载](https://download-installer.cdn.mozilla.net/pub/devedition/releases/76.0b5/win32/zh-CN/Firefox%20Setup%2076.0b5.exe)          
-### 下载          
+### 下载           
+[source](/storage/linux/scripts/browser.sh)           
 ```sh
 wget -O browser.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/browser.sh
 chmod +x ./browser.sh
