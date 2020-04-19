@@ -16,3 +16,8 @@ XshellPlus-6.0.0025 [Download Link](https://cdn.netsarang.net/0ada4521/XshellPlu
 %userprofile%\Documents\NetSarang Computer\6\Xshell\Sessions\
 %userprofile%\Documents\NetSarang Computer\6\Xshell\ColorScheme Files\
 ```
+删除 Xshell 注册表       
+```bat
+REG DELETE HKEY_CURRENT_USER\Software\NetSarang /f
+REG DELETE HKEY_LOCAL_MACHINE\Software\NetSarang /f
+```
