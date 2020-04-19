@@ -26,3 +26,7 @@ Firefox 52.0.2 XP 系统最终版 32 位： [点击下载](https://ftp.mozilla.o
 ### Firefox Developer Edition           
 Firefox Developer Edition 64 位: [点击下载](https://download-installer.cdn.mozilla.net/pub/devedition/releases/63.0b5/win64/zh-CN/Firefox%20Setup%2063.0b5.exe)          
 Firefox Developer Edition 32 位: [点击下载](https://download-installer.cdn.mozilla.net/pub/devedition/releases/63.0b5/win32/zh-CN/Firefox%20Setup%2063.0b5.exe)          
+### 用法           
+Chrome 浏览器缓存目录 `%userprofile%\AppData\Local\Google`                
+Firefox 多用户配置 `about:profiles`          
+Chrome enable DNS-over-HTTPS `chrome://flags/#dns-over-https`         
