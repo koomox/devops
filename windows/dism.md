@@ -76,7 +76,7 @@ DISM /Online /Add-Driver /Driver:D:\DriversBackup /Recurse
 ### 使用完整版 Dism          
 Windows 7 系统中的 Dism 不完整很多功能无法使用。可以从Windows ADK 中提取出完整版的 Dism。          
 `DandIRoot` 变量就是DeploymentTools的路径，如此就可以使用完整版的 Dism 了。       
-使用完整版 Dism: [点击查看源文件](../storage/windows/scripts/dism/DISM-ENV.bat)           
+使用完整版 Dism: [点击查看源文件](/storage/windows/scripts/dism/DISM-ENV.bat)           
 ```
 IF /I %PROCESSOR_ARCHITECTURE%==x86 (
     IF NOT "%PROCESSOR_ARCHITEW6432%"=="" (
