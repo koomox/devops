@@ -42,14 +42,25 @@ hosts 文件 Windows 下面的路径: `%SystemRoot%\system32\drivers\etc\`
 ```
 ### Sublime Text 3             
 ```txt
-127.0.0.1 license.sublimehq.com
-127.0.0.1 45.55.255.55
-127.0.0.1 45.55.41.223
+0.0.0.0 www.sublimemerge.com
+0.0.0.0 sublimemerge.com
+0.0.0.0 www.sublimetext.com
+0.0.0.0 sublimetext.com
+0.0.0.0 sublimehq.com
+0.0.0.0 telemetry.sublimehq.com
+0.0.0.0 license.sublimehq.com
+0.0.0.0 download.sublimetext.com
+0.0.0.0 download.sublimemerge.com
+0.0.0.0 45.55.255.55
+0.0.0.0 45.55.41.223
 ```
 ### IntelliJ IDEA          
 ```txt
-0.0.0.0 account.jetbrains.com
-0.0.0.0 www.jetbrains.com
+0.0.0.0 transact.netsarang.com
+0.0.0.0 update.netsarang.com
+0.0.0.0 www.netsarang.com
+0.0.0.0 www.netsarang.co.kr
+0.0.0.0 sales.netsarang.com
 ```
 ### CorelDRAW        
 ```txt
