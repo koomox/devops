@@ -47,3 +47,5 @@ netsh wlan set hostednetwork mode=disallow
 ![](/static/images/wiki/IMG_20200424_063306.png)      
 关闭桥接网络       
 ![](/static/images/wiki/IMG_20200424_063307.jpg)      
+### 一键启用 wifi 热点          
+一键启用/停用 wifi 热点        [source](/storage/windows/scripts/wireless_hotspot.bat)            
