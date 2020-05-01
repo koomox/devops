@@ -1,10 +1,13 @@
 #!/bin/bash
 FIREFOX_VERSION=75.0
-FIREFOX_DEVELOPER_EDITION_VERSION=76.0b5
+FIREFOX_DEVELOPER_EDITION_VERSION=76.0b8
 TOR_VERSION=9.0.9
 APPGUID=8A69D345-D564-463C-AFF1-A69D9E530F96
 ID=754CC110-B9C8-798B-4231-9054058921FC
 DATETIME=$(date +%Y%m%d)
+\rm -rf /opt/browser
+mkdir -p /opt/browser
+cd /opt/browser
 
 wget -O en_ChromeStandaloneSetup64_${DATETIME}.exe https://dl.google.com/tag/s/appguid%3D%7B${APPGUID}%7D%26iid%3D%7B${ID}%7D%26lang%3Den%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/chrome/install/ChromeStandaloneSetup64.exe
 wget -O en_ChromeStandaloneSetup_${DATETIME}.exe https://dl.google.com/tag/s/appguid%3D%7B${APPGUID}%7D%26iid%3D%7B${ID}%7D%26lang%3Den%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx86-stable-statsdef_1%26installdataindex%3Dempty/chrome/install/ChromeStandaloneSetup.exe
@@ -30,3 +33,5 @@ wget -O torbrowser-install-${TOR_VERSION}_zh-CN.exe https://www.torproject.org/d
 wget -O torbrowser-install-win64-${TOR_VERSION}_zh-CN.exe https://www.torproject.org/dist/torbrowser/${TOR_VERSION}/torbrowser-install-win64-${TOR_VERSION}_zh-CN.exe
 
 wget -O tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz https://www.torproject.org/dist/torbrowser/${TOR_VERSION}/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz
+
+tar -czvf browser.tar.gz ./*

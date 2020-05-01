@@ -1,9 +1,9 @@
-select vdisk file="F:\VHD\win10.vhd"
+select vdisk file="D:\VHD\win10.vhd"
 attach vdisk
 select disk 3
 select partition 2
 assign letter=M
-select vdisk file="F:\VHD\win8.1.vhd"
+select vdisk file="D:\VHD\win8.1.vhd"
 attach vdisk
 select disk 4
 select partition 2
