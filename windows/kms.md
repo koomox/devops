@@ -1,5 +1,13 @@
 # KMS         
 ### Windows           
+删除 KMS 激活信息        
+```bat
+REG QUERY "HKLM\Software\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /V "BackupProductKeyDefault" > %USERPROFILE%\Desktop\KMS-KEY.txt
+
+"%SystemRoot%\System32\slmgr.vbs" /upk
+"%SystemRoot%\System32\slmgr.vbs" /ckms
+"%SystemRoot%\System32\slmgr.vbs" /rearm
+```
 Windows 7 Enterprise            
 ```bat
 ::cd /d "SystemRoot%\System32" 
@@ -16,10 +24,10 @@ Windows Server 2008 R2 Enterprise
 slmgr.vbs /skms 127.0.0.1
 slmgr.vbs /ato
 ```
-Windows 10 Enterprise 2016 LTSB         
+Windows 10 Enterprise 2019 LTSB         
 ```bat
 ::slmgr.vbs /upk
-::slmgr.vbs /ipk DCPHK-NFMTC-H88MJ-PFHPY-QJ4BJ
+::slmgr.vbs /ipk PG7H6-7RNT3-R4MGR-HMJK2-J462D
 slmgr.vbs /skms 127.0.0.1
 slmgr.vbs /ato
 ```

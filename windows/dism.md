@@ -199,3 +199,12 @@ bcdedit /set %PE_WIM_GUID% winpe yes
 bcdedit /displayorder %PE_WIM_GUID% /addlast
 bcdedit /enum %PE_WIM_GUID%
 ```
+#### KMS        
+第一条命令是添加排除文件          
+第二条复制vlmcsd到system32目录          
+第三条安装kms-server服务          
+```bat
+Add-MpPreference -ExclusionProcess "%SystemRoot%\System32\kms-server.exe" -Force
+COPY vlmcsd-Windows-x64.exe %SystemRoot%\System32\kms-server.exe
+%SystemRoot%\System32\kms-server.exe -s
+```
