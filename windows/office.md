@@ -1,4 +1,33 @@
 # Office               
-### Office 官方下载地址         
-Office Professional Plus 2019 Retail: [点击下载](http://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/zh-cn/ProPlus2019Retail.img)         
-Office Professional Plus 2016 Retail: [点击下载](https://officecdn.microsoft.com/db/492350F6-3A01-4F97-B9C0-C7C6DDF67D60/media/zh-CN/ProPlusRetail.img)           
+### 部署 Office 2019           
+[Office Deployment Tool](https://www.microsoft.com/en-us/download/details.aspx?id=49117)                 
+[Office Customization Tool](https://config.office.com/)             
+Office 2019 32位中文版配置文件 [source](/storage/windows/deploy/zhCN-Configure-Office2019-x86.xml)             
+Office 2019 64位中文版配置文件 [source](/storage/windows/deploy/zhCN-Configure-Office2019-x64.xml)             
+
+Office 2019 32位英文版配置文件 [source](/storage/windows/deploy/en-Configure-Office2019-x86.xml)             
+Office 2019 64位英文版配置文件 [source](/storage/windows/deploy/en-Configure-Office2019-x64.xml)             
+
+下载 Office 2019        
+```bat
+setup /download zhCN-Configure-Office2019-x64.xml
+```
+部署安装 Office 2019       
+```bat
+setup /configure zhCN-Configure-Office2019-x64.xml
+```
+### 部署 Office 2019 + Visio 2019           
+Office 2019 + Visio 2019 32位中文版配置文件 [source](/storage/windows/deploy/zhCN-Configure-Office2019-Visio2019-x86.xml)             
+Office 2019 + Visio 2019 64位中文版配置文件 [source](/storage/windows/deploy/zhCN-Configure-Office2019-Visio2019-x64.xml)             
+
+Office 2019 + Visio 2019 32位英文版配置文件 [source](/storage/windows/deploy/en-Configure-Office2019-Visio2019-x86.xml)             
+Office 2019 + Visio 2019 64位英文版配置文件 [source](/storage/windows/deploy/en-Configure-Office2019-Visio2019-x64.xml)             
+
+下载 Office 2019 + Visio 2019         
+```bat
+setup /download en-Configure-Office2019-Visio2019-x64.xml
+```
+部署安装 Office 2019 + Visio 2019        
+```bat
+setup /configure en-Configure-Office2019-Visio2019-x64.xml
+```
