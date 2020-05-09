@@ -1,7 +1,7 @@
 # Office               
 ### 部署 Office 2019           
-[Office Deployment Tool](https://www.microsoft.com/en-us/download/details.aspx?id=49117)                 
-[Office Customization Tool](https://config.office.com/)             
+Office Deployment Tool [Link](https://www.microsoft.com/en-us/download/details.aspx?id=49117)                 
+Office Customization Tool [Link](https://config.office.com/)             
 Office 2019 32位中文版配置文件 [source](/storage/windows/deploy/zhCN-Configure-Office2019-x86.xml)             
 Office 2019 64位中文版配置文件 [source](/storage/windows/deploy/zhCN-Configure-Office2019-x64.xml)             
 
