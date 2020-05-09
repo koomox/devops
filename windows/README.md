@@ -1,5 +1,6 @@
 # Windows 7 优化          
 [Office](office.md)           
+[VirtualBox](virtualbox.md)          
 [Windows 10 启用 wifi 热点](wireless_hotspot.md)          
 [Windows 10 无人值守安装](windows.md)        
 [输入法](ime.md)          
