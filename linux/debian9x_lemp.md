@@ -110,7 +110,7 @@ SELECT User, Host, Password, plugin FROM mysql.user;
 
 DROP USER 'root'@'%';
 
-GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 
 SELECT User, Host, Password, plugin FROM mysql.user;
