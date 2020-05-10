@@ -25,13 +25,25 @@ cat /etc/apt/sources.list.d/MariaDB.list
 sudo apt-get update -y
 sudo apt-get install mariadb-server -y
 ```
+删除默认空密码用户， 创建带密码得root用户           
+```sql
+DROP USER 'root'@'localhost';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+SELECT User, Host, Password, plugin FROM mysql.user;
+
+DROP USER 'mysql'@'localhost';
+GRANT ALL PRIVILEGES ON *.* TO 'mysql'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+SELECT User, Host, Password, plugin FROM mysql.user;
+```
 使 root 用户可以远程登录        
 ```sql
 SELECT User, Host, Password, plugin FROM mysql.user;
 
 DROP USER 'root'@'%';
 
-GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 
 SELECT User, Host, Password, plugin FROM mysql.user;

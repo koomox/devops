@@ -34,7 +34,7 @@ rem       ** NOTE: Update this size to match the size
 rem                of the recovery image           **
 rem ==    c. Prepare the Data partition ========= 
 format quick fs=ntfs label="Data"
-assign letter="D"
+assign letter="H"
 rem === 6. Recovery image partition ================
 create partition primary
 format quick fs=ntfs label="Recovery image"
