@@ -31,7 +31,7 @@ systemctl status nginx
 echo "hello world" > /var/www/letsencrypt/index
 ```
 
-### PHP 7.3        
+### PHP 7.4        
 添加 php 源        
 ```sh
 apt update -y
@@ -57,7 +57,7 @@ sudo apt upgrade -y
 echo -e "deb http://ppa.launchpad.net/ondrej/php/ubuntu $(lsb_release -sc) main\ndeb-src http://ppa.launchpad.net/ondrej/php/ubuntu $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
 cat /etc/apt/sources.list.d/php.list
 ```
-安装 php7.3-fpm           
+安装 php7.4-fpm           
 ```sh
 apt install -y php7.4 php7.4-common php7.4-cli php7.4-fpm php7.4-mysql php7.4-xml php7.4-curl php7.4-mbstring php7.4-zip php7.4-bz2 php7.4-bcmath php7.4-gd php7.4-intl
 ```
