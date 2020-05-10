@@ -59,25 +59,25 @@ cat /etc/apt/sources.list.d/php.list
 ```
 安装 php7.3-fpm           
 ```sh
-apt install -y php7.3 php7.3-common php7.3-cli php7.3-fpm php7.3-mysql php7.3-xml php7.3-curl php7.3-mbstring php7.3-zip php7.3-bz2 php7.3-bcmath php7.3-gd php7.3-intl
+apt install -y php7.4 php7.4-common php7.4-cli php7.4-fpm php7.4-mysql php7.4-xml php7.4-curl php7.4-mbstring php7.4-zip php7.4-bz2 php7.4-bcmath php7.4-gd php7.4-intl
 ```
 配置文件          
 ```sh
-cp -f  /etc/php/7.3/fpm/php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf.bak
-cp -f  /etc/php/7.3/fpm/pool.d/www.conf /etc/php/7.3/fpm/pool.d/www.conf.bak
+cp -f  /etc/php/7.4/fpm/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf.bak
+cp -f  /etc/php/7.4/fpm/pool.d/www.conf /etc/php/7.4/fpm/pool.d/www.conf.bak
 
-sed -i '/;listen.mode/clisten.mode = 0660' /etc/php/7.3/fpm/pool.d/www.conf
-sed -i '/^#/d;/^$/d;/^;/d' /etc/php/7.3/fpm/php-fpm.conf
-sed -i '/^#/d;/^$/d;/^;/d' /etc/php/7.3/fpm/pool.d/www.conf
+sed -i '/;listen.mode/clisten.mode = 0660' /etc/php/7.4/fpm/pool.d/www.conf
+sed -i '/^#/d;/^$/d;/^;/d' /etc/php/7.4/fpm/php-fpm.conf
+sed -i '/^#/d;/^$/d;/^;/d' /etc/php/7.4/fpm/pool.d/www.conf
 
-cat /etc/php/7.3/fpm/php-fpm.conf
-cat /etc/php/7.3/fpm/pool.d/www.conf
+cat /etc/php/7.4/fpm/php-fpm.conf
+cat /etc/php/7.4/fpm/pool.d/www.conf
 ```
 服务             
 ```sh
-systemctl stop php7.3-fpm
-systemctl start php7.3-fpm
-systemctl status php7.3-fpm
+systemctl stop php7.4-fpm
+systemctl start php7.4-fpm
+systemctl status php7.4-fpm
 ```
 ### MariaDB           
 添加公钥       
