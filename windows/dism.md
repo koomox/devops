@@ -28,14 +28,12 @@ SET S_DRIVE=C:\
 SET N_WIM_NAME="Windows 7 Ultimate SP1 64-bit"
 SET N_WIM_TIME="2017-08-20 22:38"
 
-cd "%windir%\DISM"
-
 Dism /Capture-Image /ImageFile:"%N_PATH%%N_WIM_FILE%" /CaptureDir:%S_DRIVE% /Name:%N_WIM_NAME% /Description:%N_WIM_TIME% /Compress:fast
 Dism /Get-ImageInfo /ImageFile:"%N_PATH%%N_WIM_FILE%"
 pause
 ```
 ```bat
-Dism /Capture-Image /ImageFile:win7sp2.wim /CaptureDir:C:\ /Name:"Windows 7 Ultimate SP1 64-bit" /Description:"2017-08-20 22:32" /Compress:fast
+Dism /Capture-Image /ImageFile:D:\RecoveryImage\win7sp2.wim /CaptureDir:C:\ /Name:"Windows 7 Ultimate SP1 64-bit" /Description:"2017-08-20 22:32" /Compress:fast
 ```
 
 显示 .wim、vhd 或 .vhdx 文件中所含映像的有关信息。                   
@@ -158,6 +156,15 @@ del .\mount\Windows\System32\Recovery\Winre.wim /Q
 dir /a .\mount\Windows\System32\Recovery
 
 Dism /Unmount-Image /MountDir:.\mount /Commit
+```
+安装 .Net3.5          
+```bat
+Dism /Image:.\mount /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess /Source:F:\sources\sxs
+Dism /Image:.\mount /Get-FeatureInfo /FeatureName:NetFx3
+
+Dism /Image:.\mount /Disable-Feature /FeatureName:NetFx3 /Remove
+
+Dism /online /Get-FeatureInfo /FeatureName:NetFx3
 ```
 构造并部署 wimboot, wimboot 文件存放在SSD硬盘隐藏分区        
 ```bat
