@@ -1,7 +1,7 @@
 #!/bin/bash
-FIREFOX_VERSION=76.0.1
-FIREFOX_DEVELOPER_EDITION_VERSION=77.0b9
-TOR_VERSION=9.0.10
+FIREFOX_VERSION=77.0.1
+FIREFOX_DEVELOPER_EDITION_VERSION=78.0b9
+TOR_VERSION=9.5
 APPGUID=8A69D345-D564-463C-AFF1-A69D9E530F96
 ID=754CC110-B9C8-798B-4231-9054058921FC
 DATETIME=$(date +%Y%m%d)
@@ -31,6 +31,9 @@ wget -O torbrowser-install-win64-${TOR_VERSION}_en-US.exe https://www.torproject
 
 wget -O torbrowser-install-${TOR_VERSION}_zh-CN.exe https://www.torproject.org/dist/torbrowser/${TOR_VERSION}/torbrowser-install-${TOR_VERSION}_zh-CN.exe
 wget -O torbrowser-install-win64-${TOR_VERSION}_zh-CN.exe https://www.torproject.org/dist/torbrowser/${TOR_VERSION}/torbrowser-install-win64-${TOR_VERSION}_zh-CN.exe
+
+wget -O TorBrowser-${TOR_VERSION}-osx64_en-US.dmg https://www.torproject.org/dist/torbrowser/${TOR_VERSION}/TorBrowser-${TOR_VERSION}-osx64_en-US.dmg
+wget -O TorBrowser-${TOR_VERSION}-osx64_zh-CN.dmg https://www.torproject.org/dist/torbrowser/${TOR_VERSION}/TorBrowser-${TOR_VERSION}-osx64_zh-CN.dmg
 
 wget -O tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz https://www.torproject.org/dist/torbrowser/${TOR_VERSION}/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz
 
