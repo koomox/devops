@@ -27,7 +27,7 @@ format quick fs=ntfs label="Windows"
 assign letter="W"
 rem == 5. Data partition ========================
 rem ==    a. Create the Data partition ==========
-create partition primary 
+create partition primary
 rem ==    b. Create space for the recovery image ===
 shrink minimum=15000
 rem       ** NOTE: Update this size to match the size
