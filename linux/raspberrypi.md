@@ -41,6 +41,9 @@ sudo raspi-config
 Putty: [Link](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)             
 Xshell: [Link](https://www.netsarang.com/en/free-for-home-school/)           
 ### 设置分辨率            
+```sh
+sudo raspi-config
+```
 ![](/static/images/wiki/IMG_20200909_014400.png)       
 ![](/static/images/wiki/IMG_20200909_014401.png)            
 ![](/static/images/wiki/IMG_20200909_014402.png)       
