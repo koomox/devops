@@ -35,8 +35,8 @@ sudo apt install vim curl wget git screen htop build-essential lsb-release
 ```sh
 sudo raspi-config
 ```
-![](../static/images/IMG_20200909_013700.png)       
-![](../static/images/IMG_20200909_013701.png)            
+![](/static/images/wiki/IMG_20200909_013700.png)       
+![](/static/images/wiki/IMG_20200909_013701.png)            
 
 Putty: [Link](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)             
 Xshell: [Link](https://www.netsarang.com/en/free-for-home-school/)           
