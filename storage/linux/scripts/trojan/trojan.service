@@ -1,6 +1,6 @@
 [Unit]
 Description=trojan
-Documentation=https://trojan-gfw.github.io/trojan/config https://trojan-gfw.github.io/trojan/
+Documentation=trojan protocol
 After=network.target network-online.target nss-lookup.target
 
 [Service]
@@ -8,6 +8,8 @@ Type=simple
 StandardError=journal
 ExecStart="/usr/local/bin/trojan" -c "/etc/trojan/config.json"
 ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=1s
 
 [Install]
 WantedBy=multi-user.target
