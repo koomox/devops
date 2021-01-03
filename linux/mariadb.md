@@ -7,17 +7,17 @@ sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com 0xF1656F24C7
 ```    
 添加debian源        
 ```sh
-echo -e "deb [arch=amd64] http://mirror.lstn.net/mariadb/repo/10.4/debian $(lsb_release -sc) main\ndeb-src http://mirror.lstn.net/mariadb/repo/10.4/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
+echo -e "deb [arch=amd64] http://sgp1.mirrors.digitalocean.com/mariadb/repo/10.5/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
 cat /etc/apt/sources.list.d/MariaDB.list
 ```
 添加ubuntu 源       
 ```sh
-echo -e "deb [arch=amd64,arm64,ppc64el] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.4/ubuntu $(lsb_release -sc) main\ndeb-src http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.4/ubuntu $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
+echo -e "deb [arch=amd64,arm64] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.5/ubuntu $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
 cat /etc/apt/sources.list.d/MariaDB.list
 ```
 tuna 源          
 ```sh
-echo -e "deb [arch=amd64] http://mirrors.tuna.tsinghua.edu.cn/mariadb/repo/10.4/debian $(lsb_release -sc) main\ndeb-src http://mirrors.tuna.tsinghua.edu.cn/mariadb/repo/10.4/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
+echo -e "deb [arch=amd64] https://mirrors.tuna.tsinghua.edu.cn/mariadb/repo/10.5/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
 cat /etc/apt/sources.list.d/MariaDB.list
 ```
 安装        
