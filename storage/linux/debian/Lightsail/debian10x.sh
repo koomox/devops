@@ -45,17 +45,6 @@ function downloadFunc() {
 	fi
 }
 
-function install_ffsend() {
-	FFSEND_VERSION=$(wget -q -O - https://github.com/timvisee/ffsend/tags | grep -m1 -E "/timvisee/ffsend/releases/tag/v[0-9]+\.[0-9]+\.*[0-9]*" | sed -E "s/.*v([0-9]+\.[0-9]+\.*[0-9]*).*/\1/gm")
-	FFSEND_FULL_NAME=ffsend-v${FFSEND_VERSION}-linux-x64-static
-	FFSEND_DOWNLOAD_LINK=https://github.com/timvisee/ffsend/releases/download/v${FFSEND_VERSION}/${FFSEND_FULL_NAME}
-
-	downloadFunc ${FFSEND_FULL_NAME} ${FFSEND_DOWNLOAD_LINK}
-	chmod +x ./${FFSEND_FULL_NAME}
-	mv ${FFSEND_FULL_NAME} /usr/bin/ffsend
-	ffsend -h
-}
-
 function custom_ssh_iptables() {
 	SSH_CONF="/etc/ssh/sshd_config"
 	SSH_PORT=22
@@ -137,7 +126,6 @@ function os_optimize() {
 	apt update -y
 	apt upgrade -y
 	apt install curl wget git vim sudo htop net-tools neofetch lsb-release build-essential -y
-	install_ffsend
 
 	echo "===== Optimize sysctl.conf ============="
 	cp -f /etc/sysctl.conf /etc/sysctl.conf.bak
