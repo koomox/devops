@@ -58,7 +58,7 @@ npm config delete https-proxy
 ```
 
 ### Yarn         
-Windows Classic Stable: [Link](https://classic.yarnpkg.com/en/docs/install/#windows-stable)         
+Windows Classic Stable: [Link](https://classic.yarnpkg.com/en/docs/install/#windows-stable)  [Download](https://classic.yarnpkg.com/latest.msi)        
 安装 yarn         
 ```sh
 npm install --global yarn
