@@ -40,3 +40,43 @@ apt update -y
 apt install nodejs -y
 apt install yarn -y
 ```
+### NPM       
+设置代理         
+```sh
+npm config set proxy http://127.0.0.1:8080
+npm config set https-proxy http://127.0.0.1:8080
+```
+查看代理        
+```sh
+npm config get
+npm config list
+```
+删除代理       
+```sh
+npm config delete proxy
+npm config delete https-proxy
+```
+
+### Yarn         
+Windows Classic Stable: [Link](https://classic.yarnpkg.com/en/docs/install/#windows-stable)         
+安装 yarn         
+```sh
+npm install --global yarn
+
+yarn --version
+```
+设置代理         
+```sh
+yarn config set proxy http://127.0.0.1:8080
+yarn config set https-proxy http://127.0.0.1:8080
+```
+查看代理        
+```sh
+yarn config get
+yarn config list
+```
+删除代理       
+```sh
+yarn config delete proxy
+yarn config delete https-proxy
+```
