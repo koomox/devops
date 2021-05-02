@@ -4,17 +4,11 @@ OpenSSL [Link](https://www.openssl.org/source/)
 Zlib [Link](https://zlib.net/)       
 pcre [Link](https://ftp.pcre.org/pub/pcre/)         
 ### 一键安装脚本        
-Linux 一键安装脚本 [查看源文件](/storage/linux/scripts/nginx/install_nginx1142.sh)         
+Linux 一键安装脚本 [查看源文件](/storage/linux/scripts/nginx/1.18.0/install.sh)         
 ```sh
-curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/install_nginx1142.sh -o /tmp/install_nginx1142.sh
-chmod +x /tmp/install_nginx1142.sh
-/tmp/install_nginx1142.sh
-```
-Linux 下载 nginx 相关文件打包后，上次至 Firefox Send。             
-```sh
-curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/download_nginx1142.sh -o /tmp/download_nginx1142.sh
-chmod +x /tmp/download_nginx1142.sh
-/tmp/download_nginx1142.sh
+curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.18.0/install.sh -o /tmp/install_1180.sh
+chmod +x /tmp/install_1180.sh
+/tmp/install_1180.sh
 ```
 一键安装 Nginx 1.16.0 [查看源文件](/storage/linux/scripts/nginx/install_nginx1160.sh)         
 ```sh
@@ -44,9 +38,9 @@ systemctl status nginx
 echo "hello world" > /var/www/letsencrypt/index
 ```
 ### SSL        
-一键安装二进制版 Nginx 1.16.1 [source file](/storage/linux/scripts/nginx/1.16.1/install.sh)             
+一键安装二进制版 Nginx 1.18.0 [source file](/storage/linux/scripts/nginx/1.18.0/install.sh)             
 ```sh
-wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.1/install.sh
+wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.18.0/install.sh
 chmod +x ./install.sh
 ./install.sh
 
