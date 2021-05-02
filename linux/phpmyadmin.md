@@ -2,12 +2,12 @@
 Home: [Link](https://www.phpmyadmin.net/downloads/)             
 ### 部署 phpMyAdmin           
 ```sh
-wget https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin-5.0.4-all-languages.tar.xz
+wget https://files.phpmyadmin.net/phpMyAdmin/5.1.0/phpMyAdmin-5.1.0-all-languages.tar.xz
 
 \rm -rf /web/phpMyAdmin
 mkdir -p /web/phpMyAdmin
-xz -d phpMyAdmin-5.0.4-all-languages.tar.xz
-tar --strip-components 1 -C /web/phpMyAdmin -xf phpMyAdmin-5.0.4-all-languages.tar
+xz -d phpMyAdmin-5.1.0-all-languages.tar.xz
+tar --strip-components 1 -C /web/phpMyAdmin -xf phpMyAdmin-5.1.0-all-languages.tar
 
 cd /web/phpMyAdmin
 \cp -f config.sample.inc.php config.inc.php
