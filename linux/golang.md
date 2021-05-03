@@ -22,3 +22,31 @@ curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/sc
 chmod +x ./latest_go_v3.sh
 ./latest_go_v3.sh
 ```
+### 打包带图标的 windows 可执行程序            
+下载 `rsrc`
+```sh
+go get github.com/akavel/rsrc
+go build github.com/akavel/rsrc
+```
+创建 `main.manifest` 文件       
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+    <assemblyIdentity version="1.0.0.0" processorArchitecture="*" name="controls" type="win32">
+	</assemblyIdentity>
+    <dependency>
+        <dependentAssembly>
+            <assemblyIdentity type="win32" name="Microsoft.Windows.Common-Controls" version="6.0.0.0" processorArchitecture="*" publicKeyToken="6595b64144ccf1df" language="*">
+			</assemblyIdentity>
+        </dependentAssembly>
+    </dependency>
+</assembly>
+```
+生成 `syso` 文件          
+```sh
+rsrc -manifest main.manifest -ico main.ico -o main.syso
+```
+编译程序        
+```sh
+go build -ldflags "-s -w" -o app.exe
+```
