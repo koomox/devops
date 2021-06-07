@@ -87,13 +87,8 @@ function custom_ssh_iptables() {
 
 	# INPUT
 	iptables -A INPUT -i lo -j ACCEPT
-	# iptables -A INPUT -m icmp -p icmp --icmp-type any -j ACCEPT
 	iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-
-	# iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
 	iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport ${SSH_PORT} -j ACCEPT
-	iptables -A INPUT -p udp --sport 53 -j ACCEPT
-	iptables -A INPUT -p udp --sport 123 -j ACCEPT
 	iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 	iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
 
