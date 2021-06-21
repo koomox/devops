@@ -27,9 +27,9 @@ hdiutil convert ~/Desktop/InstallSystem.dmg -format UDTO -o ~/Desktop/Catalina.i
 ```
 ### 制作 macOS Big Sur 10.16 系统镜像cdr、ISO文件，可用虚拟机安装              
 ```sh
-hdiutil create -o /tmp/bigsur -size 10g -volname bigsur -layout SPUD -fs HFS+J
-hdiutil attach /tmp/BigSur.dmg -noverify -mountpoint /Volumes/BigSur
+hdiutil create -o /tmp/bigsur -size 13g -volname bigsur -layout SPUD -fs HFS+J
+hdiutil attach /tmp/bigsur.dmg -noverify -mountpoint /Volumes/BigSur
 sudo /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/createinstallmedia --volume /Volumes/BigSur --nointeraction
 hdiutil eject -force /Volumes/Install\ macOS\ Big\ Sur
-hdiutil convert /tmp/BigSur.dmg -format UDTO -o ~/Desktop/BigSur.cdr
+hdiutil convert /tmp/bigsur.dmg -format UDTO -o ~/Desktop/BigSur.cdr
 ```
