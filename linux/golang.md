@@ -50,3 +50,10 @@ rsrc -manifest main.manifest -ico main.ico -o main.syso
 ```sh
 go build -ldflags "-s -w" -o app.exe
 ```
+### Alpine Linux       
+由于alpine镜像使用的是musl libc而不是gnu libc，/lib64/ 是不存在的。但他们是兼容的，可以创建个软连接过去试试。          
+```sh
+mkdir /lib64
+ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
+go version
+```
