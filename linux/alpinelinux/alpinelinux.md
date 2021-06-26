@@ -1,5 +1,5 @@
 # Alpine Linux 3.14.0             
-Linux Kernel 5.4.43               
+Linux Kernel 5.10.43               
 下载地址: [Link](https://alpinelinux.org/downloads/)             
 ### 安装        
 不管是刻录U盘还是在虚拟机里启动，进入终端之后，输入 `root` 默认无密登陆，然后执行 `setup-alpine` 命令，在终端上启动他的安装程序。              
