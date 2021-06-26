@@ -1,10 +1,10 @@
-# Debian 9.x for LEMP         
+# Debian 10.x for LEMP         
 ### Nginx        
-一键安装 Nginx 1.16.0 [查看源文件](../storage/linux/scripts/nginx/install_nginx1160.sh)         
+一键安装 Nginx 1.20.1 [查看源文件](../storage/linux/scripts/nginx/install_nginx1201.sh)         
 ```sh
-wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/install_nginx1160.sh
-chmod +x ./install_nginx1160.sh
-./install_nginx1160.sh
+wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.20.1/install.sh
+chmod +x ./install.sh
+./install.sh
 ```
 配置文件          
 ```sh
@@ -57,7 +57,10 @@ sudo apt upgrade -y
 echo -e "deb http://ppa.launchpad.net/ondrej/php/ubuntu $(lsb_release -sc) main\ndeb-src http://ppa.launchpad.net/ondrej/php/ubuntu $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
 cat /etc/apt/sources.list.d/php.list
 ```
-安装 php7.4-fpm           
+安装 php7.4-fpm  
+```sh
+sudo apt-get install php7.4 php7.4-{common, cli, fpm, mysql, xml, curl, mbstring, zip, bz2, bcmath, gd, intl}
+````         
 ```sh
 apt install -y php7.4 php7.4-common php7.4-cli php7.4-fpm php7.4-mysql php7.4-xml php7.4-curl php7.4-mbstring php7.4-zip php7.4-bz2 php7.4-bcmath php7.4-gd php7.4-intl
 ```
@@ -87,17 +90,17 @@ sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F2
 ```
 添加源       
 ```sh
-echo -e "deb [arch=amd64] http://mirror.lstn.net/mariadb/repo/10.4/debian $(lsb_release -sc) main\ndeb-src http://mirror.lstn.net/mariadb/repo/10.4/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
+echo -e "deb [arch=amd64] http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.5/debian $(lsb_release -sc) main\ndeb-src http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.5/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
 cat /etc/apt/sources.list.d/MariaDB.list
 ```
 tuna 源       
 ```sh
-echo -e "deb [arch=amd64] http://mirrors.tuna.tsinghua.edu.cn/mariadb/repo/10.4/debian $(lsb_release -sc) main\ndeb-src http://mirrors.tuna.tsinghua.edu.cn/mariadb/repo/10.4/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
+echo -e "deb [arch=amd64] http://mirrors.tuna.tsinghua.edu.cn/mariadb/repo/10.5/debian $(lsb_release -sc) main\ndeb-src http://mirrors.tuna.tsinghua.edu.cn/mariadb/repo/10.5/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
 cat /etc/apt/sources.list.d/MariaDB.list
 ```
 ubuntu 源       
 ```sh
-echo -e "deb [arch=amd64,arm64,ppc64el] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.4/ubuntu $(lsb_release -sc) main\ndeb-src http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.4/ubuntu $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
+echo -e "deb [arch=amd64,arm64,ppc64el] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.5/ubuntu $(lsb_release -sc) main\ndeb-src http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.5/ubuntu $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
 cat /etc/apt/sources.list.d/MariaDB.list
 ```
 ```sh
@@ -125,4 +128,20 @@ SELECT User, Host, Password, plugin FROM mysql.user;
 UPDATE mysql.user SET plugin='mysql_native_password';
 FLUSH PRIVILEGES;
 SELECT User, Host, Password, plugin FROM mysql.user;
+```
+### Redis         
+安装 redis       
+```sh
+sudo apt -y install redis-server
+```
+开机自启动服务       
+```sh
+sudo systemctl enable redis-server
+sudo systemctl status redis-server
+```
+配置文件       
+```sh
+sudo cp -f /etc/redis/redis.conf /etc/redis/redis.conf.bak
+sed -i '/^#/d;/^$/d;/^;/d' /etc/redis/redis.conf
+sudo vim /etc/redis/redis.conf
 ```
