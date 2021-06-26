@@ -51,6 +51,10 @@ rsrc -manifest main.manifest -ico main.ico -o main.syso
 go build -ldflags "-s -w" -o app.exe
 ```
 ### Alpine Linux       
+linux上面运行`cgo`需要`musl-dev`依赖包         
+```sh
+apk add --no-cache musl-dev
+```
 由于alpine镜像使用的是musl libc而不是gnu libc，/lib64/ 是不存在的。但他们是兼容的，可以创建个软连接过去试试。          
 ```sh
 mkdir /lib64

@@ -92,6 +92,16 @@ rc-service mariadb start
 rc-update add mariadb
 ps aux | grep mysql
 ```
+修改配置文件 `/etc/my.cnf` 替换为如下内容       
+```ini
+[client-server]
+port=3306
+
+[mysqld]
+bind-address=127.0.0.1
+port=3306
+datadir=/var/lib/mysql
+```
 ### Redis   
 ```sh
 apk update
