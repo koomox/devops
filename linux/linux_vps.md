@@ -56,7 +56,7 @@ yum update
 ```sh
 wget --no-check-certificate -qO InstallNET.sh 'https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/DebianNET/InstallNET.sh' && chmod a+x InstallNET.sh
 
-bash InstallNET.sh -d buster -v amd64 -a --mirror 'http://ftp.hk.debian.org/debian/'
+bash InstallNET.sh -d bullseye -v amd64 -a --mirror 'http://ftp.debian.org/debian/'
 ```
 ```sh
 wget --no-check-certificate -qO InstallNET.sh 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh' && chmod a+x InstallNET.sh
@@ -80,17 +80,17 @@ Usage:
 使用示例:       
 ```sh
 #使用默认镜像全自动安装
-bash InstallNET.sh -d 10 -v 64 -a --mirror 'http://mirror.xtom.com.hk/debian/'
+bash InstallNET.sh -d 11 -v 64 -a --mirror 'http://mirror.xtom.com.hk/debian/'
 
-bash InstallNET.sh -d 10 -v 64 -a --mirror 'http://ftp2.cn.debian.org/debian/'
+bash InstallNET.sh -d 11 -v 64 -a --mirror 'http://ftp2.cn.debian.org/debian/'
 
-bash InstallNET.sh -d 10 -v 64 -a --mirror 'http://ftp.hk.debian.org/debian/'
+bash InstallNET.sh -d 11 -v 64 -a --mirror 'http://ftp.hk.debian.org/debian/'
 
-bash InstallNET.sh -d 10 -v 64 -a --mirror 'http://ftp.tw.debian.org/debian/'
+bash InstallNET.sh -d 11 -v 64 -a --mirror 'http://ftp.tw.debian.org/debian/'
 
-bash InstallNET.sh -d 10 -v 64 -a --mirror 'http://mirror.0x.sg/debian/'
+bash InstallNET.sh -d 11 -v 64 -a --mirror 'http://mirror.0x.sg/debian/'
 
-bash InstallNET.sh -d 9 -v 64 -a --mirror 'http://ftp.us.debian.org/debian/'
+bash InstallNET.sh -d 10 -v 64 -a --mirror 'http://ftp.us.debian.org/debian/'
 
 #使用自定义镜像全自动安装
 bash InstallNET.sh -c 6.9 -v 64 -a --mirror 'http://mirror.centos.org/centos'
@@ -125,20 +125,14 @@ apt update
 
 wget --no-check-certificate -qO InstallNET.sh 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh' && chmod a+x InstallNET.sh
 
-bash InstallNET.sh -d 10 -v 64 -a --mirror 'http://mirror.xtom.com.hk/debian/'
-bash InstallNET.sh -d 10 -v 64 -a --mirror 'http://ftp.hk.debian.org/debian/'
+bash InstallNET.sh -d 11 -v 64 -a --mirror 'http://mirror.xtom.com.hk/debian/'
+bash InstallNET.sh -d 11 -v 64 -a --mirror 'http://ftp.debian.org/debian/'
 #bash InstallNET.sh -d 9 -v 64 -a --mirror 'http://mirrors.ustc.edu.cn/debian/'
 ```
 ### 安装常用软件          
 安装常用软件及相关依赖        
 ```sh
 apt install curl wget git vim sudo htop net-tools neofetch lsb-release build-essential
-```
-安装 ffsend [查看源文件](/storage/linux/scripts/ffsend/ffsend.sh)        
-```sh
-wget -O autoinstall_ffsend.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/ffsend/ffsend.sh
-chmod +x ./autoinstall_ffsend.sh
-./autoinstall_ffsend.sh
 ```
 ### 优化系统         
 优化内核参数 [查看源文件](/storage/linux/debian/sysctl/aliyun.lightsail.sysctl.conf)        
