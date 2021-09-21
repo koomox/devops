@@ -98,6 +98,7 @@ function custom_ssh_iptables() {
 	nft add rule inet filter input tcp dport 80 accept
 	nft add rule inet filter input tcp dport 443 accept
 	nft add chain inet filter input { type filter hook input priority 0\; policy drop\; }
+	nft add chain inet filter forward { type filter hook forward priority 0\; policy drop\; }
 	nft list ruleset
 
 	sh -c 'echo "flush ruleset" > /etc/nftables.conf'

@@ -14,7 +14,7 @@ table inet filter {
 	}
 
 	chain forward {
-		type filter hook forward priority filter; policy accept;
+		type filter hook forward priority filter; policy drop;
 	}
 
 	chain output {
