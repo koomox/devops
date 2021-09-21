@@ -164,11 +164,11 @@ timedatectl set-timezone Asia/Shanghai
 timedatectl
 ```
 ### 设置SSH          
-自定义SSH端口，设置证书登录 [查看源文件](/storage/linux/scripts/iptables/iptables.v2.rules.sh)         
+自定义SSH端口，设置证书登录 [查看源文件](/storage/linux/scripts/nftables/nftables.rules.sh)         
 ```sh
-wget -O custom_ssh_iptables.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/iptables/iptables.v2.rules.sh
+wget -O custom_ssh_nftables.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nftables/nftables.rules.sh
 chmod +x ./custom_ssh_iptables.sh
-./custom_ssh_iptables.sh
+./custom_ssh_nftables.sh
 ```
 ### 获取公网IP地址          
 ```sh
