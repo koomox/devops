@@ -6,6 +6,7 @@
 [iptables](iptables.md)            
 [Dnsmasq](dnsmasq.md)        
 [Debian 10.x](debian10x.md)        
+[Debian 11.x](debian11x.md)        
 [Linux VPS - DD 重装系统与系统优化](linux_vps.md)         
 [Ubuntu 18.10](ubuntu/ubuntu1810.md)            
 [Linux Mint](linuxmint.md)          
