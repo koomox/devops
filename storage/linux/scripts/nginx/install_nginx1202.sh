@@ -5,12 +5,12 @@ fi
 mkdir -p make_nginx && cd make_nginx
 
 wget https://nginx.org/download/nginx-1.20.2.tar.gz
-wget https://www.openssl.org/source/openssl-1.1.1k.tar.gz
-wget https://ftp.pcre.org/pub/pcre/pcre-8.44.tar.gz
+wget https://www.openssl.org/source/openssl-1.1.1l.tar.gz
+wget https://ftp.pcre.org/pub/pcre/pcre-8.45.tar.gz
 wget https://www.zlib.net/zlib-1.2.11.tar.gz
 
-tar -zxf openssl-1.1.1k.tar.gz
-tar -zxf pcre-8.44.tar.gz
+tar -zxf openssl-1.1.1l.tar.gz
+tar -zxf pcre-8.45.tar.gz
 tar -zxf zlib-1.2.11.tar.gz
 tar -zxf nginx-1.20.2.tar.gz
 
@@ -27,9 +27,9 @@ cd nginx-1.20.2
 --with-http_stub_status_module \
 --with-stream \
 --with-stream_ssl_module \
---with-pcre=../pcre-8.44 \
+--with-pcre=../pcre-8.45 \
 --with-zlib=../zlib-1.2.11 \
---with-openssl=../openssl-1.1.1k
+--with-openssl=../openssl-1.1.1l
 make
 make install
 
