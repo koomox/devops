@@ -6,7 +6,7 @@ mkdir -p make_nginx && cd make_nginx
 
 wget https://nginx.org/download/nginx-1.20.2.tar.gz
 wget https://www.openssl.org/source/openssl-1.1.1l.tar.gz
-wget https://ftp.pcre.org/pub/pcre/pcre-8.45.tar.gz
+wget https://ftp.exim.org/pub/pcre/pcre-8.45.tar.gz
 wget https://www.zlib.net/zlib-1.2.11.tar.gz
 
 tar -zxf openssl-1.1.1l.tar.gz
