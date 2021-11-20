@@ -66,15 +66,6 @@ function custom_ssh_iptables() {
 	echo "====== read ~/.ssh/authorized_keys ========"
 	cat ~/.ssh/authorized_keys
 
-	echo "===== reset iptables rules======"
-	iptables -P INPUT ACCEPT
-	iptables -P FORWARD ACCEPT
-	iptables -P OUTPUT ACCEPT
-	iptables -F
-	iptables -X
-	iptables -Z
-	iptables -nvL
-
 	#修改SSH为证书登录
 	setenforce 0
 	sed -E -i '/^#*Port /cPort '"$SSH_PORT"'' ${SSH_CONF}
