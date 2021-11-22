@@ -7,6 +7,11 @@ sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/u
 sudo chmod +x ./ubuntu20x.sh
 sudo ./ubuntu20x.sh
 ```
+启用 root 远程登录         
+```sh
+sudo sed -E -i '/^#*PermitEmptyPasswords/cPermitEmptyPasswords no' /etc/ssh/sshd_config
+sudo sed -E -i '/^#*PermitRootLogin/cPermitRootLogin yes' /etc/ssh/sshd_config
+```
 ### 更换更新源            
 备份文件          
 ```sh
