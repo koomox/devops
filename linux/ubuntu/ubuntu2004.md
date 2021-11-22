@@ -12,11 +12,11 @@ sudo ./ubuntu20x.sh
 ```sh
 sudo cp -f /etc/apt/sources.list /etc/apt/sources.list.bak
 ```
-[source](/storage/linux/ubuntu/mirrors.sh)       
+[source](/storage/linux/ubuntu/mirrors-tuna.sh)       
 ```sh
-sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/ubuntu/mirrors.sh
-sudo chmod +x ./mirrors.sh
-sudo ./mirrors.sh
+sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/ubuntu/mirrors-tuna.sh
+sudo chmod +x ./mirrors-tuna.sh
+sudo ./mirrors-tuna.sh
 ```
 ```sh
 sudo apt update
