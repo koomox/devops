@@ -23,7 +23,7 @@ sudo apt update
 sudo apt upgrade
 ```
 ### Nginx        
-一键安装 Nginx 1.20.2 [查看源文件](../storage/linux/scripts/nginx/install_nginx1202.sh)         
+一键安装 Nginx 1.20.2 [查看源文件](/storage/linux/scripts/nginx/1.20.2/install.sh)         
 ```sh
 sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.20.2/install.sh
 sudo chmod +x ./install.sh
