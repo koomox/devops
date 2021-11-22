@@ -50,7 +50,7 @@ sudo cp -f /etc/apt/sources.list /etc/apt/sources.list.bak
 [source](/storage/linux/ubuntu/mirrors.sh)       
 ```sh
 sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/ubuntu/mirrors.sh
-chmod +x ./mirrors.sh
+sudo chmod +x ./mirrors.sh
 sudo ./mirrors.sh
 ```
 ```sh
