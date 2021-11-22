@@ -4,7 +4,7 @@
 [source](/storage/linux/ubuntu/Lightsail/ubuntu20x.sh)         
 ```sh
 sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/ubuntu/Lightsail/ubuntu20x.sh
-chmod +x ./ubuntu20x.sh
+sudo chmod +x ./ubuntu20x.sh
 sudo ./ubuntu20x.sh
 ```
 ### 更换更新源            
