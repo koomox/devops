@@ -6,15 +6,15 @@ pcre [Link](https://ftp.pcre.org/pub/pcre/)
 ### 一键安装脚本        
 Linux 一键安装脚本 [查看源文件](/storage/linux/scripts/nginx/1.20.2/install.sh)         
 ```sh
-curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.20.2/install.sh -o /tmp/install.sh
-chmod +x /tmp/install.sh
-/tmp/install.sh
+sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.20.2/install.sh
+sudo chmod +x ./install.sh
+sudo ./install.sh
 ```
 一键安装 Nginx 1.18.0 [查看源文件](/storage/linux/scripts/nginx/1.18.0/install.sh)         
 ```sh
-curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.18.0/install.sh -o /tmp/install.sh
-chmod +x ./install.sh
-./install.sh
+sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.18.0/install.sh
+sudo chmod +x ./install.sh
+sudo ./install.sh
 ```
 ```sh
 sed -i 's/phpmyadmin/pma/g' /etc/nginx/conf.d/phpmyadmin.conf
