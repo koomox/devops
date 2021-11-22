@@ -50,6 +50,8 @@ acme.sh --issue --standalone -d example.com -d www.example.com -d cp.example.com
 ```
 非 80、443 端口，安卓 Let's Encrypt 证书，可以使用 DNS 验证的方式, cloudflare 界面添加 txt 记录。           
 ```sh
+sudo rm -rf /etc/letsencrypt/live
+sudo mkdir -p /etc/letsencrypt/live && cd /etc/letsencrypt/live
 sudo apt install certbot
 sudo certbot certonly --manual --preferred-challenges dns -d example.com --register-unsafely-without-email
 ```
