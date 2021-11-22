@@ -6,22 +6,15 @@ pcre [Link](https://ftp.pcre.org/pub/pcre/)
 ### 一键安装脚本        
 Linux 一键安装脚本 [查看源文件](/storage/linux/scripts/nginx/1.20.2/install.sh)         
 ```sh
-curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.20.2/install.sh -o /tmp/install_1202.sh
-chmod +x /tmp/install_1202.sh
-/tmp/install_1202.sh
+curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.20.2/install.sh -o /tmp/install.sh
+chmod +x /tmp/install.sh
+/tmp/install.sh
 ```
 一键安装 Nginx 1.18.0 [查看源文件](/storage/linux/scripts/nginx/1.18.0/install.sh)         
 ```sh
-curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.18.0/install.sh -o /tmp/install_1180.sh
-chmod +x ./install_nginx1180.sh
-./install_nginx1180.sh
-```
-```sh
-domain=example.com
-
-mkdir -p /etc/letsencrypt/live/$domain
-touch /etc/letsencrypt/live/$domain/fullchain.pem
-touch /etc/letsencrypt/live/$domain/privkey.pem
+curl -s https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.18.0/install.sh -o /tmp/install.sh
+chmod +x ./install.sh
+./install.sh
 ```
 ```sh
 sed -i 's/phpmyadmin/pma/g' /etc/nginx/conf.d/phpmyadmin.conf
@@ -33,23 +26,18 @@ systemctl enable nginx
 systemctl stop nginx
 systemctl start nginx
 systemctl status nginx
-```
+```   
+强制 SSL 网页跳转 [source file](/storage/linux/scripts/nginx/1.16.1/conf.d/default.conf)                         
 ```sh
-echo "hello world" > /var/www/letsencrypt/index
-```
-### SSL        
-一键安装二进制版 Nginx 1.20.2 [source file](/storage/linux/scripts/nginx/1.20.2/install.sh)             
-```sh
-wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.20.2/install.sh
-chmod +x ./install.sh
-./install.sh
+sudo wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.1/conf.d/default.conf
+sudo mkdir -p /var/www/html
 
-wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.1/conf.d/default.conf
-mkdir -p /var/www/html
-cd /var/www/html
-wget --content-disposition https://html5up.net/paradigm-shift/download
-apt install unzip -y
-unzip html5up-paradigm-shift.zip
+domain=test.com
+sed -i "s/example.com/${domain}/g" /etc/nginx/conf.d/default.conf
+
+mkdir -p /etc/letsencrypt/live/$domain
+vim /etc/letsencrypt/live/$domain/fullchain.pem
+vim /etc/letsencrypt/live/$domain/privkey.pem
 ```
 安装 Let's Encrypt 证书, 证书路径 `~/.acme.sh/`            
 ```sh
@@ -62,19 +50,8 @@ acme.sh --issue --standalone -d example.com -d www.example.com -d cp.example.com
 ```
 非 80、443 端口，安卓 Let's Encrypt 证书，可以使用 DNS 验证的方式, cloudflare 界面添加 txt 记录。           
 ```sh
-apt install certbot
-certbot certonly --manual --preferred-challenges dns -d example.com --register-unsafely-without-email
-```
-强制 SSL 网页跳转 [source file](/storage/linux/scripts/nginx/1.16.1/conf.d/default.conf)           
-```sh
-wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.1/conf.d/default.conf
-
-domain=test.com
-sed -i "s/example.com/${domain}/g" /etc/nginx/conf.d/default.conf
-
-mkdir -p /etc/letsencrypt/live/$domain
-vim /etc/letsencrypt/live/$domain/fullchain.pem
-vim /etc/letsencrypt/live/$domain/privkey.pem
+sudo apt install certbot
+sudo certbot certonly --manual --preferred-challenges dns -d example.com --register-unsafely-without-email
 ```
 PHP-FPM [source](/storage/linux/scripts/nginx/1.18.0/nginx-ssl-fpm.conf)                
 ```sh
