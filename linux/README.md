@@ -9,6 +9,7 @@
 [Debian 11.x](debian11x.md)        
 [Linux VPS - DD 重装系统与系统优化](linux_vps.md)         
 [Ubuntu 18.10](ubuntu/ubuntu1810.md)            
+[Ubuntu 20.04](ubuntu/ubuntu2004.md)            
 [Linux Mint](linuxmint.md)          
 [OpenSUSE](opensuse.md)          
 [CentOS 7.x](centos7x.md)           
