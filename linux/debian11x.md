@@ -11,11 +11,22 @@ wget -O custom_ssh_nftables.sh https://raw.githubusercontent.com/koomox/devops/m
 chmod +x ./custom_ssh_nftables.sh
 ./custom_ssh_nftables.sh
 ```
-一键安装二进制版 Nginx 1.20.2 [查看源文件](/storage/linux/scripts/nginx/1.20.2/install.sh)          
+一键安装二进制版 Nginx 1.18.0 [查看源文件](/storage/linux/scripts/nginx/1.18.0/install.sh)          
 ```sh
-wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.20.2/install.sh
-chmod +x ./install.sh
-./install.sh
+sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.18.0/install.sh
+sudo chmod +x ./install.sh
+sudo ./install.sh
+```
+配置文件      
+```sh
+sudo wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.1/conf.d/default.conf
+```
+非 80、443 端口，安卓 Let's Encrypt 证书，可以使用 DNS 验证的方式, cloudflare 界面添加 txt 记录。        
+```sh
+sudo rm -rf /etc/letsencrypt/live
+sudo mkdir -p /etc/letsencrypt/live && cd /etc/letsencrypt/live
+sudo apt install certbot
+sudo certbot certonly --manual --preferred-challenges dns -d example.com --register-unsafely-without-email
 ```
 ### youtube-dl      
 安装 youtube-dl      
