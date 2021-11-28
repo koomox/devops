@@ -28,6 +28,14 @@ sudo mkdir -p /etc/letsencrypt/live && cd /etc/letsencrypt/live
 sudo apt install certbot
 sudo certbot certonly --manual --preferred-challenges dns -d example.com --register-unsafely-without-email
 ```
+解压文件       
+```sh
+apt install -y unzip
+mkdir -p /var/www/html
+cp -f html5up-editorial /var/www/html
+cd /var/www/html
+unzip html5up-editorial.zip
+```
 ### youtube-dl      
 安装 youtube-dl      
 ```sh
