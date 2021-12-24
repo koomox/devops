@@ -20,7 +20,7 @@ qemu-img convert -f raw openwrt-21.02.1-x86-generic-squashfs.img -O vmdk openwrt
 #wget https://downloads.openwrt.org/releases/21.02.1/targets/x86/generic/openwrt-21.02.1-x86-generic-generic-ext4-combined.img.gz
 wget https://downloads.openwrt.org/releases/21.02.1/targets/x86/generic/openwrt-21.02.1-x86-generic-generic-squashfs-combined.img.gz
 gzip -d openwrt-21.02.1-x86-generic-generic-squashfs-combined.img.gz
-qemu-img convert -f raw openwrt-21.02.1-x86-generic-squashfs-combined.img -O vmdk openwrt-21.02.1-x86-generic-squashfs.vmdk
+qemu-img convert -f raw openwrt-21.02.1-x86-generic-generic-squashfs-combined.img -O vmdk openwrt-21.02.1-x86-generic-squashfs.vmdk
 ```
 设置IP地址，修改`/etc/config/network`配置文件。     
 
