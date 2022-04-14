@@ -3,14 +3,32 @@
 一键设置 Ubuntu 18.x, 更新系统, 设置防火墙, 自定义 SSH 端口和证书          
 [source](/storage/linux/ubuntu/oraclecloud/ubuntu18x.sh)         
 ```sh
-wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/ubuntu/oraclecloud/ubuntu18x.sh
-chmod +x ./ubuntu18x.sh
-./ubuntu18x.sh
+sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/ubuntu/oraclecloud/ubuntu18x.sh
+sudo chmod +x ./ubuntu18x.sh
+sudo ./ubuntu18x.sh
 ```
 启用 root 远程登录         
 ```sh
 sudo sed -E -i '/^#*PermitEmptyPasswords/cPermitEmptyPasswords no' /etc/ssh/sshd_config
 sudo sed -E -i '/^#*PermitRootLogin/cPermitRootLogin yes' /etc/ssh/sshd_config
+```
+### Nginx        
+一键安装 Nginx 1.20.2 [查看源文件](/storage/linux/scripts/nginx/1.20.2/install.sh)         
+```sh
+sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.20.2/install.sh
+sudo chmod +x ./install.sh
+sudo ./install.sh
+```
+配置文件      
+```sh
+sudo wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.1/conf.d/default.conf
+```
+非 80、443 端口，安卓 Let's Encrypt 证书，可以使用 DNS 验证的方式, cloudflare 界面添加 txt 记录。        
+```sh
+sudo rm -rf /etc/letsencrypt/live
+sudo mkdir -p /etc/letsencrypt/live && cd /etc/letsencrypt/live
+sudo apt install certbot -y
+sudo certbot certonly --manual --preferred-challenges dns -d example.com --register-unsafely-without-email
 ```
 ### 禁用 Nvidia 独显       
 Ubuntu 默认使用 nouveau 开源驱动程序驱动 Nvidia 显卡，但是该驱动经常导致 Nvidia 显卡无法正常工作，甚至无法引导，如果需要无法引导的情况需要将其禁用。       
