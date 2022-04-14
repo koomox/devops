@@ -35,27 +35,6 @@ function check_os_bits() {
 	fi
 }
 
-function downloadFunc() {
-	fileName=$1
-	downLink=$2
-	if [ -f ${fileName} ]; then
-		echo "Found file ${fileName} Already Exist!"
-	else
-		wget ${downLink}
-	fi
-}
-
-function install_ffsend() {
-	FFSEND_VERSION=$(wget -q -O - https://github.com/timvisee/ffsend/tags | grep -m1 -E "/timvisee/ffsend/releases/tag/v[0-9]+\.[0-9]+\.*[0-9]*" | sed -E "s/.*v([0-9]+\.[0-9]+\.*[0-9]*).*/\1/gm")
-	FFSEND_FULL_NAME=ffsend-v${FFSEND_VERSION}-linux-x64-static
-	FFSEND_DOWNLOAD_LINK=https://github.com/timvisee/ffsend/releases/download/v${FFSEND_VERSION}/${FFSEND_FULL_NAME}
-
-	downloadFunc ${FFSEND_FULL_NAME} ${FFSEND_DOWNLOAD_LINK}
-	chmod +x ./${FFSEND_FULL_NAME}
-	mv ${FFSEND_FULL_NAME} /usr/bin/ffsend
-	ffsend -h
-}
-
 function custom_ssh_iptables() {
 	SSH_CONF="/etc/ssh/sshd_config"
 	SSH_PORT=22
@@ -98,15 +77,10 @@ function custom_ssh_iptables() {
 
 	# INPUT
 	iptables -A INPUT -i lo -j ACCEPT
-	# iptables -A INPUT -m icmp -p icmp --icmp-type any -j ACCEPT
 	iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-
-	# iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
 	iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport ${SSH_PORT} -j ACCEPT
-	iptables -A INPUT -p udp --sport 53 -j ACCEPT
-	iptables -A INPUT -p udp --sport 123 -j ACCEPT
-	iptables -A INPUT -p tcp --sport 16630 -j ACCEPT
-	iptables -A INPUT -p tcp --dport 16630 -j ACCEPT
+	iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+	iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
 
 	systemctl restart sshd
 
@@ -152,7 +126,6 @@ function os_optimize() {
 	sysctl net.ipv4.tcp_available_congestion_control
 	lsmod | grep bbr
 	
-
 	echo "===== Optimize limits.conf ============="
 	cp -f /etc/security/limits.conf /etc/security/limits.conf.bak
 	wget -O /etc/security/limits.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/sysctl/aliyun.limits.conf

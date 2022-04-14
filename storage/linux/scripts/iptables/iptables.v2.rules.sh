@@ -11,7 +11,6 @@ cat > /etc/iptables.rules << EOF
 -A INPUT -p tcp -m tcp --dport ${SSH_PORT} -j ACCEPT
 -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
--A INPUT -p tcp -m tcp --dport 10000 -j ACCEPT
 COMMIT
 # Completed on Sat Apr 27 08:31:29 2019
 EOF

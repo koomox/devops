@@ -13,16 +13,6 @@ iptables -F
 iptables -X
 iptables -Z
 iptables -nvL
-iptables-save > /etc/iptables.rules
-
-echo '#!/bin/sh -e' > /etc/rc.local
-echo 'iptables-restore < /etc/iptables.rules' >> /etc/rc.local
-echo 'exit 0' >> /etc/rc.local
-chmod +x /etc/rc.local
-iptables -nvL
-
-systemctl restart sshd
-systemctl status sshd
 
 SSH_CONF="/etc/ssh/sshd_config"
 SSH_PORT=22
@@ -50,6 +40,29 @@ sed -E -i '/^#*PermitRootLogin/cPermitRootLogin yes' /etc/ssh/sshd_config
 sed -E -i '/^#*PasswordAuthentication/cPasswordAuthentication no' /etc/ssh/sshd_config
 sed -E -i '/^#*PubkeyAuthentication/cPubkeyAuthentication yes' /etc/ssh/sshd_config
 grep -E "^#*(Port|PermitEmptyPasswords|PermitRootLogin|PasswordAuthentication|PubkeyAuthentication)" /etc/ssh/sshd_config
+
+echo "======== set iptables rules================"
+
+# INPUT
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport ${SSH_PORT} -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+
+systemctl restart sshd
+
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
+iptables -P OUTPUT ACCEPT
+
+iptables-save > /etc/iptables.rules
+
+echo '#!/bin/sh -e' > /etc/rc.local
+echo 'iptables-restore < /etc/iptables.rules' >> /etc/rc.local
+echo 'exit 0' >> /etc/rc.local
+chmod +x /etc/rc.local
+iptables -nvL
 
 echo "========= setting rc-local ============"
 echo -e "\n[Install]\nWantedBy=multi-user.target\nAlias=rc.local.service" >> /lib/systemd/system/rc-local.service
