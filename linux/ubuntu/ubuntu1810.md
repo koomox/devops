@@ -12,6 +12,10 @@ sudo ./ubuntu18x.sh
 sudo sed -E -i '/^#*PermitEmptyPasswords/cPermitEmptyPasswords no' /etc/ssh/sshd_config
 sudo sed -E -i '/^#*PermitRootLogin/cPermitRootLogin yes' /etc/ssh/sshd_config
 ```
+删除　oracle-cloud-agent     
+```sh
+sudo snap remove oracle-cloud-agent
+```
 ### Nginx        
 一键安装 Nginx 1.20.2 [查看源文件](/storage/linux/scripts/nginx/1.20.2/install.sh)         
 ```sh
