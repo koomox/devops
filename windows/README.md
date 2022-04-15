@@ -42,7 +42,8 @@
 [MIUI](miui.md)         
 [AIDA64](aida64.md)             
 [Android SDK Tools](android-sdk.md)                    
-[Proxifier 代理软件](Proxifier.md)
+[Proxifier 代理软件](Proxifier.md)        
+[Fiddler](fiddler.md)        
 ### 黑苹果            
 [Windows 提取 DSDT](dsdt.md)        
 ### VPN            
