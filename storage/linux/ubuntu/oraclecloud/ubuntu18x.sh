@@ -1,9 +1,9 @@
 #!/bin/bash
 echo "========= ubuntu update =============="
-apt update -y
-apt upgrade -y
-apt install curl wget git vim sudo htop net-tools neofetch lsb-release build-essential python iputils-ping -y
-apt autoremove -y
+apt-get update -y
+apt-get upgrade -y
+apt-get install curl wget git vim sudo htop net-tools neofetch lsb-release build-essential -y
+apt-get autoremove -y
 
 echo "======= setting iptables rules =========="
 iptables -P INPUT ACCEPT
