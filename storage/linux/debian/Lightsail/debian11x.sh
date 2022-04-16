@@ -1,50 +1,4 @@
 #!/bin/bash
-
-function installation_dependency(){
-	if grep -Eqi "CentOS|Red Hat|RedHat" /etc/issue || grep -Eq "CentOS|Red Hat|RedHat" /etc/*-release || grep -Eqi "CentOS|Red Hat|RedHat" /proc/version; then
-		release="CentOS"
-	elif grep -Eqi "Debian" /etc/issue || grep -Eq "Debian" /etc/*-release; then
-		release="Debian"
-	elif grep -Eqi "Fedora" /etc/issue || grep -Eq "Fedora" /etc/*-release || grep -Eqi "Fedora" /proc/version; then
-		release="Fedora"
-	elif grep -Eqi "Ubuntu" /etc/issue || grep -Eq "Ubuntu" /etc/*-release || grep -Eqi "Ubuntu" /proc/version; then
-		release="Ubuntu"
-	elif grep -Eqi "Raspbian" /etc/issue || grep -Eq "Raspbian" /etc/*-release; then
-		release="Raspbian"
-	elif grep -Eqi "Aliyun" /etc/issue || grep -Eq "Aliyun" /etc/*-release; then
-		release="Aliyun"
-	else
-		release="unknown"
-	fi
-
-	if ! `command -v wget >/dev/null`; then
-		if [[ ${release} == "CentOS" || ${release} == "Fedora" ]]; then
-			yum install wget -y
-		elif [[ ${release} == "Debian" || ${release} == "Ubuntu" || ${release} == "Raspbian" || ${release} == "Aliyun" ]]; then
-			apt install wget -y
-		fi
-	fi
-}
-
-function check_os_bits() {
-	bit=$(uname -m)
-	if [[ ${bit} == "x86_64" ]]; then
-		bit="x64"
-	elif [[ ${bit} == "i386" || ${bit} == "i686" ]]; then
-		bit="x86"
-	fi
-}
-
-function downloadFunc() {
-	fileName=$1
-	downLink=$2
-	if [ -f ${fileName} ]; then
-		echo "Found file ${fileName} Already Exist!"
-	else
-		wget ${downLink}
-	fi
-}
-
 function custom_ssh_iptables() {
 	SSH_CONF="/etc/ssh/sshd_config"
 	SSH_PORT=22
@@ -100,17 +54,15 @@ function custom_ssh_iptables() {
 	systemctl status nftables
 }
 
-function get_publicIP() {
+function get_public_address() {
 	echo "================= Public IP ====================="
 	curl https://checkip.amazonaws.com/
 }
 
 function os_optimize() {
-	installation_dependency
-	check_os_bits
-	apt update -y
-	apt upgrade -y
-	apt install curl wget git vim sudo htop net-tools neofetch lsb-release build-essential -y
+	apt-get update -y
+	apt-get upgrade -y
+	apt-get install curl wget git vim sudo htop net-tools neofetch lsb-release build-essential -y
 
 	echo "===== Optimize sysctl.conf ============="
 	cp -f /etc/sysctl.conf /etc/sysctl.conf.bak
@@ -137,7 +89,7 @@ function os_optimize() {
 	echo "===== Custom SSH Port And Iptabes Rules ========="
 	custom_ssh_iptables
 
-	get_publicIP
+	get_public_address
 }
 
 os_optimize
