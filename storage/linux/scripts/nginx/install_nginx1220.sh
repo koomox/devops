@@ -12,7 +12,7 @@ wget https://www.zlib.net/zlib-1.2.12.tar.gz
 tar -zxf openssl-1.1.1o.tar.gz
 tar -zxf pcre-8.45.tar.gz
 tar -zxf zlib-1.2.12.tar.gz
-tar -zxf nginx-1.20.2.tar.gz
+tar -zxf nginx-1.22.0.tar.gz
 
 cd nginx-1.22.0
 ./configure --prefix=/usr/local/nginx \
