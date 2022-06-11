@@ -3,6 +3,13 @@ Home [Link](https://nginx.org/en/download.html)
 OpenSSL [Link](https://www.openssl.org/source/)         
 Zlib [Link](https://zlib.net/)       
 pcre [Link](https://ftp.pcre.org/pub/pcre/)         
+### 编译安装脚本           
+Linux 一键编译安装脚本 [查看源文件](/storage/linux/scripts/nginx/install_nginx1220.sh)     
+```sh
+sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/install_nginx1220.sh
+sudo chmod +x ./install_nginx1220.sh
+sudo ./install_nginx1220.sh
+```
 ### 一键安装脚本        
 Linux 一键安装脚本 [查看源文件](/storage/linux/scripts/nginx/1.20.2/install.sh)         
 ```sh
