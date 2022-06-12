@@ -1,20 +1,25 @@
 #!/bin/bash
+NGINX=nginx-1.22.0
+OPENSSL=openssl-1.1.1o
+PCRE=pcre-8.45
+ZLIB=zlib-1.2.12
+
 if [ ! -d make_nginx ]; then
 	\rm -rf make_nginx
 fi
 mkdir -p make_nginx && cd make_nginx
 
-wget https://nginx.org/download/nginx-1.22.0.tar.gz
-wget https://www.openssl.org/source/openssl-1.1.1o.tar.gz
-wget https://ftp.exim.org/pub/pcre/pcre-8.45.tar.gz
-wget https://www.zlib.net/zlib-1.2.12.tar.gz
+wget https://nginx.org/download/${NGINX}.tar.gz
+wget https://www.openssl.org/source/${OPENSSL}.tar.gz
+wget https://ftp.exim.org/pub/pcre/${PCRE}.tar.gz
+wget https://www.zlib.net/${ZLIB}.tar.gz
 
-tar -zxf openssl-1.1.1o.tar.gz
-tar -zxf pcre-8.45.tar.gz
-tar -zxf zlib-1.2.12.tar.gz
-tar -zxf nginx-1.22.0.tar.gz
+tar -zxf ${OPENSSL}.tar.gz
+tar -zxf ${PCRE}.tar.gz
+tar -zxf ${ZLIB}.tar.gz
+tar -zxf ${NGINX}.tar.gz
 
-cd nginx-1.22.0
+cd ${NGINX}
 ./configure --prefix=/usr/local/nginx \
 --conf-path=/etc/nginx/nginx.conf \
 --pid-path=/var/lib/nginx/nginx.pid \
@@ -27,9 +32,9 @@ cd nginx-1.22.0
 --with-http_stub_status_module \
 --with-stream \
 --with-stream_ssl_module \
---with-pcre=../pcre-8.45 \
---with-zlib=../zlib-1.2.12 \
---with-openssl=../openssl-1.1.1o
+--with-pcre=../${PCRE} \
+--with-zlib=../${ZLIB} \
+--with-openssl=../${OPENSSL}
 make
 make install
 
