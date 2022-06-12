@@ -7,19 +7,19 @@ chmod +x ./debian11x.sh
 ```
 设置 iptables [查看源文件](/storage/linux/scripts/nftables/nftables.rules.sh)        
 ```sh
-wget -O custom_ssh_nftables.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nftables/nftables.rules.sh
-chmod +x ./custom_ssh_nftables.sh
-./custom_ssh_nftables.sh
+sudo wget -O custom_ssh_nftables.sh https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nftables/nftables.rules.sh
+sudo chmod +x ./custom_ssh_nftables.sh
+sudo ./custom_ssh_nftables.sh
 ```
-一键安装二进制版 Nginx 1.18.0 [查看源文件](/storage/linux/scripts/nginx/1.18.0/install.sh)          
+一键安装二进制版 Nginx 1.22.0 [查看源文件](/storage/linux/scripts/nginx/1.22.0/install.sh)          
 ```sh
-sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.18.0/install.sh
+sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.22.0/install.sh
 sudo chmod +x ./install.sh
 sudo ./install.sh
 ```
 配置文件      
 ```sh
-sudo wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.1/conf.d/default.conf
+sudo wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/conf.d/default_force.conf
 ```
 非 80、443 端口，安卓 Let's Encrypt 证书，可以使用 DNS 验证的方式, cloudflare 界面添加 txt 记录。        
 ```sh
@@ -30,11 +30,11 @@ sudo certbot certonly --manual --preferred-challenges dns -d example.com --regis
 ```
 解压文件       
 ```sh
-apt install -y unzip
-mkdir -p /var/www/html
-cp -f html5up-editorial.unzip /var/www/html
-cd /var/www/html
-unzip html5up-editorial.zip
+sudo apt-get install -y unzip
+sudo mkdir -p /var/www/html
+sudo cp -f html5up-editorial.unzip /var/www/html
+sudo cd /var/www/html
+sudo unzip html5up-editorial.zip
 ```
 ### youtube-dl      
 安装 youtube-dl      

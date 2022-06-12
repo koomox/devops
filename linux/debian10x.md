@@ -1,27 +1,27 @@
 # Debian 10.x              
 一键设置优化 Amazon Lightsail [查看源文件](/storage/linux/debian/Lightsail/debian10x.sh)         
 ```sh
-wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/Lightsail/debian10x.sh
-chmod +x ./debian10x.sh
-./debian10x.sh
+sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/Lightsail/debian10x.sh
+sudo chmod +x ./debian10x.sh
+sudo ./debian10x.sh
 ```
 一键设置优化 Aliyun ECS [查看源文件](/storage/linux/debian/Aliyun/debian10x.sh)        
 ```sh
-wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/Aliyun/debian10x.sh
-chmod +x ./debian10x.sh
-./debian10x.sh
+sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/Aliyun/debian10x.sh
+sudo chmod +x ./debian10x.sh
+sudo ./debian10x.sh
 ```
 设置 iptables [查看源文件](/storage/linux/scripts/iptables/iptables.v2.rules.sh)        
 ```sh
-wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/iptables/iptables.v2.rules.sh
-chmod +x ./iptables.v2.rules.sh
-./iptables.v2.rules.sh
+sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/iptables/iptables.v2.rules.sh
+sudo chmod +x ./iptables.v2.rules.sh
+sudo ./iptables.v2.rules.sh
 ```
 一键安装二进制版 Nginx 1.18.0 [查看源文件](/storage/linux/scripts/nginx/1.18.0/install.sh)          
 ```sh
-wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.18.0/install.sh
-chmod +x ./install.sh
-./install.sh
+sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.18.0/install.sh
+sudo chmod +x ./install.sh
+sudo ./install.sh
 ```
 ### youtube-dl      
 安装 youtube-dl      

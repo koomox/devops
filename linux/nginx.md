@@ -19,7 +19,7 @@ sudo ./install.sh
 ```
 ```sh
 sudo sed -i 's/phpmyadmin/pma/g' /etc/nginx/conf.d/phpmyadmin.conf
-cat /etc/nginx/conf.d/phpmyadmin.conf
+sudo cat /etc/nginx/conf.d/phpmyadmin.conf
 ```
 重新启动 nginx       
 ```sh
@@ -28,9 +28,9 @@ sudo systemctl stop nginx
 sudo systemctl start nginx
 sudo systemctl status nginx
 ```   
-强制 SSL 网页跳转 [source file](/storage/linux/scripts/nginx/1.16.1/conf.d/default.conf)                         
+强制 SSL 网页跳转 [source file](/storage/linux/scripts/nginx/conf.d/default_force.conf)                         
 ```sh
-sudo wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.1/conf.d/default.conf
+sudo wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/conf.d/default_force.conf
 sudo mkdir -p /var/www/html
 
 domain=test.com
@@ -56,9 +56,9 @@ sudo mkdir -p /etc/letsencrypt/live && cd /etc/letsencrypt/live
 sudo apt install certbot
 sudo certbot certonly --manual --preferred-challenges dns -d example.com --register-unsafely-without-email
 ```
-PHP-FPM [source](/storage/linux/scripts/nginx/1.18.0/nginx-ssl-fpm.conf)                
+PHP-FPM [source](/storage/linux/scripts/nginx/conf.d/nginx-ssl-fpm.conf)                
 ```sh
-sudo wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.18.0/nginx-ssl-fpm.conf
+sudo wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/conf.d/nginx-ssl-fpm.conf
 
 domain=test.com
 sudo sed -i "s/example.com/${domain}/g" /etc/nginx/conf.d/default.conf
@@ -68,9 +68,9 @@ sudo vim /etc/letsencrypt/live/$domain/fullchain.pem
 sudo vim /etc/letsencrypt/live/$domain/privkey.pem
 ```
 ### cdnjs         
-nginx 配置文件 [source](/storage/linux/scripts/nginx/1.16.1/conf.d/cdnjs.conf)           
+nginx 配置文件 [source](/storage/linux/scripts/nginx/conf.d/cdnjs.conf)           
 ```sh
-sudo wget -O /etc/nginx/conf.d/cdnjs.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.16.1/conf.d/cdnjs.conf
+sudo wget -O /etc/nginx/conf.d/cdnjs.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/conf.d/cdnjs.conf
 ```
 一键构建 cdnjs [source](/storage/linux/scripts/cdnjs/deploy.sh)          
 ```sh
