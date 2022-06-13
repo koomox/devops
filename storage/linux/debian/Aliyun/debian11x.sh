@@ -67,7 +67,6 @@ function custom_ssh_iptables() {
 	cat ~/.ssh/authorized_keys
 
 	#修改SSH为证书登录
-	setenforce 0
 	sed -E -i '/^#*Port /cPort '"$SSH_PORT"'' ${SSH_CONF}
 	sed -E -i '/^#*PermitEmptyPasswords/cPermitEmptyPasswords no' ${SSH_CONF}
 	sed -E -i '/^#*PermitRootLogin/cPermitRootLogin yes' ${SSH_CONF}
