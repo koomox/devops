@@ -86,7 +86,7 @@ function os_optimize() {
 
 	echo "===== Optimize limits.conf ============="
 	cp -f /etc/security/limits.conf /etc/security/limits.conf.bak
-	wget -O /etc/security/limits.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/sysctl/aliyun.limits.conf
+	wget -O /etc/security/limits.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/sysctl/limits.conf
 	cat /etc/security/limits.conf
 	echo "ulimit -SHn 60000" >> /etc/profile
 	ulimit -SHn 60000
