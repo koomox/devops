@@ -1,13 +1,13 @@
 #!/bin/bash
-FIREFOX_VERSION=99.0.1
-FIREFOX_DEVELOPER_EDITION_VERSION=100.0b6
-TOR_VERSION=11.0.10
+FIREFOX_VERSION=103.0.1
+FIREFOX_DEVELOPER_EDITION_VERSION=104.0b6
+TOR_VERSION=11.5.1
 APPGUID=8A69D345-D564-463C-AFF1-A69D9E530F96
 ID=754CC110-B9C8-798B-4231-9054058921FC
 DATETIME=$(date +%Y%m%d)
-\rm -rf /opt/browser
-mkdir -p /opt/browser
-cd /opt/browser
+\rm -rf ./browser
+mkdir -p ./browser
+cd ./browser
 
 wget -O en_ChromeStandaloneSetup64_${DATETIME}.exe https://dl.google.com/tag/s/appguid%3D%7B${APPGUID}%7D%26iid%3D%7B${ID}%7D%26lang%3Den%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/chrome/install/ChromeStandaloneSetup64.exe
 wget -O en_ChromeStandaloneSetup_${DATETIME}.exe https://dl.google.com/tag/s/appguid%3D%7B${APPGUID}%7D%26iid%3D%7B${ID}%7D%26lang%3Den%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx86-stable-statsdef_1%26installdataindex%3Dempty/chrome/install/ChromeStandaloneSetup.exe
