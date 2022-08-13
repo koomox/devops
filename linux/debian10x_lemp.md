@@ -90,12 +90,12 @@ sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F2
 ```
 添加源       
 ```sh
-echo -e "deb [arch=amd64] http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.6/debian $(lsb_release -sc) main\ndeb-src http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.6/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
+echo -e "deb [arch=amd64] http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.8/debian $(lsb_release -sc) main\ndeb-src http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.8/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
 cat /etc/apt/sources.list.d/MariaDB.list
 ```
 tuna 源       
 ```sh
-echo -e "deb [arch=amd64] http://mirrors.tuna.tsinghua.edu.cn/mariadb/repo/10.6/debian $(lsb_release -sc) main\ndeb-src http://mirrors.tuna.tsinghua.edu.cn/mariadb/repo/10.6/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
+echo -e "deb [arch=amd64] http://mirrors.tuna.tsinghua.edu.cn/mariadb/repo/10.8/debian $(lsb_release -sc) main\ndeb-src http://mirrors.tuna.tsinghua.edu.cn/mariadb/repo/10.8/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
 cat /etc/apt/sources.list.d/MariaDB.list
 ```
 ```sh
