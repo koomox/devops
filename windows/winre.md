@@ -13,7 +13,7 @@ gpt attributes=0x8000000000000001
 exit
 ```
 ### 复制文件到隐藏分区            
-可用的wim文件有两个，`*.iso\sources\boot.wim`或`*.iso\sources\install.wim\Windows\System32\Recovery\winre.wim`文件，以及`*.iso\boot\boot.sdi`文件。复制到`T:\Recovery\WindowsRE\`文件夹。          
+可用的wim文件有两个，`*.iso\sources\boot.wim`或`*.iso\sources\install.wim\Windows\System32\Recovery\winre.wim`文件，以及`*.iso\boot\boot.sdi`文件。复制到`T:\RecoveryImage\RE\`文件夹。          
 ```bat
 mkdir mount
 
@@ -29,9 +29,9 @@ Dism /Get-ImageInfo /ImageFile:.\Winre.wim
 ```
 复制到 RE 分区       
 ```bat
-mkdir T:\Recovery\WindowsRE
+mkdir T:\RecoveryImage\RE
 
-xcopy /h .\Winre.wim T:\Recovery\WindowsRE
+xcopy /h .\Winre.wim T:\RecoveryImage\RE
 ```
 挂载WIM镜像文件            
 ```
@@ -43,19 +43,18 @@ Dism /Mount-Wim /WimFile:.\Winre.wim /Index:2 /MountDir:.\mount
 SET RE_DRIVE=T:
 SET WIM_MOUNTPATH=D:\mount
 
-rmdir /S /Q "%RE_DRIVE%\Recovery"
-mkdir "%RE_DRIVE%\Recovery"
-mkdir "%RE_DRIVE%\Recovery\WindowsRE\"
-xcopy %WIM_MOUNTPATH%\Windows\System32\boot.sdi "%RE_DRIVE%\Recovery\WindowsRE\" /H /K /Y
-xcopy %WIM_MOUNTPATH%\Windows\System32\Recovery\winre.wim "%RE_DRIVE%\Recovery\WindowsRE\" /H /K /Y
+rmdir /S /Q "%RE_DRIVE%\RecoveryImage"
+mkdir "%RE_DRIVE%\RecoveryImage"
+mkdir "%RE_DRIVE%\RecoveryImage\RE\"
+xcopy %WIM_MOUNTPATH%\Windows\System32\boot.sdi "%RE_DRIVE%\RecoveryImage\RE\" /H /K /Y
+xcopy %WIM_MOUNTPATH%\Windows\System32\Recovery\winre.wim "%RE_DRIVE%\RecoveryImage\RE\" /H /K /Y
 
-cd /d "%RE_DRIVE%\Recovery\WindowsRE\"
+cd /d "%RE_DRIVE%\RecoveryImage\RE\"
 dir /a
 ```
 卸载WIM镜像文件          
 ```
-SET WIM_MOUNTPATH=D:\mount\win10
-Dism /Unmount-Wim /MountDir:%WIM_MOUNTPATH% /Discard
+Dism /Unmount-Wim /MountDir:".\mount" /Discard
 ```
 ### 把 Windows RE 系统添加到系统启动项 [source](/storage/windows/deploy/add_re.bat)             
 ```bat
