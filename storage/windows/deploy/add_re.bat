@@ -2,8 +2,8 @@
 SET RE_SDI_GUID={}
 SET RE_WIM_GUID={}
 SET RE_SDI_PART=T:
-SET RE_SDI_FILE=\Recovery\WindowsRE\boot.sdi
-SET RE_WIM_FILE=[T:]\Recovery\WindowsRE\Winre.wim
+SET RE_SDI_FILE=\RecoveryImage\RE\boot.sdi
+SET RE_WIM_FILE=[T:]\RecoveryImage\RE\Winre.wim
 SET RE_WIM_BOOT_NAME="Windows RE"
 
 FOR /F "tokens=2 delims={,}" %%I IN ('bcdedit /create /d %RE_WIM_BOOT_NAME% /device') DO @SET RE_SDI_GUID={%%I}
