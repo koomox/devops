@@ -30,7 +30,6 @@ function custom_ssh_iptables() {
 	iptables -nvL
 
 	#修改SSH为证书登录
-	setenforce 0
 	sed -E -i '/^#*Port /cPort '"$SSH_PORT"'' ${SSH_CONF}
 	sed -E -i '/^#*PermitEmptyPasswords/cPermitEmptyPasswords no' ${SSH_CONF}
 	sed -E -i '/^#*PermitRootLogin/cPermitRootLogin yes' ${SSH_CONF}
@@ -89,10 +88,10 @@ function os_optimize() {
 	
 	echo "===== Optimize limits.conf ============="
 	cp -f /etc/security/limits.conf /etc/security/limits.conf.bak
-	wget -O /etc/security/limits.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/sysctl/aliyun.limits.conf
+	wget -O /etc/security/limits.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/sysctl/limits.conf
 	cat /etc/security/limits.conf
-	echo "ulimit -SHn 60000" >> /etc/profile
-	ulimit -SHn 60000
+	sed -E -i '/^#*DefaultLimitNOFILE=/cDefaultLimitNOFILE=524288' /etc/systemd/system.conf
+	grep -E '^#*DefaultLimitNOFILE=' /etc/systemd/system.conf
 
 	echo "===== Optimize timedatectl ============"
 	apt install dbus -y

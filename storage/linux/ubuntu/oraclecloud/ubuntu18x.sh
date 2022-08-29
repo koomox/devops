@@ -5,6 +5,22 @@ apt-get upgrade -y
 apt-get install curl wget git vim sudo htop net-tools neofetch lsb-release build-essential -y
 apt-get autoremove -y
 
+echo "===== Optimize sysctl.conf ============="
+cp -f /etc/sysctl.conf /etc/sysctl.conf.bak
+wget -O /etc/sysctl.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/sysctl/aws.lightsail.sysctl.conf
+modprobe ip_conntrack
+lsmod |grep conntrack
+sysctl -p
+sysctl net.ipv4.tcp_available_congestion_control
+lsmod | grep bbr
+
+echo "===== Optimize limits.conf ============="
+cp -f /etc/security/limits.conf /etc/security/limits.conf.bak
+wget -O /etc/security/limits.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/sysctl/limits.conf
+cat /etc/security/limits.conf
+sed -E -i '/^#*DefaultLimitNOFILE=/cDefaultLimitNOFILE=524288' /etc/systemd/system.conf
+grep -E '^#*DefaultLimitNOFILE=' /etc/systemd/system.conf
+
 echo "======= setting iptables rules =========="
 iptables -P INPUT ACCEPT
 iptables -P FORWARD ACCEPT
