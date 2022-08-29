@@ -81,11 +81,11 @@ chmod +x /etc/rc.local
 iptables -nvL
 
 echo "========= setting rc-local ============"
-echo -e "\n[Install]\nWantedBy=multi-user.target\nAlias=rc.local.service" >> /lib/systemd/system/rc-local.service
+echo -e "\n[Install]\nWantedBy=multi-user.target" >> /lib/systemd/system/rc-local.service
 systemctl daemon-reload
-systemctl enable rc.local
-systemctl start rc.local
-systemctl status rc.local
+systemctl enable rc-local
+systemctl start rc-local
+systemctl status rc-local
 
 cat /etc/iptables.rules
 cat /etc/rc.local
