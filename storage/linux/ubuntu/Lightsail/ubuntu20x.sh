@@ -50,7 +50,7 @@ function get_public_address() {
 function os_optimize() {
 	apt-get update -y
 	apt-get upgrade -y
-	apt-get install curl wget git vim sudo htop net-tools neofetch lsb-release build-essential -y
+	apt-get install curl wget git vim sudo htop net-tools neofetch lsb-release build-essential iputils-ping -y
 
 	echo "===== Optimize sysctl.conf ============="
 	cp -f /etc/sysctl.conf /etc/sysctl.conf.bak

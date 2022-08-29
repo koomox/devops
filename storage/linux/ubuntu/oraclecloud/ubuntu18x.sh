@@ -2,7 +2,7 @@
 echo "========= ubuntu update =============="
 apt-get update -y
 apt-get upgrade -y
-apt-get install curl wget git vim sudo htop net-tools neofetch lsb-release build-essential -y
+apt-get install curl wget git vim sudo htop net-tools neofetch lsb-release build-essential iputils-ping -y
 apt-get autoremove -y
 
 echo "===== Optimize sysctl.conf ============="
