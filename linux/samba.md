@@ -2,9 +2,9 @@
 Samba 官网: [传送门](https://www.samba.org/)         
 ### Linux 编译安装 Samba         
 ```sh
-curl -LO https://download.samba.org/pub/samba/stable/samba-4.8.0.tar.gz
-tar -zxf samba-4.8.0.tar.gz
-cd samba-4.8.0
+wget -O https://download.samba.org/pub/samba/stable/samba-4.16.4.tar.gz
+tar -zxf samba-4.16.4.tar.gz
+cd samba-4.16.4
 ./configure --prefix=/usr/local/samba \
 --sbindir=/usr/local/samba/sbin \
 --sysconfdir=/etc/samba/ \
@@ -16,11 +16,11 @@ make
 make install
 ```
 ### Linux 在线安装 Samba         
-CentOS 7.x 安装 Samba           
+CentOS 安装 Samba           
 ```sh
 yum install samba samba-client
 ```
-Debian 9.x 安装 Samba           
+Debian 安装 Samba           
 ```sh
 apt-get install samba smbclient
 ```
@@ -30,18 +30,19 @@ samba -V
 ```
 Samba 相关命令          
 ```sh
-systemctl status smbd
+sudo systemctl status smbd
 
-systemctl stop smbd
-systemctl start smbd
+sudo systemctl stop smbd
+sudo systemctl start smbd
 
-systemctl disable smbd
-systemctl enable smbd
+sudo systemctl disable smbd
+sudo systemctl enable smbd
+sudo systemctl status smbd
 ```
 ### Samba 配置文件           
 Samba 配置文件         
 ```sh
-vim /etc/samba/smb.conf
+sudo vim /etc/samba/smb.conf
 ```
 备份配置文件，并去掉注释行          
 ```sh
