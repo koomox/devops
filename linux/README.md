@@ -10,6 +10,7 @@
 [Linux VPS - DD 重装系统与系统优化](linux_vps.md)         
 [Ubuntu 18.x](ubuntu/ubuntu18x.md)            
 [Ubuntu 20.x](ubuntu/ubuntu20x.md)            
+[Ubuntu 22.x](ubuntu/ubuntu22x.md)           
 [Linux Mint](linuxmint.md)          
 [OpenSUSE](opensuse.md)          
 [CentOS 7.x](centos7x.md)           
