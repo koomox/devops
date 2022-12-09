@@ -1,4 +1,4 @@
-# Ubuntu 20.04          
+# Ubuntu 20.x         
 ### Ubuntu 20.x         
 一键设置 Ubuntu 20.x, 更新系统, 设置防火墙, 自定义 SSH 端口和证书          
 [source](/storage/linux/ubuntu/Lightsail/ubuntu20x.sh)         
@@ -16,16 +16,32 @@ sudo sed -E -i '/^#*PermitRootLogin/cPermitRootLogin yes' /etc/ssh/sshd_config
 备份文件          
 ```sh
 sudo cp -f /etc/apt/sources.list /etc/apt/sources.list.bak
-```
-[source](/storage/linux/ubuntu/mirrors-tuna.sh)       
+```  
 ```sh
-sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/ubuntu/mirrors-tuna.sh
-sudo chmod +x ./mirrors-tuna.sh
-sudo ./mirrors-tuna.sh
+echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ $(lsb_release -sc) main restricted universe multiverse" | sudo tee /etc/apt/sources.list
+echo "deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ $(lsb_release -sc) main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
+echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ $(lsb_release -sc)-updates main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
+echo "deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ $(lsb_release -sc)-updates main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
+echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ $(lsb_release -sc)-backports main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
+echo "deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ $(lsb_release -sc)-backports main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
+echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ $(lsb_release -sc)-security main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
+echo "deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ $(lsb_release -sc)-security main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
 ```
 ```sh
 sudo apt update
 sudo apt upgrade
+```
+安装常用依赖          
+```sh
+sudo apt install curl wget git vim sudo htop net-tools neofetch lsb-release build-essential
+```
+安装多媒体解码套件          
+```sh
+sudo apt install ubuntu-restricted-extras
+```
+安装 open-vm-tools        
+```sh
+sudo apt install open-vm-tools open-vm-tools-desktop
 ```
 ### Nginx        
 一键安装 Nginx 1.22.0 [查看源文件](/storage/linux/scripts/nginx/1.22.0/install.sh)         

@@ -1,4 +1,4 @@
-# Ubuntu 18.10          
+# Ubuntu 18.x         
 ### Oracle Cloud Ubuntu 18.x         
 一键设置 Ubuntu 18.x, 更新系统, 设置防火墙, 自定义 SSH 端口和证书          
 [source](/storage/linux/ubuntu/oraclecloud/ubuntu18x.sh)         
