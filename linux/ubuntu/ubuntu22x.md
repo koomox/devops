@@ -51,6 +51,10 @@ sudo apt install ubuntu-restricted-extras
 ```sh
 sudo apt install open-vm-tools open-vm-tools-desktop
 ```
+安装 PuTTY       
+```sh
+sudo apt install putty
+```
 ### 向日葵                 
 ```sh
 wget https://down.oray.com/sunlogin/linux/SunloginClient_11.0.1.44968_amd64.deb
