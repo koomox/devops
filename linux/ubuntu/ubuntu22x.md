@@ -5,6 +5,11 @@
 sudo sed -E -i '/^#*PermitEmptyPasswords/cPermitEmptyPasswords no' /etc/ssh/sshd_config
 sudo sed -E -i '/^#*PermitRootLogin/cPermitRootLogin yes' /etc/ssh/sshd_config
 ```
+### 语言格式         
+Ubuntu 安装完成后，因为时区选择的上海，结果时间显示为中文，不伦不类的，需要修改 locale 文件。         
+```sh
+sudo sed -i 's/zh_CN/en_US/g' /etc/default/locale
+```
 ### 更换更新源            
 备份文件          
 ```sh
