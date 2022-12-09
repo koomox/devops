@@ -51,3 +51,20 @@ sudo apt install ubuntu-restricted-extras
 ```sh
 sudo apt install open-vm-tools open-vm-tools-desktop
 ```
+### 网易云音乐                 
+```sh
+wget https://d1.music.126.net/dmusic/netease-cloud-music_1.2.1_amd64_ubuntu_20190428.deb
+sudo dpkg -i netease-cloud-music_1.2.1_amd64_ubuntu_20190428.deb
+```
+修复启动文件    
+```sh
+sudo vim /opt/netease/netease-cloud-music/netease-cloud-music.bash
+```
+```sh
+HERE="$(dirname "$(readlink -f "${0}")")"
+export LD_LIBRARY_PATH="${HERE}"/libs:$LD_LIBRARY_PATH
+export QT_PLUGIN_PATH="${HERE}"/plugins
+export QT_QPA_PLATFORM_PLUGIN_PATH="${HERE}"/plugins/platforms
+cd /lib/x86_64-linux-gnu/
+exec "${HERE}"/netease-cloud-music $@
+```
