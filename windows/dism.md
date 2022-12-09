@@ -125,13 +125,20 @@ Dism /Unmount-Image /MountDir:.\mount /Commit
 ```
 ```bat
 Dism /Get-ImageInfo /ImageFile:.\install.wim
-Dism /Export-Image /SourceImageFile:.\install.wim /SourceIndex:4 /DestinationImageFile:win7sp1-Ultimate-x64.wim
+Dism /Export-Image /SourceImageFile:.\install.wim /SourceIndex:4 /DestinationImageFile:D:\install.wim
 Dism /Image:.\mount /Add-Driver /Driver:D:\DriversBackup /Recurse
 MD .\mount\Windows\Panther
 COPY Unattend-x64.xml .\mount\Windows\Panther\Unattend.xml
-Dism /Mount-Image /ImageFile:.\win7sp1-Ultimate-x64.wim /Index:1 /MountDir:.\mount
+Dism /Mount-Image /ImageFile:.\install.wim /Index:1 /MountDir:.\mount
 Dism /Unmount-Image /MountDir:.\mount /Commit
 ::Dism /Unmount-Image /MountDir:.\mount /Discard
+```
+### Drivers         
+```bat
+Dism /Image:.\mount /Add-Driver /Driver:D:\DriversBackup /Recurse
+```
+```bat
+Dism /Online /Add-Driver /Driver:D:\DriversBackup /Recurse
 ```
 ### WIMBOOT              
 导出镜像并添加驱动、无人值守、hosts 文件            
