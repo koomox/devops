@@ -51,6 +51,11 @@ sudo apt install ubuntu-restricted-extras
 ```sh
 sudo apt install open-vm-tools open-vm-tools-desktop
 ```
+### 向日葵                 
+```sh
+wget https://down.oray.com/sunlogin/linux/SunloginClient_11.0.1.44968_amd64.deb
+sudo dpkg -i SunloginClient_11.0.1.44968_amd64.deb
+```
 ### 网易云音乐                 
 ```sh
 wget https://d1.music.126.net/dmusic/netease-cloud-music_1.2.1_amd64_ubuntu_20190428.deb
@@ -67,4 +72,19 @@ export QT_PLUGIN_PATH="${HERE}"/plugins
 export QT_QPA_PLATFORM_PLUGIN_PATH="${HERE}"/plugins/platforms
 cd /lib/x86_64-linux-gnu/
 exec "${HERE}"/netease-cloud-music $@
+```
+### Skype                 
+```sh
+wget https://go.skype.com/skypeforlinux-64.deb
+sudo dpkg -i skypeforlinux-64.deb
+```
+### Spotify                 
+```sh
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
+
+echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
+
+sudo apt update
+
+sudo apt install spotify-client
 ```

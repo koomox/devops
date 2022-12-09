@@ -265,7 +265,6 @@ sudo dpkg -i skypeforlinux-64.deb
 cp /usr/share/applications/skypeforlinux.desktop ~/Desktop
 chmod +x ~/Desktop/skypeforlinux.desktop
 ```
-```
 ### Spotify            
 ```sh
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
@@ -280,11 +279,9 @@ sudo apt install spotify-client
 ```sh
 wget --content-disposition https://telegram.org/dl/desktop/linux
 
-xz -d tsetup.2.0.1.tar.xz
-tar -xf tsetup.2.0.1.tar
+xz -d tsetup.4.4.1.tar.xz
+tar -xf tsetup.4.4.1.tar
 sudo mv Telegram /opt
-
-
 ```
 ### Steam            
 ```sh
@@ -300,9 +297,9 @@ chmod +x ./jdk11.sh.sh
 ### IntelliJ IDEA          
 运行 `idea.sh` 脚本的时候，不要使用 `sudo` 命令，否则会提示无法找到JAVA运行环境。           
 ```sh
-wget https://download.jetbrains.8686c.com/idea/ideaIU-2018.3.4-no-jdk.tar.gz
-sudo tar -zxf ideaIU-2018.3.4-no-jdk.tar.gz -C /opt
-/opt/idea-IU-183.5429.30/bin/idea.sh
+wget https://download-cdn.jetbrains.com/idea/ideaIC-2022.3.tar.gz
+sudo tar -zxf ideaIC-2022.3.tar.gz -C /opt
+/opt/ideaIC-2022.3/bin/idea.sh
 ```
 IntelliJ IDEA 创建的启动文件，在 `~/.local/share/applications` 路径下。      
 ```sh
@@ -314,9 +311,9 @@ rm ~/.local/share/applications/jetbrains-idea.desktop
 ### GoLand           
 允许 `goland.sh` 脚本，安装 GoLand。            
 ```sh
-wget https://download.jetbrains.8686c.com/go/goland-2018.3.4.tar.gz
-sudo tar -zxf goland-2018.3.4.tar.gz -C /opt
-/opt/GoLand-2018.3.4/bin/goland.sh
+wget https://download-cdn.jetbrains.com/go/goland-2022.3.tar.gz
+sudo tar -zxf goland-2022.3.tar.gz -C /opt
+/opt/GoLand-2022.3/bin/goland.sh
 ```
 GoLand 默认不创建启动文件，第一次打开 GoLand 程序后，点击菜单栏上面的 Tool 创建桌面快捷方式。          
 ```sh
