@@ -1,9 +1,0 @@
-{
-	"server": "my-server-ip",
-	"server_port": 8888,
-	"local_address": "0.0.0.0",
-	"local_port": 10258,
-	"password": "mypassword",
-	"timeout": "aes-256-cfb",
-	"fast_open": false
-}

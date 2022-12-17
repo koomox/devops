@@ -1,7 +1,0 @@
-# MariaDB 10.3 CentOS repository list - created 2018-05-27 16:20 UTC
-# http://downloads.mariadb.org/mariadb/repositories/
-[mariadb]
-name = MariaDB
-baseurl = https://mirrors.tuna.tsinghua.edu.cn/mariadb//mariadb-10.3.7/yum/centos/7.4/x86_64/
-gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
-gpgcheck=1
