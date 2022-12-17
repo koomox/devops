@@ -34,6 +34,35 @@ mkdir -p ~/.ssh
 touch ~/.ssh/authorized_keys
 vim ~/.ssh/authorized_keys
 ```
+### ssh client 设置        
+修复ssh远程链接断开，无响应的问题。每隔60秒发送一次心跳，若超过3次请求，都没有发送成功，则会主动断开与服务器之间的连接。
+```sh
+echo -e "    ServerAliveCountMax 3\n    ServerAliveInterval 60" | sudo tee -a /etc/ssh/ssh_config
+```
+ssh 连接远程主机配置文件 `~/.ssh/config`       
+```
+Host example.com
+    HostName 127.0.0.1
+    Port 22
+    User root
+```
+证书登陆      
+```
+Host example.com
+    HostName 127.0.0.1
+    Port 22
+    User ubuntu
+    IdentityFile ~/.ssh/id_rsa.key
+```
+通过 socks5 代理连接远程主机       
+```
+Host example.com
+    HostName 127.0.0.1
+    Port 22
+    User ubuntu
+    IdentityFile ~/.ssh/id_rsa.key
+    ProxyCommand nc -X 5 -x 127.0.0.1:1080 %h %p
+```
 ### github 上传         
 修复 git 无法上次的问题          
 ```sh
