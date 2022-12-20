@@ -1,4 +1,4 @@
-# Alpine Linux 3.14.0             
+# Alpine Linux 3.17.0             
 Linux Kernel 5.10.43               
 下载地址: [Link](https://alpinelinux.org/downloads/)             
 ### 安装        
@@ -8,8 +8,8 @@ Linux Kernel 5.10.43
 软件源，如果联网了，输入 `f` 回车，让程序自动匹配当前最快的软件源。可能会花一点时间。尽量不要跳过，因为后面格式化硬盘的时候需要联网安装相关的命令。               
 有时候网络不通，输入 `e` 回车，添加源到文件。              
 ```
-https://mirrors.tuna.tsinghua.edu.cn/alpine/v3.14/main
-https://mirrors.tuna.tsinghua.edu.cn/alpine/v3.14/community
+https://mirrors.tuna.tsinghua.edu.cn/alpine/v3.17/main
+https://mirrors.tuna.tsinghua.edu.cn/alpine/v3.17/community
 ```
 之后的每一步要仔细看了，就询问你"Availabe disks are"和"Which disks would you like to use?"来选择安装的硬盘，可以输入"?"来列举可用硬盘，然后手动输入，这里这里我安装到 `sda` ，你有需要可以选择其他位置。         
 在询问你"How would you like to use it?",这里输入 `sys` 硬盘安装，其余的"data"、"lvm"可以了解一下，这里不再赘述。            
@@ -22,13 +22,13 @@ sed -i 's/http:\/\/.*\//https:\/\/mirrors.tuna.tsinghua.edu.cn\//g' /etc/apk/rep
 Tuna 源     
 ```sh
 cp /etc/apk/repositories /etc/apk/repositories.bak
-echo -e "https://mirrors.tuna.tsinghua.edu.cn/alpine/v3.14/main\nhttps://mirrors.tuna.tsinghua.edu.cn/alpine/v3.14/community" > /etc/apk/repositories
+echo -e "https://mirrors.tuna.tsinghua.edu.cn/alpine/v3.17/main\nhttps://mirrors.tuna.tsinghua.edu.cn/alpine/v3.17/community" > /etc/apk/repositories
 cat /etc/apk/repositories
 ```
 阿里云源        
 ```sh
 cp /etc/apk/repositories /etc/apk/repositories.bak
-echo -e "https://mirrors.aliyun.com/alpine/v3.14/main\nhttps://mirrors.aliyun.com/alpine/v3.14/community" > /etc/apk/repositories
+echo -e "https://mirrors.aliyun.com/alpine/v3.17/main\nhttps://mirrors.aliyun.com/alpine/v3.17/community" > /etc/apk/repositories
 cat /etc/apk/repositories
 ```
 更新系统          
