@@ -61,8 +61,9 @@ wget https://down.oray.com/sunlogin/linux/SunloginClient_11.0.1.44968_amd64.deb
 sudo dpkg -i SunloginClient_11.0.1.44968_amd64.deb
 ```
 ```sh
-wget https://dl-cdn.oray.com/sunlogin/linux/SunloginClient_11.0.1.44968_kylin_arm.deb
+wget https://down.oray.com/sunlogin/linux/SunloginClient_11.0.1.44968_kylin_arm.deb
 sudo dpkg -i SunloginClient_11.0.1.44968_kylin_arm.deb
+```
 ### 网易云音乐                 
 ```sh
 wget https://d1.music.126.net/dmusic/netease-cloud-music_1.2.1_amd64_ubuntu_20190428.deb
