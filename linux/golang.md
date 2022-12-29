@@ -1,26 +1,42 @@
 # 安装 Golang                    
-Go Home: [传送门](https://golang.org/)              
-Go 下载地址: [传送门](https://golang.org/dl/)             
-Go 下载地址:[中国镜像](https://golang.google.cn/)            
-github 仓库: [传送门](https://github.com/golang/go/)              
+Golang [Home Link](https://golang.org/)      
+GoLand [Link](https://www.jetbrains.com/go/)          
+Heroku [Link](https://www.heroku.com/go)          
+### Environment Variables           
+```sh
+export GOPROXY=https://goproxy.io,direct
+```
+```sh
+echo 'export PATH=$PATH:/usr/local/go/bin' >> /etc/profile
+```
 ### Linux 一键安装最新版 Golang                
 从 `https://golang.org/dl/` 页面提取最新版本号，自动安装，设置环境变量。[查看源文件](/storage/linux/scripts/go/latest_go.sh)                
 ```sh
-curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/go/latest_go.sh
-chmod +x ./latest_go.sh
-./latest_go.sh
+GO_BITS=amd64
+GO_VERSION=$(wget -q -O - https://golang.org/dl/ | grep -m1 -E "go[0-9]+\.[0-9]+\.*[0-9]*\.linux.*\.tar\.gz" | sed -E "s/.*go([0-9]+\.[0-9]+\.*[0-9]*)\.linux.*\.tar\.gz.*/\1/gm")
+wget -O go${GO_VERSION}.linux-${GO_BITS}.tar.gz https://dl.google.com/go/go${GO_VERSION}.linux-${GO_BITS}.tar.gz
+tar -C /usr/local -xzf  go${GO_VERSION}.linux-${GO_BITS}.tar.gz
 ```
 从 `https://golang.org/` 页面提取最新版本号，自动安装，设置环境变量。[查看源文件](/storage/linux/scripts/go/latest_go_v2.sh)                     
 ```sh
-curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/go/latest_go_v2.sh
-chmod +x ./latest_go_v2.sh
-./latest_go_v2.sh
+GO_BITS=amd64
+GO_VERSION=$(wget -q -O - https://golang.org/ | grep -E "goVersion" | sed -E "s/.*go([0-9]+\.[0-9]+\.*[0-9]*).*/\1/gm")
+wget -O go${GO_VERSION}.linux-${GO_BITS}.tar.gz https://dl.google.com/go/go${GO_VERSION}.linux-${GO_BITS}.tar.gz
+tar -C /usr/local -xzf  go${GO_VERSION}.linux-${GO_BITS}.tar.gz
 ```
 中国用户使用该版本从 `https://github.com/golang/go/tags` 页面提取最新版本号，自动安装，设置环境变量。[查看源文件](/storage/linux/scripts/go/latest_go_v3.sh)                     
 ```sh
-curl -LO https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/go/latest_go_v3.sh
-chmod +x ./latest_go_v3.sh
-./latest_go_v3.sh
+GO_BITS=amd64
+GO_VERSION=$(wget -q -O - https://github.com/golang/go/tags | grep -v "beta" | grep -m1 -E "golang/go/releases/tag/go[0-9]+\.[0-9]+\.*[0-9]*" | sed -E "s/.*go([0-9]+\.[0-9]+\.*[0-9]*).*/\1/gm")
+wget -O go${GO_VERSION}.linux-${GO_BITS}.tar.gz https://dl.google.com/go/go${GO_VERSION}.linux-${GO_BITS}.tar.gz
+tar -C /usr/local -xzf  go${GO_VERSION}.linux-${GO_BITS}.tar.gz
+```
+安装 arm 版本 golang          
+```sh
+GO_BITS=arm64
+GO_VERSION=$(wget -q -O - https://golang.org/dl/ | grep -m1 -E "go[0-9]+\.[0-9]+\.*[0-9]*\.linux.*\.tar\.gz" | sed -E "s/.*go([0-9]+\.[0-9]+\.*[0-9]*)\.linux.*\.tar\.gz.*/\1/gm")
+wget -O go${GO_VERSION}.linux-${GO_BITS}.tar.gz https://dl.google.com/go/go${GO_VERSION}.linux-${GO_BITS}.tar.gz
+tar -C /usr/local -xzf  go${GO_VERSION}.linux-${GO_BITS}.tar.gz
 ```
 ### 打包带图标的 windows 可执行程序            
 下载 `rsrc`
