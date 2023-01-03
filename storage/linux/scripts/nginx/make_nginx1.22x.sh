@@ -1,7 +1,7 @@
 #!/bin/bash
 NGINX=nginx-1.22.1
 OPENSSL=openssl-3.0.7
-PCRE=pcre-8.45
+PCRE=pcre2-10.37
 ZLIB=zlib-1.2.13
 
 if [ ! -d make_nginx ]; then
