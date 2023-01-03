@@ -1,6 +1,6 @@
 #!/bin/bash
 NGINX=nginx-1.22.1
-OPENSSL=openssl-1.1.1s
+OPENSSL=openssl-3.0.7
 PCRE=pcre-8.45
 ZLIB=zlib-1.2.13
 
