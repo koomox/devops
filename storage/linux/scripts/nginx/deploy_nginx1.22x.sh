@@ -62,5 +62,5 @@ wget -O ${WORK_DIR}/targets/${NGINX_VERSION}/conf/conf.d/nginx-ssl-fpm.conf http
 
 cd ${WORK_DIR}/targets
 FILE_DATE=_$(date +"%Y%m%d%H%M")
-tar czvf ${NGINX_VERSION}.tar.gz ${NGINX_VERSION}
+tar czvf ${NGINX_VERSION}${FILE_DATE}.tar.gz ${NGINX_VERSION}
 rm -rf ${NGINX_VERSION}
