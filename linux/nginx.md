@@ -10,6 +10,12 @@ sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/s
 sudo chmod +x ./make_nginx1.22x.sh
 sudo ./make_nginx1.22x.sh
 ```
+Linux 一键编译二进制文件 [查看源文件](/storage/linux/scripts/nginx/deploy_nginx1.22x.sh)     
+```sh
+sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/deploy_nginx1.22x.sh
+sudo chmod +x ./deploy_nginx1.22x.sh
+sudo ./deploy_nginx1.22x.sh
+```
 ### 一键安装脚本        
 一键安装 Nginx 1.22.0 [查看源文件](/storage/linux/scripts/nginx/1.22.0/install.sh)         
 ```sh
