@@ -37,7 +37,6 @@ cd ${NGINX_VERSION}
 --with-zlib=../${ZLIB_VERSION} \
 --with-openssl=../${OPENSSL_VERSION}
 make
-make install
 
 mkdir -p ${WORK_DIR}/targets/${NGINX_VERSION}/{sbin,logs}
 cd ${WORK_DIR}/${NGINX_VERSION}
