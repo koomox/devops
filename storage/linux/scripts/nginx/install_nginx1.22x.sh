@@ -3,7 +3,7 @@ cd /tmp
 wget -O nginx-1.22.1-debian-amd64.tar.gz https://github.com/koomox/nginx/releases/download/nginx-2023.1.3/nginx-1.22.1-debian-amd64.tar.gz
 tar -zxf nginx-1.22.1-debian-amd64.tar.gz
 \rm -rf /usr/local/nginx /etc/nginx
-mv nginx-1.22.1-debian-amd64 /usr/local/nginx
+mv nginx-1.22.1 /usr/local/nginx
 cd /usr/local/nginx
 mv conf /etc/nginx
 cp -f nginx.service /etc/systemd/system/nginx.service
