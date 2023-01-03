@@ -1,8 +1,8 @@
 #!/bin/bash
-NGINX=nginx-1.22.0
-OPENSSL=openssl-1.1.1o
+NGINX=nginx-1.22.1
+OPENSSL=openssl-1.1.1s
 PCRE=pcre-8.45
-ZLIB=zlib-1.2.12
+ZLIB=zlib-1.2.13
 
 if [ ! -d make_nginx ]; then
 	\rm -rf make_nginx
