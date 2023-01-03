@@ -1,7 +1,6 @@
 #!/bin/bash
-cd /tmp
-wget -O nginx-1.22.1-debian-amd64.tar.gz https://github.com/koomox/nginx/releases/download/nginx-2023.1.3/nginx-1.22.1-debian-amd64.tar.gz
-tar -zxf nginx-1.22.1-debian-amd64.tar.gz
+wget -O nginx-1.22.1.tar.gz https://github.com/koomox/nginx/releases/download/nginx-2023.1.3/nginx-1.22.1-debian-amd64.tar.gz
+tar -zxf nginx-1.22.1.tar.gz
 \rm -rf /usr/local/nginx /etc/nginx
 mv nginx-1.22.1 /usr/local/nginx
 cd /usr/local/nginx
