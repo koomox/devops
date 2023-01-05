@@ -26,7 +26,7 @@ mirrors
 echo -e "deb https://mirror.xtom.com.hk/sury/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
 ```
 ```sh
-echo -e "deb https://mirror.sjtu.edu.cn/sury/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
+echo -e "deb https://mirror.sjtu.edu.cn/sury/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
 ```
 ubuntu mirrors                   
 ```sh
