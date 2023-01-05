@@ -1,52 +1,33 @@
-# Debian 10.x for LEMP         
+# Debian 11.x for LEMP         
 ### Nginx        
-一键安装 Nginx 1.22.0 [查看源文件](../storage/linux/scripts/nginx/install_nginx1220.sh)         
+一键安装 Nginx 1.22.x [source](/storage/linux/scripts/nginx/install_nginx1.22x.sh)         
 ```sh
-sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.22.0/install.sh
-sudo chmod +x ./install.sh
-sudo ./install.sh
+sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/install_nginx1.22x.sh
+sudo chmod +x ./install_nginx1.22x.sh
+sudo ./install_nginx1.22x.sh
 ```
-配置文件          
-```sh
-sed -i 's/localhost/*.com www.*.com/g' /etc/nginx/conf.d/*.com.conf
-sed -i 's/$domain/*.com/g' /etc/nginx/conf.d/*.com.conf
-sed -i 's/\/var\/www\/html/\/${public_path}/g' /etc/nginx/conf.d/*.com.conf
-```
-```sh
-sudo mkdir -p /etc/letsencrypt/live/$domain
-sudo touch /etc/letsencrypt/live/$domain/fullchain.pem
-sudo touch /etc/letsencrypt/live/$domain/privkey.pem
-```
-```sh
-sudo sed -i 's/phpmyadmin/pma/g' /etc/nginx/conf.d/phpmyadmin.conf
-sudo cat /etc/nginx/conf.d/phpmyadmin.conf
-```
-服务       
+service       
 ```sh
 sudo systemctl stop nginx
 sudo systemctl start nginx
 sudo systemctl status nginx
 ```
-```sh
-echo "hello world" > /var/www/letsencrypt/index
-```
-
 ### PHP 7.4        
 添加 php 源        
 ```sh
-sudo apt update -y
-sudo apt install ca-certificates apt-transport-https -y
+sudo apt-get update -y
+sudo apt-get install -y ca-certificates apt-transport-https
 sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
-sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
-sudo apt update -y
+echo -e "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
+sudo apt-get update -y
 ```
 使用香港镜像加速安装          
 ```sh
 sudo apt-get update -y
 sudo apt-get install -y ca-certificates apt-transport-https 
 sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
-sh -c 'echo "deb https://mirror.xtom.com.hk/sury/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
-sudo apt-get update
+echo -e "deb https://mirror.xtom.com.hk/sury/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
+sudo apt-get update -y
 ```
 ubuntu 源          
 ```sh
@@ -85,7 +66,7 @@ sudo systemctl status php7.4-fpm
 ### MariaDB           
 添加公钥       
 ```sh
-sudo apt-get install apt-transport-https curl
+sudo apt-get install -y apt-transport-https curl
 sudo curl -o /etc/apt/trusted.gpg.d/mariadb_release_signing_key.asc 'https://mariadb.org/mariadb_release_signing_key.asc'
 ```
 添加源       
@@ -139,4 +120,16 @@ sudo systemctl status redis-server
 sudo cp -f /etc/redis/redis.conf /etc/redis/redis.conf.bak
 sudo sed -i '/^#/d;/^$/d;/^;/d' /etc/redis/redis.conf
 sudo vim /etc/redis/redis.conf
+```
+### gitlab-ce         
+添加源
+```sh
+sudo wget -O /etc/apt/trusted.gpg.d/gitlab.gpg https://packages.gitlab.com/gpg.key
+echo -e "deb http://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/gitlab-ce.list
+cat /etc/apt/sources.list.d/gitlab-ce.list
+```
+install gitlab-ce            
+```sh
+sudo apt-get update -y
+sudo apt-get install -y gitlab-ce
 ```

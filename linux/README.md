@@ -37,7 +37,7 @@
 [docker for NextCloud](docker_nextcloud.md)                      
 # LNMP        
 [Alpine Linux for LEMP](alpine_lemp.md)            
-[Debian 10.x for LEMP](debian10x_lemp.md)            
+[Debian 11.x for LEMP](debian11x_lemp.md)            
 [CentOS 7.x for LNMP](centos7x_lnmp.md)              
 [CentOS 7.x for OpenLDAP](centos7x_openldap.md)            
 # PHP        
