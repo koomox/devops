@@ -21,15 +21,14 @@ sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gp
 echo -e "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
 sudo apt-get update -y
 ```
-使用香港镜像加速安装          
+mirrors             
 ```sh
-sudo apt-get update -y
-sudo apt-get install -y ca-certificates apt-transport-https 
-sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 echo -e "deb https://mirror.xtom.com.hk/sury/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
-sudo apt-get update -y
 ```
-ubuntu 源          
+```sh
+echo -e "deb https://mirror.sjtu.edu.cn/sury/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
+```
+ubuntu mirrors                   
 ```sh
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x4F4EA0AAE5267A6C
 sudo apt-get update -y
@@ -122,14 +121,34 @@ sudo sed -i '/^#/d;/^$/d;/^;/d' /etc/redis/redis.conf
 sudo vim /etc/redis/redis.conf
 ```
 ### gitlab-ce         
-添加源
+添加源          
 ```sh
 sudo wget -O /etc/apt/trusted.gpg.d/gitlab.gpg https://packages.gitlab.com/gpg.key
 echo -e "deb http://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/gitlab-ce.list
 cat /etc/apt/sources.list.d/gitlab-ce.list
 ```
-install gitlab-ce            
+install gitlab-ce             
 ```sh
 sudo apt-get update -y
 sudo apt-get install -y gitlab-ce
+```
+### docker-ce        
+添加源         
+```sh
+sudo wget -O /etc/apt/trusted.gpg.d/docker.gpg https://download.docker.com/linux/debian/gpg
+echo -e "deb https://download.docker.com/linux/debian $(lsb_release -sc) stable" | sudo tee /etc/apt/sources.list.d/docker-ce.list
+cat /etc/apt/sources.list.d/docker-ce.list
+```
+```sh
+echo -e "deb https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/debian $(lsb_release -sc) stable" | sudo tee /etc/apt/sources.list.d/docker-ce.list
+cat /etc/apt/sources.list.d/docker-ce.list
+```
+```sh
+echo -e "deb https://mirrors.ustc.edu.cn/docker-ce/linux/debian $(lsb_release -sc) stable" | sudo tee /etc/apt/sources.list.d/docker-ce.list
+cat /etc/apt/sources.list.d/docker-ce.list
+```
+install docker-ce         
+```sh
+sudo apt-get update -y
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
