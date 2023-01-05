@@ -71,12 +71,12 @@ sudo curl -o /etc/apt/trusted.gpg.d/mariadb_release_signing_key.asc 'https://mar
 ```
 添加源       
 ```sh
-echo -e "deb http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.10/debian $(lsb_release -sc) main\ndeb-src http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.10/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
+echo -e "deb http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.10/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
 cat /etc/apt/sources.list.d/MariaDB.list
 ```
 tuna 源       
 ```sh
-echo -e "deb http://mirrors.tuna.tsinghua.edu.cn/mariadb/repo/10.10/debian $(lsb_release -sc) main\ndeb-src http://mirrors.tuna.tsinghua.edu.cn/mariadb/repo/10.10/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
+echo -e "deb http://mirrors.tuna.tsinghua.edu.cn/mariadb/repo/10.10/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
 cat /etc/apt/sources.list.d/MariaDB.list
 ```
 ```sh
