@@ -10,33 +10,18 @@ export GOPROXY=https://goproxy.io,direct
 echo 'export PATH=$PATH:/usr/local/go/bin' >> /etc/profile
 ```
 ### Linux 一键安装最新版 Golang                
-从 `https://golang.org/dl/` 页面提取最新版本号，自动安装，设置环境变量。                
+get linux amd64 version                
 ```sh
-GO_BITS=amd64
-GO_VERSION=$(wget -q -O - https://golang.org/dl/ | grep -m1 -E "go[0-9]+\.[0-9]+\.*[0-9]*\.linux.*\.tar\.gz" | sed -E "s/.*go([0-9]+\.[0-9]+\.*[0-9]*)\.linux.*\.tar\.gz.*/\1/gm")
-wget -O go${GO_VERSION}.linux-${GO_BITS}.tar.gz https://dl.google.com/go/go${GO_VERSION}.linux-${GO_BITS}.tar.gz
-sudo tar -C /usr/local -xzf  go${GO_VERSION}.linux-${GO_BITS}.tar.gz
+GO_VERSION=$(wget -qO- --no-check-certificate https://go.dev/dl/ | grep -m1 -E "go([0-9]+\.){0,3}linux-amd64.tar.gz" | sed -E "s/.*(go.*linux-amd64).tar.gz.*/\1/gm" )
 ```
-从 `https://golang.org/` 页面提取最新版本号，自动安装，设置环境变量。                     
+get linux arm64 version       
 ```sh
-GO_BITS=amd64
-GO_VERSION=$(wget -q -O - https://golang.org/ | grep -E "goVersion" | sed -E "s/.*go([0-9]+\.[0-9]+\.*[0-9]*).*/\1/gm")
-wget -O go${GO_VERSION}.linux-${GO_BITS}.tar.gz https://dl.google.com/go/go${GO_VERSION}.linux-${GO_BITS}.tar.gz
-sudo tar -C /usr/local -xzf  go${GO_VERSION}.linux-${GO_BITS}.tar.gz
+GO_VERSION=$(wget -qO- --no-check-certificate https://go.dev/dl/ | grep -m1 -E "go([0-9]+\.){0,3}linux-arm64.tar.gz" | sed -E "s/.*(go.*linux-arm64).tar.gz.*/\1/gm" )
 ```
-中国用户使用该版本从 `https://github.com/golang/go/tags` 页面提取最新版本号，自动安装，设置环境变量。                     
+下载解压安装          
 ```sh
-GO_BITS=amd64
-GO_VERSION=$(wget -q -O - https://github.com/golang/go/tags | grep -v "beta" | grep -m1 -E "golang/go/releases/tag/go[0-9]+\.[0-9]+\.*[0-9]*" | sed -E "s/.*go([0-9]+\.[0-9]+\.*[0-9]*).*/\1/gm")
-wget -O go${GO_VERSION}.linux-${GO_BITS}.tar.gz https://dl.google.com/go/go${GO_VERSION}.linux-${GO_BITS}.tar.gz
-sudo tar -C /usr/local -xzf  go${GO_VERSION}.linux-${GO_BITS}.tar.gz
-```
-安装 arm 版本 golang          
-```sh
-GO_BITS=arm64
-GO_VERSION=$(wget -q -O - https://golang.org/dl/ | grep -m1 -E "go[0-9]+\.[0-9]+\.*[0-9]*\.linux.*\.tar\.gz" | sed -E "s/.*go([0-9]+\.[0-9]+\.*[0-9]*)\.linux.*\.tar\.gz.*/\1/gm")
-wget -O go${GO_VERSION}.linux-${GO_BITS}.tar.gz https://dl.google.com/go/go${GO_VERSION}.linux-${GO_BITS}.tar.gz
-sudo tar -C /usr/local -xzf  go${GO_VERSION}.linux-${GO_BITS}.tar.gz
+wget -O ${GO_VERSION}.tar.gz https://dl.google.com/go/${GO_VERSION}.tar.gz
+sudo tar -C /usr/local -xzf  ${GO_VERSION}.tar.gz
 ```
 ### 打包带图标的 windows 可执行程序            
 下载 `rsrc`
