@@ -11,13 +11,18 @@ NODE_VERSION=$(wget -qO- --no-check-certificate https://nodejs.org/en/download/ 
 ```sh
 NODE_VERSION=$(wget -qO- --no-check-certificate https://github.com/nodejs/node/tags | grep -m1 -E "/releases/tag/v[0-9]+\.[0-9]+\.[0-9]+" | sed -E "s/.*v([0-9]+\.[0-9]+\.[0-9]+).*/\1/gm")
 ```
+```sh
+NODE_FULL=node-v${NODE_VERSION}-linux-x64.tar.xz
+
+NODE_FULL=node-v${NODE_VERSION}-linux-arm64.tar.xz
+```
 download and Extract file               
 ```sh
-wget -O node-v${NODE_VERSION}-linux-x64.tar.xz https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz
+wget -O ${NODE_FULL}.tar.xz https://nodejs.org/dist/v${NODE_VERSION}/${NODE_FULL}.tar.xz
 
 sudo mkdir -p /usr/local/node
-xz -d node-v${NODE_VERSION}-linux-x64.tar.xz
-sudo tar --strip-components 1 -C /usr/local/node -xf node-v${NODE_VERSION}-linux-x64.tar
+xz -d ${NODE_FULL}.tar.xz
+sudo tar --strip-components 1 -C /usr/local/node -xf ${NODE_FULL}.tar
 ```
 Environment
 ```sh
