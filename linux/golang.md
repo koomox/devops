@@ -12,11 +12,14 @@ echo 'export PATH=$PATH:/usr/local/go/bin' >> /etc/profile
 ### Linux 一键安装最新版 Golang                
 get linux amd64 version                
 ```sh
-GO_VERSION=$(wget -qO- --no-check-certificate https://go.dev/dl/ | grep -m1 -E "go([0-9]+\.){0,3}linux-amd64.tar.gz" | sed -E "s/.*(go.*linux-amd64).tar.gz.*/\1/gm" )
+GO_VERSION=$(wget -qO- --no-check-certificate https://go.dev/dl/ | grep -m1 -E "go([0-9]+\.){0,3}linux-amd64.tar.gz" | sed -E "s/.*(go.*linux-amd64.tar.gz).*/\1/gm" )
+```
+```sh
+GO_VERSION=$(wget -qO- --no-check-certificate https://github.com/golang/go/tags | grep -m1 -E "/releases/tag/go[0-9]+\.[0-9]+\.[0-9]+" | sed -E "s/.*(go[0-9]+\.[0-9]+\.[0-9]+).*/\1.linux-amd64.tar.gz/gm")
 ```
 get linux arm64 version       
 ```sh
-GO_VERSION=$(wget -qO- --no-check-certificate https://go.dev/dl/ | grep -m1 -E "go([0-9]+\.){0,3}linux-arm64.tar.gz" | sed -E "s/.*(go.*linux-arm64).tar.gz.*/\1/gm" )
+GO_VERSION=$(wget -qO- --no-check-certificate https://go.dev/dl/ | grep -m1 -E "go([0-9]+\.){0,3}linux-arm64.tar.gz" | sed -E "s/.*(go.*linux-arm64.tar.gz).*/\1/gm" )
 ```
 下载解压安装          
 ```sh
