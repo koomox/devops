@@ -12,9 +12,9 @@ NODE_VERSION=$(wget -qO- --no-check-certificate https://nodejs.org/en/download/ 
 NODE_VERSION=$(wget -qO- --no-check-certificate https://github.com/nodejs/node/tags | grep -m1 -E "/releases/tag/v[0-9]+\.[0-9]+\.[0-9]+" | sed -E "s/.*v([0-9]+\.[0-9]+\.[0-9]+).*/\1/gm")
 ```
 ```sh
-NODE_FULL=node-v${NODE_VERSION}-linux-x64.tar.xz
+NODE_FULL=node-v${NODE_VERSION}-linux-x64
 
-NODE_FULL=node-v${NODE_VERSION}-linux-arm64.tar.xz
+NODE_FULL=node-v${NODE_VERSION}-linux-arm64
 ```
 download and Extract file               
 ```sh
