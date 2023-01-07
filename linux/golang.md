@@ -7,7 +7,7 @@ Heroku [Link](https://www.heroku.com/go)
 export GOPROXY=https://goproxy.io,direct
 ```
 ```sh
-echo 'export PATH=$PATH:/usr/local/go/bin' >> /etc/profile
+echo -e 'export PATH=$PATH:/usr/local/go/bin' | sudo tee -a /etc/profile
 ```
 ### Linux 一键安装最新版 Golang                
 get linux amd64 version                
