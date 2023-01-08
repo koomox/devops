@@ -19,18 +19,18 @@ lsmod | grep bbr
 
 echo "===== Optimize limits.conf ============="
 ${SUDO} cp -f /etc/security/limits.conf /etc/security/limits.conf.bak
-${SUDO} echo -e "*         hard    nofile      524288" | sudo tee /etc/security/limits.conf
-${SUDO} echo -e "*         soft    nofile      524288" | sudo tee -a /etc/security/limits.conf
-${SUDO} echo -e "*         hard    nproc       unlimited" | sudo tee -a /etc/security/limits.conf
-${SUDO} echo -e "*         soft    nproc       unlimited" | sudo tee -a /etc/security/limits.conf
-${SUDO} echo -e "*         hard    core        unlimited" | sudo tee -a /etc/security/limits.conf
-${SUDO} echo -e "*         soft    core        unlimited" | sudo tee -a /etc/security/limits.conf
-${SUDO} echo -e "root      hard    nofile      524288" | sudo tee /etc/security/limits.conf
-${SUDO} echo -e "root      soft    nofile      524288" | sudo tee -a /etc/security/limits.conf
-${SUDO} echo -e "root      hard    nproc       unlimited" | sudo tee -a /etc/security/limits.conf
-${SUDO} echo -e "root      soft    nproc       unlimited" | sudo tee -a /etc/security/limits.conf
-${SUDO} echo -e "root      hard    core        unlimited" | sudo tee -a /etc/security/limits.conf
-${SUDO} echo -e "root      soft    core        unlimited" | sudo tee -a /etc/security/limits.conf
+echo -e "*         hard    nofile      524288" | ${SUDO} tee /etc/security/limits.conf
+echo -e "*         soft    nofile      524288" | ${SUDO} tee -a /etc/security/limits.conf
+echo -e "*         hard    nproc       unlimited" | ${SUDO} tee -a /etc/security/limits.conf
+echo -e "*         soft    nproc       unlimited" | ${SUDO} tee -a /etc/security/limits.conf
+echo -e "*         hard    core        unlimited" | ${SUDO} tee -a /etc/security/limits.conf
+echo -e "*         soft    core        unlimited" | ${SUDO} tee -a /etc/security/limits.conf
+echo -e "root      hard    nofile      524288" | ${SUDO} tee /etc/security/limits.conf
+echo -e "root      soft    nofile      524288" | ${SUDO} tee -a /etc/security/limits.conf
+echo -e "root      hard    nproc       unlimited" | ${SUDO} tee -a /etc/security/limits.conf
+echo -e "root      soft    nproc       unlimited" | ${SUDO} tee -a /etc/security/limits.conf
+echo -e "root      hard    core        unlimited" | ${SUDO} tee -a /etc/security/limits.conf
+echo -e "root      soft    core        unlimited" | ${SUDO} tee -a /etc/security/limits.conf
 cat /etc/security/limits.conf
 
 ${SUDO} sed -E -i '/^#*DefaultLimitNOFILE=/cDefaultLimitNOFILE=524288' /etc/systemd/system.conf
@@ -92,9 +92,9 @@ ${SUDO} iptables-save > /etc/iptables.rules
 
 ${SUDO} systemctl enable rc.local
 ${SUDO} systemctl start rc.local
-${SUDO} echo -e "#!/bin/sh -e" | sudo tee /etc/rc.local
-${SUDO} echo -e "iptables-restore < /etc/iptables.rules" | sudo tee -a /etc/rc.local
-${SUDO} echo -e "exit 0" | sudo tee -a /etc/rc.local
+echo -e "#!/bin/sh -e" | ${SUDO} tee /etc/rc.local
+echo -e "iptables-restore < /etc/iptables.rules" | ${SUDO} tee -a /etc/rc.local
+echo -e "exit 0" | ${SUDO} tee -a /etc/rc.local
 ${SUDO} chmod +x /etc/rc.local
 
 ${SUDO} iptables -nvL

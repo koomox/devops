@@ -19,18 +19,18 @@ lsmod | grep bbr
 
 echo "===== Optimize limits.conf ============="
 ${SUDO} cp -f /etc/security/limits.conf /etc/security/limits.conf.bak
-${SUDO} echo -e "*         hard    nofile      524288" | sudo tee /etc/security/limits.conf
-${SUDO} echo -e "*         soft    nofile      524288" | sudo tee -a /etc/security/limits.conf
-${SUDO} echo -e "*         hard    nproc       unlimited" | sudo tee -a /etc/security/limits.conf
-${SUDO} echo -e "*         soft    nproc       unlimited" | sudo tee -a /etc/security/limits.conf
-${SUDO} echo -e "*         hard    core        unlimited" | sudo tee -a /etc/security/limits.conf
-${SUDO} echo -e "*         soft    core        unlimited" | sudo tee -a /etc/security/limits.conf
-${SUDO} echo -e "root      hard    nofile      524288" | sudo tee /etc/security/limits.conf
-${SUDO} echo -e "root      soft    nofile      524288" | sudo tee -a /etc/security/limits.conf
-${SUDO} echo -e "root      hard    nproc       unlimited" | sudo tee -a /etc/security/limits.conf
-${SUDO} echo -e "root      soft    nproc       unlimited" | sudo tee -a /etc/security/limits.conf
-${SUDO} echo -e "root      hard    core        unlimited" | sudo tee -a /etc/security/limits.conf
-${SUDO} echo -e "root      soft    core        unlimited" | sudo tee -a /etc/security/limits.conf
+echo -e "*         hard    nofile      524288" | ${SUDO} tee /etc/security/limits.conf
+echo -e "*         soft    nofile      524288" | ${SUDO} tee -a /etc/security/limits.conf
+echo -e "*         hard    nproc       unlimited" | ${SUDO} tee -a /etc/security/limits.conf
+echo -e "*         soft    nproc       unlimited" | ${SUDO} tee -a /etc/security/limits.conf
+echo -e "*         hard    core        unlimited" | ${SUDO} tee -a /etc/security/limits.conf
+echo -e "*         soft    core        unlimited" | ${SUDO} tee -a /etc/security/limits.conf
+echo -e "root      hard    nofile      524288" | ${SUDO} tee /etc/security/limits.conf
+echo -e "root      soft    nofile      524288" | ${SUDO} tee -a /etc/security/limits.conf
+echo -e "root      hard    nproc       unlimited" | ${SUDO} tee -a /etc/security/limits.conf
+echo -e "root      soft    nproc       unlimited" | ${SUDO} tee -a /etc/security/limits.conf
+echo -e "root      hard    core        unlimited" | ${SUDO} tee -a /etc/security/limits.conf
+echo -e "root      soft    core        unlimited" | ${SUDO} tee -a /etc/security/limits.conf
 cat /etc/security/limits.conf
 
 ${SUDO} sed -E -i '/^#*DefaultLimitNOFILE=/cDefaultLimitNOFILE=524288' /etc/systemd/system.conf
@@ -82,8 +82,8 @@ ${SUDO} nft add chain inet filter input { type filter hook input priority 0\; po
 ${SUDO} nft add chain inet filter forward { type filter hook forward priority 0\; policy drop\; }
 ${SUDO} nft list ruleset
 
-${SUDO} echo -e "flush ruleset" | sudo tee /etc/nftables.conf
-${SUDO} echo -e "nft list ruleset" | sudo tee -a /etc/nftables.conf
+echo -e "flush ruleset" | ${SUDO} tee /etc/nftables.conf
+echo -e "nft list ruleset" | ${SUDO} tee -a /etc/nftables.conf
 ${SUDO} nft --check --file /etc/nftables.conf
 ${SUDO} systemctl enable nftables
 ${SUDO} systemctl start nftables
