@@ -1,104 +1,91 @@
 #!/bin/bash
-function custom_ssh_iptables() {
-	SSH_CONF="/etc/ssh/sshd_config"
-	SSH_PORT=22
+if [ "$(whoami)" != "root" ]; then
+    SUDO=sudo
+fi
 
-	echo "========= setting SSH and internat ip and ipsec secrets ======"
-	echo "please input SSH PORT: "
-	read SSH_PORT
-	echo "========= SSH PORT ============="
-	echo "${SSH_PORT}"
-	echo "please input SSH: "
-	read SSH_KEY
-	echo "========= SSH ============="
-	echo "${SSH_KEY}"
+echo "===== Optimize System ============="
+${SUDO} apt-get update -y
+${SUDO} apt-get upgrade -y
+${SUDO} apt-get install curl wget git vim sudo htop net-tools neofetch lsb-release build-essential iputils-ping -y
 
-	if [ ! -x "~/.ssh" ];then
-		mkdir -p ~/.ssh
-	fi
-	echo -e "${SSH_KEY}" > ~/.ssh/authorized_keys
-	echo "====== read ~/.ssh/authorized_keys ========"
-	cat ~/.ssh/authorized_keys
+echo "===== Optimize sysctl.conf ============="
+${SUDO} cp -f /etc/sysctl.conf /etc/sysctl.conf.bak
+${SUDO} wget -O /etc/sysctl.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/sysctl/aws.lightsail.sysctl.conf
+modprobe ip_conntrack
+lsmod |grep conntrack
+sysctl -p
+sysctl net.ipv4.tcp_available_congestion_control
+lsmod | grep bbr
 
-	echo "===== reset iptables rules======"
-	iptables -P INPUT ACCEPT
-	iptables -P FORWARD ACCEPT
-	iptables -P OUTPUT ACCEPT
-	iptables -F
-	iptables -X
-	iptables -Z
-	iptables -nvL
+echo "===== Optimize limits.conf ============="
+${SUDO} cp -f /etc/security/limits.conf /etc/security/limits.conf.bak
+${SUDO} wget -O /etc/security/limits.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/sysctl/limits.conf
+cat /etc/security/limits.conf
+${SUDO} sed -E -i '/^#*DefaultLimitNOFILE=/cDefaultLimitNOFILE=524288' /etc/systemd/system.conf
+grep -E '^#*DefaultLimitNOFILE=' /etc/systemd/system.conf
 
-	#修改SSH为证书登录
-	sed -E -i '/^#*Port /cPort '"$SSH_PORT"'' ${SSH_CONF}
-	sed -E -i '/^#*PermitEmptyPasswords/cPermitEmptyPasswords no' ${SSH_CONF}
-	sed -E -i '/^#*PermitRootLogin/cPermitRootLogin yes' ${SSH_CONF}
-	sed -E -i '/^#*PasswordAuthentication/cPasswordAuthentication no' ${SSH_CONF}
-	sed -E -i '/^#*PubkeyAuthentication/cPubkeyAuthentication yes' ${SSH_CONF}
+echo "===== Optimize timedatectl ============"
+${SUDO} apt install dbus -y
+timedatectl set-timezone Asia/Shanghai
+timedatectl
 
-	echo "======== set iptables rules================"
+echo "===== Custom SSH Port And Iptabes Rules ========="
+echo "input SSH Port: "
+read SSH_PORT
+echo "input SSH Key: "
+read SSH_KEY
+echo "SSH Port: ${SSH_PORT}"
+echo "========= SSH ============="
+echo "${SSH_KEY}"
 
-	# INPUT
-	iptables -A INPUT -i lo -j ACCEPT
-	iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-	iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport ${SSH_PORT} -j ACCEPT
-	iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
-	iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+if [ ! -x "~/.ssh" ];then
+	mkdir -p ~/.ssh
+fi
+echo -e "${SSH_KEY}" > ~/.ssh/authorized_keys
+echo "====== read ~/.ssh/authorized_keys ========"
+cat ~/.ssh/authorized_keys
 
-	systemctl restart sshd
+echo "===== reset iptables rules======"
+${SUDO} iptables -P INPUT ACCEPT
+${SUDO} iptables -P FORWARD ACCEPT
+${SUDO} iptables -P OUTPUT ACCEPT
+${SUDO} iptables -F
+${SUDO} iptables -X
+${SUDO} iptables -Z
+${SUDO} iptables -nvL
 
-	iptables -P INPUT DROP
-	iptables -P FORWARD DROP
-	iptables -P OUTPUT ACCEPT
+#修改SSH为证书登录
+${SUDO} sed -E -i '/^#*Port /cPort '"$SSH_PORT"'' /etc/ssh/sshd_config
+${SUDO} sed -E -i '/^#*PermitEmptyPasswords/cPermitEmptyPasswords no' /etc/ssh/sshd_config
+${SUDO} sed -E -i '/^#*PermitRootLogin/cPermitRootLogin yes' /etc/ssh/sshd_config
+${SUDO} sed -E -i '/^#*PasswordAuthentication/cPasswordAuthentication no' /etc/ssh/sshd_config
+${SUDO} sed -E -i '/^#*PubkeyAuthentication/cPubkeyAuthentication yes' /etc/ssh/sshd_config
 
-	iptables-save > /etc/iptables.rules
+echo "======== set iptables rules================"
 
-	systemctl enable rc.local
-	systemctl start rc.local
-	echo '#!/bin/sh -e' > /etc/rc.local
-	echo 'iptables-restore < /etc/iptables.rules' >> /etc/rc.local
-	echo 'exit 0' >> /etc/rc.local
-	chmod +x /etc/rc.local
+# INPUT
+${SUDO} iptables -A INPUT -i lo -j ACCEPT
+${SUDO} iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+${SUDO} iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport ${SSH_PORT} -j ACCEPT
+${SUDO} iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+${SUDO} iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
 
-	iptables -nvL
-}
+${SUDO} systemctl restart sshd
 
-function get_public_address() {
-	echo "================= Public IP ====================="
-	curl https://checkip.amazonaws.com/
-}
+${SUDO} iptables -P INPUT DROP
+${SUDO} iptables -P FORWARD DROP
+${SUDO} iptables -P OUTPUT ACCEPT
 
-function os_optimize() {
-	apt-get update -y
-	apt-get upgrade -y
-	apt-get install curl wget git vim sudo htop net-tools neofetch lsb-release build-essential iputils-ping -y
+${SUDO} iptables-save > /etc/iptables.rules
 
-	echo "===== Optimize sysctl.conf ============="
-	cp -f /etc/sysctl.conf /etc/sysctl.conf.bak
-	wget -O /etc/sysctl.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/sysctl/aws.lightsail.sysctl.conf
-	modprobe ip_conntrack
-	lsmod |grep conntrack
-	sysctl -p
-	sysctl net.ipv4.tcp_available_congestion_control
-	lsmod | grep bbr
-	
+${SUDO} systemctl enable rc.local
+${SUDO} systemctl start rc.local
+${SUDO} echo -e "#!/bin/sh -e" | sudo tee /etc/rc.local
+${SUDO} echo -e "iptables-restore < /etc/iptables.rules" | sudo tee -a /etc/rc.local
+${SUDO} echo -e "exit 0" | sudo tee -a /etc/rc.local
+${SUDO} chmod +x /etc/rc.local
 
-	echo "===== Optimize limits.conf ============="
-	cp -f /etc/security/limits.conf /etc/security/limits.conf.bak
-	wget -O /etc/security/limits.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/sysctl/limits.conf
-	cat /etc/security/limits.conf
-	sed -E -i '/^#*DefaultLimitNOFILE=/cDefaultLimitNOFILE=524288' /etc/systemd/system.conf
-	grep -E '^#*DefaultLimitNOFILE=' /etc/systemd/system.conf
+${SUDO} iptables -nvL
 
-	echo "===== Optimize timedatectl ============"
-	apt install dbus -y
-	timedatectl set-timezone Asia/Shanghai
-	timedatectl
-
-	echo "===== Custom SSH Port And Iptabes Rules ========="
-	custom_ssh_iptables
-
-	get_public_address
-}
-
-os_optimize
+echo "================= Public IP ====================="
+curl https://checkip.amazonaws.com/

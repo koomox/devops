@@ -1,94 +1,81 @@
 #!/bin/bash
-function custom_ssh_iptables() {
-	SSH_CONF="/etc/ssh/sshd_config"
-	SSH_PORT=22
+if [ "$(whoami)" != "root" ]; then
+    SUDO=sudo
+fi
 
-	echo "========= setting SSH and internat ip and ipsec secrets ======"
-	echo "please input SSH PORT: "
-	read SSH_PORT
-	echo "========= SSH PORT ============="
-	echo "${SSH_PORT}"
-	echo "please input SSH: "
-	read SSH_KEY
-	echo "========= SSH ============="
-	echo "${SSH_KEY}"
+echo "===== Update System ===================="
+${SUDO} apt-get update -y
+${SUDO} apt-get upgrade -y
+${SUDO} apt-get install curl wget git vim sudo htop net-tools neofetch lsb-release build-essential iputils-ping -y
 
-	if [ ! -x "~/.ssh" ];then
-		mkdir -p ~/.ssh
-	fi
-	echo -e "${SSH_KEY}" > ~/.ssh/authorized_keys
-	echo "====== read ~/.ssh/authorized_keys ========"
-	cat ~/.ssh/authorized_keys
+echo "===== Optimize sysctl.conf ============="
+${SUDO} cp -f /etc/sysctl.conf /etc/sysctl.conf.bak
+${SUDO} wget -O /etc/sysctl.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/sysctl/aws.lightsail.sysctl.conf
+modprobe ip_conntrack
+lsmod |grep conntrack
+sysctl -p
+sysctl net.ipv4.tcp_available_congestion_control
+lsmod | grep bbr
 
-	#修改SSH为证书登录
-	sed -E -i '/^#*Port /cPort '"$SSH_PORT"'' ${SSH_CONF}
-	sed -E -i '/^#*PermitEmptyPasswords/cPermitEmptyPasswords no' ${SSH_CONF}
-	sed -E -i '/^#*PermitRootLogin/cPermitRootLogin yes' ${SSH_CONF}
-	sed -E -i '/^#*PasswordAuthentication/cPasswordAuthentication no' ${SSH_CONF}
-	sed -E -i '/^#*PubkeyAuthentication/cPubkeyAuthentication yes' ${SSH_CONF}
+echo "===== Optimize limits.conf ============="
+${SUDO} cp -f /etc/security/limits.conf /etc/security/limits.conf.bak
+${SUDO} wget -O /etc/security/limits.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/sysctl/limits.conf
+cat /etc/security/limits.conf
+${SUDO} sed -E -i '/^#*DefaultLimitNOFILE=/cDefaultLimitNOFILE=524288' /etc/systemd/system.conf
+grep -E '^#*DefaultLimitNOFILE=' /etc/systemd/system.conf
 
-	echo "======== set iptables rules================"
+echo "===== Optimize timedatectl ============"
+${SUDO} apt install dbus -y
+timedatectl set-timezone Asia/Shanghai
+timedatectl
 
-	# INPUT
-	nft flush ruleset
-	nft add table inet filter
-	nft add chain inet filter input { type filter hook input priority 0\; policy accept\; }
-	nft add chain inet filter forward { type filter hook forward priority 0\; policy accept\; }
-	nft add chain inet filter output { type filter hook output priority 0\; policy accept\; }
-	nft add rule inet filter input ct state invalid drop
-	nft add rule inet filter input meta iif lo ct state new accept
-	nft add rule inet filter input ct state established,related accept
-	nft add rule inet filter input tcp dport ${SSH_PORT} accept
-	nft add rule inet filter input tcp dport 80 accept
-	nft add rule inet filter input tcp dport 443 accept
-	nft add chain inet filter input { type filter hook input priority 0\; policy drop\; }
-	nft add chain inet filter forward { type filter hook forward priority 0\; policy drop\; }
-	nft list ruleset
+echo "===== Custom SSH Port And Iptabes Rules ========="
+echo "Input SSH Port: "
+read SSH_PORT
+echo "Input SSH Key:"
+read SSH_KEY
+echo "SSH Port: ${SSH_PORT}"
+echo "========= SSH Key ============="
+echo "${SSH_KEY}"
 
-	sh -c 'echo "flush ruleset" > /etc/nftables.conf'
-	sh -c 'nft list ruleset >> /etc/nftables.conf'
-	nft --check --file /etc/nftables.conf
-	systemctl enable nftables
-	systemctl start nftables
-	systemctl status nftables
-}
+if [ ! -x "~/.ssh" ];then
+	mkdir -p ~/.ssh
+fi
+echo -e "${SSH_KEY}" > ~/.ssh/authorized_keys
+echo "====== read ~/.ssh/authorized_keys ========"
+cat ~/.ssh/authorized_keys
 
-function get_public_address() {
-	echo "================= Public IP ====================="
-	curl https://checkip.amazonaws.com/
-}
+#修改SSH为证书登录
+${SUDO} sed -E -i '/^#*Port /cPort '"$SSH_PORT"'' /etc/ssh/sshd_config
+${SUDO} sed -E -i '/^#*PermitEmptyPasswords/cPermitEmptyPasswords no' /etc/ssh/sshd_config
+${SUDO} sed -E -i '/^#*PermitRootLogin/cPermitRootLogin yes' /etc/ssh/sshd_config
+${SUDO} sed -E -i '/^#*PasswordAuthentication/cPasswordAuthentication no' /etc/ssh/sshd_config
+${SUDO} sed -E -i '/^#*PubkeyAuthentication/cPubkeyAuthentication yes' /etc/ssh/sshd_config
 
-function os_optimize() {
-	apt-get update -y
-	apt-get upgrade -y
-	apt-get install curl wget git vim sudo htop net-tools neofetch lsb-release build-essential iputils-ping -y
+echo "======== set iptables rules================"
 
-	echo "===== Optimize sysctl.conf ============="
-	cp -f /etc/sysctl.conf /etc/sysctl.conf.bak
-	wget -O /etc/sysctl.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/sysctl/aws.lightsail.sysctl.conf
-	modprobe ip_conntrack
-	lsmod |grep conntrack
-	sysctl -p
-	sysctl net.ipv4.tcp_available_congestion_control
-	lsmod | grep bbr
-	
+# INPUT
+${SUDO} nft flush ruleset
+${SUDO} nft add table inet filter
+${SUDO} nft add chain inet filter input { type filter hook input priority 0\; policy accept\; }
+${SUDO} nft add chain inet filter forward { type filter hook forward priority 0\; policy accept\; }
+${SUDO} nft add chain inet filter output { type filter hook output priority 0\; policy accept\; }
+${SUDO} nft add rule inet filter input ct state invalid drop
+${SUDO} nft add rule inet filter input meta iif lo ct state new accept
+${SUDO} nft add rule inet filter input ct state established,related accept
+${SUDO} nft add rule inet filter input tcp dport ${SSH_PORT} accept
+${SUDO} nft add rule inet filter input tcp dport 80 accept
+${SUDO} nft add rule inet filter input tcp dport 443 accept
+${SUDO} nft add chain inet filter input { type filter hook input priority 0\; policy drop\; }
+${SUDO} nft add chain inet filter forward { type filter hook forward priority 0\; policy drop\; }
+${SUDO} nft list ruleset
 
-	echo "===== Optimize limits.conf ============="
-	cp -f /etc/security/limits.conf /etc/security/limits.conf.bak
-	wget -O /etc/security/limits.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/sysctl/limits.conf
-	cat /etc/security/limits.conf
-	sed -E -i '/^#*DefaultLimitNOFILE=/cDefaultLimitNOFILE=524288' /etc/systemd/system.conf
-	grep -E '^#*DefaultLimitNOFILE=' /etc/systemd/system.conf
+${SUDO} echo -e "flush ruleset" | sudo tee /etc/nftables.conf
+${SUDO} echo -e "nft list ruleset" | sudo tee -a /etc/nftables.conf
+${SUDO} nft --check --file /etc/nftables.conf
+${SUDO} systemctl enable nftables
+${SUDO} systemctl start nftables
+${SUDO} systemctl status nftables
 
-	echo "===== Optimize timedatectl ============"
-	apt install dbus -y
-	timedatectl set-timezone Asia/Shanghai
-	timedatectl
-
-	echo "===== Custom SSH Port And Iptabes Rules ========="
-	custom_ssh_iptables
-
-	get_public_address
-}
-
-os_optimize
+echo "================= Public IP ====================="
+curl https://checkip.amazonaws.com/
