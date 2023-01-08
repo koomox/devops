@@ -3,9 +3,9 @@
 一键设置 Ubuntu 20.x, 更新系统, 设置防火墙, 自定义 SSH 端口和证书          
 [source](/storage/linux/ubuntu/Lightsail/ubuntu20x.sh)         
 ```sh
-sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/ubuntu/Lightsail/ubuntu20x.sh
-sudo chmod +x ./ubuntu20x.sh
-sudo ./ubuntu20x.sh
+wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/ubuntu/Lightsail/ubuntu20x.sh
+chmod +x ./ubuntu20x.sh
+./ubuntu20x.sh
 ```
 启用 root 远程登录         
 ```sh

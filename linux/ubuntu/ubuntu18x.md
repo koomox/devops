@@ -3,9 +3,9 @@
 一键设置 Ubuntu 18.x, 更新系统, 设置防火墙, 自定义 SSH 端口和证书          
 [source](/storage/linux/ubuntu/oraclecloud/ubuntu18x.sh)         
 ```sh
-sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/ubuntu/oraclecloud/ubuntu18x.sh
-sudo chmod +x ./ubuntu18x.sh
-sudo ./ubuntu18x.sh
+wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/ubuntu/oraclecloud/ubuntu18x.sh
+chmod +x ./ubuntu18x.sh
+./ubuntu18x.sh
 ```
 启用 root 远程登录         
 ```sh
