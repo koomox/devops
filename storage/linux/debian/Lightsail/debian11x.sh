@@ -19,8 +19,20 @@ lsmod | grep bbr
 
 echo "===== Optimize limits.conf ============="
 ${SUDO} cp -f /etc/security/limits.conf /etc/security/limits.conf.bak
-${SUDO} wget -O /etc/security/limits.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/sysctl/limits.conf
+${SUDO} echo -e "*         hard    nofile      524288" | sudo tee /etc/security/limits.conf
+${SUDO} echo -e "*         soft    nofile      524288" | sudo tee -a /etc/security/limits.conf
+${SUDO} echo -e "*         hard    nproc       unlimited" | sudo tee -a /etc/security/limits.conf
+${SUDO} echo -e "*         soft    nproc       unlimited" | sudo tee -a /etc/security/limits.conf
+${SUDO} echo -e "*         hard    core        unlimited" | sudo tee -a /etc/security/limits.conf
+${SUDO} echo -e "*         soft    core        unlimited" | sudo tee -a /etc/security/limits.conf
+${SUDO} echo -e "root      hard    nofile      524288" | sudo tee /etc/security/limits.conf
+${SUDO} echo -e "root      soft    nofile      524288" | sudo tee -a /etc/security/limits.conf
+${SUDO} echo -e "root      hard    nproc       unlimited" | sudo tee -a /etc/security/limits.conf
+${SUDO} echo -e "root      soft    nproc       unlimited" | sudo tee -a /etc/security/limits.conf
+${SUDO} echo -e "root      hard    core        unlimited" | sudo tee -a /etc/security/limits.conf
+${SUDO} echo -e "root      soft    core        unlimited" | sudo tee -a /etc/security/limits.conf
 cat /etc/security/limits.conf
+
 ${SUDO} sed -E -i '/^#*DefaultLimitNOFILE=/cDefaultLimitNOFILE=524288' /etc/systemd/system.conf
 grep -E '^#*DefaultLimitNOFILE=' /etc/systemd/system.conf
 
