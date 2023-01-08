@@ -1,5 +1,5 @@
 # MAC            
-[制作 macOS Mojave 10.14 系统镜像cdr、ISO文件，可用虚拟机安装](../mac/mojave.md)         
+[制作 macOS Mojave 10.14 系统镜像cdr、ISO文件，可用虚拟机安装](/mac/mac.md)         
 # Linux          
 [Raspberry Pi](raspberrypi.md)               
 [Proxmox VE](proxmoxve.md)            
