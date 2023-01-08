@@ -10,7 +10,27 @@ ${SUDO} apt-get install curl wget git vim sudo htop net-tools neofetch lsb-relea
 
 echo "===== Optimize sysctl.conf ============="
 ${SUDO} cp -f /etc/sysctl.conf /etc/sysctl.conf.bak
-${SUDO} wget -O /etc/sysctl.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/sysctl/aws.lightsail.sysctl.conf
+echo -e "net.ipv4.conf.all.rp_filter=0" | ${SUDO} tee /etc/sysctl.conf
+echo -e "net.ipv4.conf.default.rp_filter=0" | ${SUDO} tee -a /etc/sysctl.conf
+echo -e "net.ipv4.conf.default.arp_announce = 2" | ${SUDO} tee -a /etc/sysctl.conf
+echo -e "net.ipv4.conf.lo.arp_announce=2" | ${SUDO} tee -a /etc/sysctl.conf
+echo -e "net.ipv4.conf.all.arp_announce=2" | ${SUDO} tee -a /etc/sysctl.conf
+echo -e "net.ipv4.tcp_max_tw_buckets = 55000" | ${SUDO} tee -a /etc/sysctl.conf
+echo -e "net.ipv4.tcp_max_syn_backlog = 5000" | ${SUDO} tee -a /etc/sysctl.conf
+echo -e "net.ipv4.tcp_synack_retries = 2" | ${SUDO} tee -a /etc/sysctl.conf
+echo -e "fs.file-max = 60000" | ${SUDO} tee -a /etc/sysctl.conf
+echo -e "net.ipv4.tcp_syncookies = 1" | ${SUDO} tee -a /etc/sysctl.conf
+echo -e "net.ipv4.tcp_tw_reuse = 1" | ${SUDO} tee -a /etc/sysctl.conf
+echo -e "net.ipv4.tcp_tw_recycle = 0" | ${SUDO} tee -a /etc/sysctl.conf
+echo -e "net.ipv4.tcp_keepalive_time = 1200" | ${SUDO} tee -a /etc/sysctl.conf
+echo -e "net.ipv4.ip_forward = 1" | ${SUDO} tee -a /etc/sysctl.conf
+echo -e "kernel.sysrq = 1" | ${SUDO} tee -a /etc/sysctl.conf
+echo -e "net.core.default_qdisc = fq" | ${SUDO} tee -a /etc/sysctl.conf
+echo -e "net.ipv4.tcp_congestion_control = bbr" | ${SUDO} tee -a /etc/sysctl.conf
+echo -e "net.core.netdev_max_backlog = 55000" | ${SUDO} tee -a /etc/sysctl.conf
+echo -e "net.core.somaxconn = 10000" | ${SUDO} tee -a /etc/sysctl.conf
+echo -e "net.nf_conntrack_max = 65536000" | ${SUDO} tee -a /etc/sysctl.conf
+echo -e "net.netfilter.nf_conntrack_tcp_timeout_established = 1200" | ${SUDO} tee -a /etc/sysctl.conf
 ${SUDO} modprobe ip_conntrack
 lsmod |grep conntrack
 ${SUDO} sysctl -p
