@@ -11,10 +11,10 @@ ${SUDO} apt-get install curl wget git vim sudo htop net-tools neofetch lsb-relea
 echo "===== Optimize sysctl.conf ============="
 ${SUDO} cp -f /etc/sysctl.conf /etc/sysctl.conf.bak
 ${SUDO} wget -O /etc/sysctl.conf https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/sysctl/aws.lightsail.sysctl.conf
-modprobe ip_conntrack
+${SUDO} modprobe ip_conntrack
 lsmod |grep conntrack
-sysctl -p
-sysctl net.ipv4.tcp_available_congestion_control
+${SUDO} sysctl -p
+${SUDO} sysctl net.ipv4.tcp_available_congestion_control
 lsmod | grep bbr
 
 echo "===== Optimize limits.conf ============="
@@ -26,7 +26,7 @@ grep -E '^#*DefaultLimitNOFILE=' /etc/systemd/system.conf
 
 echo "===== Optimize timedatectl ============"
 ${SUDO} apt install dbus -y
-timedatectl set-timezone Asia/Shanghai
+${SUDO} timedatectl set-timezone Asia/Singapore
 timedatectl
 
 echo "===== Custom SSH Port And Iptabes Rules ========="
