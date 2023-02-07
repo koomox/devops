@@ -83,7 +83,7 @@ systemctl stop mysql
 systemctl start mysql
 systemctl status mysql
 ```
-### Backup And Recover            
+### Backup And Restore            
 backup databse      
 ```sh
 mysqldump -uroot -p my_database > ~/my_database_backup_$(date +"%Y%m%d").sql
@@ -93,7 +93,7 @@ drop and create database
 drop database my_database;
 create database my_database;
 ```
-recover database         
+restore database         
 ```sh
 mysql -uroot -p my_database < my_database_backup.sql
 ```
