@@ -12,7 +12,7 @@ make
 make install
 make install-config
 
-::\cp -f src/proxychains.conf /etc/proxychains.conf
+\cp -f src/proxychains.conf /etc/proxychains.conf
 sed -i '/^#/d;/^$/d' /etc/proxychains.conf
 
 proxychains4 printenv
