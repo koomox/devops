@@ -17,6 +17,8 @@ sudo apt update
 sudo apt upgrade
 
 sudo apt install cloudflare-warp
+
+sudo systemctl status warp-svc
 ```
 ```sh
 echo "Cloudflare WARP Account Registration in progress..."
