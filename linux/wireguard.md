@@ -38,3 +38,6 @@ warp-cli --accept-tos enable-always-on
 echo "Status check in progress..."
 warp-cli warp-stats
 ```
+```sh
+curl -x socks5://127.0.0.1:1080  https://checkip.amazonaws.com/
+```
