@@ -11,7 +11,12 @@ wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian
 chmod +x ./warp.sh
 ./warp.sh
 ```
-
+reset warp ip address       
+```sh
+wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/Lightsail/reset_warp.sh
+chmod +x ./reset_warp.sh
+./reset_warp.sh
+```
 ```sh
 curl https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
 ```

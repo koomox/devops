@@ -10,6 +10,8 @@ ${SUDO} apt-get update -y
 ${SUDO} apt-get upgrade -y
 ${SUDO} apt-get install cloudflare-warp -y
 
+echo "Cloudflare WARP Client installed successfully!"
+
 echo "Cloudflare WARP Account Registration in progress..."
 warp-cli --accept-tos register
 
