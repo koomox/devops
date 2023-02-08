@@ -5,6 +5,13 @@ Home [Link](https://www.wireguard.com/)
 sudo apt install wireguard-tools
 ```
 ### cloudflare warp           
+一键安装 cloudflare warp [source](/storage/linux/debian/Lightsail/warp.sh)       
+```sh
+wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/Lightsail/warp.sh
+chmod +x ./warp.sh
+./warp.sh
+```
+
 ```sh
 curl https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
 ```
