@@ -23,6 +23,12 @@ warp-cli --accept-tos register
 echo "Setting up WARP Proxy Mode..."
 warp-cli --accept-tos set-mode proxy
 
+echo "Setting up WARP Proxy Socks5 Port..."
+warp-cli --accept-tos set-proxy-port 1080
+
+echo "check WARP Proxy Setting..."
+warp-cli settings
+
 echo "Connecting to WARP..."
 warp-cli --accept-tos connect
 
@@ -30,5 +36,5 @@ echo "Enable WARP Always-On..."
 warp-cli --accept-tos enable-always-on
 
 echo "Status check in progress..."
-warip-cli status
+warp-cli warp-stats
 ```
