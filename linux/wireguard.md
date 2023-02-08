@@ -15,6 +15,8 @@ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyr
 sudo apt update
 
 sudo apt upgrade
+
+sudo apt install cloudflare-warp
 ```
 ```sh
 echo "Cloudflare WARP Account Registration in progress..."
