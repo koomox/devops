@@ -45,7 +45,7 @@ echo -e "*         hard    nproc       unlimited" | ${SUDO} tee -a /etc/security
 echo -e "*         soft    nproc       unlimited" | ${SUDO} tee -a /etc/security/limits.conf
 echo -e "*         hard    core        unlimited" | ${SUDO} tee -a /etc/security/limits.conf
 echo -e "*         soft    core        unlimited" | ${SUDO} tee -a /etc/security/limits.conf
-echo -e "root      hard    nofile      524288" | ${SUDO} tee /etc/security/limits.conf
+echo -e "root      hard    nofile      524288" | ${SUDO} tee -a /etc/security/limits.conf
 echo -e "root      soft    nofile      524288" | ${SUDO} tee -a /etc/security/limits.conf
 echo -e "root      hard    nproc       unlimited" | ${SUDO} tee -a /etc/security/limits.conf
 echo -e "root      soft    nproc       unlimited" | ${SUDO} tee -a /etc/security/limits.conf
