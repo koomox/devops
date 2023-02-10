@@ -2,7 +2,21 @@
 Home [Link](https://www.wireguard.com/)          
 ### install        
 ```sh
-sudo apt install wireguard-tools
+sudo apt install wireguard
+```
+warp PublicKey        
+```
+[Interface]
+PrivateKey = xxxxxxxxxxxxxxxxxx
+Address = 172.16.0.2/32
+Address = 2606:4700:110:8d44:a7a8:52e5:a5e:c043/128
+DNS = 1.1.1.1,8.8.8.8
+MTU = 1280
+[Peer]
+PublicKey = bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
+AllowedIPs = 0.0.0.0/0
+AllowedIPs = ::/0
+Endpoint = engage.cloudflareclient.com:2408
 ```
 ### cloudflare warp           
 一键安装 cloudflare warp [source](/storage/linux/debian/Lightsail/warp.sh)       
