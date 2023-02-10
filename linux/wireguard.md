@@ -79,4 +79,10 @@ warp-cli warp-stats
 curl https://checkip.amazonaws.com/
 
 curl -x socks5://127.0.0.1:1080  https://checkip.amazonaws.com/
+
+curl -x socks5://127.0.0.1:1080 https://www.cloudflare.com/cdn-cgi/trace/
+```
+check register info          
+```sh
+sudo cat /var/lib/cloudflare-warp/reg.json /var/lib/cloudflare-warp/conf.json
 ```
