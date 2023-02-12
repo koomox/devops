@@ -18,13 +18,13 @@ AllowedIPs = 0.0.0.0/0
 AllowedIPs = ::/0
 Endpoint = engage.cloudflareclient.com:2408
 ```
-IPv4 range:       
+Endpoint IPv4 range:       
 ```
 162.159.193.1 - 162.159.193.10
 162.159.192.0 - 162.159.192.254
 162.159.195.0 - 162.159.195.254
 ```
-Port range:  2408, 1701, 500, 4500, 908           
+Endpoint Port range:  2408, 1701, 500, 4500, 908           
 ### cloudflare warp           
 一键安装 cloudflare warp [source](/storage/linux/debian/Lightsail/warp.sh)       
 ```sh
