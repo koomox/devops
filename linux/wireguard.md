@@ -4,6 +4,31 @@ Home [Link](https://www.wireguard.com/)
 ```sh
 sudo apt install wireguard
 ```
+```sh
+wg genkey | sudo tee /etc/wireguard/privatekey | wg pubkey | sudo tee /etc/wireguard/publickey
+
+cat /etc/wireguard/privatekey /etc/wireguard/publickey
+```
+```sh
+sudo vim /etc/wireguard/wg0.conf
+```
+```
+[Interface]
+Address = 192.168.10.1/24
+ListenPort = 10000
+PrivateKey = 
+PostUp = iptables -A FORWARD -i wg0 -j ACCEPT
+PostUp = iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
+PostDown = iptables -D FORWARD -i wg0 -j ACCEPT
+PostDown = iptables -t nat -D POSTROUTING -o enp0s3 -j MASQUERADE
+```
+```sh
+sudo systemctl start wg-quick@wg0
+sudo systemctl enable wg-quick@wg0
+sudo systemctl status wg-quick@wg0
+
+sudo wg show wg0
+```
 warp PublicKey        
 ```
 [Interface]
