@@ -3,8 +3,7 @@ Home: [Link](https://www.teamviewer.com/en/download/windows/)
 Teamviewer 历史版本: [Link](https://www.teamviewer.com/en-us/download/previous-versions/)             
 ### TeamViewer for Windows           
 TeamViewer for Windows 下载地址: [链接](https://www.teamviewer.com/zhcn/download/windows/)           
-TeamViewer QuickSupport: [点击下载](https://download.teamviewer.com/download/TeamViewerQS.exe)        
-TeamViewer QuickSupport 国内加速: [点击下载](http://7xqxqz.com1.z0.glb.clouddn.com/TeamViewerQS.exe)       
+TeamViewer QuickSupport: [点击下载](https://download.teamviewer.com/download/TeamViewerQS.exe)         
 TeamViewer Host: [点击下载](https://download.teamviewer.com/download/TeamViewer_Host_Setup.exe)        
 TeamViewer Portable: [点击下载](https://download.teamviewer.com/download/TeamViewerPortable.zip)               
 ### TeamViewer for Mac           
