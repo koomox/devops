@@ -4,26 +4,26 @@
 [source](/storage/linux/ubuntu/oraclecloud/ubuntu18x.sh)         
 ```sh
 wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/ubuntu/oraclecloud/ubuntu18x.sh
-chmod +x ./ubuntu18x.sh
-./ubuntu18x.sh
+sudo chmod +x ./ubuntu18x.sh
+sudo ./ubuntu18x.sh
 ```
 启用 root 远程登录         
 ```sh
 sudo sed -E -i '/^#*PermitEmptyPasswords/cPermitEmptyPasswords no' /etc/ssh/sshd_config
 sudo sed -E -i '/^#*PermitRootLogin/cPermitRootLogin yes' /etc/ssh/sshd_config
 ```
-删除　oracle-cloud-agent     
+删除 oracle-cloud-agent     
 ```sh
 sudo snap remove oracle-cloud-agent
 ```
 ### Nginx        
-一键安装 Nginx 1.22.x [查看源文件](/storage/linux/scripts/nginx/1.22.0/install.sh)         
+一键安装 Nginx 1.22.x [source](/storage/linux/scripts/nginx/1.22.0/install.sh)         
 ```sh
-sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.22.0/install.sh
+wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.22.0/install.sh
 sudo chmod +x ./install.sh
 sudo ./install.sh
 ```
-编译安装 Nginx 1.22.x [查看源文件](/storage/linux/scripts/nginx/make_nginx1.22x.sh)     
+编译安装 Nginx 1.22.x [source](/storage/linux/scripts/nginx/make_nginx1.22x.sh)     
 ```sh
 sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/make_nginx1.22x.sh
 sudo chmod +x ./make_nginx1.22x.sh
@@ -200,7 +200,7 @@ sudo apt install fcitx fcitx-googlepinyin
 echo -e "export GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\nexport XMODIFIERS=\"@im=fcitx\"" >> ~/.xprofile
 ```
 还需要在语言中设置为 fcitx              
-![fcitx](https://raw.githubusercontent.com/koomox/devops/master/static/images/wiki/IMG_20190225_122500.png)
+![fcitx](/static/images/wiki/IMG_20190225_122500.png)
 ### Chrome 浏览器           
 在线安装 Chrome 最新稳定版          
 ```sh
@@ -326,8 +326,8 @@ GoLand 默认不创建启动文件，第一次打开 GoLand 程序后，点击�
 cp /usr/share/applications/jetbrains-goland.desktop ~/Desktop
 chmod +x ~/Desktop/jetbrains-goland.desktop
 ```
-![goland_img](https://raw.githubusercontent.com/koomox/devops/master/static/images/wiki/IMG_20190224_192100.png)          
-![goland_img](https://raw.githubusercontent.com/koomox/devops/master/static/images/wiki/IMG_20190224_192101.png)
+![goland_img](/static/images/wiki/IMG_20190224_192100.png)          
+![goland_img](/static/images/wiki/IMG_20190224_192101.png)
 ### 开启转发            
 下面的命令都可以查询是否开启转发，0禁用，1启用               
 ```sh
