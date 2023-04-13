@@ -22,7 +22,6 @@ echo -e "net.ipv4.tcp_synack_retries = 2" | ${SUDO} tee -a /etc/sysctl.conf
 echo -e "fs.file-max = 60000" | ${SUDO} tee -a /etc/sysctl.conf
 echo -e "net.ipv4.tcp_syncookies = 1" | ${SUDO} tee -a /etc/sysctl.conf
 echo -e "net.ipv4.tcp_tw_reuse = 1" | ${SUDO} tee -a /etc/sysctl.conf
-echo -e "net.ipv4.tcp_tw_recycle = 0" | ${SUDO} tee -a /etc/sysctl.conf
 echo -e "net.ipv4.tcp_keepalive_time = 1200" | ${SUDO} tee -a /etc/sysctl.conf
 echo -e "net.ipv4.ip_forward = 1" | ${SUDO} tee -a /etc/sysctl.conf
 echo -e "kernel.sysrq = 1" | ${SUDO} tee -a /etc/sysctl.conf
@@ -46,7 +45,7 @@ echo -e "*         hard    nproc       unlimited" | ${SUDO} tee -a /etc/security
 echo -e "*         soft    nproc       unlimited" | ${SUDO} tee -a /etc/security/limits.conf
 echo -e "*         hard    core        unlimited" | ${SUDO} tee -a /etc/security/limits.conf
 echo -e "*         soft    core        unlimited" | ${SUDO} tee -a /etc/security/limits.conf
-echo -e "root      hard    nofile      524288" | ${SUDO} tee /etc/security/limits.conf
+echo -e "root      hard    nofile      524288" | ${SUDO} tee -a /etc/security/limits.conf
 echo -e "root      soft    nofile      524288" | ${SUDO} tee -a /etc/security/limits.conf
 echo -e "root      hard    nproc       unlimited" | ${SUDO} tee -a /etc/security/limits.conf
 echo -e "root      soft    nproc       unlimited" | ${SUDO} tee -a /etc/security/limits.conf
