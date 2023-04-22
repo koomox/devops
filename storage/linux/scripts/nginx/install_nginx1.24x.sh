@@ -1,5 +1,5 @@
 #!/bin/bash
-wget -O nginx-1.24.0.tar.gz https://github.com/koomox/nginx/releases/download/nginx-2023.4.23/nginx-1.24.0-debian-amd64.tar.gz
+wget -O nginx-1.24.0.tar.gz https://github.com/koomox/nginx/releases/download/nginx-2023.4.23/nginx-1.24.0_debian-amd64.tar.gz
 tar -zxf nginx-1.24.0.tar.gz
 \rm -rf /usr/local/nginx /etc/nginx
 mv nginx-1.24.0 /usr/local/nginx
