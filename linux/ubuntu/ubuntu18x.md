@@ -23,11 +23,11 @@ wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/script
 sudo chmod +x ./install.sh
 sudo ./install.sh
 ```
-编译安装 Nginx 1.22.x [source](/storage/linux/scripts/nginx/make_nginx1.22x.sh)     
+编译安装 Nginx 1.24.x [source](/storage/linux/scripts/nginx/make_nginx1.24x.sh)     
 ```sh
-sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/make_nginx1.22x.sh
-sudo chmod +x ./make_nginx1.22x.sh
-sudo ./make_nginx1.22x.sh
+sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/make_nginx1.24x.sh
+sudo chmod +x ./make_nginx1.24x.sh
+sudo ./make_nginx1.24x.sh
 ```
 配置文件      
 ```sh
