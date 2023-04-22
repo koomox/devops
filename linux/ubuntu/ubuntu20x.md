@@ -54,17 +54,17 @@ sudo apt install ubuntu-restricted-extras
 sudo apt install open-vm-tools open-vm-tools-desktop
 ```
 ### Nginx        
-一键安装 Nginx 1.22.x [查看源文件](/storage/linux/scripts/nginx/1.22.0/install.sh)         
+一键安装 Nginx 1.24.x [查看源文件](/storage/linux/scripts/nginx/install_nginx1.24x.sh)         
 ```sh
-sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/1.22.0/install.sh
-sudo chmod +x ./install.sh
-sudo ./install.sh
+sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/install_nginx1.24x.sh
+sudo chmod +x ./install_nginx1.24x.sh
+sudo ./install_nginx1.24x.sh
 ```
-编译安装 Nginx 1.22.x [查看源文件](/storage/linux/scripts/nginx/make_nginx1.22x.sh)     
+编译安装 Nginx 1.24.x [查看源文件](/storage/linux/scripts/nginx/make_nginx1.24x.sh)     
 ```sh
-sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/make_nginx1.22x.sh
-sudo chmod +x ./make_nginx1.22x.sh
-sudo ./make_nginx1.22x.sh
+sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/make_nginx1.24x.sh
+sudo chmod +x ./make_nginx1.24x.sh
+sudo ./make_nginx1.24x.sh
 ```
 配置文件      
 ```sh
