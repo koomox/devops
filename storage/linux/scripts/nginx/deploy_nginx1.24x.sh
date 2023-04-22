@@ -1,5 +1,5 @@
 #!/bin/bash
-NGINX_VERSION=$(wget -qO- --no-check-certificate https://nginx.org/en/download.html | grep -m1 -E "nginx-1.22.([0-9]+).tar.gz" | sed -E "s/.*(nginx-1.22.[0-9]+).tar.gz.*/\1/gm" )
+NGINX_VERSION=$(wget -qO- --no-check-certificate https://nginx.org/en/download.html | grep -m1 -E "nginx-1.24.([0-9]+).tar.gz" | sed -E "s/.*(nginx-1.24.[0-9]+).tar.gz.*/\1/gm" )
 OPENSSL_VERSION=$(wget -qO- --no-check-certificate https://www.openssl.org/source/ | grep -m1 -E "\"openssl-3(\.[0-9]+){0,2}.tar.gz\"" | sed -E "s/.*\"(openssl-.*).tar.gz\".*/\1/gm" )
 PCRE2_VERSION=pcre2-10.37
 ZLIB_VERSION=$(wget -qO- --no-check-certificate https://zlib.net/ | grep -m1 -E "\"zlib-([0-9]+\.){0,3}tar.gz\"" | sed -E "s/.*\"(zlib-.*).tar.gz\".*/\1/gm" )

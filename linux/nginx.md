@@ -4,17 +4,17 @@ OpenSSL [Link](https://www.openssl.org/source/)
 Zlib [Link](https://zlib.net/)       
 pcre [Link](https://ftp.pcre.org/pub/pcre/)         
 ### 编译安装脚本           
-Linux 一键编译安装脚本 [查看源文件](/storage/linux/scripts/nginx/make_nginx1.22x.sh)     
+Linux 一键编译安装脚本 [查看源文件](/storage/linux/scripts/nginx/make_nginx1.24x.sh)     
 ```sh
-sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/make_nginx1.22x.sh
-sudo chmod +x ./make_nginx1.22x.sh
-sudo ./make_nginx1.22x.sh
+sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/make_nginx1.24x.sh
+sudo chmod +x ./make_nginx1.24x.sh
+sudo ./make_nginx1.24x.sh
 ```
-Linux 一键编译二进制文件 [查看源文件](/storage/linux/scripts/nginx/deploy_nginx1.22x.sh)     
+Linux 一键编译二进制文件 [查看源文件](/storage/linux/scripts/nginx/deploy_nginx1.24x.sh)     
 ```sh
-sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/deploy_nginx1.22x.sh
-sudo chmod +x ./deploy_nginx1.22x.sh
-sudo ./deploy_nginx1.22x.sh
+sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/deploy_nginx1.24x.sh
+sudo chmod +x ./deploy_nginx1.24x.sh
+sudo ./deploy_nginx1.24x.sh
 ```       
 一键安装 Nginx 1.22.x [查看源文件](/storage/linux/scripts/nginx/install_nginx1.22x.sh)         
 ```sh
