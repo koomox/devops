@@ -55,3 +55,4 @@
 [Vlmcsd](vlmcsd.md)          
 [proxychains-ng](proxychains_ng.md)          
 [WireGuard](wireguard.md)               
+[Jupyter](jupyter.md)
