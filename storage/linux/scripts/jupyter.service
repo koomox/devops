@@ -1,0 +1,14 @@
+[Unit]
+Description=Jupyter Lab server
+Documentation=https://jupyterlab.readthedocs.io/en/stable/
+After=network.target
+
+[Service]
+Type=simple
+User=jupyter
+Group=jupyter
+ExecStart=/usr/bin/env jupyter lab
+WorkingDirectory=/home/jupyter
+
+[Install]
+WantedBy=multi-user.target

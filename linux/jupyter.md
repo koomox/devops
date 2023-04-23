@@ -13,6 +13,10 @@ run
 ```sh
 jupyter-lab
 ```
+```sh
+sudo groupadd -r jupyter
+sudo useradd -r -g jupyter -d /home/jupyter -m jupyter
+```
 ### Setting         
 ```sh
 sudo cp -f  ~/.jupyter/jupyter_lab_config.py ~/.jupyter/jupyter_lab_config.py.bak
