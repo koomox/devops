@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Reference https://stackoverflow.com/questions/525872/echo-tab-characters-in-bash-script
 mkdir lambda-function
 cd lambda-function
 
