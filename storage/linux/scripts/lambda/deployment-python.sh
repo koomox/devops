@@ -1,5 +1,5 @@
 #!/bin/bash
-# Reference https://stackoverflow.com/questions/525872/echo-tab-characters-in-bash-script
+# Reference https://stackoverflow.com/questions/40741282/cannot-use-requests-module-on-aws-lambda
 mkdir lambda-function
 cd lambda-function
 
