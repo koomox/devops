@@ -3,11 +3,12 @@
 mkdir lambda-function
 cd lambda-function
 
-echo "import requests" > lambda_function.py
-echo "def lambda_handler(event, context):" >> lambda_function.py
-echo "\tresponse = requests.get(\"https://www.test.com/\")" >> lambda_function.py
-echo "\tprint(response.text)" >> lambda_function.py
-echo "\treturn response.text" >> lambda_function.py
+echo "import os" > lambda_function.py
+echo "import requests" >> lambda_function.py
+echo -e "\ndef lambda_handler(event, context):" >> lambda_function.py
+echo -e "\tresponse = requests.get(os.environ['URL'])" >> lambda_function.py
+echo -e "\tprint(response.text)" >> lambda_function.py
+echo -e "\treturn response.text" >> lambda_function.py
 
 pip install --target ./package requests
 cd package
