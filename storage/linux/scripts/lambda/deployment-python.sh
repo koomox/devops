@@ -10,7 +10,7 @@ echo -e "\tresponse = requests.get(os.environ['URL'])" >> lambda_function.py
 echo -e "\tprint(response.status_code)\n\tprint(response.text)" >> lambda_function.py
 echo -e "\treturn {\n\t\t'statusCode': 200,\n\t\t'body': json.dumps(response.json())\n\t}" >> lambda_function.py
 
-pip install --target ./package requests
+pip3 install --target ./package requests
 cd package
 zip -r ../deployment-package.zip .
 cd ..
