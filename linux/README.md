@@ -55,4 +55,5 @@
 [Vlmcsd](vlmcsd.md)          
 [proxychains-ng](proxychains_ng.md)          
 [WireGuard](wireguard.md)               
-[Jupyter](jupyter.md)
+[Jupyter](jupyter.md)            
+[AWS Lambda](lamda.md)     
