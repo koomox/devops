@@ -1,6 +1,5 @@
 #!/bin/bash
-virtualenv --python=/usr/bin/python3.8 python
-source python/bin/active
-pip install -r requirements.txt -t python/lib/python3.8/site-packages
+virtualenv --python=/usr/bin/python python
+pip install -r requirements.txt -t python/lib/python3.10/site-packages
 
 zip -r9 python.zip python
