@@ -30,6 +30,7 @@
 [Nginx](nginx.md)           
 [Rust](rust.md)          
 [MariaDB](mariadb.md)        
+[Redis](redis.md)       
 # Docker                             
 [Docker for CentOS 7.x](docker/centos7x.md)                  
 [certbot on docker for CentOS 7.x](docker/docker_certbot.md)             
