@@ -22,3 +22,8 @@ sudo systemctl stop redis-server
 sudo systemctl start redis-server
 sudo systemctl status redis-server
 ```
+
+openssl generate a random string      
+```sh
+openssl rand -base64 25 | sha256sum
+```
