@@ -7,6 +7,7 @@
 [Dnsmasq](dnsmasq.md)        
 [Debian 10.x](debian10x.md)        
 [Debian 11.x](debian11x.md)        
+[Debian 12.x](debian12x.md)        
 [Linux VPS - DD 重装系统与系统优化](linux_vps.md)         
 [Ubuntu 18.x](ubuntu/ubuntu18x.md)            
 [Ubuntu 20.x](ubuntu/ubuntu20x.md)            
