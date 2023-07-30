@@ -103,7 +103,7 @@ ${SUDO} nft add chain inet filter forward { type filter hook forward priority 0\
 ${SUDO} nft list ruleset
 
 echo -e "flush ruleset" | ${SUDO} tee /etc/nftables.conf
-echo -e "nft list ruleset" | ${SUDO} tee -a /etc/nftables.conf
+echo -e "list ruleset" | ${SUDO} tee -a /etc/nftables.conf
 ${SUDO} nft --check --file /etc/nftables.conf
 ${SUDO} systemctl enable nftables
 ${SUDO} systemctl start nftables
