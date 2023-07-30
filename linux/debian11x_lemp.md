@@ -66,7 +66,7 @@ sudo systemctl status php7.4-fpm
 添加公钥       
 ```sh
 sudo apt-get install -y apt-transport-https curl
-sudo wget -O /etc/apt/trusted.gpg.d/mariadb.gpg https://mariadb.org/mariadb_release_signing_key.asc
+sudo wget -O /etc/apt/trusted.gpg.d/mariadb.gpg https://mariadb.org/mariadb_release_signing_key.pgp
 ```
 添加源       
 ```sh

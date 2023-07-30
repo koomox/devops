@@ -2,8 +2,8 @@
 Home: [Link](https://downloads.mariadb.org/)         
 添加公钥          
 ```sh
-sudo apt-get install apt-transport-https curl
-sudo curl -o /etc/apt/trusted.gpg.d/mariadb_release_signing_key.asc 'https://mariadb.org/mariadb_release_signing_key.asc'
+sudo apt-get install -y apt-transport-https curl
+sudo wget -O /etc/apt/trusted.gpg.d/mariadb.gpg https://mariadb.org/mariadb_release_signing_key.pgp
 ```    
 添加debian源        
 ```sh
