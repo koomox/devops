@@ -82,6 +82,10 @@ cat /etc/apt/sources.list.d/MariaDB.list
 sudo apt-get update -y
 sudo apt-get install mariadb-server -y
 ```
+Secure the MariaDB Installation            
+```sh
+sudo mariadb-secure-installation
+```
 使 root 用户可以远程登录        
 ```sql
 SELECT User, Host, Password, plugin FROM mysql.user;

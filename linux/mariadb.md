@@ -25,6 +25,10 @@ cat /etc/apt/sources.list.d/MariaDB.list
 sudo apt-get update -y
 sudo apt-get install mariadb-server -y
 ```
+Secure the MariaDB Installation            
+```sh
+sudo mariadb-secure-installation
+```
 删除默认空密码用户， 创建带密码得root用户           
 ```sql
 DROP USER 'root'@'localhost';
