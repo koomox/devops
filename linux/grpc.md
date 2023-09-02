@@ -22,7 +22,7 @@ define a service in a .proto file, pen helloworld/helloworld.proto and add a new
 ```
 syntax = "proto3";
 
-option go_package="/github.com/helloworld";
+option go_package = "/github.com/helloworld";
 
 // The greeting service definition.
 service Greeter {
