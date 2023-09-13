@@ -59,8 +59,8 @@ grep -v -E "^#|^;" ${SAMBA_CONF_BAK_FILE} | grep . > /etc/samba/smb.conf
 	log file = /var/log/samba/log.%m
 	max log size = 50
 	security = user
-	passdb backend = tdbsam
-	guest account = nobody
+	passdb backend = smbpasswd
+	map to guest = bad user
 	load printers = no
 [share]
 	comment = My File Share
@@ -99,23 +99,22 @@ iptables -A OUTPUT -p udp --sport 137 -j ACCEPT
 iptables -A OUTPUT -p udp --sport 138 -j ACCEPT
 ```
 ### 访问用户         
-使用 `tdbsam` 方式认证，必须先创建系统用户，再使用 `pdbedit` 添加 Samba 用户。             
+使用 `smbpasswd` 方式认证，必须先创建系统用户，再使用 `smbpasswd` 添加 Samba 用户。             
 ```sh
 groupadd samba
 useradd -r -g samba -s /bin/false samba
 ```
 创建 samba 用户            
 ```sh
-pdbedit -a -u samba
+sudo smbpasswd -a username
 ```
-查看本地 Samba 用户          
+删除 Samba 用户          
 ```sh
-pdbedit -Lw
+sudo smbpasswd -x username
 ```
 创建共享文件夹，设置权限          
 ```sh
-mkdir -p /data/share/samba_newuser
-cd /data/share/samba_newuser
-chmod -R 777 .
-chown samba_newuser:samba_newuser .
+sudo mkdir -p /data/share/samba_newuser
+sudo chown -R samba_newuser:samba_newuser /data/share/samba_newuser
+sudo chmod -R 775 /data/share/samba_newuser
 ```
