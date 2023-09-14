@@ -101,3 +101,46 @@ restore database
 ```sh
 mysql -uroot -p my_database < my_database_backup.sql
 ```
+### update inner join 批量更新       
+MYSQL 根据SELECT数据UPDATE更新          
+```sql
+CREATE DATABASE IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`table1` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `price` INT NOT NULL DEFAULT 0,
+  `number` INT NOT NULL DEFAULT 0,
+  `total` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
+ENGINE = InnoDB;
+
+SHOW DATABASES;
+```
+```sql
+INSERT INTO `mydb`.`table1` (price, number, total)VALUES (0,0,0);
+INSERT INTO `mydb`.`table1` (price, number, total)VALUES (0,0,0);
+INSERT INTO `mydb`.`table1` (price, number, total)VALUES (0,0,0);
+INSERT INTO `mydb`.`table1` (price, number, total)VALUES (0,0,0);
+INSERT INTO `mydb`.`table1` (price, number, total)VALUES (0,0,0);
+INSERT INTO `mydb`.`table1` (price, number, total)VALUES (0,0,0);
+INSERT INTO `mydb`.`table1` (price, number, total)VALUES (0,0,0);
+INSERT INTO `mydb`.`table1` (price, number, total)VALUES (0,0,0);
+INSERT INTO `mydb`.`table1` (price, number, total)VALUES (0,0,0);
+INSERT INTO `mydb`.`table1` (price, number, total)VALUES (0,0,0);
+
+SELECT * FROM `mydb`.`table1`;
+```
+update          
+```sql
+UPDATE `mydb`.`table1` AS t1
+INNER JOIN (SELECT id FROM `mydb`.`table1`) AS subquery
+ON t1.`id` = subquery.id
+SET t1.price = subquery.id, t1.number = subquery.id;
+```
+```sql
+UPDATE `mydb`.`table1` AS t1
+INNER JOIN (SELECT id, price, number FROM `mydb`.`table1`) AS subquery
+ON t1.`id` = subquery.id
+SET t1.total = subquery.price + subquery.number;
+```
