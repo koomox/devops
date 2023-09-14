@@ -144,3 +144,12 @@ INNER JOIN (SELECT id, price, number FROM `mydb`.`table1`) AS subquery
 ON t1.`id` = subquery.id
 SET t1.total = subquery.price + subquery.number;
 ```
+### SQL SERVER       
+update inner join        
+```sql
+UPDATE `mydb`.`table1`
+SET price = subquery.id
+FROM `mydb`.`table1`
+INNER JOIN (SELECT id FROM `mydb`.`table1`) AS subquery
+ON `mydb`.`table1`.`id` = subquery.id;
+```
