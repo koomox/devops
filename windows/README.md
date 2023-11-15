@@ -49,3 +49,6 @@
 [Windows 提取 DSDT](dsdt.md)        
 ### VPN            
 [L2TP 错误汇总](l2tp.md)           
+### 库          
+[boost](boost.md)            
+[openssl](openssl.md)
