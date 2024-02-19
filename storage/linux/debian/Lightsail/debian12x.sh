@@ -64,8 +64,6 @@ timedatectl
 echo "===== Custom SSH Port And Iptabes Rules ========="
 echo "input SSH Port: "
 read SSH_PORT
-echo "input SSH Key: "
-read SSH_KEY
 echo "SSH Port: ${SSH_PORT}"
 
 echo "===== reset iptables rules======"
