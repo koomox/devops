@@ -51,31 +51,28 @@ Endpoint IPv4 range:
 ```
 Endpoint Port range:  2408, 1701, 500, 4500, 908           
 ### cloudflare warp           
-一键安装 cloudflare warp [source](/storage/linux/debian/Lightsail/warp.sh)       
+Debian install cloudflare warp
 ```sh
-wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/Lightsail/warp.sh
-chmod +x ./warp.sh
-./warp.sh
-```
-reset warp ip address       
-```sh
-wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/Lightsail/reset_warp.sh
-chmod +x ./reset_warp.sh
-./reset_warp.sh
+curl -fsSL https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
 ```
 ```sh
-curl https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflare-client.list
 ```
 ```sh
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflare-client.list
+sudo apt-get update && sudo apt-get install cloudflare-warp
 ```
-```sh
-sudo apt update
 
-sudo apt upgrade
-
-sudo apt install cloudflare-warp
-
+Ubuntu install cloudflare warp
+```sh
+curl -fsSL https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
+```
+```sh
+echo "deb [signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflare-client.list
+```
+```sh
+sudo apt-get update && sudo apt-get install cloudflare-warp
+```
+```sh
 sudo systemctl status warp-svc
 ```
 ```sh
@@ -99,6 +96,9 @@ warp-cli --accept-tos enable-always-on
 
 echo "Status check in progress..."
 warp-cli warp-stats
+```
+```sh
+warp-cli tunnel endpoint set 127.0.0.1:1080
 ```
 ```sh
 curl https://checkip.amazonaws.com/
