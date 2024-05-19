@@ -4,7 +4,7 @@ Windows Assessment and Deployment Kit (Windows ADK) [Link](https://learn.microso
 Windows PE add-on for the Windows ADK [Link](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install)           
 AnyBurn [Link](https://www.anyburn.com/index.htm)          
 Deployment lab sample scripts [Link](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/oem-deployment-of-windows-desktop-editions-sample-scripts?view=windows-11)                   
-
+Hiren's BootCD PE [Link](https://www.hirensbootcd.org/)            
 #### Create bootable Windows PE media            
 1.Make sure your PC has the ADK and ADK Windows PE add-on installed.      
 - Windows Assessment and Deployment Kit (Windows ADK) [Link](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install)        
@@ -89,3 +89,10 @@ bcdedit /set %PE_WIM_GUID% winpe yes
 bcdedit /displayorder %PE_WIM_GUID% /addlast
 bcdedit /enum %PE_WIM_GUID%
 ```
+#### Enable administrator account in Windows 10               
+1. Press [Shift] + [F10] simultaneously to run the Windows Command Processor             
+2. Type the Windows CMD command "net user administrator /active:yes" and press [Enter]. The Windows 10 administrator account is now enabled.       
+```
+net user administrator /active:yes
+```
+3.Press [Ctrl] + [Shift] + [F3] reboot computer.       
