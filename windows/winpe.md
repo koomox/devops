@@ -1,15 +1,14 @@
 # 添加 Windows PE 启动项         
-Windows ADK: [Link](https://docs.microsoft.com/en-us/windows-hardware/get-started/adk-install) 
+Windows ADK: [Link](https://docs.microsoft.com/en-us/windows-hardware/get-started/adk-install)             
 Windows Assessment and Deployment Kit (Windows ADK) [Link](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install)        
 Windows PE add-on for the Windows ADK [Link](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install)           
 AnyBurn [Link](https://www.anyburn.com/index.htm)          
-Deployment lab sample scripts [Link](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/oem-deployment-of-windows-desktop-editions-sample-scripts?view=windows-11)
-加载ISO光盘映像文件，查看 `sources\boot.wim` 映像文件详细信息         
+Deployment lab sample scripts [Link](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/oem-deployment-of-windows-desktop-editions-sample-scripts?view=windows-11)                   
 
 #### Create bootable Windows PE media            
 1.Make sure your PC has the ADK and ADK Windows PE add-on installed.      
-     - Windows Assessment and Deployment Kit (Windows ADK) [Link](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install)        
-     - Windows PE add-on for the Windows ADK [Link](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install)           
+- Windows Assessment and Deployment Kit (Windows ADK) [Link](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install)        
+- Windows PE add-on for the Windows ADK [Link](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install)           
 
 2.Start the Deployment and Imaging Tools Environment as an administrator.          
 3.Run copype to create a working copy of the Windows PE files. For more information about copype         
@@ -55,6 +54,7 @@ dism /Get-WimInfo /WimFile:E:\sources\install.esd
 dism /export-image /SourceImageFile:I:\sources\install.esd /SourceIndex:1 /DestinationImageFile:F:\install.wim /Compress:max /CheckIntegrity
 ```
 #### export wim              
+加载ISO光盘映像文件，查看 `sources\boot.wim` 映像文件详细信息            
 ```
 Dism /Get-ImageInfo /ImageFile:E:\sources\boot.wim
 ```
