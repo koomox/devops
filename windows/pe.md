@@ -77,30 +77,22 @@ Dism /Get-ImageInfo /ImageFile:.\install.wim
 ```
 挂载WIM镜像文件            
 ```
-SET WIM_FILE=F:\RecoveryImage\10\x64\install.wim
-SET WIM_INDEX=2
-SET WIM_MOUNTPATH=D:\mount\win10
-
 Dism /Mount-Wim /WimFile:%WIM_FILE% /Index:%WIM_INDEX% /MountDir:%WIM_MOUNTPATH%
 ```
 复制文件到隐藏分区           
 ```
-SET RE_DRIVE=T:
-SET WIM_MOUNTPATH=D:\mount\win10
+rmdir /S /Q R:\Recovery
+mkdir R:\Recovery
+mkdir R:\Recovery\WindowsRE\
+xcopy .\mount\Windows\System32\boot.sdi R:\Recovery\WindowsRE\ /H /K /Y
+xcopy .\mount\Windows\System32\Recovery\winre.wim R:\Recovery\WindowsRE\ /H /K /Y
 
-rmdir /S /Q "%RE_DRIVE%\Recovery"
-mkdir "%RE_DRIVE%\Recovery"
-mkdir "%RE_DRIVE%\Recovery\WindowsRE\"
-xcopy %WIM_MOUNTPATH%\Windows\System32\boot.sdi "%RE_DRIVE%\Recovery\WindowsRE\" /H /K /Y
-xcopy %WIM_MOUNTPATH%\Windows\System32\Recovery\winre.wim "%RE_DRIVE%\Recovery\WindowsRE\" /H /K /Y
-
-cd /d "%RE_DRIVE%\Recovery\WindowsRE\"
+cd /d R:\Recovery\WindowsRE\
 dir /a
 ```
 卸载WIM镜像文件          
 ```
-SET WIM_MOUNTPATH=D:\mount\win10
-Dism /Unmount-Wim /MountDir:%WIM_MOUNTPATH% /Discard
+Dism /Unmount-Wim /MountDir:.\mount /Discard
 ```
 ##### 把 Windows RE 系统添加到系统启动项              
 用管理员身份运行命令提示符，输入下面的命令获取启动项          
