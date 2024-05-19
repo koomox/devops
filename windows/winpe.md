@@ -1,4 +1,4 @@
-# 添加 Windows PE 启动项         
+# Windows PE         
 Windows ADK: [Link](https://docs.microsoft.com/en-us/windows-hardware/get-started/adk-install)             
 Windows Assessment and Deployment Kit (Windows ADK) [Link](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install)        
 Windows PE add-on for the Windows ADK [Link](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install)           
