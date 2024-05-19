@@ -32,7 +32,7 @@ rem               change this value to size = 260 **
 format quick fs=fat32 label="System"
 assign letter="S"
 rem == 2. Microsoft Reserved (MSR) partition =======
-create partition msr size=16
+create partition msr size=128
 rem == 3. Windows partition ========================
 create partition primary  
 format quick fs=ntfs label="Windows"

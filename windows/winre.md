@@ -13,28 +13,31 @@ rem    as necessary. ==
 select disk 0
 clean
 convert gpt
-rem == 1. System partition =========================
+rem == 1. Windows RE tools partition ===============
+create partition primary size=2000
+format quick fs=ntfs label="Windows RE tools"
+assign letter="T"
+set id="de94bba4-06d1-4d40-a16a-bfd50179d6ac"
+gpt attributes=0x8000000000000001
+rem == 2. System partition =========================
 create partition efi size=500
-rem    ** NOTE: For Advanced Format 4Kn drives,
-rem               change this value to size = 260 ** 
+rem ** NOTE: For Advanced Format 4Kn drives,
+rem          change this value to size = 260 **
 format quick fs=fat32 label="System"
 assign letter="S"
-rem == 2. Microsoft Reserved (MSR) partition =======
-create partition msr size=16
-rem == 3. Windows partition ========================
+rem == 3. Microsoft Reserved (MSR) partition =======
+create partition msr size=128
+rem == 4. Windows partition ========================
 rem ==    a. Create the Windows partition ==========
 create partition primary 
-rem ==    b. Create space for the recovery tools ===
-rem       ** Update this size to match the size of
-rem          the recovery tools (winre.wim)
-rem          plus some free space.
-shrink minimum=2000
+rem ==    b. Create space for the recovery image ===
+shrink minimum=15000
 rem ==    c. Prepare the Windows partition ========= 
 format quick fs=ntfs label="Windows"
 assign letter="W"
-rem === 4. Recovery partition ======================
+rem === 5. Recovery image partition ================
 create partition primary
-format quick fs=ntfs label="Recovery"
+format quick fs=ntfs label="Recovery image"
 assign letter="R"
 set id="de94bba4-06d1-4d40-a16a-bfd50179d6ac"
 gpt attributes=0x8000000000000001
