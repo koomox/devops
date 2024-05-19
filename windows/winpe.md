@@ -1,19 +1,70 @@
 # 添加 Windows PE 启动项         
-Windows PE 下载: [传送门](https://go.microsoft.com/fwlink/?linkid=2196224)             
-Windows 11 Version 22H2 ADK 评估和部署工具包: [传送门](https://docs.microsoft.com/en-us/windows-hardware/get-started/adk-install) [点击下载](https://go.microsoft.com/fwlink/?linkid=2196127)      
-加载ISO光盘映像文件，查看 `sources\boot.wim` 映像文件详细信息           
-```
-SET WIM_FILE=V:\sources\boot.wim
+Windows ADK: [Link](https://docs.microsoft.com/en-us/windows-hardware/get-started/adk-install) 
+Windows Assessment and Deployment Kit (Windows ADK) [Link](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install)        
+Windows PE add-on for the Windows ADK [Link](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install)           
+AnyBurn [Link](https://www.anyburn.com/index.htm)          
+Deployment lab sample scripts [Link](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/oem-deployment-of-windows-desktop-editions-sample-scripts?view=windows-11)
+加载ISO光盘映像文件，查看 `sources\boot.wim` 映像文件详细信息         
 
-Dism /Get-ImageInfo /ImageFile:%WIM_FILE%
+#### Create bootable Windows PE media            
+1.Make sure your PC has the ADK and ADK Windows PE add-on installed.      
+     - Windows Assessment and Deployment Kit (Windows ADK) [Link](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install)        
+     - Windows PE add-on for the Windows ADK [Link](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install)           
+
+2.Start the Deployment and Imaging Tools Environment as an administrator.          
+3.Run copype to create a working copy of the Windows PE files. For more information about copype         
+```
+copype amd64 C:\WinPE_amd64
+```
+4.Use MakeWinPEMedia with the /ISO option to create an ISO file containing the Windows PE files:           
+```
+MakeWinPEMedia /ISO C:\WinPE_amd64 C:\WinPE_amd64\WinPE_amd64.iso
+```
+#### CreatePartitions-UEFI.txt          
+```txt
+rem == CreatePartitions-UEFI.txt ==
+select disk 0
+clean
+convert gpt
+rem == 1. System partition =========================
+create partition efi size=500
+rem    ** NOTE: For Advanced Format 4Kn drives,
+rem               change this value to size = 260 ** 
+format quick fs=fat32 label="System"
+assign letter="S"
+rem == 2. Microsoft Reserved (MSR) partition =======
+create partition msr size=16
+rem == 3. Windows partition ========================
+create partition primary  
+format quick fs=ntfs label="Windows"
+assign letter="W"
+list volume
+exit
+```
+#### setup.cmd        
+```
+diskpart /s CreatePartitions-UEFI.txt
+dism /Apply-Image /ImageFile:install.wim /Index:1 /ApplyDir:W:\
+bcdboot W:\Windows /s S:
+```
+#### convert esd to wim    
+```
+dism /Get-WimInfo /WimFile:E:\sources\install.esd
+```
+```
+dism /export-image /SourceImageFile:I:\sources\install.esd /SourceIndex:1 /DestinationImageFile:F:\install.wim /Compress:max /CheckIntegrity
+```
+#### export wim              
+```
+Dism /Get-ImageInfo /ImageFile:E:\sources\boot.wim
 ```
 从 boot.wim 映像中导出索引1的映像文件。
 ```
-Dism /Export-Image /SourceImageFile:"V:\sources\boot.wim" /SourceIndex:1 /DestinationImageFile:10PEX64.wim /DestinationName:"Windows 11 PE"
+Dism /Export-Image /SourceImageFile"I:\sources\boot.wim /SourceIndex:1 /DestinationImageFile:10PEX64.wim /DestinationName:"Windows PE"
 ```
 挂载WIM镜像文件          
 ```
-Dism /Mount-Wim /WimFile:F:\RecoveryImage\10PEX64.wim /Index:1 /MountDir:.\mount
+Dism /Mount-Wim /WimFile:10PEX64.wim /Index:1 /MountDir:.\mount
 ```
 将 PE 添加到启动项 [source](/storage/windows/deploy/add_pe.bat)           
 ```

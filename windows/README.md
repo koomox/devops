@@ -16,7 +16,7 @@
 [勒索病毒补丁](wncry.md)          
 [Adobe](adobe.md)           
 [Ubuntu on Windows 10](Microsoft-Windows-Subsystem-Linux.md)                    
-[添加 Windows PE 启动项](winpe.md)        
+[Windows PE](winpe.md)        
 [添加 Windows RE 启动项](winre.md)        
 [Windows 共享打开匿名访问权限](share.md)        
 [KMS 激活 Windows](active.md)          
