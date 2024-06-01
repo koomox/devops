@@ -124,8 +124,8 @@ COPY Unattend-x64.xml .\mount\Windows\Panther\Unattend.xml
 Dism /Unmount-Image /MountDir:.\mount /Commit
 ```
 ```bat
-Dism /Get-ImageInfo /ImageFile:.\install.wim
-Dism /Export-Image /SourceImageFile:.\install.wim /SourceIndex:4 /DestinationImageFile:D:\install.wim
+Dism /Get-ImageInfo /ImageFile:E:\sources\install.wim
+Dism /Export-Image /SourceImageFile:E:\sources\install.wim /SourceIndex:4 /DestinationImageFile:D:\win11_optimize.wim
 Dism /Image:.\mount /Add-Driver /Driver:D:\DriversBackup /Recurse
 MD .\mount\Windows\Panther
 COPY Unattend-x64.xml .\mount\Windows\Panther\Unattend.xml
@@ -143,8 +143,8 @@ Dism /Online /Add-Driver /Driver:D:\DriversBackup /Recurse
 ### WIMBOOT              
 导出镜像并添加驱动、无人值守、hosts 文件            
 ```bat
-Dism /Get-ImageInfo /ImageFile:.\install.wim
-Dism /Export-Image /SourceImageFile:.\install.wim /SourceIndex:1 /DestinationImageFile:en_win10_ltsc_2019_x64.wim
+Dism /Get-ImageInfo /ImageFile:E:\sources\install.wim
+Dism /Export-Image /SourceImageFile:E:\sources\install.wim /SourceIndex:1 /DestinationImageFile:D:\en_win10_ltsc_2019_x64.wim
 
 Dism /Mount-Image /ImageFile:.\en_win10_ltsc_2019_x64.wim /Index:1 /MountDir:.\mount
 

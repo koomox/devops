@@ -1,8 +1,8 @@
 # VMware Workstation              
 VMware Workstation Player: [Link](https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html)         
 VMware Workstation 15.5 Pro: [Link](https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html)          
-VMware-workstation-full-15.5.0-14665864: [Download Link](https://download3.vmware.com/software/wkst/file/VMware-workstation-full-15.5.0-14665864.exe)        
-VMware-player-15.5.0-14665864: [Download Link](https://download3.vmware.com/software/player/file/VMware-player-15.5.0-14665864.exe)        
+VMware-tools-windows: [Link](https://softwareupdate.vmware.com/cds/vmw-desktop/ws)              
+VMware-tools-windows-17.5.2: [Link](https://softwareupdate.vmware.com/cds/vmw-desktop/ws/17.5.2/23775571/windows/packages/)      
 ### 备份 VMware         
 备份 VMware 配置文件 `%APPDATA%\VMware\`            
 ### VMware 默认共享端口，无法启动 web 服务       
