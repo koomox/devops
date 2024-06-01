@@ -44,6 +44,8 @@ exit
 ```
 diskpart /s CreatePartitions-UEFI.txt
 dism /Apply-Image /ImageFile:install.wim /Index:1 /ApplyDir:W:\
+MD W:\Windows\Panther
+COPY /Y Unattend.xml W:\Windows\Panther\Unattend.xml
 bcdboot W:\Windows /s S:
 ```
 #### convert esd to wim    
