@@ -1,6 +1,7 @@
 # VMware Workstation              
 VMware Workstation Player: [Link](https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html)         
-VMware Workstation 15.5 Pro: [Link](https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html)          
+VMware Workstation Pro: [Link](https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html)          
+VMware tools: [Link](https://packages.vmware.com/tools/releases/)         
 VMware-tools-windows: [Link](https://softwareupdate.vmware.com/cds/vmw-desktop/ws)              
 VMware-tools-windows-17.5.2: [Link](https://softwareupdate.vmware.com/cds/vmw-desktop/ws/17.5.2/23775571/windows/packages/)      
 ### 备份 VMware         
