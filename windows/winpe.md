@@ -48,6 +48,10 @@ MD W:\Windows\Panther
 COPY /Y Unattend.xml W:\Windows\Panther\Unattend.xml
 bcdboot W:\Windows /s S:
 ```
+#### imagefile info         
+```
+Dism /Get-ImageInfo /ImageFile:E:\sources\install.wim
+```
 #### convert esd to wim    
 ```
 dism /Get-WimInfo /WimFile:E:\sources\install.esd
