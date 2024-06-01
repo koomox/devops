@@ -15,7 +15,7 @@ bcdboot C:\Windows /s C: /f ALL /l zh-cn
 ```
 ### dism             
 DISM 命令行选项: [传送门](https://technet.microsoft.com/zh-cn/library/hh825258.aspx)            
-Dism 完整版: [点击下载](https://gitee.com/koomox/devops/raw/master/storage/windows/dism/DeploymentTools.zip)        
+Dism 完整版: [点击下载](/storage/windows/deploy/DeploymentTools.7z)        
 
 将某个驱动器的映像捕捉到新的 .wim 文件。                        
 ```bat
