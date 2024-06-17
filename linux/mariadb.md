@@ -144,6 +144,13 @@ INNER JOIN (SELECT id, price, number FROM `mydb`.`table1`) AS subquery
 ON t1.`id` = subquery.id
 SET t1.total = subquery.price + subquery.number;
 ```
+batch delete         
+```sql
+SELECT id FROM `mydb`.`table1` WHERE id NOT IN (SELECT id FROM `mydb`.`table2`);
+```
+```sql
+DELETE FROM `mydb`.`table1` WHERE id NOT IN (SELECT id FROM `mydb`.`table2`);
+```
 ### SQL SERVER       
 update inner join        
 ```sql
