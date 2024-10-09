@@ -1,0 +1,4 @@
+select disk 0
+select part 2
+format quick fs=fat32
+exit

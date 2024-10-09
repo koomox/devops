@@ -1,0 +1,10 @@
+rem == HideRecoveryPartitions-BIOS.txt
+select disk 0
+select partition 3
+set id=27
+remove
+rem == If Push-button reset features are included, add the following commands:
+rem    select partition 3
+rem    set id=27
+rem    remove
+list volume

@@ -1,0 +1,42 @@
+;SetupMgrTag
+[Data]
+    AutoPartition=0
+    MsDosInitiated="0"
+    UnattendedInstall="Yes"
+
+[Unattended]
+    UnattendMode=FullUnattended
+    OemSkipEula=Yes
+    OemPreinstall=No
+    TargetPath=\WINDOWS
+	UnattendSwitch="Yes"
+	Repartition=Yes
+
+[GuiUnattended]
+    AdminPassword=*
+    EncryptedAdminPassword=NO
+    AutoLogon=Yes
+    AutoLogonCount=1
+    OEMSkipRegional=1
+    TimeZone=210
+    OemSkipWelcome=1
+
+[UserData]
+    ProductKey=MDGJK-PF6YQ-PD8DJ-RFQVM-7WKWG
+    FullName="Alex"
+    OrgName="Kox.Inc"
+    ComputerName=*
+
+[LicenseFilePrintData]
+    AutoMode=PerServer
+    AutoUsers=200
+
+[RegionalSettings]
+    LanguageGroup=10
+
+[Identification]
+    JoinWorkgroup=WORKGROUP
+
+[Networking]
+    InstallDefaultComponents=Yes
+
