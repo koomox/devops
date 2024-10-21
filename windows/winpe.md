@@ -48,6 +48,44 @@ MD W:\Windows\Panther
 COPY /Y Unattend.xml W:\Windows\Panther\Unattend.xml
 bcdboot W:\Windows /s S:
 ```
+#### Unattend.xml            
+```
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+    <settings pass="oobeSystem">
+        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <AutoLogon>
+                <Enabled>true</Enabled>
+                <LogonCount>1</LogonCount>
+                <Username>Administrator</Username>
+            </AutoLogon>
+            <LogonCommands>
+                <AsynchronousCommand wcm:action="add">
+                    <Description>Enable Admin AutoLogin</Description>
+                    <Order>1</Order>
+                    <CommandLine>reg add &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon&quot; /v AutoLogonCount /t REG_DWORD /d 0 /f</CommandLine>
+                </AsynchronousCommand>
+            </LogonCommands>
+            <OOBE>
+                <SkipUserOOBE>true</SkipUserOOBE>
+                <SkipMachineOOBE>true</SkipMachineOOBE>
+                <ProtectYourPC>1</ProtectYourPC>
+                <NetworkLocation>Work</NetworkLocation>
+            </OOBE>
+            <RegisteredOrganization>Dev.Inc</RegisteredOrganization>
+            <RegisteredOwner>Dev</RegisteredOwner>
+            <TimeZone>China Standard Time</TimeZone>
+        </component>
+        <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <UserLocale>en-US</UserLocale>
+            <InputLocale>en-US</InputLocale>
+            <SystemLocale>en-US</SystemLocale>
+            <UILanguage>en-US</UILanguage>
+            <UILanguageFallback>en-US</UILanguageFallback>
+        </component>
+    </settings>
+</unattend>
+```
 #### imagefile info         
 ```
 Dism /Get-ImageInfo /ImageFile:E:\sources\install.wim
