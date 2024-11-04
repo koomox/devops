@@ -7,8 +7,10 @@ echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://pack
 
 sudo apt-get update
 sudo apt-get install redis
-```
 
+redis-server -v
+```
+Configure Redis       
 ```sh
 sudo cp -f /etc/redis/redis.conf /etc/redis/redis.conf.bak
 
@@ -60,12 +62,20 @@ protected-mode yes
 ```
 Save and close the file, then restart the Redis service           
 ```sh
+sudo systemctl enable redis-server
 sudo systemctl stop redis-server
 sudo systemctl start redis-server
 sudo systemctl status redis-server
 ```
-
+Listening Ports       
+```sh
+ps -ef | grep redis
+```
 openssl generate a random string      
 ```sh
 openssl rand -base64 30 | sha256sum
+```
+#### Ping Testing the Redis Service          
+```sh
+redis-cli
 ```
