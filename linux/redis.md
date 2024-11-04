@@ -79,3 +79,17 @@ openssl rand -base64 30 | sha256sum
 ```sh
 redis-cli
 ```
+Then, authenticate yourself with the password that you have set:          
+```
+auth your_redis_password
+```
+We assumed that you rename the `config` command to `b840fc02d524045429941cc15f59e41cb7be6c52`. If you use config you will get an error:             
+```
+config get requirepass
+```
+You should use the renamed command:        
+```
+b840fc02d524045429941cc15f59e41cb7be6c52 get requirepass
+```
+
+Now you can exit from the Redis client with the `exit` or `quit` command.
