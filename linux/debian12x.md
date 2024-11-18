@@ -20,6 +20,11 @@ echo "deb-src http://mirrors.tuna.tsinghua.edu.cn/debian/ $(lsb_release -sc) mai
 echo "deb http://mirrors.tuna.tsinghua.edu.cn/debian/ $(lsb_release -sc)-updates main contrib non-free non-free-firmware" | sudo tee -a /etc/apt/sources.list
 echo "deb-src http://mirrors.tuna.tsinghua.edu.cn/debian/ $(lsb_release -sc)-updates main contrib non-free non-free-firmware" | sudo tee -a /etc/apt/sources.list
 ```
+### 用户管理           
+新增用户        
+```sh
+sudo useradd -m -d /home/dev -s /bin/bash -c "Development User" dev
+```
 ### 安装 sudo 命令      
 Debian 默认没有 `sudo` 命令，可以先输入 `su` 命令，再输入 root 命令。然后使用如下命令安装 `sudo` 命令。              
 ```sh
@@ -31,6 +36,10 @@ vim /etc/sudoers
 添加一行，其中的 username 替换为你的用户名。            
 ```
 "username"    ALL=(ALL:ALL) ALL
+```
+如果不想输入密码使用下面的格式
+```
+"username"    ALL=(ALL:ALL) NOPASSWD:ALL
 ```
 ### Debian 12.x         
 安装常用软件         
