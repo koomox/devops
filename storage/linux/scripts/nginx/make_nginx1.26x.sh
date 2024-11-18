@@ -15,7 +15,7 @@ wget https://ftp.exim.org/pub/pcre/${PCRE2_VERSION}.tar.gz
 wget https://www.zlib.net/${ZLIB_VERSION}.tar.gz
 
 tar -zxf ${OPENSSL_VERSION}.tar.gz
-tar -zxf ${PCRE_VERSION}.tar.gz
+tar -zxf ${PCRE2_VERSION}.tar.gz
 tar -zxf ${ZLIB_VERSION}.tar.gz
 tar -zxf ${NGINX_VERSION}.tar.gz
 
