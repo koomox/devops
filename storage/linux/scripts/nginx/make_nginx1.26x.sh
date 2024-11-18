@@ -9,10 +9,15 @@ if [ ! -d make_nginx ]; then
 fi
 mkdir -p make_nginx && cd make_nginx
 
-wget -qO- --no-check-certificate https://nginx.org/download/${NGINX}.tar.gz | tar -xz
-wget -qO- --no-check-certificate https://github.com/openssl/openssl/releases/download/${OPENSSL}/${OPENSSL}.tar.gz | tar -xz
-wget -qO- --no-check-certificate https://ftp.exim.org/pub/pcre/${PCRE2}.tar.gz | tar -xz
-wget -qO- --no-check-certificate https://www.zlib.net/${ZLIB}.tar.gz | tar -xz
+wget https://nginx.org/download/${NGINX}.tar.gz
+wget https://github.com/openssl/openssl/releases/download/${OPENSSL}/${OPENSSL}.tar.gz
+wget https://ftp.exim.org/pub/pcre/${PCRE2}.tar.gz
+wget https://www.zlib.net/${ZLIB}.tar.gz
+
+tar -zxf ${OPENSSL_VERSION}.tar.gz
+tar -zxf ${PCRE_VERSION}.tar.gz
+tar -zxf ${ZLIB_VERSION}.tar.gz
+tar -zxf ${NGINX_VERSION}.tar.gz
 
 cd ${NGINX_VERSION}
 ./configure --prefix=/usr/local/nginx \
