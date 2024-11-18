@@ -1,23 +1,18 @@
 #!/bin/bash
-NGINX_VERSION=$(wget -qO- --no-check-certificate https://nginx.org/en/download.html | grep -m1 -E "nginx-1.24.([0-9]+).tar.gz" | sed -E "s/.*(nginx-1.24.[0-9]+).tar.gz.*/\1/gm" )
-OPENSSL_VERSION=$(wget -qO- --no-check-certificate https://www.openssl.org/source/ | grep -m1 -E "\"openssl-3(\.[0-9]+){0,2}.tar.gz\"" | sed -E "s/.*\"(openssl-.*).tar.gz\".*/\1/gm" )
+NGINX_VERSION=NGINX=$(wget -qO- --no-check-certificate https://nginx.org/en/download.html | grep -m1 -E "nginx-1.26.([0-9]+).tar.gz" | sed -E "s/.*(nginx-1.26.[0-9]+).tar.gz.*/\1/gm" )
+OPENSSL_VERSION=$(wget -qO- --no-check-certificate https://www.openssl-library.org/source/ | grep -m1 -E "openssl-3(\.[0-9]+){0,2}.tar.gz" | sed -E "s/.*(openssl-.*).tar.gz.*/\1/gm" )
 PCRE2_VERSION=pcre2-10.37
-ZLIB_VERSION=$(wget -qO- --no-check-certificate https://zlib.net/ | grep -m1 -E "\"zlib-([0-9]+\.){0,3}tar.gz\"" | sed -E "s/.*\"(zlib-.*).tar.gz\".*/\1/gm" )
+ZLIB_VERSION=$(wget -qO- --no-check-certificate https://zlib.net/ | grep -m1 -E "zlib-([0-9]+\.){0,3}tar.gz" | sed -E "s/.*(zlib-.*).tar.gz.*/\1/gm" )
 
 if [ ! -d make_nginx ]; then
 	\rm -rf make_nginx
 fi
 mkdir -p make_nginx && cd make_nginx
 
-wget https://nginx.org/download/${NGINX_VERSION}.tar.gz
-wget https://www.openssl.org/source/${OPENSSL_VERSION}.tar.gz
-wget https://ftp.exim.org/pub/pcre/${PCRE2_VERSION}.tar.gz
-wget https://www.zlib.net/${ZLIB_VERSION}.tar.gz
-
-tar -zxf ${OPENSSL_VERSION}.tar.gz
-tar -zxf ${PCRE2_VERSION}.tar.gz
-tar -zxf ${ZLIB_VERSION}.tar.gz
-tar -zxf ${NGINX_VERSION}.tar.gz
+wget -qO- --no-check-certificate https://nginx.org/download/${NGINX}.tar.gz | tar -xz
+wget -qO- --no-check-certificate https://github.com/openssl/openssl/releases/download/${OPENSSL}/${OPENSSL}.tar.gz | tar -xz
+wget -qO- --no-check-certificate https://ftp.exim.org/pub/pcre/${PCRE2}.tar.gz | tar -xz
+wget -qO- --no-check-certificate https://www.zlib.net/${ZLIB}.tar.gz | tar -xz
 
 cd ${NGINX_VERSION}
 ./configure --prefix=/usr/local/nginx \
