@@ -9,10 +9,10 @@ if [ ! -d make_nginx ]; then
 fi
 mkdir -p make_nginx && cd make_nginx
 
-wget https://nginx.org/download/${NGINX}.tar.gz
-wget https://github.com/openssl/openssl/releases/download/${OPENSSL}/${OPENSSL}.tar.gz
-wget https://ftp.exim.org/pub/pcre/${PCRE2}.tar.gz
-wget https://www.zlib.net/${ZLIB}.tar.gz
+wget https://nginx.org/download/${NGINX_VERSION}.tar.gz
+wget https://github.com/openssl/openssl/releases/download/${OPENSSL_VERSION}/${OPENSSL_VERSION}.tar.gz
+wget https://ftp.exim.org/pub/pcre/${PCRE2_VERSION}.tar.gz
+wget https://www.zlib.net/${ZLIB_VERSION}.tar.gz
 
 tar -zxf ${OPENSSL_VERSION}.tar.gz
 tar -zxf ${PCRE_VERSION}.tar.gz
