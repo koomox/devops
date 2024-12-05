@@ -31,11 +31,11 @@ rename-command SHUTDOWN FCKTGTdPVw8v7XbvNOTDf8vJ3o2PxX1uh2P2BHs
 ```
 Rename dangerous commands           
 ```sh
-echo "rename-command CONFIG \"$(openssl rand -base64 30 | sha256sum | awk '{print $1}')\"" | sudo tee -a /etc/redis/redis.conf
-echo "rename-command SHUTDOWN \"$(openssl rand -base64 30 | sha256sum | awk '{print $1}')\"" | sudo tee -a /etc/redis/redis.conf
-echo "rename-command FLUSHALL \"$(openssl rand -base64 30 | sha256sum | awk '{print $1}')\"" | sudo tee -a /etc/redis/redis.conf
-echo "rename-command FLUSHDB \"$(openssl rand -base64 30 | sha256sum | awk '{print $1}')\"" | sudo tee -a /etc/redis/redis.conf
-echo "rename-command DEBUG \"$(openssl rand -base64 30 | sha256sum | awk '{print $1}')\"" | sudo tee -a /etc/redis/redis.conf
+echo "rename-command CONFIG CONFIG-$(openssl rand -base64 30 | sha256sum | awk '{print $1}')" | sudo tee -a /etc/redis/redis.conf
+echo "rename-command SHUTDOWN SHUTDOWN-$(openssl rand -base64 30 | sha256sum | awk '{print $1}')" | sudo tee -a /etc/redis/redis.conf
+echo "rename-command FLUSHALL FLUSHALL-$(openssl rand -base64 30 | sha256sum | awk '{print $1}')" | sudo tee -a /etc/redis/redis.conf
+echo "rename-command FLUSHDB FLUSHDB-$(openssl rand -base64 30 | sha256sum | awk '{print $1}')" | sudo tee -a /etc/redis/redis.conf
+echo "rename-command DEBUG DEBUG-$(openssl rand -base64 30 | sha256sum | awk '{print $1}')" | sudo tee -a /etc/redis/redis.conf
 ```
 In the above example, the CONFIG command was renamed into an unguessable name. It is also possible to completely disallow it (or any other command) by renaming it to the empty string, like in the following example:          
 ```
