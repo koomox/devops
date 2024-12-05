@@ -45,6 +45,20 @@ rename-command FLUSHALL ""
 rename-command FLUSHDB ""
 rename-command DEBUG ""
 ```
+#### Disable Other Sensitive Commands             
+Depending on your needs, you can disable or rename the following high-risk commands:
+
+    SCRIPT: Lua scripting commands that might be used for injection attacks.       
+    KEYS: Reveals all key names; avoid using it directly in production environments.               
+    EVAL and EVALSHA: Could be used to execute complex script attacks.            
+    MONITOR: Might be exploited by attackers to capture real-time command streams.            
+```sh
+echo "rename-command KEYS KEYS-$(openssl rand -base64 30 | sha256sum | awk '{print $1}')" | sudo tee -a /etc/redis/redis.conf
+echo "rename-command SCRIPT SCRIPT-$(openssl rand -base64 30 | sha256sum | awk '{print $1}')" | sudo tee -a /etc/redis/redis.conf
+echo "rename-command EVAL EVAL-$(openssl rand -base64 30 | sha256sum | awk '{print $1}')" | sudo tee -a /etc/redis/redis.conf
+echo "rename-command EVALSHA EVALSHA-$(openssl rand -base64 30 | sha256sum | awk '{print $1}')" | sudo tee -a /etc/redis/redis.conf
+echo "rename-command MONITOR MONITOR-$(openssl rand -base64 30 | sha256sum | awk '{print $1}')" | sudo tee -a /etc/redis/redis.conf
+```
 #### requirepass                
 Thus, it’s important that you specify a very strong and very long value as your password. Rather than make up a password yourself, you can use the `openssl` command to generate a random one, as in the following example. The pipe to the second `openssl` command will remove any line breaks that are output by the first command:             
 ```sh
