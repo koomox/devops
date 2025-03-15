@@ -34,6 +34,9 @@ chmod +x ./browser.sh
 Chrome 浏览器缓存目录 `%userprofile%\AppData\Local\Google`                
 Firefox 多用户配置 `about:profiles`          
 Chrome enable DNS-over-HTTPS `chrome://flags/#dns-over-https`         
+### Firefox 配置文件           
+`%USERPROFILE%\AppData\Roaming\Mozilla\Firefox\` 用户配置文件目录, 主要存储与用户相关的配置信息和设置                         
+`%USERPROFILE%\AppData\Local\Mozilla\Firefox\Profiles` 具体配置文件存储目录,每个用户配置文件会在这里有一个子文件夹          
 ### 硬件加速           
 Disable Hardware Acceleration in Chrome Using the Registry        
 Create file `HardwareAccelerationModeEnabled.reg`       
