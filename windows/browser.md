@@ -34,3 +34,15 @@ chmod +x ./browser.sh
 Chrome 浏览器缓存目录 `%userprofile%\AppData\Local\Google`                
 Firefox 多用户配置 `about:profiles`          
 Chrome enable DNS-over-HTTPS `chrome://flags/#dns-over-https`         
+### 硬件加速           
+Disable Hardware Acceleration in Chrome Using the Registry        
+Create file `HardwareAccelerationModeEnabled.reg`       
+```
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome]
+"HardwareAccelerationModeEnabled"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge]
+"HardwareAccelerationModeEnabled"=dword:00000000
+```
