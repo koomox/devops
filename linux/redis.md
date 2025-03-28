@@ -1,13 +1,19 @@
 # Redis         
 ## Install on Ubuntu/Debian       
 ```sh
+sudo apt-get install lsb-release curl gpg -y
 curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
-
+sudo chmod 644 /usr/share/keyrings/redis-archive-keyring.gpg
+```
+```sh
 echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
-
-sudo apt-get update
-sudo apt-get install redis
-
+cat /etc/apt/sources.list.d/redis.list
+```
+```sh
+sudo apt-get update -y
+sudo apt-get install redis -y
+```
+```sh
 redis-server -v
 ```
 Configure Redis       
