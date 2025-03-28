@@ -1,24 +1,35 @@
 # MariaDB        
-Home: [Link](https://downloads.mariadb.org/)         
+MariaDB Server: [Link](https://mariadb.org/download/)         
+MySQL Community Server: [Link](https://dev.mysql.com/downloads/mysql/)              
+MySQL Workbench: [Link](https://dev.mysql.com/downloads/workbench/)             
+HeidiSQL: [Link](https://www.heidisql.com/)           
+DBeaver Community: [Link](https://dbeaver.io/)              
+### Install MariaDB Server       
 添加公钥          
 ```sh
 sudo apt-get install -y apt-transport-https curl
-sudo wget -O /etc/apt/trusted.gpg.d/mariadb.gpg https://mariadb.org/mariadb_release_signing_key.pgp
+sudo mkdir -p /etc/apt/keyrings
+sudo curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp'
 ```    
-添加debian源        
+MariaDB 11.8 On the Debian        
 ```sh
-echo -e "deb http://sgp1.mirrors.digitalocean.com/mariadb/repo/10.10/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
-cat /etc/apt/sources.list.d/MariaDB.list
+echo -e "deb [signed-by=/etc/apt/keyrings/mariadb-keyring.pgp] https://mirrors.xtom.com/mariadb/repo/11.8/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/mariadb.list
+cat /etc/apt/sources.list.d/mariadb.list
 ```
-添加ubuntu 源       
+MariaDB 10.11 On the Debian        
 ```sh
-echo -e "deb http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.10/ubuntu $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
-cat /etc/apt/sources.list.d/MariaDB.list
+echo -e "deb [signed-by=/etc/apt/keyrings/mariadb-keyring.pgp] https://mirrors.xtom.com/mariadb/repo/10.11/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/mariadb.list
+cat /etc/apt/sources.list.d/mariadb.list
 ```
-tuna 源          
+MariaDB 11.8 On the Ubuntu          
 ```sh
-echo -e "deb https://mirrors.tuna.tsinghua.edu.cn/mariadb/repo/10.10/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/MariaDB.list
-cat /etc/apt/sources.list.d/MariaDB.list
+echo -e "deb [signed-by=/etc/apt/keyrings/mariadb-keyring.pgp] https://mirrors.xtom.com/mariadb/repo/11.8/ubuntu $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/mariadb.list
+cat /etc/apt/sources.list.d/mariadb.list
+```
+MariaDB 10.11 On the Ubuntu          
+```sh
+echo -e "deb [signed-by=/etc/apt/keyrings/mariadb-keyring.pgp] https://mirrors.xtom.com/mariadb/repo/10.11/ubuntu $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/mariadb.list
+cat /etc/apt/sources.list.d/mariadb.list
 ```
 安装        
 ```sh
