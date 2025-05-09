@@ -56,20 +56,33 @@ grep -v -E "^#|^;" ${SAMBA_CONF_BAK_FILE} | grep . > /etc/samba/smb.conf
 	workgroup = WORKGROUP
 	server string = Samba File Server
 	netbios name = smbserver
-	log file = /var/log/samba/log.%m
-	max log size = 50
+	log file = /var/log/samba/%m.log
+	log level = 1 vfs:2
+	max log size = 10000
+	logging = file
 	security = user
 	passdb backend = smbpasswd
 	map to guest = bad user
 	load printers = no
+	vfs objects = catia fruit streams_xattr
+	fruit:metadata = stream
+	fruit:resource = file
+	fruit:locking = none
 [share]
 	comment = My File Share
 	path = /data/share
 	browseable = yes
-	writable = yes
-	write list = samba
-	valid users = %S
+	read only = yes
+	guest ok = yes
 	public = yes
+[data]
+	comment = DATA
+	path = /data
+	browseable = yes
+	read only = no
+	guest ok = no
+	valid users = @data
+	force group = data
 	create mode = 0664
 	directory mode = 0775
 ```
@@ -117,4 +130,15 @@ sudo smbpasswd -x username
 sudo mkdir -p /data/share/samba_newuser
 sudo chown -R samba_newuser:samba_newuser /data/share/samba_newuser
 sudo chmod -R 775 /data/share/samba_newuser
+```
+设置文件系统权限确保匿名可读           
+755：确保其他用户（包括 guest）有读取和进入目录权限         
+```sh
+sudo chown -R nobody:nogroup /data/share
+sudo chmod -R 755 /data/share
+```
+强制所有创建文件归属 data 组, 确认 /data 目录拥有者和权限：          
+```sh
+sudo chown -R root:data /data
+sudo chmod -R 2775 /data   # 注意是 2775，加了 SGID 确保新建文件继承 data 组
 ```
