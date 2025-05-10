@@ -1,33 +1,35 @@
-# Office               
-### 部署 Office 2019           
+# Install Microsoft Office 2024 using the Office Deployment Tool                             
 Office Deployment Tool [Link](https://www.microsoft.com/en-us/download/details.aspx?id=49117)                 
-Office Customization Tool [Link](https://config.office.com/)             
-Office 2019 32位中文版配置文件 [source](/storage/windows/deploy/zhCN-Configuration-Office2019-x86.xml)             
-Office 2019 64位中文版配置文件 [source](/storage/windows/deploy/zhCN-Configuration-Office2019-x64.xml)             
+Office Customization Tool [Link](https://config.office.com/)                         
 
-Office 2019 32位英文版配置文件 [source](/storage/windows/deploy/en-Configuration-Office2019-x86.xml)             
-Office 2019 64位英文版配置文件 [source](/storage/windows/deploy/en-Configuration-Office2019-x64.xml)             
-
-下载 Office 2019        
+Download Microsoft Office 2024
 ```bat
-setup /download zhCN-Configure-Office2019-x64.xml
+setup /download configuration.xml
 ```
-部署安装 Office 2019       
+Install Microsoft Office 2024
 ```bat
-setup /configure zhCN-Configure-Office2019-x64.xml
-```
-### 部署 Office 2019 + Visio 2019           
-Office 2019 + Visio 2019 32位中文版配置文件 [source](/storage/windows/deploy/zhCN-Configuration-Office2019-Visio2019-x86.xml)             
-Office 2019 + Visio 2019 64位中文版配置文件 [source](/storage/windows/deploy/zhCN-Configuration-Office2019-Visio2019-x64.xml)             
-
-Office 2019 + Visio 2019 32位英文版配置文件 [source](/storage/windows/deploy/en-Configuration-Office2019-Visio2019-x86.xml)             
-Office 2019 + Visio 2019 64位英文版配置文件 [source](/storage/windows/deploy/en-Configuration-Office2019-Visio2019-x64.xml)             
-
-下载 Office 2019 + Visio 2019         
-```bat
-setup /download en-Configure-Office2019-Visio2019-x64.xml
-```
-部署安装 Office 2019 + Visio 2019        
-```bat
-setup /configure en-Configure-Office2019-Visio2019-x64.xml
+setup /configure configuration.xml
+```  
+```xml
+<Configuration ID="75ec6cf0-e82b-4890-b44f-cff1b76381b3">
+  <Add OfficeClientEdition="64" Channel="PerpetualVL2024">
+    <Product ID="ProPlus2024Volume" PIDKEY="XJ2XN-FW8RK-P4HMP-DKDBV-GCVGB">
+      <Language ID="en-us" />
+      <ExcludeApp ID="Access" />
+      <ExcludeApp ID="Lync" />
+      <ExcludeApp ID="OneDrive" />
+      <ExcludeApp ID="OneNote" />
+      <ExcludeApp ID="Outlook" />
+      <ExcludeApp ID="Publisher" />
+    </Product>
+  </Add>
+  <Property Name="SharedComputerLicensing" Value="0" />
+  <Property Name="FORCEAPPSHUTDOWN" Value="FALSE" />
+  <Property Name="DeviceBasedLicensing" Value="0" />
+  <Property Name="SCLCacheOverride" Value="0" />
+  <Property Name="AUTOACTIVATE" Value="1" />
+  <Updates Enabled="TRUE" />
+  <RemoveMSI />
+  <Display Level="Full" AcceptEULA="TRUE" />
+</Configuration>
 ```
