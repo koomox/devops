@@ -42,27 +42,7 @@ Google Chrome 125.0.6422.142 32bit： [Download](https://edgedl.me.gvt1.com/edge
 ### Google Chrome 124.0.6367.208             
 Google Chrome 124.0.6367.208 64bit： [Download](https://edgedl.me.gvt1.com/edgedl/release2/chrome/ac6ifbnmkcielv4lx37uvuooch2a_124.0.6367.208/124.0.6367.208_chrome_installer.exe)           
 Google Chrome 124.0.6367.208 32bit： [Download](https://edgedl.me.gvt1.com/edgedl/release2/chrome/actsc5ufyrhxb43wlawpddtaee6a_124.0.6367.208/124.0.6367.208_chrome_installer.exe)    
-       
-### Google Chrome 123.0.6312.123             
-Google Chrome 123.0.6312.123 64bit： [Download](https://edgedl.me.gvt1.com/edgedl/release2/chrome/acq7ad7frffpcbzjbrwktmqa6vgq_123.0.6312.123/123.0.6312.123_chrome_installer.exe)           
-Google Chrome 123.0.6312.123 32bit： [Download](https://edgedl.me.gvt1.com/edgedl/release2/chrome/dj3jk2dwdcs2xfud35kd4ko6fy_123.0.6312.123/123.0.6312.123_chrome_installer.exe)    
-       
-### Google Chrome 122.0.6261.129             
-Google Chrome 122.0.6261.129 64bit： [Download](https://edgedl.me.gvt1.com/edgedl/release2/chrome/adno2uyj7yhsdmrqsizskbq3um2q_122.0.6261.129/122.0.6261.129_chrome_installer.exe)           
-Google Chrome 122.0.6261.129 32bit： [Download](https://edgedl.me.gvt1.com/edgedl/release2/chrome/adwvuhbnuhvxcmnnsnpviropmi2q_122.0.6261.129/122.0.6261.129_chrome_installer.exe)    
-       
-### Google Chrome 121.0.6167.185             
-Google Chrome 121.0.6167.185 64bit： [Download](https://edgedl.me.gvt1.com/edgedl/release2/chrome/adryfaklhnr2657rqd7ed57yhjda_121.0.6167.185/121.0.6167.185_chrome_installer.exe)           
-Google Chrome 121.0.6167.185 32bit： [Download](https://edgedl.me.gvt1.com/edgedl/release2/chrome/ghcotjukehrxxngdltxb2j2pzq_121.0.6167.185/121.0.6167.185_chrome_installer.exe)    
-  
-### Google Chrome 120.0.6099.225             
-Google Chrome 120.0.6099.225 64bit： [Download](https://edgedl.me.gvt1.com/edgedl/release2/chrome/hl3gjj3r5vaxibb4qotnmk6e2q_120.0.6099.225/120.0.6099.225_chrome_installer.exe)           
-Google Chrome 120.0.6099.225 32bit： [Download](https://edgedl.me.gvt1.com/edgedl/release2/chrome/adsoaiukqljqrs7okosd2am6cmqa_120.0.6099.225/120.0.6099.225_chrome_installer.exe)    
-  
-### Google Chrome 119.0.6045.200              
-Google Chrome 119.0.6045.200 64bit： [Download](https://edgedl.me.gvt1.com/edgedl/release2/chrome/ahckqtq74iesp5nueo4knjewpe_119.0.6045.200/119.0.6045.200_chrome_installer.exe)           
-Google Chrome 119.0.6045.200 32bit： [Download](https://edgedl.me.gvt1.com/edgedl/release2/chrome/acstigzytqmn5pcgpafvnufobrfa_119.0.6045.200/119.0.6045.200_chrome_installer.exe)    
-  
+      
 ### Google Chrome 109.0.5414.120 WIN7 final version              
 Google Chrome 109.0.5414.120 WIN7 final version 64bit： [Download](https://dl.google.com/release2/chrome/czao2hrvpk5wgqrkz4kks5r734_109.0.5414.120/109.0.5414.120_chrome_installer.exe)           
 Google Chrome 109.0.5414.120 WIN7 final version 32bit： [Download](https://dl.google.com/release2/chrome/acihtkcueyye3ymoj2afvv7ulzxa_109.0.5414.120/109.0.5414.120_chrome_installer.exe)        
