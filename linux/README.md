@@ -31,7 +31,8 @@
 [Node.js](nodejs.md)            
 [Nginx](nginx.md)           
 [Rust](rust.md)          
-[MariaDB](mariadb.md)        
+[MariaDB](mariadb.md)     
+[PostgreSQL](postgresql.md)        
 [Redis](redis.md)       
 # Docker                             
 [Docker for CentOS 7.x](docker/centos7x.md)                  
