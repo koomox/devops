@@ -7,12 +7,11 @@ sudo apt install curl ca-certificates postgresql-common
 ```
 Download the PostgreSQL GPG public key              
 ```sh
-sudo install -d /usr/share/postgresql-common/pgdg
-sudo curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc
+curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /usr/share/keyrings/postgresql-keyring.gpg
 ```
 Add the official PostgreSQL APT repository            
 ```sh
-echo -e "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -sc)-pgdg main" | sudo tee /etc/apt/sources.list.d/postgresql.list
+echo -e "deb [signed-by=/usr/share/keyrings/postgresql-keyring.gpg] https://apt.postgresql.org/pub/repos/apt $(lsb_release -sc)-pgdg main" | sudo tee /etc/apt/sources.list.d/postgresql.list
 cat /etc/apt/sources.list.d/postgresql.list
 ```
 Update package list and install the latest PostgreSQL version        
@@ -30,13 +29,26 @@ Access the PostgreSQL database console as the user postgres.
 ```sh
 sudo -u postgres psql
 ```
-Modify the user to use password authentication. Replace `Secur3Passw0rd` with a strong password.         
+Modify the user to use password authentication. Replace `your_password` with a strong password.         
 ```
-postgres=# ALTER ROLE postgres WITH ENCRYPTED PASSWORD 'Secur3Passw0rd';
+ALTER USER postgres WITH PASSWORD 'your_password';
+```
+You can create a new PostgreSQL user and password by executing the following queries:         
+```
+CREATE USER your_userwith CREATE CREATEDB ROLE;
+ALTER USER your_userwith PASSWORD 'your_password';
 ```
 Exit the database console.          
 ```
 postgres=# \q
+```
+How we can check which encryption method we are using?         
+```
+postgres=# show password_encryption;
+```
+In `postgresql.conf`, you should set:         
+```
+password_encryption = 'scram-sha-256'
 ```
 Open the `/etc/postgresql/16/main/pg_hba.conf` main PostgreSQL configuration file using a text editor like `vim`.        
 ```sh
@@ -70,7 +82,7 @@ Enter the password you set earlier and press :key_enter when prompted.
 
 Create a new `db_admin` database role and grant `LOGIN` and `CREATEDB` privileges to allow the user to log in to the database server and create databases.           
 ```
-postgres=# CREATE ROLE db_admin WITH LOGIN CREATEDB ENCRYPTED PASSWORD 'MyS3curePassWD!';
+CREATE ROLE db_admin WITH LOGIN CREATEDB PASSWORD 'MyS3curePassWD!';
 ```
 Access the PostgreSQL database server as `db_admin` and enter the password you created earlier.         
 ```sh
