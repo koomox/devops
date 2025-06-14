@@ -46,6 +46,10 @@ How we can check which encryption method we are using?
 ```
 postgres=# show password_encryption;
 ```
+Open the `/etc/postgresql/16/main/postgresql.conf`         
+```sh
+sudo vim /etc/postgresql/16/main/postgresql.conf
+```
 In `postgresql.conf`, you should set:         
 ```
 password_encryption = 'scram-sha-256'
@@ -67,9 +71,9 @@ Find the following directive for all PostgreSQL users.
 local    all    all    peer
 ```
 Replace `peer` with `scram-sha-256` to enable password authentication.           
-```
-local    all    all    scram-sha-256
-```
+| TYPE | DATABASE | USER    | ADDRESS       | METHOD        |
+| ---- | -------- | ------- | ------------- | ------------- |
+| host | all      | hostman | 38.62.228.244 | scram-sha-256 |
 Restart PostgreSQL to apply the configuration changes.          
 ```sh
 sudo systemctl restart postgresql
