@@ -58,22 +58,13 @@ Open the `/etc/postgresql/16/main/pg_hba.conf` main PostgreSQL configuration fil
 ```sh
 sudo vim /etc/postgresql/16/main/pg_hba.conf
 ```
-Find the following configuration directive.           
-```
-local    all    postgres    peer
-```
-Edit the last column and change it from `peer` to `scram-sha-256` to enable password authentication for the local postgres user.       
-```
-local    all    postgres    scram-sha-256
-```
-Find the following directive for all PostgreSQL users.         
-```
-local    all    all    peer
-```
+
 Replace `peer` with `scram-sha-256` to enable password authentication.           
-| TYPE | DATABASE | USER    | ADDRESS       | METHOD        |
-| ---- | -------- | ------- | ------------- | ------------- |
-| host | all      | hostman | 38.62.228.244 | scram-sha-256 |
+| TYPE | DATABASE | USER     | ADDRESS       | METHOD        |
+| ---- | -------- | -------- | ------------- | ------------- |
+| host | all      | postgres | 127.0.0.1/32  | peer          |
+| host | all      | all      | ::1/128       | md5           |
+| host | all      | hostman  | 38.62.228.244 | scram-sha-256 |
 Restart PostgreSQL to apply the configuration changes.          
 ```sh
 sudo systemctl restart postgresql
