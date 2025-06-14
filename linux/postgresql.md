@@ -97,3 +97,14 @@ Switch to the new database.
 postgres=> \c school;           
 ```
 Enter `db_admin` role and press `Enter` when prompted.         
+
+View All Users (Roles)       
+Using psql shortcut: `\du`           
+```sql
+SELECT rolname, rolsuper, rolcreatedb, rolcreaterole, rolcanlogin FROM pg_roles;
+```
+View All Databases       
+Using psql shortcut: `\l`      
+```sql
+SELECT datname, datdba::regrole, encoding, datcollate, datctype FROM pg_database WHERE datistemplate = false;
+```
