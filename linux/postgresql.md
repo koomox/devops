@@ -46,17 +46,17 @@ How we can check which encryption method we are using?
 ```
 postgres=# show password_encryption;
 ```
-Open the `/etc/postgresql/16/main/postgresql.conf`         
+Open the `/etc/postgresql/17/main/postgresql.conf`         
 ```sh
-sudo vim /etc/postgresql/16/main/postgresql.conf
+sudo vim /etc/postgresql/17/main/postgresql.conf
 ```
 In `postgresql.conf`, you should set:         
 ```
 password_encryption = 'scram-sha-256'
 ```
-Open the `/etc/postgresql/16/main/pg_hba.conf` main PostgreSQL configuration file using a text editor like `vim`.        
+Open the `/etc/postgresql/17/main/pg_hba.conf` main PostgreSQL configuration file using a text editor like `vim`.        
 ```sh
-sudo vim /etc/postgresql/16/main/pg_hba.conf
+sudo vim /etc/postgresql/17/main/pg_hba.conf
 ```
 
 Replace `peer` with `scram-sha-256` to enable password authentication.        
