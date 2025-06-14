@@ -31,12 +31,12 @@ sudo -u postgres psql
 ```
 Modify the user to use password authentication. Replace `your_password` with a strong password.         
 ```
-ALTER USER postgres WITH PASSWORD 'your_password';
+postgres=# ALTER USER postgres WITH PASSWORD 'your_password';
 ```
 You can create a new PostgreSQL user and password by executing the following queries:         
 ```
-CREATE USER your_userwith CREATE CREATEDB ROLE;
-ALTER USER your_userwith PASSWORD 'your_password';
+postgres=# CREATE USER your_userwith CREATE CREATEDB ROLE;
+postgres=# ALTER USER your_userwith PASSWORD 'your_password';
 ```
 Exit the database console.          
 ```
