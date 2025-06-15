@@ -14,6 +14,11 @@ Add the official PostgreSQL APT repository
 echo -e "deb [signed-by=/usr/share/keyrings/postgresql-keyring.gpg] https://apt.postgresql.org/pub/repos/apt $(lsb_release -sc)-pgdg main" | sudo tee /etc/apt/sources.list.d/postgresql.list
 cat /etc/apt/sources.list.d/postgresql.list
 ```
+Tuna mirror          
+```sh
+echo -e "deb [signed-by=/usr/share/keyrings/postgresql-keyring.gpg] https://mirrors.tuna.tsinghua.edu.cn/postgresql/repos/apt/ $(lsb_release -sc)-pgdg main" | sudo tee /etc/apt/sources.list.d/postgresql.list
+cat /etc/apt/sources.list.d/postgresql.list
+```
 Update package list and install the latest PostgreSQL version        
 ```sh
 sudo apt update
