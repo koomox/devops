@@ -9,7 +9,6 @@ if [ -n "$1" ]; then
             ARCH="arm64"
             ;;
         *)
-            ARCH="amd64"
             ;;
     esac
 fi
