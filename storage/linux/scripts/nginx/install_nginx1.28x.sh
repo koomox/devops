@@ -1,5 +1,19 @@
 #!/bin/bash
-wget -O nginx-1.28.0.tar.gz https://github.com/koomox/nginx/releases/download/nginx-2025.05.16/nginx-1.28.0-amd64.tar.gz
+ARCH="amd64"
+if [ -n "$1" ]; then
+    case "$1" in
+        --amd64)
+            ARCH="amd64"
+            ;;
+        --arm64)
+            ARCH="arm64"
+            ;;
+        *)
+            ARCH="amd64"
+            ;;
+    esac
+fi
+wget -O nginx-1.28.0.tar.gz https://github.com/koomox/nginx/releases/download/nginx-2025.05.16/nginx-1.28.0-${ARCH}.tar.gz
 tar -zxf nginx-1.28.0.tar.gz
 \rm -rf /usr/local/nginx /etc/nginx
 mv nginx-1.28.0 /usr/local/nginx
