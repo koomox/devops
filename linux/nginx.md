@@ -16,11 +16,11 @@ sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/s
 sudo chmod +x ./deploy_nginx1.26x.sh
 sudo ./deploy_nginx1.26x.sh
 ```       
-一键安装 Nginx 1.26.x [查看源文件](/storage/linux/scripts/nginx/install_nginx1.26x.sh)         
+一键安装 Nginx 1.26.x [查看源文件](/storage/linux/scripts/nginx/install_nginx1.28x.sh)         
 ```sh
-sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/install_nginx1.26x.sh
-sudo chmod +x ./install_nginx1.26x.sh
-sudo ./install_nginx1.26x.sh
+sudo wget https://raw.githubusercontent.com/koomox/devops/master/storage/linux/scripts/nginx/install_nginx1.28x.sh
+sudo chmod +x ./install_nginx1.28x.sh
+sudo ./install_nginx1.28x.sh
 ```
 ```sh
 sudo sed -i 's/phpmyadmin/pma/g' /etc/nginx/conf.d/phpmyadmin.conf

@@ -32,7 +32,7 @@ tls:
 
 auth:
   type: password
-  password: @password@ 
+  password: @PASSWORD_PLACEHOLDER@ 
 
 masquerade: 
   type: proxy
@@ -42,7 +42,7 @@ masquerade:
 ```
 
 ```sh
-sudo sed -i "s/@password@/\"$(openssl rand -hex 32)\"/" /etc/hysteria/config.yaml
+sudo sed -i "s/@PASSWORD_PLACEHOLDER@/\"$(openssl rand -hex 32)\"/" /etc/hysteria/config.yaml
 ``` 
 Enable the service at startup and start it immediately.        
 ```sh
