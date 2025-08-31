@@ -43,7 +43,10 @@ masquerade:
 
 ```sh
 sudo sed -i "s/@PASSWORD_PLACEHOLDER@/\"$(openssl rand -hex 32)\"/" /etc/hysteria/config.yaml
-``` 
+```
+```sh
+sudo iptables -A INPUT -p udp -m udp --dport 443 -j ACCEPT
+```       
 Enable the service at startup and start it immediately.        
 ```sh
 sudo systemctl enable --now hysteria-server.service
