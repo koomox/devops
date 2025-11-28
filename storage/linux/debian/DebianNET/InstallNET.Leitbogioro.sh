@@ -101,49 +101,6 @@ while [[ $# -ge 1 ]]; do
 		targetRelese='Ubuntu'
 		shift
 		;;
-	-kali | -Kali)
-		shift
-		Relese='Kali'
-		tmpDIST="$1"
-		shift
-		;;
-	-centos | -CentOS | -cent | -Cent)
-		shift
-		Relese='CentOS'
-		tmpDIST="$1"
-		shift
-		;;
-	-rocky | -rockylinux | -RockyLinux)
-		shift
-		Relese='RockyLinux'
-		tmpDIST="$1"
-		shift
-		;;
-	-alma | -almalinux | -AlmaLinux)
-		shift
-		Relese='AlmaLinux'
-		tmpDIST="$1"
-		shift
-		;;
-	-fedora | -Fedora)
-		shift
-		Relese='Fedora'
-		tmpDIST="$1"
-		shift
-		;;
-	-alpine | -alpinelinux | -AlpineLinux | -alpineLinux)
-		shift
-		Relese='AlpineLinux'
-		tmpDIST="$1"
-		shift
-		;;
-	-win | -windows)
-		shift
-		ddMode='1'
-		finalDIST="$1"
-		targetRelese='Windows'
-		shift
-		;;
 	-lang | -language)
 		shift
 		targetLang="$1"
@@ -341,14 +298,9 @@ while [[ $# -ge 1 ]]; do
 		shift
 		setMemCheck='0'
 		;;
-	-netbootxyz)
-		shift
-		setNetbootXyz='1'
-		shift
-		;;
 	*)
 		if [[ "$1" != 'error' ]]; then echo -ne "\nInvaild option: '$1'\n\n"; fi
-		echo -ne " Usage:\n\tbash $(basename $0)\t-debian          [${underLine}${yellow}dists-name${plain}]\n\t\t\t\t-ubuntu          [${underLine}dists-name${plain}]\n\t\t\t\t-kali            [${underLine}dists-name${plain}]\n\t\t\t\t-alpine          [${underLine}dists-name${plain}]\n\t\t\t\t-centos          [${underLine}dists-name${plain}]\n\t\t\t\t-rockylinux      [${underLine}dists-name${plain}]\n\t\t\t\t-almalinux       [${underLine}dists-name${plain}]\n\t\t\t\t-fedora          [${underLine}dists-name${plain}]\n\t\t\t\t-windows         [${underLine}dists-name${plain}]\n\t\t\t\t-architecture    [32/i386|64/${underLine}${yellow}amd64${plain}|arm/${underLine}${yellow}arm64${plain}]\n\t\t\t\t--ip-addr/--ip-gate/--ip-mask\n\t\t\t\t-apt/-yum/-mirror\n\t\t\t\t-dd/--image      [image-url]\n\t\t\t\t-pwd             [linux-password]\n\t\t\t\t-port            [linux-ssh-port]\n"
+		echo -ne " Usage:\n\tbash $(basename $0)\t-debian          [${underLine}${yellow}dists-name${plain}]\n\t\t\t\t-ubuntu          [${underLine}dists-name${plain}]\n\t\t\t\t-architecture    [32/i386|64/${underLine}${yellow}amd64${plain}|arm/${underLine}${yellow}arm64${plain}]\n\t\t\t\t--ip-addr/--ip-gate/--ip-mask\n\t\t\t\t-apt/-yum/-mirror\n\t\t\t\t-dd/--image      [image-url]\n\t\t\t\t-pwd             [linux-password]\n\t\t\t\t-port            [linux-ssh-port]\n"
 		exit 1
 		;;
 	esac
@@ -426,28 +378,17 @@ function selectMirror() {
 	VER=$(echo "$3" | sed 's/\ //g' | sed -r 's/(.*)/\L\1/')
 	New=$(echo "$4" | sed 's/\ //g')
 	[ -n "$Relese" ] && [ -n "$DIST" ] && [ -n "$VER" ] || exit 1
-	if [ "$Relese" == "debian" ] || [ "$Relese" == "ubuntu" ] || [ "$Relese" == "kali" ]; then
+	if [ "$Relese" == "debian" ] || [ "$Relese" == "ubuntu" ]; then
 		[ "$DIST" == "focal" ] && legacy="legacy-" || legacy=""
 		TEMP="SUB_MIRROR/dists/${DIST}/main/installer-${VER}/current/${legacy}images/netboot/${Relese}-installer/${VER}/initrd.gz"
-		[[ "$Relese" == "kali" ]] && TEMP="SUB_MIRROR/dists/${DIST}/main/installer-${VER}/current/images/netboot/debian-installer/${VER}/initrd.gz"
-	elif [ "$Relese" == "centos" ] || [ "$Relese" == "rockylinux" ] || [ "$Relese" == "almalinux" ]; then
-		if [ "$Relese" == "centos" ] && [[ "$RedHatSeries" -le "7" ]]; then
-			TEMP="SUB_MIRROR/${DIST}/os/${VER}/images/pxeboot/initrd.img"
-		else
-			TEMP="SUB_MIRROR/${DIST}/BaseOS/${VER}/os/images/pxeboot/initrd.img"
-		fi
-	elif [ "$Relese" == "fedora" ]; then
-		TEMP="SUB_MIRROR/releases/${DIST}/Server/${VER}/os/images/pxeboot/initrd.img"
-	elif [ "$Relese" == "alpinelinux" ]; then
-		TEMP="SUB_MIRROR/${DIST}/releases/${VER}/netboot/${InitrdName}"
 	fi
 	[ -n "$TEMP" ] || exit 1
 	mirrorStatus=0
 	declare -A MirrorBackup
 	if [[ "$IsCN" == "cn" ]]; then
-		MirrorBackup=(["debian0"]="" ["debian1"]="http://mirrors.ustc.edu.cn/debian" ["debian2"]="http://mirror.nju.edu.cn/debian" ["debian3"]="https://mirrors.tuna.tsinghua.edu.cn/debian" ["debian4"]="https://mirrors.aliyun.com/debian-archive/debian" ["ubuntu0"]="" ["ubuntu1"]="https://mirrors.ustc.edu.cn/ubuntu" ["ubuntu2"]="http://mirrors.xjtu.edu.cn/ubuntu" ["kali0"]="" ["kali1"]="https://mirrors.tuna.tsinghua.edu.cn/kali" ["kali2"]="http://mirrors.zju.edu.cn/kali" ["alpinelinux0"]="" ["alpinelinux1"]="http://mirror.nju.edu.cn/alpine" ["alpinelinux2"]="http://mirrors.tuna.tsinghua.edu.cn/alpine" ["centos0"]="" ["centos1"]="https://mirrors.ustc.edu.cn/centos-stream" ["centos2"]="https://mirrors.bfsu.edu.cn/centos-stream" ["centos3"]="https://mirrors.tuna.tsinghua.edu.cn/centos" ["centos4"]="http://mirror.nju.edu.cn/centos-altarch" ["centos5"]="https://mirrors.tuna.tsinghua.edu.cn/centos-vault" ["fedora0"]="" ["fedora1"]="https://mirrors.tuna.tsinghua.edu.cn/fedora" ["fedora2"]="https://mirrors.bfsu.edu.cn/fedora" ["rockylinux0"]="" ["rockylinux1"]="http://mirror.nju.edu.cn/rocky" ["rockylinux2"]="http://mirrors.sdu.edu.cn/rocky" ["almalinux0"]="" ["almalinux1"]="https://mirror.sjtu.edu.cn/almalinux" ["almalinux2"]="http://mirrors.neusoft.edu.cn/almalinux")
+		MirrorBackup=(["debian0"]="" ["debian1"]="http://mirrors.ustc.edu.cn/debian" ["debian2"]="http://mirror.nju.edu.cn/debian" ["debian3"]="https://mirrors.tuna.tsinghua.edu.cn/debian" ["debian4"]="https://mirrors.aliyun.com/debian-archive/debian" ["ubuntu0"]="" ["ubuntu1"]="https://mirrors.ustc.edu.cn/ubuntu" ["ubuntu2"]="http://mirrors.xjtu.edu.cn/ubuntu")
 	else
-		MirrorBackup=(["debian0"]="" ["debian1"]="http://deb.debian.org/debian" ["debian2"]="http://mirrors.ocf.berkeley.edu/debian" ["debian3"]="http://ftp.yz.yamagata-u.ac.jp/pub/linux/debian" ["debian4"]="http://archive.debian.org/debian" ["ubuntu0"]="" ["ubuntu1"]="http://archive.ubuntu.com/ubuntu" ["ubuntu2"]="http://ports.ubuntu.com" ["kali0"]="" ["kali1"]="https://mirrors.ocf.berkeley.edu/kali" ["kali2"]="http://ftp.yz.yamagata-u.ac.jp/pub/linux/kali" ["alpinelinux0"]="" ["alpinelinux1"]="http://dl-cdn.alpinelinux.org/alpine" ["alpinelinux2"]="https://mirrors.edge.kernel.org/alpine" ["centos0"]="" ["centos1"]="http://mirror.stream.centos.org" ["centos2"]="http://mirrors.ocf.berkeley.edu/centos-stream" ["centos3"]="http://mirror.centos.org/centos" ["centos4"]="http://mirror.centos.org/altarch" ["centos5"]="http://vault.centos.org" ["fedora0"]="" ["fedora1"]="http://mirrors.rit.edu/fedora/fedora/linux" ["fedora2"]="http://ftp.iij.ad.jp/pub/linux/Fedora/fedora/linux" ["rockylinux0"]="" ["rockylinux1"]="http://download.rockylinux.org/pub/rocky" ["rockylinux2"]="http://mirrors.iu13.net/rocky" ["almalinux0"]="" ["almalinux1"]="http://repo.almalinux.org/almalinux" ["almalinux2"]="http://ftp.iij.ad.jp/pub/linux/almalinux")
+		MirrorBackup=(["debian0"]="" ["debian1"]="http://deb.debian.org/debian" ["debian2"]="http://mirrors.ocf.berkeley.edu/debian" ["debian3"]="http://ftp.yz.yamagata-u.ac.jp/pub/linux/debian" ["debian4"]="http://archive.debian.org/debian" ["ubuntu0"]="" ["ubuntu1"]="http://archive.ubuntu.com/ubuntu" ["ubuntu2"]="http://ports.ubuntu.com")
 	fi
 	echo "$New" | grep -q '^http://\|^https://\|^ftp://' && MirrorBackup[${Relese}0]="${New%*/}"
 	for mirror in $(echo "${!MirrorBackup[@]}" | sed 's/\ /\n/g' | sort -n | grep "^$Relese"); do
@@ -822,28 +763,6 @@ d-i partman-basicfilesystems/no_swap boolean false
 $normalRecipes
 $gptPartitionPreseed
 ")
-	elif [[ "$1" == 'centos' ]] || [[ "$1" == 'rockylinux' ]] || [[ "$1" == 'almalinux' ]] || [[ "$1" == 'fedora' ]]; then
-		ksIncDisk=$(echo $9 | cut -d'/' -f 3)
-		ksAllDisks=$(echo ${10} | sed 's/\/dev\///g' | sed 's/ /,/g')
-		if [[ -n "$swapSpace" && "$swapSpace" -gt "512" ]]; then
-			swapRecipe='part swap --ondisk='${ksIncDisk}' --size='${swapSpace}'\n'
-		elif [[ -z "$swapSpace" || "$swapSpace" -le "512" ]]; then
-			# Not distributing any capacity of swap will cause installing of Kickstart collapse.
-			swapRecipe='part swap --ondisk='${ksIncDisk}' --size=512\n'
-		fi
-		[[ "$2" -le "1" || "$4" != "all" ]] && {
-			clearPart="clearpart --drives=${ksIncDisk} --all --initlabel"
-			if [[ "$7" == "enabled" ]]; then
-				FormatDisk=$(echo -e "part / --fstype="xfs" --ondisk="$ksIncDisk" --grow --size="0"\n${swapRecipe}part /boot --fstype="xfs" --ondisk="$ksIncDisk" --size="1024"\npart /boot/efi --fstype="efi" --ondisk="$ksIncDisk" --size="512"")
-			else
-				FormatDisk=$(echo -e "part / --fstype="xfs" --ondisk="$ksIncDisk" --grow --size="0"\n${swapRecipe}part /boot --fstype="xfs" --ondisk="$ksIncDisk" --size="1024"\npart biosboot --fstype=biosboot --ondisk="$ksIncDisk" --size=1")
-			fi
-		}
-		[[ "$4" == "all" || -n "$setRaid" ]] && {
-			clearPart="clearpart --all --initlabel"
-			FormatDisk="autopart"
-		}
-	fi
 }
 
 # $1 is "$setRaid", $2 is "$disksNum", $3 is "$AllDisks", $4 is "$linux_relese".
@@ -936,61 +855,6 @@ d-i partman-auto/expert_recipe string multiraid ::                 \
 			#            https://lala.im/7911.html
 			#            https://github.com/office-itou/Linux/blob/master/installer/source/preseed_debian.cfg
 			#            https://qiita.com/YasuhiroABE/items/ff233459035d8187263d
-		elif [[ "$4" == 'centos' ]] || [[ "$4" == 'rockylinux' ]] || [[ "$4" == 'almalinux' ]] || [[ "$4" == 'fedora' ]]; then
-			tmpKsAllDisks=$(echo "$3" | sed 's/\/dev\///g')
-			ksRaidVolumes=()
-			ksRaidConfigs=""
-			ksRaidRecipes=""
-			if [[ "$EfiSupport" == "enabled" ]]; then
-				for ((partitionIndex = 0; partitionIndex <= "2"; partitionIndex++)); do
-					disksIndex="1"
-					for currentDisk in $tmpKsAllDisks; do
-						tmpKsRaidVolumes="raid."$partitionIndex""$disksIndex""
-						if [[ "$partitionIndex" == "0" ]]; then
-							tmpKsRaidConfigs="part "$tmpKsRaidVolumes" --size="1024" --ondisk="$currentDisk""
-						elif [[ "$partitionIndex" == "1" ]]; then
-							tmpKsRaidConfigs="part "$tmpKsRaidVolumes" --size="512" --ondisk="$currentDisk""
-						elif [[ "$partitionIndex" == "2" ]]; then
-							tmpKsRaidConfigs="part "$tmpKsRaidVolumes" --size="0" --grow --ondisk="$currentDisk""
-						fi
-						disksIndex=$(expr "$disksIndex" + 1)
-						ksRaidVolumes[$partitionIndex]+=""$tmpKsRaidVolumes" "
-						ksRaidConfigs+=""$tmpKsRaidConfigs"\n"
-					done
-				done
-				ksRaidConfigs=$(echo -e "$ksRaidConfigs")
-				ksRaidRecipes=$(echo -e "raid /boot --fstype="xfs" --device="boot" --level="1" ${ksRaidVolumes[0]}
-raid /boot/efi --fstype="efi" --device="boot-efi" --level="1" ${ksRaidVolumes[1]}
-raid / --fstype="xfs" --device="root" --level="$1" ${ksRaidVolumes[2]}
-")
-			else
-				for ((partitionIndex = 0; partitionIndex <= "2"; partitionIndex++)); do
-					disksIndex="1"
-					for currentDisk in $tmpKsAllDisks; do
-						tmpKsRaidVolumes="raid."$partitionIndex""$disksIndex""
-						if [[ "$partitionIndex" == "0" ]]; then
-							tmpKsRaidConfigs="part biosboot --fstype="biosboot" --size="1" --ondisk="$currentDisk""
-						elif [[ "$partitionIndex" == "1" ]]; then
-							tmpKsRaidConfigs="part "$tmpKsRaidVolumes" --size="1024" --ondisk="$currentDisk""
-						elif [[ "$partitionIndex" == "2" ]]; then
-							tmpKsRaidConfigs="part "$tmpKsRaidVolumes" --size="0" --grow --ondisk="$currentDisk""
-						fi
-						disksIndex=$(expr "$disksIndex" + 1)
-						ksRaidVolumes[$partitionIndex]+=""$tmpKsRaidVolumes" "
-						ksRaidConfigs+=""$tmpKsRaidConfigs"\n"
-					done
-				done
-				ksRaidConfigs=$(echo -e "$ksRaidConfigs")
-				ksRaidRecipes=$(echo -e "raid /boot --fstype="xfs" --device="boot" --level="1" ${ksRaidVolumes[1]}
-raid / --fstype="xfs" --device="root" --level="$1" ${ksRaidVolumes[2]}
-")
-			fi
-			FormatDisk="${ksRaidConfigs}
-${ksRaidRecipes}"
-			# Reference: <Example 27.4. Using the raid Kickstart command>. https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/installation_guide/sect-kickstart-syntax
-			#            https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/installation_guide/sect-kickstart-examples
-			#            https://gist.github.com/micmoyles/587131aa19089e5c18916949c26b65e7
-			#            <4.3.3.1. ソフトウェアRAID1でのシステムパーティションの作成>. https://dl.acronis.com/u/software-defined/html/AcronisCyberInfrastructure_3_5_installation_guide_ja-JP/installing-using-pxe/creating-kickstart-file.html#kickstart-file-example
 		else
 			echo -ne "\n[${red}Warning${plain}] Raid $1 recipe is not supported by target system!\n"
 			exit 1
@@ -1308,15 +1172,6 @@ function checkVirt() {
 
 function checkSys() {
 	# Remove AliYunDun(a guard process to support monitoring hardware status, scanning security breaches for alarm etc.) from Alibaba Cloud otherwise it will impede the installation.
-	aliyundunProcess=$(ps -ef | grep -i 'aegis\|aliyun\|aliyundun\|assist-daemon' | grep -v 'grep\|-i' | awk -F ' ' '{print $NF}')
-	[[ -n "$aliyundunProcess" ]] && {
-		timeout 5s wget --no-check-certificate -qO /root/Fuck_Aliyun.sh 'https://git.io/fpN6E' && chmod a+x /root/Fuck_Aliyun.sh
-		if [[ $? -ne 0 ]]; then
-			wget --no-check-certificate -qO /root/Fuck_Aliyun.sh 'https://gitee.com/mb9e8j2/Fuck_Aliyun/raw/master/Fuck_Aliyun.sh' && sed -i 's/\r//g' /root/Fuck_Aliyun.sh && chmod a+x /root/Fuck_Aliyun.sh
-		fi
-		bash /root/Fuck_Aliyun.sh
-		rm -rf /root/Fuck_Aliyun.sh
-	}
 
 	rm -rf /swapspace
 	# Allocate 512 MB temporary swap to provent yum dead.
@@ -1358,31 +1213,11 @@ function checkSys() {
 	fi
 	apt install lsb-release -y
 
-	# Delete mirrors from elrepo.org because it will causes dnf/yum checking updates continuously(maybe some of the server mirror lists are in the downtime?)
-	[[ $(grep -wri "elrepo.org" /etc/yum.repos.d/) != "" ]] && {
-		elrepoFile=$(grep -wri "elrepo.org" /etc/yum.repos.d/ | head -n 1 | cut -d':' -f 1)
-		mv "$elrepoFile" "$elrepoFile.bak"
-	}
-	yum install redhat-lsb -y
-	OsLsb=$(lsb_release -d | awk '{print$2}')
-
-	RedHatRelease=""
-	for Count in $(cat /etc/redhat-release | awk '{print$1}') $(cat /etc/system-release | awk '{print$1}') $(cat /etc/os-release | grep -w "ID=*" | awk -F '=' '{print $2}' | sed 's/\"//g') "$OsLsb"; do
-		[[ -n "$Count" ]] && RedHatRelease=$(echo -e "$Count")"$RedHatRelease"
-	done
-
 	DebianRelease=""
 	IsUbuntu=$(uname -a | grep -i "ubuntu")
 	IsDebian=$(uname -a | grep -i "debian")
-	IsKali=$(uname -a | grep -i "kali")
 	for Count in $(cat /etc/os-release | grep -w "ID=*" | awk -F '=' '{print $2}') $(cat /etc/issue | awk '{print $1}') "$OsLsb"; do
 		[[ -n "$Count" ]] && DebianRelease=$(echo -e "$Count")"$DebianRelease"
-	done
-
-	AlpineRelease=""
-	apk update
-	for Count in $(cat /etc/os-release | grep -w "ID=*" | awk -F '=' '{print $2}') $(cat /etc/issue | awk '{print $3}' | head -n 1) $(uname -v | awk '{print $1}' | sed 's/[^a-zA-Z]//g'); do
-		[[ -n "$Count" ]] && AlpineRelease=$(echo -e "$Count")"$AlpineRelease"
 	done
 
 	if [[ $(echo "$RedHatRelease" | grep -i 'centos') != "" ]]; then
@@ -1441,61 +1276,6 @@ function checkSys() {
 	# Debian like linux OS necessary components.
 	apt install cpio curl dmidecode dnsutils efibootmgr fdisk file gzip iputils-ping jq net-tools openssl tuned util-linux virt-what wget xz-utils -y
 
-	# Redhat like Linux OS prefer to use dnf instead of yum because former has a higher execute efficiency.
-	yum install dnf -y
-	if [[ $? -eq 0 ]]; then
-		# To avoid "Failed loading plugin "osmsplugin": No module named 'librepo'"
-		# Reference: https://anatolinicolae.com/failed-loading-plugin-osmsplugin-no-module-named-librepo/
-		[[ "$CurrentOS" == "CentOS" && "$CurrentOSVer" == "8" ]] && dnf install python3-librepo -y
-		# Redhat like linux OS necessary components.
-		dnf install epel-release -y
-		dnf install bind-utils cpio curl dmidecode dnsutils efibootmgr file gzip jq net-tools openssl redhat-lsb syslinux tuned util-linux virt-what wget xz --skip-broken -y
-	else
-		yum install dnf -y >/root/yum_execute.log 2>&1
-		# In some versions of CentOS 8 which are not subsumed into CentOS-stream are end of supporting by CentOS official, so the source is failure.
-		# We need to change the source from http://mirror.centos.org to http://vault.centos.org to make repository is still available.
-		# Reference: https://techglimpse.com/solve-failed-synchronize-cache-repo-appstream/
-		#            https://qiita.com/yamada-hakase/items/cb1b6124e11ca65e2a2b
-		if [[ $(grep -i "failed to\|no urls in mirrorlist" /root/yum_execute.log) ]]; then
-			if [[ "$CurrentOS" == "CentOS" ]]; then
-				cd /etc/yum.repos.d/
-				sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
-				baseRepo=$(ls /etc/yum.repos.d/ | grep -i "base\|cr" | head -n 1)
-				currentRedhatMirror=$(sed -n '/^#baseurl=\|^baseurl=/'p /etc/yum.repos.d/$baseRepo | head -n 1 | awk -F '=' '{print $2}' | sed -e 's|^[^/]*//||' -e 's|/.*$||')
-				sed -ri 's/#baseurl/baseurl/g' /etc/yum.repos.d/CentOS-*
-				sed -ri 's/'$currentRedhatMirror'/vault.centos.org/g' /etc/yum.repos.d/CentOS-*
-				[[ "$CurrentOSVer" == "8" ]] && dnf install python3-librepo -y
-			fi
-			yum install dnf -y
-			# Run dnf update and install components.
-			# In official template of AlmaLinux 9 of Linode, "tuned" must be installed otherwise "grub2-mkconfig" can't work formally.
-			# Reference: https://phanes.silogroup.org/fips-disa-stig-hardening-on-centos9/
-			dnf install epel-release -y
-			dnf install bind-utils cpio curl dmidecode dnsutils efibootmgr file gzip jq net-tools openssl redhat-lsb syslinux tuned util-linux virt-what wget xz --skip-broken -y
-			# Oracle Linux 7 doesn't support DNF.
-		elif [[ $(grep -i "no package" /root/yum_execute.log) ]]; then
-			yum install epel-release -y
-			yum install bind-utils cpio curl dmidecode dnsutils efibootmgr file gzip jq net-tools openssl redhat-lsb syslinux tuned util-linux virt-what wget xz --skip-broken -y
-		fi
-		rm -rf /root/yum_execute.log
-	fi
-
-	# Alpine Linux necessary components and configurations.
-	[[ "$CurrentOS" == "AlpineLinux" ]] && {
-		# Get current version number of Alpine Linux
-		CurrentAlpineVer=$(cut -d. -f1,2 </etc/alpine-release)
-		# Try to remove comments of any valid mirror.
-		sed -i 's/#//' /etc/apk/repositories
-		# Add community mirror.
-		[[ ! $(grep -i "community" /etc/apk/repositories) ]] && sed -i '$a\http://dl-cdn.alpinelinux.org/alpine/v'${CurrentAlpineVer}'/community' /etc/apk/repositories
-		# Add testing mirror.
-		# [[ ! `grep -i "testing" /etc/apk/repositories` ]] && sed -i '$a\http://ftp.udx.icscoe.jp/Linux/alpine/edge/testing' /etc/apk/repositories
-		# Alpine Linux use "apk" as package management.
-		apk update
-		apk add bash bind-tools coreutils cpio curl dmidecode efibootmgr file gawk grep gzip jq lsblk net-tools openssl sed shadow tzdata util-linux virt-what wget xz
-		# Use bash to replace ash.
-		sed -i 's/root:\/bin\/ash/root:\/bin\/bash/g' /etc/passwd
-	}
 }
 
 function checkVER() {
@@ -1568,112 +1348,6 @@ function checkDIST() {
 			}
 		}
 		LinuxMirror=$(selectMirror "$Relese" "$DIST" "$VER" "$tmpMirror")
-	fi
-	if [[ "$Relese" == 'Kali' ]]; then
-		SpikCheckDIST='0'
-		DIST="$(echo "$tmpDIST" | sed -r 's/(.*)/\L\1/')"
-		[[ ! "$DIST" =~ "kali-" ]] && DIST="kali-""$DIST"
-		# Kali Linux releases reference: https://www.kali.org/releases/
-		LinuxMirror=$(selectMirror "$Relese" "$DIST" "$VER" "$tmpMirror")
-	fi
-	if [[ "$Relese" == 'AlpineLinux' ]]; then
-		SpikCheckDIST='0'
-		DIST="$(echo "$tmpDIST" | sed -r 's/(.*)/\L\1/')"
-		# Recommend "edge" version of Alpine Linux to make sure to keep always updating.
-		AlpineVer1=$(echo "$DIST" | sed 's/[a-z][A-Z]*//g' | cut -d"." -f 1)
-		AlpineVer2=$(echo "$DIST" | sed 's/[a-z][A-Z]*//g' | cut -d"." -f 2)
-		if [[ "$AlpineVer1" -lt "3" || "$AlpineVer2" -le "15" ]] && [[ "$DIST" != "edge" ]]; then
-			echo -ne "\n[${red}Warning${plain}] $Relese $DIST is not supported!\n"
-			exit 1
-		fi
-		# Alpine Linux releases reference: https://alpinelinux.org/releases/
-		[[ "$DIST" != "edge" && ! "$DIST" =~ "v" ]] && DIST="v""$DIST"
-		if [[ "$setCloudKernel" == "" ]]; then
-			[[ -n "$virtWhat" ]] && virtualizationStatus='1' || virtualizationStatus='0'
-		elif [[ "$setCloudKernel" == "1" ]]; then
-			virtualizationStatus='1'
-		fi
-		# Virtual linux kernel of "vmlinuz-virt" of Alpine is unable to probe modules of IPv6 at the beginning so that "modloop" can't be downloaded and loaded!
-		if [[ "$virtualizationStatus" == "1" && "$IPStackType" != "IPv6Stack" ]]; then
-			InitrdName="initramfs-virt"
-			VmLinuzName="vmlinuz-virt"
-			ModLoopName="modloop-virt"
-		else
-			InitrdName="initramfs-lts"
-			VmLinuzName="vmlinuz-lts"
-			ModLoopName="modloop-lts"
-		fi
-		LinuxMirror=$(selectMirror "$Relese" "$DIST" "$VER" "$tmpMirror")
-	fi
-	if [[ "$Relese" == 'CentOS' ]] || [[ "$Relese" == 'RockyLinux' ]] || [[ "$Relese" == 'AlmaLinux' ]] || [[ "$Relese" == 'Fedora' ]]; then
-		SpikCheckDIST='1'
-		DISTCheck="$(echo "$tmpDIST" | grep -o '[\.0-9]\{1,\}' | head -n1)"
-		RedHatSeries=$(echo "$tmpDIST" | cut -d"." -f 1 | cut -d"-" -f 1)
-		# CentOS and CentOS stream releases history:
-		# https://endoflife.date/centos
-		# https://endoflife.date/centos-stream
-		if [[ "$linux_relese" == 'centos' ]]; then
-			[[ "$RedHatSeries" =~ [0-9]{${#1}} ]] && {
-				if [[ "$RedHatSeries" == "6" ]]; then
-					DISTCheck="6.10"
-					echo -ne "\n[${red}Warning${plain}] $Relese $DISTCheck is not supported!\n"
-					exit 1
-				elif [[ "$RedHatSeries" == "7" ]]; then
-					DISTCheck="7.9.2009"
-				elif [[ "$RedHatSeries" -ge "8" ]] && [[ ! "$RedHatSeries" =~ "-stream" ]]; then
-					DISTCheck="$RedHatSeries""-stream"
-				elif [[ "$RedHatSeries" -le "5" ]]; then
-					echo -ne "\n[${red}Warning${plain}] $Relese $DISTCheck is not supported!\n"
-				else
-					echo -ne "\n[${red}Error${plain}] Invaild $DIST! version!\n"
-				fi
-			}
-			LinuxMirror=$(selectMirror "$Relese" "$DISTCheck" "$VER" "$tmpMirror")
-			DIST="$DISTCheck"
-		fi
-		if [[ "$linux_relese" == 'rockylinux' ]] || [[ "$linux_relese" == 'almalinux' ]] || [[ "$linux_relese" == 'fedora' ]]; then
-			[[ "$RedHatSeries" =~ [0-9]{${#1}} ]] && {
-				# RockyLinux releases history:
-				# https://wiki.rockylinux.org/rocky/version/
-				# AlmaLinux releases history:
-				# https://wiki.almalinux.org/release-notes/
-				if [[ "$linux_relese" == 'rockylinux' || "$linux_relese" == 'almalinux' ]] && [[ "$RedHatSeries" -le "7" ]]; then
-					echo -ne "\n[${red}Warning${plain}] $Relese $DISTCheck is not supported!\n"
-					exit 1
-					# Fedora releases history:
-					# https://fedorapeople.org/groups/schedule/
-				elif [[ "$linux_relese" == 'fedora' ]] && [[ "$RedHatSeries" -le "37" ]]; then
-					echo -ne "\n[${red}Warning${plain}] $Relese $DISTCheck is not supported!\n"
-					exit 1
-				fi
-			}
-			LinuxMirror=$(selectMirror "$Relese" "$DISTCheck" "$VER" "$tmpMirror")
-			DIST="$DISTCheck"
-		fi
-		[[ -z "$DIST" ]] && {
-			echo -ne "\nThe dists version not found in this mirror, Please check it! \n\n"
-			bash $0 error
-			exit 1
-		}
-		if [[ "$linux_relese" == 'centos' ]] && [[ "$RedHatSeries" -le "7" ]]; then
-			wget --no-check-certificate -qO- "$LinuxMirror/$DIST/os/$VER/.treeinfo" | grep -q 'general'
-			[[ $? != '0' ]] && {
-				echo -ne "\n[${red}Warning${plain}] $Relese $DISTCheck was not found in this mirror, Please change mirror try again!\n"
-				exit 1
-			}
-		elif [[ "$linux_relese" == 'centos' && "$RedHatSeries" -ge "8" ]] || [[ "$linux_relese" == 'rockylinux' ]] || [[ "$linux_relese" == 'almalinux' ]]; then
-			wget --no-check-certificate -qO- "$LinuxMirror/$DIST/BaseOS/$VER/os/media.repo" | grep -q 'mediaid'
-			[[ $? != '0' ]] && {
-				echo -ne "\n[${red}Warning${plain}] $Relese $DISTCheck was not found in this mirror, Please change mirror try again!\n"
-				exit 1
-			}
-		elif [[ "$linux_relese" == 'fedora' ]]; then
-			wget --no-check-certificate -qO- "$LinuxMirror/releases/$DIST/Server/$VER/os/media.repo" | grep -q 'mediaid'
-			[[ $? != '0' ]] && {
-				echo -ne "\n[${red}Warning${plain}] $Relese $DISTCheck was not found in this mirror, Please change mirror try again!\n"
-				exit 1
-			}
-		fi
 	fi
 }
 
@@ -2766,40 +2440,28 @@ function DebianModifiedPreseed() {
 			DebianVimVer=""
 		fi
 		# Set parameter "mouse-=a" in /usr/share/vim/vim-version/defaults.vim to support copy text from terminal to client.
-		VimSupportCopy="$1 sed -i 's/set mouse=a/set mouse-=a/g' /usr/share/vim/${DebianVimVer}/defaults.vim;"
 		# Enable cursor edit backspace freely in insert mode.
 		# Reference: https://wonderwall.hatenablog.com/entry/2016/03/23/232634
-		VimIndentEolStart="$1 sed -i 's/set compatible/set nocompatible/g' /etc/vim/vimrc.tiny; $1 sed -i '/set nocompatible/a\set backspace=2' /etc/vim/vimrc.tiny;"
-		[[ "$DebianVimVer" == "" ]] && {
-			VimSupportCopy=""
-			VimIndentEolStart=""
-		}
 		# Fail2ban configurations.
 		# Reference: https://github.com/fail2ban/fail2ban/issues/2756
 		#            https://www.mail-archive.com/debian-bugs-dist@lists.debian.org/msg1879390.html
-		[[ "$setFail2banStatus" == "1" ]] && {
-			EnableFail2ban="$1 sed -i '/^\[Definition\]/a allowipv6 = auto' /etc/fail2ban/fail2ban.conf; $1 sed -ri 's/^backend = auto/backend = systemd/g' /etc/fail2ban/jail.conf; $1 update-rc.d fail2ban enable; $1 /etc/init.d/fail2ban restart;"
-			fail2banComponent="fail2ban"
-		}
 		AptUpdating="$1 apt update -y;"
 		# pre-install some commonly used software.
-		InstallComponents="$1 apt install apt-transport-https ca-certificates cron curl dnsutils dpkg ${fail2banComponent} file lrzsz lsb-release net-tools sudo vim wget -y;"
+		InstallComponents="$1 apt install apt-transport-https ca-certificates curl lsb-release net-tools sudo vim wget -y;"
 		# In Debian 9 and former, some certificates are expired.
 		DisableCertExpiredCheck="$1 sed -i '/^mozilla\/DST_Root_CA_X3/s/^/!/' /etc/ca-certificates.conf; $1 update-ca-certificates -f;"
 		if [[ "$IsCN" == "cn" ]]; then
 			# Modify /root/.bashrc to support colorful filename.
-			ChangeBashrc="$1 rm -rf /root/.bashrc; $1 wget --no-check-certificate -qO /root/.bashrc '${debianConfFileDirCn}/.bashrc';"
 			# Need to install "resolvconf" manually after all installation ended, logged into new system.
 			# DNS server validation must setting up in installed system, can't in preseeding!
 			# Set China DNS server from Tencent Cloud and Alibaba Cloud permanently.
-			[[ "$setDns" == "1" ]] && SetDNS="CNResolvHead" DnsChangePermanently="$1 mkdir -p /etc/resolvconf/resolv.conf.d/; $1 wget --no-check-certificate -qO /etc/resolvconf/resolv.conf.d/head '${debianConfFileDirCn}/network/${SetDNS}';" || DnsChangePermanently=""
+			[[ "$setDns" == "1" ]] && SetDNS="CNResolvHead"
 			# Modify logging in welcome information(Message Of The Day) of Debian and make it more pretty.
-			[[ "$setMotd" == "1" ]] && ModifyMOTD="$1 rm -rf /etc/update-motd.d/ /etc/motd /run/motd.dynamic; $1 mkdir -p /etc/update-motd.d/; $1 wget --no-check-certificate -qO /etc/update-motd.d/00-header '${debianConfFileDirCn}/updatemotd/00-header'; $1 wget --no-check-certificate -qO /etc/update-motd.d/10-sysinfo '${debianConfFileDirCn}/updatemotd/10-sysinfo'; $1 wget --no-check-certificate -qO /etc/update-motd.d/90-footer '${debianConfFileDirCn}/updatemotd/90-footer'; $1 chmod +x /etc/update-motd.d/00-header; $1 chmod +x /etc/update-motd.d/10-sysinfo; $1 chmod +x /etc/update-motd.d/90-footer;" || ModifyMOTD=""
+			[[ "$setMotd" == "1" ]]
 		else
-			ChangeBashrc="$1 rm -rf /root/.bashrc; $1 wget --no-check-certificate -qO /root/.bashrc '${debianConfFileDir}/.bashrc';"
 			# Set DNS server from Cloudflare and Google permanently.
-			[[ "$setDns" == "1" ]] && SetDNS="NomalResolvHead" DnsChangePermanently="$1 mkdir -p /etc/resolvconf/resolv.conf.d/; $1 wget --no-check-certificate -qO /etc/resolvconf/resolv.conf.d/head '${debianConfFileDir}/network/${SetDNS}';" || DnsChangePermanently=""
-			[[ "$setMotd" == "1" ]] && ModifyMOTD="$1 rm -rf /etc/update-motd.d/ /etc/motd /run/motd.dynamic; $1 mkdir -p /etc/update-motd.d/; $1 wget --no-check-certificate -qO /etc/update-motd.d/00-header '${debianConfFileDir}/updatemotd/00-header'; $1 wget --no-check-certificate -qO /etc/update-motd.d/10-sysinfo '${debianConfFileDir}/updatemotd/10-sysinfo'; $1 wget --no-check-certificate -qO /etc/update-motd.d/90-footer '${debianConfFileDir}/updatemotd/90-footer'; $1 chmod +x /etc/update-motd.d/00-header; $1 chmod +x /etc/update-motd.d/10-sysinfo; $1 chmod +x /etc/update-motd.d/90-footer;" || ModifyMOTD=""
+			[[ "$setDns" == "1" ]] && SetDNS="NomalResolvHead" 
+			[[ "$setMotd" == "1" ]]
 		fi
 		# For multiple interfaces environment, if the interface which is configurated by "auto", regardless of it is plugged by internet cable,
 		# Debian/Kali will continuously try to wake and start up it contains with dhcp even timeout.
@@ -2880,14 +2542,6 @@ function DebianModifiedPreseed() {
 		#         netmask 128
 		#         gateway fe80::200:17ff:fe9e:f9d0
 		#         dns-nameservers 2606:4700:4700::1001 2001:4860:4860::8844
-		[[ "$linux_relese" == 'kali' ]] && {
-			ChangeBashrc=""
-			# Enable Kali ssh service.
-			EnableSSH="$1 update-rc.d ssh enable; $1 /etc/init.d/ssh restart;"
-			# Revise terms of license from "Debian" to "Kali" in motd file of "00-header".
-			ReviseMOTD="$1 sed -ri 's/Debian/Kali/g' /etc/update-motd.d/00-header;"
-			SupportZSH="$1 apt install zsh -y; $1 chsh -s /bin/zsh; $1 rm -rf /root/.bashrc.original;"
-		}
 		# Write the following configs to "/etc/sysctl.d/99-sysctl.conf", including network optimization:
 		#
 		# net.core.default_qdisc = fq
@@ -2947,11 +2601,6 @@ function DebianModifiedPreseed() {
 		# 9. http://performance.oreda.net/linux/configuration/sysctl 高負荷·大規模システムのLinuxカーネル·チューニング Linux kernel tuning for high availability and large scale system.
 		#
 		# To enable BBR is only suitable for Debian 11+
-		[[ "$enableBBR" == "1" ]] && [[ "$DebianDistNum" -ge "11" || "$linux_relese" == "kali" ]] && {
-			EnableBBR="$1 sed -i '\$anet.core.default_qdisc = fq' $3; $1 sed -i '\$anet.ipv4.tcp_congestion_control = bbr' $3; $1 sed -i '\$anet.ipv4.tcp_rmem = 8192 262144 536870912' $3; $1 sed -i '\$anet.ipv4.tcp_wmem = 4096 16384 536870912' $3; $1 sed -i '\$anet.ipv4.tcp_adv_win_scale = -2' $3; $1 sed -i '\$anet.ipv4.tcp_collapse_max_bytes = 6291456' $3; $1 sed -i '\$anet.ipv4.tcp_notsent_lowat = 131072' $3; $1 sed -i '\$anet.ipv4.ip_local_port_range = 1024 65535' $3; $1 sed -i '\$anet.core.rmem_max = 536870912' $3; $1 sed -i '\$anet.core.wmem_max = 536870912' $3; $1 sed -i '\$anet.core.somaxconn = 32768' $3; $1 sed -i '\$anet.core.netdev_max_backlog = 32768' $3; $1 sed -i '\$anet.ipv4.tcp_max_tw_buckets = 65536' $3; $1 sed -i '\$anet.ipv4.tcp_abort_on_overflow = 1' $3; $1 sed -i '\$anet.ipv4.tcp_slow_start_after_idle = 0' $3; $1 sed -i '\$anet.ipv4.tcp_timestamps = 1' $3; $1 sed -i '\$anet.ipv4.tcp_syncookies = 0' $3; $1 sed -i '\$anet.ipv4.tcp_syn_retries = 3' $3; $1 sed -i '\$anet.ipv4.tcp_synack_retries = 3' $3; $1 sed -i '\$anet.ipv4.tcp_max_syn_backlog = 32768' $3; $1 sed -i '\$anet.ipv4.tcp_fin_timeout = 15' $3; $1 sed -i '\$anet.ipv4.tcp_keepalive_intvl = 3' $3; $1 sed -i '\$anet.ipv4.tcp_keepalive_probes = 5' $3; $1 sed -i '\$anet.ipv4.tcp_keepalive_time = 600' $3; $1 sed -i '\$anet.ipv4.tcp_retries1 = 3' $3; $1 sed -i '\$anet.ipv4.tcp_retries2 = 5' $3; $1 sed -i '\$anet.ipv4.tcp_no_metrics_save = 1' $3; $1 sed -i '\$anet.ipv4.ip_forward = 1' $3; $1 sed -i '\$afs.file-max = 104857600' $3; $1 sed -i '\$afs.inotify.max_user_instances = 8192' $3; $1 sed -i '\$afs.nr_open = 1048576' $3; $1 systemctl restart systemd-sysctl;"
-		} || {
-			EnableBBR=""
-		}
 		# For some cloud providers which servers boot from their own grub2 bootloader first by force, not boot from grub in harddisk of our own servers directly,
 		# we need to creat a soft link for grub2 from grub1 to make sure the first reboot after installation won't meet a fatal.
 		# In this situation, the partition table and filesystem of the newly installed OS must be "mbr" and "ext4".
@@ -2959,7 +2608,7 @@ function DebianModifiedPreseed() {
 		CreateSoftLinkToGrub2FromGrub1="$1 ln -s /boot/grub/ /boot/grub2;"
 		# Statement of "grub-pc/timeout" in "preseed.cfg" is only valid for BIOS.
 		[[ "$EfiSupport" == "enabled" ]] && SetGrubTimeout="$1 sed -ri 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=3/g' /etc/default/grub; $1 sed -ri 's/set timeout=5/set timeout=3/g' /boot/grub/grub.cfg;" || SetGrubTimeout=""
-		export DebianModifiedProcession="${AptUpdating} ${InstallComponents} ${DisableCertExpiredCheck} ${ChangeBashrc} ${VimSupportCopy} ${VimIndentEolStart} ${DnsChangePermanently} ${ModifyMOTD} ${BurnIrregularIpv4Gate} ${BurnIrregularIpv6Gate} ${SupportIPv6orIPv4} ${ReplaceActualIpPrefix} ${AutoPlugInterfaces} ${EnableSSH} ${ReviseMOTD} ${SupportZSH} ${EnableFail2ban} ${EnableBBR} ${CreateSoftLinkToGrub2FromGrub1} ${SetGrubTimeout}"
+		export DebianModifiedProcession="${AptUpdating} ${BurnIrregularIpv4Gate} ${BurnIrregularIpv6Gate} ${SupportIPv6orIPv4} ${ReplaceActualIpPrefix} ${AutoPlugInterfaces} ${EnableSSH} ${CreateSoftLinkToGrub2FromGrub1}"
 	fi
 }
 
@@ -3271,16 +2920,9 @@ linux_relese=$(echo "$Relese" | sed 's/\ //g' | sed -r 's/(.*)/\L\1/')
 
 [[ -z "$tmpDIST" ]] && {
 	[ "$Relese" == 'Debian' ] && tmpDIST='12'
-	[ "$Relese" == 'Kali' ] && tmpDIST='rolling'
-	[ "$Relese" == 'AlpineLinux' ] && tmpDIST='edge'
-	[ "$Relese" == 'CentOS' ] && tmpDIST='9'
-	[ "$Relese" == 'RockyLinux' ] && tmpDIST='9'
-	[ "$Relese" == 'AlmaLinux' ] && tmpDIST='9'
-	[ "$Relese" == 'Fedora' ] && tmpDIST='39'
 }
 [[ -z "$finalDIST" ]] && {
 	[ "$targetRelese" == 'Ubuntu' ] && finalDIST='22.04'
-	[ "$targetRelese" == 'Windows' ] && finalDIST='11'
 }
 
 checkVER
@@ -3367,7 +3009,7 @@ clear
 }
 
 [[ "$ddMode" == '1' ]] && {
-	if [[ "$targetRelese" == 'Ubuntu' ]] || [[ "$targetRelese" == 'Windows' ]] || [[ "$targetRelese" == 'AlmaLinux' ]] || [[ "$targetRelese" == 'Rocky' ]]; then
+	if [[ "$targetRelese" == 'Ubuntu' ]]; then
 		Relese='AlpineLinux'
 		tmpDIST='edge'
 		if [[ "$targetRelese" == 'Windows' ]]; then
@@ -3389,12 +3031,6 @@ clear
 	echo -ne "\n[${red}Error${plain}] Invaild mirror! \n"
 	[ "$Relese" == 'Debian' ] && echo -ne "${yellow}Please check mirror lists:${plain} https://www.debian.org/mirror/list\n\n"
 	[ "$Relese" == 'Ubuntu' ] && echo -ne "${yellow}Please check mirror lists:${plain} https://launchpad.net/ubuntu/+archivemirrors\n\n"
-	[ "$Relese" == 'Kali' ] && echo -ne "${yellow}Please check mirror lists:${plain} https://http.kali.org/README.mirrorlist\n\n"
-	[ "$Relese" == 'AlpineLinux' ] && echo -ne "${yellow}Please check mirror lists:${plain} https://mirrors.alpinelinux.org/\n\n"
-	[ "$Relese" == 'CentOS' ] && echo -ne "${yellow}Please check mirror lists:${plain} https://www.centos.org/download/mirrors/\n\n"
-	[ "$Relese" == 'RockyLinux' ] && echo -ne "${yellow}Please check mirror lists:${plain} https://mirrors.rockylinux.org/mirrormanager/mirrors\n\n"
-	[ "$Relese" == 'AlmaLinux' ] && echo -ne "${yellow}Please check mirror lists:${plain} https://mirrors.almalinux.org/\n\n"
-	[ "$Relese" == 'Fedora' ] && echo -ne "${yellow}Please check mirror lists:${plain} https://mirrors.fedoraproject.org/\n\n"
 	# bash $0 error
 	exit 1
 }
