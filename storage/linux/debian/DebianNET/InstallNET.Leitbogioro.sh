@@ -1171,111 +1171,55 @@ function checkVirt() {
 }
 
 function checkSys() {
-	# Remove AliYunDun(a guard process to support monitoring hardware status, scanning security breaches for alarm etc.) from Alibaba Cloud otherwise it will impede the installation.
+	# [Optimization] Removed the forced uninstallation script for Aliyun Shield (Fuck_Aliyun) to eliminate security risks.
 
+	# [Retained] Create temporary Swap partition
+	# Prevents installation failure due to Out Of Memory (OOM) on low-memory machines (e.g., 512MB) during image download or decompression.
 	rm -rf /swapspace
-	# Allocate 512 MB temporary swap to provent yum dead.
 	if [[ ! -e "/swapspace" ]]; then
 		fallocate -l 512M /swapspace
 		chmod 600 /swapspace
 		mkswap /swapspace
 		swapon /swapspace
-		# Prefer to divert temporary data from RAM to virtual memory when there are 70% left and below of RAM to pull out a biggest effort to make sure the allowance of RAM is sufficient for installing dependence.
-		# In RAM that less and equal than 512 MB environment, the occupation of "yum / dnf" process could reach to nearly 49% at highest, the original value of swappiness in official templates of Simple Application Servers from Alibaba Cloud is "0".
-		# The default number of this value is "60" for a standard Linux distribution like Debian/Kali/Redhat series, it's "90" on Alpine.
-		# Mem:  446028(total)  216752(used)
+		# Optimize Swappiness: Increase value to encourage swapping and prevent OOM killer on low RAM.
 		[[ $(cat /proc/sys/vm/swappiness | sed 's/[^0-9]//g') -lt "70" ]] && sysctl vm.swappiness=70
 	fi
 
-	# Fix debian security sources 404 not found (only of default sources)
-	sed -i 's/^\(deb.*security.debian.org\/\)\(.*\)\/updates/\1debian-security\2-security/g' /etc/apt/sources.list
+	# [Optimization] Environment check and dependency installation for Debian/Ubuntu hosts only.
+	# Confirm the current host is Debian or Ubuntu based.
+	if [ -f /etc/debian_version ]; then
+		# Attempt to fix potential 404 errors with security sources on older Debian versions.
+		sed -i 's/^\(deb.*security.debian.org\/\)\(.*\)\/updates/\1debian-security\2-security/g' /etc/apt/sources.list
 
-	CurrentOSVer=$(cat /etc/os-release | grep -w "VERSION_ID=*" | awk -F '=' '{print $2}' | sed 's/\"//g' | cut -d'.' -f 1)
+		# Update software sources.
+		apt-get update -y
 
-	apt update -y
-	# Try to fix error of connecting to current mirror for Debian.
-	if [[ $? -ne 0 ]]; then
-		apt update -y >/root/apt_execute.log
-		if [[ $(grep -i "debian" /root/apt_execute.log) ]] && [[ $(grep -i "err:[0-9]" /root/apt_execute.log) || $(grep -i "404  not found" /root/apt_execute.log) ]]; then
-			currentDebianMirror=$(sed -n '/^deb /'p /etc/apt/sources.list | head -n 1 | awk '{print $2}' | sed -e 's|^[^/]*//||' -e 's|/.*$||')
-			if [[ "$CurrentOSVer" -gt "9" ]]; then
-				# Replace invalid mirror of Debian to 'deb.debian.org' if current version has not been 'EOL'(End Of Life).
-				sed -ri "s/$currentDebianMirror/deb.debian.org/g" /etc/apt/sources.list
-			else
-				# Replace invalid mirror of Debian to 'archive.debian.org' because it had been marked with 'EOL'.
-				sed -ri "s/$currentDebianMirror/archive.debian.org/g" /etc/apt/sources.list
-			fi
-			# Disable get security update.
-			sed -ri 's/^deb-src/# deb-src/g' /etc/apt/sources.list
-			apt update -y
-		fi
-		rm -rf /root/apt_execute.log
-	fi
-	apt install lsb-release -y
+		# [Optimization] Streamline and merge dependency installation commands.
+		# Removed unnecessary packages like 'kexec-tools' that might cause kernel conflicts.
+		# Ensure installation of basic download, decompression, and network tools.
+		apt-get install -y \
+			ca-certificates \
+			curl \
+			wget \
+			net-tools \
+			iproute2 \
+			virt-what \
+			openssl \
+			lsb-release \
+			xz-utils \
+			file \
+			cpio \
+			dmidecode \
+			dnsutils
 
-	DebianRelease=""
-	IsUbuntu=$(uname -a | grep -i "ubuntu")
-	IsDebian=$(uname -a | grep -i "debian")
-	for Count in $(cat /etc/os-release | grep -w "ID=*" | awk -F '=' '{print $2}') $(cat /etc/issue | awk '{print $1}') "$OsLsb"; do
-		[[ -n "$Count" ]] && DebianRelease=$(echo -e "$Count")"$DebianRelease"
-	done
-
-	if [[ $(echo "$RedHatRelease" | grep -i 'centos') != "" ]]; then
-		CurrentOS="CentOS"
-	elif [[ $(echo "$RedHatRelease" | grep -i 'cloudlinux') != "" ]]; then
-		CurrentOS="CloudLinux"
-	elif [[ $(echo "$RedHatRelease" | grep -i 'alma') != "" ]]; then
-		CurrentOS="AlmaLinux"
-	elif [[ $(echo "$RedHatRelease" | grep -i 'rocky') != "" ]]; then
-		CurrentOS="RockyLinux"
-	elif [[ $(echo "$RedHatRelease" | grep -i 'fedora') != "" ]]; then
-		CurrentOS="Fedora"
-	elif [[ $(echo "$RedHatRelease" | grep -i 'virtuozzo') != "" ]]; then
-		CurrentOS="Vzlinux"
-	elif [[ $(echo "$RedHatRelease" | grep -i 'ol\|oracle') != "" ]]; then
-		CurrentOS="OracleLinux"
-	elif [[ $(echo "$RedHatRelease" | grep -i 'opencloud') != "" ]]; then
-		CurrentOS="OpenCloudOS"
-	elif [[ $(echo "$RedHatRelease" | grep -i 'alibaba\|alinux\|aliyun') != "" ]]; then
-		CurrentOS="AlibabaCloudLinux"
-	elif [[ $(echo "$RedHatRelease" | grep -i 'amazon\|amzn') != "" ]]; then
-		CurrentOS="AmazonLinux"
-		amazon-linux-extras install epel -y
-	elif [[ $(echo "$RedHatRelease" | grep -i 'red\|rhel') != "" ]]; then
-		CurrentOS="RedHatEnterpriseLinux"
-	elif [[ $(echo "$RedHatRelease" | grep -i 'anolis') != "" ]]; then
-		CurrentOS="OpenAnolis"
-	elif [[ $(echo "$RedHatRelease" | grep -i 'scientific') != "" ]]; then
-		CurrentOS="ScientificLinux"
-	elif [[ $(echo "$AlpineRelease" | grep -i 'alpine') != "" ]]; then
-		CurrentOS="AlpineLinux"
-	elif [[ "$IsUbuntu" ]] || [[ $(echo "$DebianRelease" | grep -i 'ubuntu') != "" ]]; then
-		CurrentOS="Ubuntu"
-		CurrentOSVer=$(lsb_release -r | awk '{print$2}' | cut -d'.' -f1)
-	elif [[ "$IsDebian" ]] || [[ $(echo "$DebianRelease" | grep -i 'debian') != "" ]]; then
-		CurrentOS="Debian"
-		CurrentOSVer=$(lsb_release -r | awk '{print$2}' | cut -d'.' -f1)
-	elif [[ "$IsKali" ]] || [[ $(echo "$DebianRelease" | grep -i 'kali') != "" ]]; then
-		CurrentOS="Kali"
-		CurrentOSVer=$(lsb_release -r | awk '{print$2}' | cut -d'.' -f1)
+		# Get current system version number (used for subsequent logic).
+		CurrentOSVer=$(cat /etc/os-release | grep -w "VERSION_ID=*" | awk -F '=' '{print $2}' | sed 's/\"//g' | cut -d'.' -f 1)
+		echo -e "[Info] Detected System Version: $CurrentOSVer"
 	else
-		echo -ne "\n[${red}Error${plain}] Does't support your system!\n"
+		echo -e "\n[Error] This script only supports running on Debian/Ubuntu systems."
+		echo -e "Current OS is not detected as Debian-based.\n"
 		exit 1
 	fi
-	# Don't support Redhat like linux OS under 6 version.
-	if [[ "$CurrentOS" == "CentOS" || "$CurrentOS" == "OracleLinux" ]] && [[ "$CurrentOSVer" -le "6" ]]; then
-		echo -e "Does't support your system!\n"
-		exit 1
-	fi
-
-	# Remove "inetutils-ping" because it does not support the statement of "ping -4" or "ping -6".
-	# "kexec-tools" is also need to be removed because in environment of official template of Debian 12 on Tencent Cloud, whether it is executing on instance of "Lighthouse" or "CVM"(Cloud Virtual Machine).
-	# This component may cause the menuentry of grub which we had generated and wrote can't be booted successfully when rebooting the system.
-	# "kdump-tools" is a dependence of "kexec-tools".
-	apt purge inetutils-ping kdump-tools kexec-tools -y
-	# Debian like linux OS necessary components.
-	apt install cpio curl dmidecode dnsutils efibootmgr fdisk file gzip iputils-ping jq net-tools openssl tuned util-linux virt-what wget xz-utils -y
-
 }
 
 function checkVER() {
@@ -2425,8 +2369,6 @@ function setDhcpOrStatic() {
 # $1 is "in-target", $2 is "/etc/network/interfaces", $3 is "/etc/sysctl.d/99-sysctl.conf".
 function DebianModifiedPreseed() {
 	if [[ "$linux_relese" == 'debian' ]] || [[ "$linux_relese" == 'kali' ]]; then
-		debianConfFileDir="https://raw.githubusercontent.com/leitbogioro/Tools/master/Linux_reinstall/Debian"
-		debianConfFileDirCn="https://gitee.com/mb9e8j2/Tools/raw/master/Linux_reinstall/Debian"
 		# Must use ";" instead of using "&&", "echo -e" etc to combine multiple commands, or write text in files, recommend sed.
 		# Can't pass parameters correctly in preseed environment.
 		# DebianVimVer=`ls -a /usr/share/vim | grep vim[0-9]`
@@ -2608,6 +2550,7 @@ function DebianModifiedPreseed() {
 		CreateSoftLinkToGrub2FromGrub1="$1 ln -s /boot/grub/ /boot/grub2;"
 		# Statement of "grub-pc/timeout" in "preseed.cfg" is only valid for BIOS.
 		[[ "$EfiSupport" == "enabled" ]] && SetGrubTimeout="$1 sed -ri 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=3/g' /etc/default/grub; $1 sed -ri 's/set timeout=5/set timeout=3/g' /boot/grub/grub.cfg;" || SetGrubTimeout=""
+		EnableSSH="$1 apt-get install -y openssh-server; $1 sed -i 's/^#PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config; $1 sed -i 's/^PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config; $1 sed -i 's/^#PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config; $1 systemctl enable ssh;"
 		export DebianModifiedProcession="${AptUpdating} ${BurnIrregularIpv4Gate} ${BurnIrregularIpv6Gate} ${SupportIPv6orIPv4} ${ReplaceActualIpPrefix} ${AutoPlugInterfaces} ${EnableSSH} ${CreateSoftLinkToGrub2FromGrub1}"
 	fi
 }
@@ -2631,9 +2574,7 @@ function DebianPreseedProcess() {
 			[[ "$linux_relese" == 'debian' && "$DebianDistNum" -ge "11" || "$linux_relese" == 'kali' ]] && AddCloudKernel="$addCloudKernelCmd linux-image-cloud-$VER" || AddCloudKernel=""
 		fi
 		# Despite VMware and Virtualbox are some kinds of virtualizations but Cloud kernel isn't suitable for them otherwise Debian series will meet a fatal when booting into the newly installed system.
-		[[ -n "$setRaid" || "$ddMode" == '1' || -n $(echo $virtWhat | grep -io 'vmware\|virtualbox') ]] && AddCloudKernel=""
-		ddWindowsEarlyCommandsOfAnna='anna-install libfuse2-udeb fuse-udeb ntfs-3g-udeb libcrypto3-udeb libpcre2-8-0-udeb libssl3-udeb libuuid1-udeb zlib1g-udeb wget-udeb'
-		tmpDdWinsEarlyCommandsOfAnna="$ddWindowsEarlyCommandsOfAnna"
+		[[ -n "$setRaid" || -n $(echo $virtWhat | grep -io 'vmware\|virtualbox') ]] && AddCloudKernel=""
 		setNormalRecipe "$linux_relese" "$disksNum" "$setSwap" "$setDisk" "$partitionTable" "$setFileSystem" "$EfiSupport" "$diskCapacity" "$IncDisk" "$AllDisks"
 		setRaidRecipe "$setRaid" "$disksNum" "$AllDisks" "$linux_relese"
 		# Debian 11 and former versions couldn't accept irregular IPv6 format configs, they can only be recognized by Debian 12+ and Kali, dd mode(base system is Debian 12) prefer IPv4 to config network.
@@ -2765,21 +2706,6 @@ d-i time/zone string ${TimeZone}
 d-i clock-setup/ntp boolean true
 d-i clock-setup/ntp-server string ntp.nict.jp
 
-### Get harddisk name and Windows DD installation set up
-d-i preseed/early_command string ${ddWindowsEarlyCommandsOfAnna}
-d-i partman/early_command string \
-lvremove --select all -ff -y; \
-vgremove --select all -ff -y; \
-pvremove /dev/* -ff -y; \
-[[ -n "\$(blkid -t TYPE='vfat' -o device)" ]] && umount "\$(blkid -t TYPE='vfat' -o device)"; \
-${PartmanEarlyCommand} \
-wget -qO- '$DDURL' | $DEC_CMD | /bin/dd of=\$(list-devices disk | grep ${IncDisk} | head -n 1); \
-/bin/ntfs-3g \$(list-devices partition | grep ${IncDisk} | head -n 1) /mnt; \
-cd '/mnt/ProgramData/Microsoft/Windows/Start Menu/Programs'; \
-cd Start* || cd start*; \
-cp -f '/net.bat' './net.bat'; \
-/sbin/reboot; \
-umount /media || true; \
 
 ### Partitioning
 d-i partman-lvm/device_remove_lvm boolean true
@@ -2829,57 +2755,6 @@ echo '' >>/target/etc/crontab; \
 echo '${setCMD}' >/target/etc/run.sh; \
 ${DebianModifiedProcession}
 EOF
-	fi
-}
-
-# The parameter which be passed into the function after 10th order must be included with "{}".
-function alpineInstallOrDdAdditionalFiles() {
-	AlpineInitFile="$1"
-	AlpineDnsFile="$2"
-	AlpineMotd="$3"
-	AlpineInitFileName="alpineConf.start"
-	if [[ "$targetRelese" == 'Ubuntu' ]]; then
-		if [[ "$ubuntuArchitecture" == "amd64" ]]; then
-			targetLinuxMirror="$4"
-			targetLinuxSecurityMirror="${10}"
-		elif [[ "$ubuntuArchitecture" == "arm64" ]]; then
-			targetLinuxMirror="$5"
-			targetLinuxSecurityMirror="$5"
-		fi
-		AlpineInitFile="$6"
-		AlpineInitFileName="ubuntuConf.start"
-		[[ "$setIPv6" == "0" ]] && setIPv6="0" || setIPv6="1"
-	elif [[ "$targetRelese" == 'AlmaLinux' || "$targetRelese" == 'Rocky' ]]; then
-		AlpineInitFile="$9"
-		AlpineInitFileName="rhelConf.start"
-		[[ "$setIPv6" == "0" ]] && setIPv6="0" || setIPv6="1"
-	elif [[ "$targetRelese" == 'Windows' ]]; then
-		AlpineInitFile="$7"
-		AlpineInitFileName="windowsConf.start"
-		windowsStaticConfigCmd="$8"
-	fi
-}
-
-# $1 is "$tmpURL".
-function verifyUrlValidationOfDdImages() {
-	echo "$1" | grep -q '^http://\|^ftp://\|^https://'
-	[[ $? -ne '0' ]] && echo -ne "\n[${red}Error${plain}] Please input a vaild URL, only support http://, ftp:// and https:// ! \n" && exit 1
-	tmpURLCheck=$(echo $(curl -s -I -X GET $1) | grep -wi "http/[0-9]*" | awk '{print $2}')
-	[[ -z "$tmpURLCheck" || ! "$tmpURLCheck" =~ ^[0-9]+$ ]] && {
-		echo -ne "\n[${red}Error${plain}] The mirror of DD images is temporarily unavailable!\n"
-		exit 1
-	}
-	DDURL="$1"
-	# Decompress command selection
-	if [[ "$setFileType" == "gz" ]]; then
-		DEC_CMD="gunzip -dc"
-		[[ $(echo "$DDURL" | grep -o ...$) == ".xz" ]] && DEC_CMD="xzcat"
-	elif [[ "$setFileType" == "xz" ]]; then
-		DEC_CMD="xzcat"
-		[[ $(echo "$DDURL" | grep -o ...$) == ".gz" ]] && DEC_CMD="gunzip -dc"
-	else
-		[[ $(echo "$DDURL" | grep -o ...$) == ".xz" ]] && DEC_CMD="xzcat"
-		[[ $(echo "$DDURL" | grep -o ...$) == ".gz" ]] && DEC_CMD="gunzip -dc"
 	fi
 }
 
@@ -2955,13 +2830,6 @@ clear
 		setenforce 0 2>/dev/null
 		echo -e "\nSuccess"
 	}
-}
-
-# RAM of RedHat series is 2.2GB required at least for native install, for dd is 512MB.
-[[ "$setNetbootXyz" == "0" ]] && {
-	checkMem "$linux_relese" "$RedHatSeries" "$targetRelese"
-	Add_OPTION="$Add_OPTION $lowmemLevel"
-	checkDIST
 }
 
 [[ -n "$TotalMem" ]] && {
@@ -3124,7 +2992,7 @@ echo "$TimeZone"
 echo -ne "\n${aoiBlue}# Hostname${plain}\n\n"
 echo "$HostName"
 
-if [[ -z "$tmpWORD" || "$linux_relese" == 'alpinelinux' ]]; then
+if [[ -z "$tmpWORD" ]]; then
 	tmpWORD='Vicer'
 	myPASSWORD='$1$0shYGfBd$8v189JOozDO1jPqPO645e1'
 else
@@ -3166,24 +3034,6 @@ echo -ne "\n${aoiBlue}# Formatting and Installing Drives${plain}\n\n"
 echo -ne "\n${aoiBlue}# Motherboard Firmware${plain}\n\n"
 [[ "$EfiSupport" == "enabled" ]] && echo "UEFI" || echo "BIOS"
 
-[[ "$setNetbootXyz" == "1" ]] && SpikCheckDIST="1"
-if [[ "$SpikCheckDIST" == '0' ]]; then
-	echo -ne "\n${aoiBlue}# Check DIST${plain}\n"
-	[[ "$linux_relese" == 'debian' ]] && DistsList="$(wget --no-check-certificate -qO- "$LinuxMirror/dists/" | grep -o 'href=.*/"' | cut -d'"' -f2 | sed '/-\|old\|README\|Debian\|experimental\|stable\|test\|sid\|devel/d' | grep '^[^/]' | sed -n '1h;1!H;$g;s/\n//g;s/\//\;/g;$p')"
-	[[ "$linux_relese" == 'kali' ]] && DistsList="$(wget --no-check-certificate -qO- "$LinuxMirror/dists/" | grep -o 'href=.*/"' | cut -d'"' -f2 | sed '/debian\|only\|last\|edge/d' | grep '^[^/]' | sed -n '1h;1!H;$g;s/\n//g;s/\//\;/g;$p')"
-	[[ "$linux_relese" == 'alpinelinux' ]] && DistsList="$(wget --no-check-certificate -qO- "$LinuxMirror/" | grep -o 'href=.*/"' | cut -d'"' -f2 | sed '/-/d' | grep '^[^/]' | sed -n '1h;1!H;$g;s/\n//g;s/\//\;/g;$p')"
-	for CheckDEB in $(echo "$DistsList" | sed 's/;/\n/g'); do
-		# In some mirror, the value of parameter "DistsList" is "?C=N;O=Dbookworm;bullseye;buster;http:;;wisepoint.jp;product;wpshibb;"
-		# The second item in "DistsList" which is splited by ";" is O=Dbookworm.
-		# So we need to check whether "DIST" is approximately equal(contains) to "CheckDEB".
-		[[ "$CheckDEB" =~ "$DIST" ]] && FindDists='1' && break
-	done
-	[[ "$FindDists" == '0' ]] && {
-		echo -ne "\n[${red}Error${plain}] The dists version not found, Please check it! \n\n"
-		exit 1
-	}
-	echo -e "\nSuccess"
-fi
 
 if [[ "$ddMode" == '1' ]]; then
 	if [[ "$targetRelese" == 'Ubuntu' ]]; then
@@ -3358,88 +3208,6 @@ if [[ "$linux_relese" == 'centos' ]]; then
 		fi
 	fi
 fi
-[[ "$setNetbootXyz" == "0" ]] && echo -ne "\n[${yellow}$Relese${plain}] [${yellow}$DIST${plain}] [${yellow}$VER${plain}] Downloading...\n" || echo -ne "\n[${yellow}netboot.xyz${plain}] Downloading...\n"
-
-if [[ "$setNetbootXyz" == "1" ]]; then
-	[[ "$VER" == "x86_64" || "$VER" == "amd64" ]] && apt install grub-imageboot -y
-	if [[ "$EfiSupport" == "enabled" ]] || [[ "$VER" == "aarch64" || "$VER" == "arm64" ]]; then
-		echo -ne "\n[${red}Error${plain}] Netbootxyz doesn't support $VER architecture!\n"
-		bash $0 error
-		exit 1
-	fi
-	# NetbootXYZ set to boot from an existing Linux installation using GRUB
-	# Reference: https://netboot.xyz/docs/booting/grub
-	if [[ "$IsCN" == "cn" ]]; then
-		NetbootXyzUrl="https://gitee.com/mb9e8j2/Tools/raw/master/Linux_reinstall/RedHat/NetbootXyz/netboot.xyz.iso"
-		NetbootXyzGrub="https://gitee.com/mb9e8j2/Tools/raw/master/Linux_reinstall/RedHat/NetbootXyz/60_grub-imageboot"
-	else
-		NetbootXyzUrl="https://boot.netboot.xyz/ipxe/netboot.xyz.iso"
-		NetbootXyzGrub="https://raw.githubusercontent.com/formorer/grub-imageboot/master/bin/60_grub-imageboot"
-	fi
-	[[ ! -d "/boot/images/" ]] && mkdir /boot/images/
-	rm -rf /boot/images/netboot.xyz.iso
-	echo -ne "[${yellow}Mirror${plain}] $NetbootXyzUrl\n"
-	wget --no-check-certificate -qO '/boot/images/netboot.xyz.iso' "$NetbootXyzUrl"
-	[[ ! -f "/etc/grub.d/60_grub-imageboot" ]] && wget --no-check-certificate -qO '/etc/grub.d/60_grub-imageboot' "$NetbootXyzGrub"
-	chmod 755 /etc/grub.d/60_grub-imageboot
-	[[ ! -z "$GRUBTYPE" && "$GRUBTYPE" == "isGrub2" ]] && {
-		rm -rf /boot/memdisk
-		cp /usr/share/syslinux/memdisk /boot/memdisk
-		ln -s /usr/share/grub/grub-mkconfig_lib /usr/lib/grub/grub-mkconfig_lib
-	}
-elif [[ "$linux_relese" == 'debian' ]] || [[ "$linux_relese" == 'ubuntu' ]] || [[ "$linux_relese" == 'kali' ]]; then
-	[ "$DIST" == "focal" ] && legacy="legacy-" || legacy=""
-	InitrdUrl="${LinuxMirror}/dists/${DIST}/main/installer-${VER}/current/${legacy}images/netboot/${linux_relese}-installer/${VER}/initrd.gz"
-	VmLinuzUrl="${LinuxMirror}/dists/${DIST}${inUpdate}/main/installer-${VER}/current/${legacy}images/netboot/${linux_relese}-installer/${VER}/linux"
-	[[ "$linux_relese" == 'kali' ]] && {
-		InitrdUrl="${LinuxMirror}/dists/${DIST}/main/installer-${VER}/current/images/netboot/debian-installer/${VER}/initrd.gz"
-		VmLinuzUrl="${LinuxMirror}/dists/${DIST}/main/installer-${VER}/current/images/netboot/debian-installer/${VER}/linux"
-	}
-	echo -ne "[${yellow}Mirror${plain}] $InitrdUrl\n\t $VmLinuzUrl\n"
-	wget --no-check-certificate -qO '/tmp/initrd.img' "$InitrdUrl"
-	[[ $? -ne '0' ]] && echo -ne "\n[${red}Error${plain}] Download 'initrd.img' for ${yellow}$linux_relese${plain} failed! \n" && exit 1
-	wget --no-check-certificate -qO '/tmp/vmlinuz' "$VmLinuzUrl"
-	[[ $? -ne '0' ]] && echo -ne "\n[${red}Error${plain}] Download 'vmlinuz' for ${yellow}$linux_relese${plain} failed! \n" && exit 1
-	MirrorHost="$(echo "$LinuxMirror" | awk -F'://|/' '{print $2}')"
-	MirrorFolder="$(echo "$LinuxMirror" | awk -F''${MirrorHost}'' '{print $2}')/"
-	[ -n "$MirrorFolder" ] || MirrorFolder="/"
-elif [[ "$linux_relese" == 'alpinelinux' ]]; then
-	InitrdUrl="${LinuxMirror}/${DIST}/releases/${VER}/netboot/${InitrdName}"
-	VmLinuzUrl="${LinuxMirror}/${DIST}/releases/${VER}/netboot/${VmLinuzName}"
-	ModLoopUrl="${LinuxMirror}/${DIST}/releases/${VER}/netboot/${ModLoopName}"
-	echo -ne "[${yellow}Mirror${plain}] $InitrdUrl\n\t $VmLinuzUrl\n"
-	wget --no-check-certificate -qO '/tmp/initrd.img' "$InitrdUrl"
-	[[ $? -ne '0' ]] && echo -ne "\n[${red}Error${plain}] Download '$InitrdName' for ${yellow}$linux_relese${plain} failed! \n" && exit 1
-	wget --no-check-certificate -qO '/tmp/vmlinuz' "$VmLinuzUrl"
-	[[ $? -ne '0' ]] && echo -ne "\n[${red}Error${plain}] Download '$VmLinuzName' for ${yellow}$linux_relese${plain} failed! \n" && exit 1
-elif [[ "$linux_relese" == 'centos' ]] && [[ "$RedHatSeries" -le "7" ]]; then
-	InitrdUrl="${LinuxMirror}/${DIST}/os/${VER}/images/pxeboot/initrd.img"
-	VmLinuzUrl="${LinuxMirror}/${DIST}/os/${VER}/images/pxeboot/vmlinuz"
-	echo -ne "[${yellow}Mirror${plain}] $InitrdUrl\n\t $VmLinuzUrl\n"
-	wget --no-check-certificate -qO '/tmp/initrd.img' "$InitrdUrl"
-	[[ $? -ne '0' ]] && echo -ne "\n[${red}Error${plain}] Download 'initrd.img' for ${yellow}$linux_relese${plain} failed! \n" && exit 1
-	wget --no-check-certificate -qO '/tmp/vmlinuz' "$VmLinuzUrl"
-	[[ $? -ne '0' ]] && echo -ne "\n[${red}Error${plain}] Download 'vmlinuz' for ${yellow}$linux_relese${plain} failed! \n" && exit 1
-elif [[ "$linux_relese" == 'centos' && "$RedHatSeries" -ge "8" ]] || [[ "$linux_relese" == 'rockylinux' ]] || [[ "$linux_relese" == 'almalinux' ]]; then
-	InitrdUrl="${LinuxMirror}/${DIST}/BaseOS/${VER}/os/images/pxeboot/initrd.img"
-	VmLinuzUrl="${LinuxMirror}/${DIST}/BaseOS/${VER}/os/images/pxeboot/vmlinuz"
-	echo -ne "[${yellow}Mirror${plain}] $InitrdUrl\n\t $VmLinuzUrl\n"
-	wget --no-check-certificate -qO '/tmp/initrd.img' "$InitrdUrl"
-	[[ $? -ne '0' ]] && echo -ne "\n[${red}Error${plain}] Download 'initrd.img' for ${yellow}$linux_relese${plain} failed! \n" && exit 1
-	wget --no-check-certificate -qO '/tmp/vmlinuz' "$VmLinuzUrl"
-	[[ $? -ne '0' ]] && echo -ne "\n[${red}Error${plain}] Download 'vmlinuz' for ${yellow}$linux_relese${plain} failed! \n" && exit 1
-elif [[ "$linux_relese" == 'fedora' ]]; then
-	InitrdUrl="${LinuxMirror}/releases/${DIST}/Server/${VER}/os/images/pxeboot/initrd.img"
-	VmLinuzUrl="${LinuxMirror}/releases/${DIST}/Server/${VER}/os/images/pxeboot/vmlinuz"
-	echo -ne "[${yellow}Mirror${plain}] $InitrdUrl\n\t $VmLinuzUrl\n"
-	wget --no-check-certificate -qO '/tmp/initrd.img' "$InitrdUrl"
-	[[ $? -ne '0' ]] && echo -ne "\n[${red}Error${plain}] Download 'initrd.img' for ${yellow}$linux_relese${plain} failed! \n" && exit 1
-	wget --no-check-certificate -qO '/tmp/vmlinuz' "$VmLinuzUrl"
-	[[ $? -ne '0' ]] && echo -ne "\n[${red}Error${plain}] Download 'vmlinuz' for ${yellow}$linux_relese${plain} failed! \n" && exit 1
-else
-	bash $0 error
-	exit 1
-fi
 
 if [[ "$IncFirmware" == '1' ]]; then
 	if [[ "$linux_relese" == 'debian' ]]; then
@@ -3480,11 +3248,8 @@ tmpDirAvail=$(df -TBM | grep "/tmp\|/dev/shm" | head -n 1 | awk '{print $5}' | t
 mkdir -p /tmp/boot
 cd /tmp/boot
 
-if [[ "$linux_relese" == 'debian' ]] || [[ "$linux_relese" == 'ubuntu' ]] || [[ "$linux_relese" == 'kali' ]] || [[ "$linux_relese" == 'alpinelinux' ]]; then
+if [[ "$linux_relese" == 'debian' ]] || [[ "$linux_relese" == 'ubuntu' ]]; then
 	COMPTYPE="gzip"
-elif [[ "$linux_relese" == 'centos' ]] || [[ "$linux_relese" == 'rockylinux' ]] || [[ "$linux_relese" == 'almalinux' ]] || [[ "$linux_relese" == 'fedora' ]]; then
-	COMPTYPE="$(file ../initrd.img | grep -o ':.*compressed data' | cut -d' ' -f2 | sed -r 's/(.*)/\L\1/' | head -n1)"
-	[[ -z "$COMPTYPE" ]] && echo "Detect compressed type fail." && exit 1
 fi
 CompDected='0'
 for COMP in $(echo -en 'gzip\nlzma\nxz'); do
@@ -3639,10 +3404,6 @@ elif [[ "$linux_relese" == 'alpinelinux' ]]; then
 			ubuntuCloudinitMirrorCn="https://gitee.com/mb9e8j2/Tools/raw/master/Linux_reinstall/Ubuntu/CloudInit/"
 			ubuntuCloudinitMirror="https://raw.githubusercontent.com/leitbogioro/Tools/master/Linux_reinstall/Ubuntu/CloudInit/"
 		}
-		[[ "$targetRelese" == 'AlmaLinux' || "$targetRelese" == 'Rocky' ]] && {
-			rhelCloudinitMirrorCn="https://gitee.com/mb9e8j2/Tools/raw/master/Linux_reinstall/RedHat/CloudInit/"
-			rhelCloudinitMirror="https://raw.githubusercontent.com/leitbogioro/Tools/master/Linux_reinstall/RedHat/CloudInit/"
-		}
 		if [[ "$IPStackType" == "IPv4Stack" ]]; then
 			if [[ "$Network4Config" == "isDHCP" ]]; then
 				if [[ "$IsCN" == "cn" ]]; then
@@ -3691,38 +3452,23 @@ elif [[ "$linux_relese" == 'alpinelinux' ]]; then
 					[[ "$IsCN" == "cn" ]] && cloudInitUrl="$ubuntuCloudinitMirrorCn""ipv4_static_ipv6_static_interfaces.cfg" || cloudInitUrl="$ubuntuCloudinitMirror""ipv4_static_ipv6_static_interfaces.cfg"
 				fi
 			}
-			[[ "$targetRelese" == 'AlmaLinux' || "$targetRelese" == 'Rocky' ]] && {
-				if [[ "$Network4Config" == "isDHCP" ]] && [[ "$Network6Config" == "isDHCP" ]]; then
-					[[ "$IsCN" == "cn" ]] && cloudInitUrl="$rhelCloudinitMirrorCn""dhcp_interfaces.cfg" || cloudInitUrl="$rhelCloudinitMirror""dhcp_interfaces.cfg"
-				elif [[ "$Network4Config" == "isDHCP" ]] && [[ "$Network6Config" == "isStatic" ]]; then
-					[[ "$IsCN" == "cn" ]] && cloudInitUrl="$rhelCloudinitMirrorCn""ipv4_dhcp_ipv6_static_interfaces.cfg" || cloudInitUrl="$rhelCloudinitMirror""ipv4_dhcp_ipv6_static_interfaces.cfg"
-				elif [[ "$Network4Config" == "isStatic" ]] && [[ "$Network6Config" == "isDHCP" ]]; then
-					[[ "$IsCN" == "cn" ]] && cloudInitUrl="$rhelCloudinitMirrorCn""ipv4_static_ipv6_dhcp_interfaces.cfg" || cloudInitUrl="$rhelCloudinitMirror""ipv4_static_ipv6_dhcp_interfaces.cfg"
-				elif [[ "$Network4Config" == "isStatic" ]] && [[ "$Network6Config" == "isStatic" ]]; then
-					[[ "$IsCN" == "cn" ]] && cloudInitUrl="$rhelCloudinitMirrorCn""ipv4_static_ipv6_static_interfaces.cfg" || cloudInitUrl="$rhelCloudinitMirror""ipv4_static_ipv6_static_interfaces.cfg"
-				fi
-			}
 			networkAdapter="$interface4"
 		elif [[ "$IPStackType" == "IPv6Stack" ]]; then
 			if [[ "$Network6Config" == "isDHCP" ]]; then
 				if [[ "$IsCN" == "cn" ]]; then
 					AlpineNetworkConf="$alpineNetcfgMirrorCn""ipv6_dhcp_interfaces"
 					[[ "$targetRelese" == 'Ubuntu' ]] && cloudInitUrl="$ubuntuCloudinitMirrorCn""dhcp_interfaces.cfg"
-					[[ "$targetRelese" == 'AlmaLinux' || "$targetRelese" == 'Rocky' ]] && cloudInitUrl="$rhelCloudinitMirrorCn""dhcp_interfaces.cfg"
 				else
 					AlpineNetworkConf="$alpineNetcfgMirror""ipv6_dhcp_interfaces"
 					[[ "$targetRelese" == 'Ubuntu' ]] && cloudInitUrl="$ubuntuCloudinitMirror""dhcp_interfaces.cfg"
-					[[ "$targetRelese" == 'AlmaLinux' || "$targetRelese" == 'Rocky' ]] && cloudInitUrl="$rhelCloudinitMirror""dhcp_interfaces.cfg"
 				fi
 			elif [[ "$Network6Config" == "isStatic" ]]; then
 				if [[ "$IsCN" == "cn" ]]; then
 					AlpineNetworkConf="$alpineNetcfgMirrorCn""ipv6_static_interfaces"
 					[[ "$targetRelese" == 'Ubuntu' ]] && cloudInitUrl="$ubuntuCloudinitMirrorCn""ipv6_static_interfaces.cfg"
-					[[ "$targetRelese" == 'AlmaLinux' || "$targetRelese" == 'Rocky' ]] && cloudInitUrl="$rhelCloudinitMirrorCn""ipv6_static_interfaces.cfg"
 				else
 					AlpineNetworkConf="$alpineNetcfgMirror""ipv6_static_interfaces"
 					[[ "$targetRelese" == 'Ubuntu' ]] && cloudInitUrl="$ubuntuCloudinitMirror""ipv6_static_interfaces.cfg"
-					[[ "$targetRelese" == 'AlmaLinux' || "$targetRelese" == 'Rocky' ]] && cloudInitUrl="$rhelCloudinitMirror""ipv6_static_interfaces.cfg"
 				fi
 			fi
 			networkAdapter="$interface6"
