@@ -56,7 +56,7 @@ yum update
 ```sh
 wget --no-check-certificate -qO InstallNET.sh 'https://raw.githubusercontent.com/koomox/devops/master/storage/linux/debian/DebianNET/InstallNET.sh' && chmod a+x InstallNET.sh
 
-bash InstallNET.sh -d bullseye -v amd64 -a --mirror 'http://ftp.debian.org/debian/'
+bash InstallNET.sh -d bookworm -v amd64 -a --mirror 'http://ftp.debian.org/debian/'
 ```
 ```sh
 wget --no-check-certificate -qO InstallNET.sh 'https://moeclub.org/attachment/LinuxShell/InstallNET.sh' && chmod a+x InstallNET.sh
@@ -80,15 +80,15 @@ Usage:
 使用示例:       
 ```sh
 #使用默认镜像全自动安装
-bash InstallNET.sh -d 11 -v 64 -a --mirror 'http://mirror.xtom.com.hk/debian/'
+bash InstallNET.sh -d 12 -v 64 -a --mirror 'http://mirror.xtom.com.hk/debian/'
 
-bash InstallNET.sh -d 11 -v 64 -a --mirror 'http://ftp2.cn.debian.org/debian/'
+bash InstallNET.sh -d 12 -v 64 -a --mirror 'http://ftp2.cn.debian.org/debian/'
 
-bash InstallNET.sh -d 11 -v 64 -a --mirror 'http://ftp.hk.debian.org/debian/'
+bash InstallNET.sh -d 12 -v 64 -a --mirror 'http://ftp.hk.debian.org/debian/'
 
-bash InstallNET.sh -d 11 -v 64 -a --mirror 'http://ftp.tw.debian.org/debian/'
+bash InstallNET.sh -d 12 -v 64 -a --mirror 'http://ftp.tw.debian.org/debian/'
 
-bash InstallNET.sh -d 11 -v 64 -a --mirror 'http://mirror.0x.sg/debian/'
+bash InstallNET.sh -d 12 -v 64 -a --mirror 'http://mirror.0x.sg/debian/'
 
 bash InstallNET.sh -d 10 -v 64 -a --mirror 'http://ftp.us.debian.org/debian/'
 
