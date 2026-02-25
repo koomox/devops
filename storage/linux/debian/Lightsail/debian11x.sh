@@ -83,7 +83,10 @@ ${SUDO} sed -E -i '/^#*PermitEmptyPasswords/cPermitEmptyPasswords no' /etc/ssh/s
 ${SUDO} sed -E -i '/^#*PermitRootLogin/cPermitRootLogin no' /etc/ssh/sshd_config
 ${SUDO} sed -E -i '/^#*PasswordAuthentication/cPasswordAuthentication no' /etc/ssh/sshd_config
 ${SUDO} sed -E -i '/^#*PubkeyAuthentication/cPubkeyAuthentication yes' /etc/ssh/sshd_config
-grep -E "^#*(Port|PermitEmptyPasswords|PermitRootLogin|PasswordAuthentication|PubkeyAuthentication)" /etc/ssh/sshd_config
+${SUDO} sed -E -i '/^#*MaxAuthTries/cMaxAuthTries 2' /etc/ssh/sshd_config
+${SUDO} sed -E -i '/^#*MaxSessions/cMaxSessions 2' /etc/ssh/sshd_config
+${SUDO} sed -E -i '/^#*MaxStartups/cMaxStartups 2:30:10' /etc/ssh/sshd_config
+grep -E "^#*(Port|PermitEmptyPasswords|PermitRootLogin|PasswordAuthentication|PubkeyAuthentication|MaxAuthTries|MaxSessions|MaxStartups)" /etc/ssh/sshd_config
 
 echo "======== set iptables rules================"
 # INPUT
