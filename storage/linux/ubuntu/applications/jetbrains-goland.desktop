@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=GoLand
+Icon=/usr/local/GoLand-2018.3.4/bin/goland.svg
+Exec="/usr/local/GoLand-2018.3.4/bin/goland.sh" %f
+Comment=The Drive to Develop
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-goland

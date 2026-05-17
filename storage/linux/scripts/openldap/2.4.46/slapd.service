@@ -1,0 +1,11 @@
+[Unit]
+Description=OpenLDAP Server Daemon
+After=syslog.target network-online.target mariadb.service
+
+[Service]
+Type=forking
+PIDFile=/var/lib/openldap/slapd.pid
+ExecStart=/usr/local/openldap/libexec/slapd -u ldap -h "ldap:/// ldapi:///" -f /etc/openldap/slapd.conf
+
+[Install]
+WantedBy=multi-user.target

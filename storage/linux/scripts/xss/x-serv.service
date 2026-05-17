@@ -1,0 +1,15 @@
+[Unit]
+Description=X Serv Service
+After=network.target rc-local.service
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/x-serv
+LimitNOFILE=10000
+LimitNPROC=10000
+Restart=on-abort
+KillSignal=SIGQUIT
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,38 @@
+Log notice file /var/log/tor/debug.log
+
+DataDirectory /var/lib/tor
+PidFile /var/lib/tor/tor.pid
+RunAsDaemon 1
+User debian-tor
+
+SocksPort 0.0.0.0:9050
+
+MaxCircuitDirtiness 60
+
+ExcludeNodes {cn},{hk},{mo},{kp},{ir},{sy},{pk},{cu},{vn}
+strictnodes 1
+Socks5Proxy 127.0.0.1:10258
+
+
+TestingTorNetwork 1
+DataDirectory /var/lib/tor
+RunAsDaemon 1
+ConnLimit 60
+ShutdownWaitLength 0
+PidFile /var/lib/tor/tor.pid
+Log debug file /var/log/tor/debug.log
+ProtocolWarnings 1
+SafeLogging 0
+DisableDebuggerAttachment 0
+SocksPort 9050
+ControlPort 9051
+Address 192.168.0.208
+# An exit policy that allows exiting to IPv4 LAN
+ExitPolicy accept 192.168.0.0/16:*
+AuthoritativeDirectory 1
+V3AuthoritativeDirectory 1
+ExitPolicy reject *:*
+
+ExcludeNodes {cn},{hk},{mo},{kp},{ir},{sy},{pk},{cu},{vn}
+strictnodes 1
+Socks5Proxy 127.0.0.1:10258

@@ -1,0 +1,12 @@
+rem == HideRecoveryPartitions-UEFI.txt
+select disk 0
+select partition 5
+remove
+set id=de94bba4-06d1-4d40-a16a-bfd50179d6ac
+gpt attributes=0x8000000000000001
+rem == If Push-button reset features are included, add the following commands:
+rem    select partition 5
+rem    remove
+rem    set id=de94bba4-06d1-4d40-a16a-bfd50179d6ac
+rem    gpt attributes=0x8000000000000001
+list volume
